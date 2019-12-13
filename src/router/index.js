@@ -22,7 +22,9 @@ const routes = [
   {
     //login cliente e restaurante
     path: "/login",
-    name: "login"
+    name: "login",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/Login.vue")
 
   },
   {
