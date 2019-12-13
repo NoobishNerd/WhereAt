@@ -21,6 +21,7 @@
         </div>
 
         <div v-if="isLogged" class="col-sm-1">
+          <span v-if="isLogged"> | <a @click="logout">Logout</a></span>
         <h5>Logged in as: John Fields aka Pastelão</h5>
         </div>
         <div v-else class="col-sm-1" text-center>

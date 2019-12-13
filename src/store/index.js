@@ -5,6 +5,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    
+    status: '',
+
+    loggedUser: {},
+
     users: [
       {username:"Rui", 
       password:"chatodemerda", 
@@ -23,9 +28,9 @@ export default new Vuex.Store({
       email:"yo@gmail.com",
       }
 
-    ],
+    ]
 
-    loggedUser: ""
+    
   },
   mutations: {
     //resgiter    push pra users se válido
