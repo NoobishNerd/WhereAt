@@ -2,12 +2,8 @@
   
 
   <div class="home">
-    <div class="row">
-      <Navbar currentUserName="John Fields aka Pastelão"/>
-    </div>
-
     
-      <img alt="WhereAt logo" src="../assets/logo.png" />
+      <img alt="WhereAt logo" src="../assets/Logotipo_Where_Texto.png" />
       <HelloWorld msg="WHERE THE SITE @T ?!  bruh" />
     
     
@@ -17,13 +13,12 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
-import Navbar from "@/components/Navbar.vue";
+
 
 export default {
   name: "home",
   components: {
-    HelloWorld,
-    Navbar
+    HelloWorld
   }
 };
 </script>

@@ -1,32 +1,37 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-light bg-light">
-      <div class="col-sm-2">
-        <router-link to="/"><h1> ICON </h1></router-link>
-      </div>
+    <nav class="navbar navbar-expand-sm" style="padding: 5px; min-height: 5px; color: '#fcfcfc';">
+        <div class="col-sm-2">
+            <router-link to="/">
+            <img src="./assets/Logotipo_Where_Texto.png"  class="navbar-brand" height="60%" width="60%">
+            </router-link>
+        </div>
 
-      <div class="col-sm-2">
+        <div class="col-sm-3">
+
+        </div>
+
+        <div class="col-sm-2 text-center">
+            <img src="./assets/Search Icon.png" width="20%" height="20%">
+            
+        </div>
+
+        <div class="col-sm-4">
+
+        </div>
+
+        <div v-if="isLogged" class="col-sm-1">
+        <h5>Logged in as: John Fields aka Pastelão</h5>
+        </div>
+        <div v-else class="col-sm-1" text-center>
+            <img src="./assets/Not Logged.png" width="80%" height="80%">
+        </div>
         
-      </div>
 
-      <div class="col-sm-4">
-        <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
+
+    </nav>
 
    
-      <div class="col-sm-2">
-        <router-link to="/about">About</router-link>
-      </div>
-
-      <div class="col-sm-2">
-        <h5>Logged in as: John Fields aka Pastelão</h5>
-      </div>
-      
-      
-    </nav>
 
     <router-view />
   </div>
