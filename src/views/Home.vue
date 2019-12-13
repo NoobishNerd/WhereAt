@@ -4,6 +4,7 @@
   <div class="home">
     
       <img alt="WhereAt logo" src="../assets/Logotipo_Where_Texto.png" />
+
       <HelloWorld msg="WHERE THE SITE @T ?!  bruh" />
     
     
