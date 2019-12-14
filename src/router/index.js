@@ -24,14 +24,16 @@ const routes = [
     path: "/login",
     name: "login",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Login.vue")
+      import(/* webpackChunkName: "login" */ "../components/Login.vue")
 
   },
   {
     //register cliente e restaurante
     path: "/register",
-    name: "register"
-
+    name: "register",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../components/RegisterForm.vue")
+    
   },
   {
     path: "/profileClient",

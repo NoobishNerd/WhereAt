@@ -1,4 +1,5 @@
 <template>
+
   <div class="login">
       <button id="btnClient" type="button" class="btn btn-secondary btn-lg btn-block">Cliente</button>
       <button id="btnRestaurant" type="button" class="btn btn-secondary btn-lg btn-block">Restaurante</button>
@@ -17,6 +18,11 @@
 </template>
 
 <script>
+
+//NAO SEI O  QUE FAZER COM ESTE VUE
+
+
+
 // @ is an alias to /src
 import loginUser from "@/components/LoginUser.vue";
 import loginRestaurant from "@/components/LoginRestaurant.vue";
