@@ -35,7 +35,7 @@ export default {
 
 <style>
 .navbar {
-  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.1);
 }
 
 #app {
