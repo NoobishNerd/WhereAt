@@ -7,31 +7,11 @@ export default new Vuex.Store({
 
   state: {
     //array de users (c/exmplos pra testar)
-    users: [
-      {id: 0,
-      username:"Rui", 
-      password:"chato", 
-      email:"bitaites@gmail.com",
-      admin: false},
-
-      {
-      id: 1,
-      username:"Zé Mockups", 
-      password:"12345", 
-      email:"where@mail",
-      admin: true}
-    ],
+    users: [],
 
     
     //array de restaurantes (c/exmplos pra testar)
-    restaurants: [
-      {id: 0,
-      username:"McRui", 
-      password:"chato", 
-      email:"yo@gmail.com",
-      }
-
-    ],
+    restaurants: [],
 
     //bool pa dar check se alguém está autenticado
     logged: false,
@@ -52,8 +32,36 @@ export default new Vuex.Store({
       } else {
         return 0
       }
-      
+    },
+
+    getUsers(state){
+      if(state.users == []){
+        state.users =[{id: 0,
+          username:"Rui", 
+          password:"chato", 
+          email:"bitaites@gmail.com",
+          admin: false},
+    
+          {id: 1,
+          username:"Zé Mockups", 
+          password:"12345", 
+          email:"where@mail",
+          admin: true}
+        ]
+      }
+    },
+
+    getRestaurants(state){
+      if(state.restaurants == []){
+        state.restaurants =[ {id: 0,
+          username:"McRui", 
+          password:"chato", 
+          email:"yo@gmail.com",
+          }    
+        ]
+      }
     }
+
   },
 
   mutations: {
