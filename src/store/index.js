@@ -15,7 +15,7 @@ export default new Vuex.Store({
 
       {username:"Zé Mockups", 
       password:"12345", 
-      email:"where@",
+      email:"where@mail",
       admin: true}
     ],
 
@@ -28,9 +28,6 @@ export default new Vuex.Store({
       }
 
     ],
-
-    //o moorre fez isto ele deve saber
-    x: 0,
 
     //bool pa dar check se alguém está autenticado
     logged: false,
@@ -56,11 +53,6 @@ export default new Vuex.Store({
   },
 
   mutations: {
-
-    //where is this?
-    UPDATE_X(state, payload) {
-      state.x = payload
-    },
 
     ADD_USER(state, payload) {
       //check se email já está registado
@@ -125,7 +117,6 @@ export default new Vuex.Store({
 
     LOGOUT(state){
       state.loggedUser = {}
-
       state.logged = false;
     }
 
