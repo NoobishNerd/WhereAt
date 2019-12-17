@@ -22,7 +22,7 @@
 
         <div v-if="this.$store.state.logged == true" class="col-sm-1">
         <h5>Logged in as: {{this.$store.loggedUser.name}} aka Pastelão</h5>
-        </div>
+     </div>
         <div v-else class="col-sm-1" text-center>
             <router-link to="/login">
             <img src="./assets/Not Logged.png" width="80%" height="80%">
