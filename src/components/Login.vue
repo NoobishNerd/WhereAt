@@ -7,7 +7,7 @@
         <div class="col-12">
           <form>
             <input type="text" id="login" class="fadeIn second" name="login" placeholder="Endereço de email">
-            <input type="text" id="password" class="fadeIn third" name="login" placeholder="Password">
+            <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password">
             <input type="submit" class="fadeIn fourth" value="Login">
             <link href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap" rel="stylesheet">
           </form>
@@ -63,6 +63,7 @@
 .login {
   width: 100%;
   height: 100vh;
+  padding-bottom: 200px;
 }
 
   /* STRUCTURE */
@@ -124,7 +125,8 @@
     transform: scale(0.95);
   }
 
-  input[type=text] {
+  input[type=text],
+  input[type=password] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
