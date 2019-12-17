@@ -21,7 +21,7 @@
         </div>
 
         <div v-if="this.$store.state.logged == true" class="col-sm-1">
-        <h5>Logged in as: {{this.$store.loggedUser[0].name}} aka Pastelão</h5>
+        <h5>Logged in as: {{this.$store.loggedUser.name}} aka Pastelão</h5>
         </div>
         <div v-else class="col-sm-1" text-center>
             <router-link to="/login">

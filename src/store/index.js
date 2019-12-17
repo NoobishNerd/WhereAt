@@ -8,12 +8,15 @@ export default new Vuex.Store({
   state: {
     //array de users (c/exmplos pra testar)
     users: [
-      {username:"Rui", 
+      {id: 0,
+      username:"Rui", 
       password:"chato", 
       email:"bitaites@gmail.com",
       admin: false},
 
-      {username:"Zé Mockups", 
+      {
+      id: 1,
+      username:"Zé Mockups", 
       password:"12345", 
       email:"where@mail",
       admin: true}
@@ -22,7 +25,8 @@ export default new Vuex.Store({
     
     //array de restaurantes (c/exmplos pra testar)
     restaurants: [
-      {username:"McRui", 
+      {id: 0,
+      username:"McRui", 
       password:"chato", 
       email:"yo@gmail.com",
       }
@@ -86,6 +90,8 @@ export default new Vuex.Store({
           alert("Registado")
 
           //levar user pra pagina inicial?
+
+
         }
       } else {
         alert("E-MAIL JÁ EXISTENTE")
@@ -103,6 +109,7 @@ export default new Vuex.Store({
             email: user.email,
             password: user.password
           }
+          localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser))
           alert("LOGIN")
           state.existUser = true;
         }
@@ -112,6 +119,7 @@ export default new Vuex.Store({
       } else {
         state.existUser = false;
         state.logged = true;
+        
       }
     },
 
@@ -121,6 +129,10 @@ export default new Vuex.Store({
     }
 
   },
+
+
+
+
 
   //maybe someday, when we have ACTUAL time...
   actions: {},

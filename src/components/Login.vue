@@ -5,9 +5,9 @@
       <!-- Login Form -->
       <div class="row">
         <div class="col-12">
-          <form>
-            <input type="text" id="login" class="fadeIn second" name="login" placeholder="Endereço de email">
-            <input type="password" id="password" class="fadeIn third" name="login" placeholder="Password">
+          <form v-on:submit.prevent="login()">
+            <input v-model="emailLogin" type="text" id="login" class="fadeIn second" name="login" placeholder="Endereço de email">
+            <input v-model="passwordLogin" type="password" id="password" class="fadeIn third" name="login" placeholder="Password">
             <input type="submit" class="fadeIn fourth" value="Login">
             <link href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap" rel="stylesheet">
           </form>
