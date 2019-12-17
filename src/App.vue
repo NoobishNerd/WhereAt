@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-sm position:relative " style="padding: 5px; color: '#fcfcfc';">
+    <nav class="navbar navbar-expand-sm  position-relative " style="color: '#fcfcfc';">
         <div class="col-sm-2">
             <router-link to="/">
             <img src="./assets/Logotipo_Where_Texto.png"  class="navbar-brand" height="60%" width="60%">
