@@ -8,7 +8,6 @@ export default new Vuex.Store({
   state: {
     //array de users (c/exmplos pra testar)
     users: [],
-
     
     //array de restaurantes (c/exmplos pra testar)
     restaurants: [],
@@ -26,41 +25,13 @@ export default new Vuex.Store({
   getters: {
 
     //get last user Id in array
-    lastId(state) {
+    getLastId(state) {
       if (!state.users.length) {
         return state.users[state.users.length - 1].id
       } else {
         return 0
       }
     },
-
-    getUsers(state){
-      if(state.users == []){
-        state.users =[{id: 0,
-          username:"Rui", 
-          password:"chato", 
-          email:"bitaites@gmail.com",
-          admin: false},
-    
-          {id: 1,
-          username:"Zé Mockups", 
-          password:"12345", 
-          email:"where@mail",
-          admin: true}
-        ]
-      }
-    },
-
-    getRestaurants(state){
-      if(state.restaurants == []){
-        state.restaurants =[ {id: 0,
-          username:"McRui", 
-          password:"chato", 
-          email:"yo@gmail.com",
-          }    
-        ]
-      }
-    }
 
   },
 
@@ -79,7 +50,7 @@ export default new Vuex.Store({
 
           //adicionar novo user ao array
           state.users.push({
-            id: payload.id,
+            id: state.getters.lastId() + 1,
             name: payload.name,
             email: payload.email,
             password: payload.password,
@@ -87,7 +58,7 @@ export default new Vuex.Store({
 
           //user agora está registado e o login é feito
           state.loggedUser = {
-            id: payload.id,
+            id: state.getters.lastId() + 1,
             name: payload.name,
             email: payload.email,
             password: payload.password,
@@ -102,13 +73,14 @@ export default new Vuex.Store({
 
         }
       } else {
-        alert("E-MAIL JÁ EXISTENTE")
+        alert("E-MAIL JÁ REGISTADO")
       }
 
     },
 
     LOGIN(state, payload) {
       //check se conta existe
+      //substituir alerts por returns de strings
       for (const user of state.users) {
         if (user.email === payload.email && user.password === payload.password) {
           state.loggedUser = {
@@ -134,6 +106,34 @@ export default new Vuex.Store({
     LOGOUT(state){
       state.loggedUser = {}
       state.logged = false;
+    },
+
+
+
+
+    CREATE_BASE(state){
+      if(state.users == []){
+        state.users =[{id: 0,
+          username:"Rui", 
+          password:"chato", 
+          email:"bitaites@gmail.com",
+          admin: false},
+    
+          {id: 1,
+          username:"Zé Mockups", 
+          password:"12345", 
+          email:"where@mail",
+          admin: true}
+        ]
+      }
+      if(state.restaurants == []){
+        state.restaurants =[ {id: 0,
+          username:"McRui", 
+          password:"chato", 
+          email:"yo@gmail.com",
+          }    
+        ]
+      }
     }
 
   },

@@ -31,6 +31,8 @@
     created: function () {
       if (localStorage.getItem("users")) {
         this.$store.state.users = JSON.parse(localStorage.getItem("users"))
+      }else{
+          this.$store.commit('CREATE_BASE')
       }
       if (localStorage.getItem("loggedUser")) {
         this.$store.state.loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
