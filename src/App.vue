@@ -1,30 +1,16 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-light bg-light">
-      <router-link to="/">
-        <img src="./assets/Logotipo_Where_Texto.png" class="navbar-brand ml-1" />
-      </router-link>
-      <form class="form-inline">
-        <img src="./assets/main_lupa.png" />
-        <span v-if="this.$store.state.logged == true">
-          <a @click="logout">Logout</a>
-        </span>
-        <div v-if="this.$store.state.logged == true">
-          <h5>Logged in as: {{this.$store.loggedUser[0].name}} aka Pastelão</h5>
-        </div>
-        <div v-else text-center>
-          <router-link to="/login">
-            <img src="./assets/main_user.png" />
-          </router-link>
-        </div>
-      </form>
-    </nav>
+    <navbar></navbar>
     <router-view />
   </div>
 </template>
 
 <script>
+import NavBar from "@/components/NavBar.vue";
 export default {
+  components: {
+    navbar: NavBar
+  },
   methods: {
     logout() {
       this.$store.commit("LOGOUT");
