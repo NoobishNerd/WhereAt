@@ -6,33 +6,30 @@
       <div class="container col-sm-4">
         <form v-on:submit.prevent="addUser()">
           <div class="form-group">
-            <label for="registerName">Nome:</label>
             <input
               type="text"
               class="form-control"
               id="registerName"
-              placeholder="Insira o seu nome"
+              placeholder="Nome"
               required
-              v-model="name"
+              v-model="username"
             />
           </div>
           <div class="form-group">
-            <label for="registerEmail">E-mail:</label>
             <input
               type="email"
               class="form-control"
               id="registerEmail"
               aria-describedby="emailHelp"
-              placeholder="Enter email"
+              placeholder="Endereço Email"
               required
               v-model="email"
             />
             <small id="emailHelp" class="form-text text-muted"
-              >We'll never share your email with anyone else.</small
+              >Nunca partilharemos o seu email com ninguém :D</small
             >
           </div>
           <div class="form-group">
-            <label for="registerPass">Password:</label>
             <input
               type="password"
               class="form-control"
@@ -43,12 +40,11 @@
             />
           </div>
           <div class="form-group">
-            <label for="registerConfPass">Confirmar Password:</label>
             <input
               type="password"
               class="form-control"
               id="registerConfPass"
-              placeholder="Confirme sua Password"
+              placeholder="Confirmar Password"
               required
               v-model="confPassword"
             />
@@ -70,7 +66,7 @@ export default {
   name: "RegisterForm",
   data: () => ({
     id: 0,
-    name: "",
+    username: "",
     email: "",
     password: "",
     confPassword: ""
@@ -102,7 +98,7 @@ export default {
          this.$store.commit("ADD_USER", {
           id: this.getLastId(),
           email: this.email,
-          name: this.name,
+          username: this.username,
           password: this.password
         });
 
@@ -122,6 +118,6 @@ export default {
   }
 };
 </script>
-~
+
 
 <style></style>

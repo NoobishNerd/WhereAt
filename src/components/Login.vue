@@ -12,7 +12,7 @@
           <form v-on:submit.prevent="login()">
             <input
               v-model="emailLogin"
-              type="text"
+              type="email"
               id="login"
               class="fadeIn second"
               name="login"
@@ -147,7 +147,8 @@ input[type="reset"]:active {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"]{
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
