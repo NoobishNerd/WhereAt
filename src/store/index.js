@@ -36,11 +36,7 @@ export default new Vuex.Store({
     ADD_USER(state, payload) {
       //check se email já está registado
       if (!state.users.some(user => user.email === payload.email)) {
-        //NOT HERE LMFAO
-        //check se a password foi confirmada
-        if (payload.password != payload.confPassword) {
-          alert("PASSWORDS DIFERENTES");
-        } else {
+        
           //adicionar novo user ao array
           state.users.push({
             id: payload.id,
@@ -62,7 +58,7 @@ export default new Vuex.Store({
           alert("Registado");
 
           //levar user pra pagina inicial?
-        }
+        
       } else {
         alert("E-MAIL JÁ REGISTADO");
       }
@@ -97,7 +93,9 @@ export default new Vuex.Store({
           state.existUser = false;
           state.logged = true;
         }
-      } else if (payload.type == "restaurant") {
+      }
+      
+      if (payload.type == "restaurant") {
         for (const restaurant of state.restaurants) {
           if (
             restaurant.email === payload.email &&

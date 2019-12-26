@@ -76,6 +76,7 @@ export default {
     confPassword: ""
   }),
   created: function() {
+    
     //quando sai guarda o user autenticado e array users na localStorage
     window.addEventListener("unload", this.saveStorage);
     if (localStorage.getItem("users")) {
@@ -86,19 +87,30 @@ export default {
         localStorage.getItem("loggedUser")
       );
     }
+    
+
   },
   methods: {
     getLastId() {
       return this.$store.getters.lastId;
     },
     addUser() {
-      this.$store.commit("ADD_USER", {
-        id: this.getLastId(),
-        email: this.email,
-        name: this.name,
-        password: this.password,
-        confPassword: this.confPassword
-      });
+      //check se a password foi confirmada
+       if(this.password != this.confPassword){
+         alert("PASSWORDS DIFERENTES");
+       }else{
+         this.$store.commit("ADD_USER", {
+          id: this.getLastId(),
+          email: this.email,
+          name: this.name,
+          password: this.password
+        });
+
+        this.saveStorage()
+       }
+                
+
+      
     },
     saveStorage() {
       localStorage.setItem("users", JSON.stringify(this.$store.state.users));

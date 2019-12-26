@@ -14,7 +14,7 @@
         </span>
         <div v-if="this.$store.state.logged == true">
           <h5>
-            Logged in as: {{ this.$store.loggedUser[0].name }} aka Pastelão
+            Logged in as: {{ loggedName }} aka Pastelão
           </h5>
         </div>
         <div v-else text-center>
@@ -31,9 +31,19 @@
 export default {
   name: "NavBar",
 
+  data: () => ({
+    loggedName: "user"
+  }),
+
   methods: {
     logout() {
       this.$store.commit("LOGOUT");
+      localStorage.setItem("loggedUser", "")
+    },
+
+    updateNav(){
+      this.loggedName = this.$store.loggedUser.name
+      return this.loggedName
     }
   }
 };
