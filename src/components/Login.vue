@@ -65,11 +65,12 @@ export default {
       this.$store.commit("LOGIN", {
         email: this.emailLogin,
         password: this.passwordLogin
-      });
+      }, "client");
     }
   }
 };
 </script>
+
 <style>
 body {
   overflow-y: hidden;
