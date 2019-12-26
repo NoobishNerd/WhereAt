@@ -92,7 +92,7 @@ export default {
   },
   methods: {
     getLastId() {
-      return this.$store.getters.lastId;
+      return this.$store.getters.getLastUserId;
     },
     addUser() {
       //check se a password foi confirmada

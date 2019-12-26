@@ -5,6 +5,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    //array com todas as reservas para algoritmo de recomendações
+    bookingHistory: [],
+    
     //array de users (c/exmplos pra testar)
     users: [],
 
@@ -15,7 +18,12 @@ export default new Vuex.Store({
     logged: false,
 
     //utilizador logado
-    loggedUser: {},
+    loggedUser: {
+      id: "",
+      username: "dorime",
+      profilePic: "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg",
+      admin: false
+    },
 
     //variável para a função login
     existUser: false
@@ -23,9 +31,22 @@ export default new Vuex.Store({
 
   getters: {
     //get last user Id in array
-    getLastId(state) {
+    getLastUserId(state) {
+      
       if (!state.users.length) {
+        
         return state.users[state.users.length - 1].id;
+
+      } else {
+        return 0;
+      }
+    },
+
+    getLastRestaurantId(state) {
+      if (!state.restaurants.length) {
+
+        return state.restaurants[state.restaurants.length - 1].id;
+
       } else {
         return 0;
       }
@@ -36,29 +57,36 @@ export default new Vuex.Store({
     ADD_USER(state, payload) {
       //check se email já está registado
       if (!state.users.some(user => user.email === payload.email)) {
+
+        //adicionar novo user ao array
+        state.users.push({
+          id: payload.id,
+          username: payload.username,
+          email: payload.email,
+          password: payload.password,
+          profilePic: "../assets/main_user.png",
+          phone: "",
+          admin: false
+        });
+
+        //user agora está registado e o login é feito
+        state.loggedUser.id = payload.id
+        state.loggedUser.username = payload.username
+        state.loggedUser.profilePic = "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg"
         
-          //adicionar novo user ao array
-          state.users.push({
-            id: payload.id,
-            name: payload.name,
-            email: payload.email,
-            password: payload.password
-          });
-
-          //user agora está registado e o login é feito
-          state.loggedUser = {
-            id: payload.id,
-            name: payload.name,
-            email: payload.email,
-            password: payload.password
-          };
-
-          state.logged = true;
-
-          alert("Registado");
-
-          //levar user pra pagina inicial?
         
+
+        state.logged = true;
+
+        localStorage.setItem(
+          "loggedUser",
+          JSON.stringify(state.loggedUser)
+        );
+
+        alert("Registado");
+
+        //levar user pra pagina inicial?
+
       } else {
         alert("E-MAIL JÁ REGISTADO");
       }
@@ -73,17 +101,17 @@ export default new Vuex.Store({
             user.email === payload.email &&
             user.password === payload.password
           ) {
-            state.loggedUser = {
-              id: user.id,
-              name: user.name,
-              email: user.email,
-              password: user.password
-            };
+            state.loggedUser.admin = user.admin
+            state.loggedUser.id = user.id
+            state.loggedUser.username = user.username
+            state.loggedUser.profilePic = user.profilePic
+
             localStorage.setItem(
               "loggedUser",
               JSON.stringify(state.loggedUser)
             );
             alert("LOGIN");
+
             state.existUser = true;
           }
         }
@@ -94,7 +122,7 @@ export default new Vuex.Store({
           state.logged = true;
         }
       }
-      
+
       if (payload.type == "restaurant") {
         for (const restaurant of state.restaurants) {
           if (
@@ -103,7 +131,7 @@ export default new Vuex.Store({
           ) {
             state.loggedUser = {
               id: restaurant.id,
-              name: restaurant.name,
+              username: restaurant.username,
               email: restaurant.email,
               password: restaurant.password
             };
@@ -120,6 +148,7 @@ export default new Vuex.Store({
         } else {
           state.existUser = false;
           state.logged = true;
+
         }
       }
     },
@@ -130,13 +159,14 @@ export default new Vuex.Store({
     },
 
     CREATE_BASE(state) {
-      if (state.users == []) {
-        state.users = [
-          {
+      if (!state.users.length) {
+        state.users = [{
             id: 0,
             username: "Rui",
             password: "chato",
             email: "bitaites@gmail.com",
+            profilePic: "../assets/main_user.png",
+            phone: "",
             admin: false
           },
 
@@ -145,19 +175,34 @@ export default new Vuex.Store({
             username: "Zé Mockups",
             password: "12345",
             email: "where@mail",
+            profilePic: "../assets/main_user.png",
+            phone: "",
             admin: true
           }
         ];
       }
-      if (state.restaurants == []) {
-        state.restaurants = [
-          {
-            id: 0,
-            username: "McRui",
-            password: "chato",
-            email: "yo@gmail.com"
-          }
-        ];
+      if (!state.restaurants.length) {
+        state.restaurants = [{
+          id: 0,
+          username: "McRui",
+          password: "chato",
+          email: "yo@gmail.com",
+          profilePic: "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg",
+          adress: "Vila do Conde",
+          approval: true,
+          available: true,
+          cod_postal: "4480",
+          info: "descritivo do restaurante",
+          album: [],
+          promotions: [],
+          comments: [],
+          tags: [],
+          menu: [],
+          tables: [],
+          reservations: [],
+          phone: ""
+          
+        }];
       }
     }
   },

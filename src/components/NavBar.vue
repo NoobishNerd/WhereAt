@@ -9,13 +9,16 @@
       </router-link>
       <form class="form-inline">
         <img src="../assets/main_lupa.png" />
-        <span v-if="this.$store.state.logged == true">
-          <a @click="logout">Logout</a>
-        </span>
+        <img v-if="this.$store.state.logged == true" v-bind:src="this.$store.state.loggedUser.profilePic">
         <div v-if="this.$store.state.logged == true">
-          <h5>
-            Logged in as: {{ loggedName }} aka Pastelão
-          </h5>
+          <h6>
+            Logged in as: 
+          </h6>
+          <h5>{{ this.$store.state.loggedUser.username }}</h5>
+
+          <span >
+          <a @click="logout">Logout</a>
+          </span>
         </div>
         <div v-else text-center>
           <router-link to="/login">
@@ -31,20 +34,13 @@
 export default {
   name: "NavBar",
 
-  data: () => ({
-    loggedName: "user"
-  }),
-
   methods: {
     logout() {
       this.$store.commit("LOGOUT");
       localStorage.setItem("loggedUser", "")
     },
 
-    updateNav(){
-      this.loggedName = this.$store.loggedUser.name
-      return this.loggedName
-    }
+    
   }
 };
 </script>
