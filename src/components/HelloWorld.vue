@@ -4,16 +4,20 @@
 
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       With Bootstrap!
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-    
-      <router-link to="/profileRestaurant"><img src="../assets/banana.jpg"></router-link>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
 
+    <router-link to="/profileRestaurant"
+      ><img src="../assets/banana.jpg"
+    /></router-link>
 
-
-      
     <h3>Installed CLI Plugins</h3>
     <ul>
       <li>
@@ -119,7 +123,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 h3 {
   margin: 40px 0 0;
 }
