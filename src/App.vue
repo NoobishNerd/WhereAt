@@ -11,10 +11,11 @@ export default {
   components: {
     navbar: NavBar
   },
-  methods: {
-    logout() {
-      this.$store.commit("LOGOUT");
-    }
+ 
+  created: function(){
+    
+    this.$store.commit("CREATE_BASE")
+
   }
 };
 </script>

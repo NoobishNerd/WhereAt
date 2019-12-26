@@ -51,6 +51,9 @@ export default {
     passwordLogin: ""
   }),
   created: function() {
+
+    this.$store.commit("CREATE_BASE")
+  
     if (localStorage.getItem("restaurants")) {
       this.$store.state.users = JSON.parse(localStorage.getItem("restaurants"));
     }
@@ -59,13 +62,15 @@ export default {
         localStorage.getItem("loggedUser")
       );
     }
+
   },
   methods: {
     login() {
       this.$store.commit("LOGIN", {
         email: this.emailLogin,
-        password: this.passwordLogin
-      }, "restaurant");
+        password: this.passwordLogin,
+        type: "restaurant"
+      });
     }
   }
 };
