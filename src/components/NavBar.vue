@@ -5,11 +5,11 @@
         <img
           src="../assets/Logotipo_Where_Texto.png"
           class="navbar-brand ml-1"
+          height="50px"
         />
       </router-link>
       <form class="form-inline">
-        <img src="../assets/main_lupa.png" />
-        <img v-if="this.$store.state.logged == true" v-bind:src="this.$store.state.loggedUser.profilePic">
+        <img src="../assets/main_lupa.png" height="40px"/>
         <div v-if="this.$store.state.logged == true">
           <h6>
             Logged in as: 
@@ -20,9 +20,10 @@
           <a @click="logout">Logout</a>
           </span>
         </div>
+        <img v-if="this.$store.state.logged == true" v-bind:src="this.$store.state.loggedUser.profilePic" class="rounded-circle" width="40px" height="40px">
         <div v-else text-center>
           <router-link to="/login">
-            <img src="../assets/main_user.png" />
+            <img src="../assets/main_user.png" height="40px"/>
           </router-link>
         </div>
       </form>
@@ -71,13 +72,5 @@ export default {
   color: #42b983;
 }
 
-img {
-  height: 50px;
-}
 
-@media (max-width: 992px) {
-  img {
-    height: 40px;
-  }
-}
 </style>
