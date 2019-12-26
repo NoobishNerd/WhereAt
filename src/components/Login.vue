@@ -63,9 +63,10 @@ export default {
   methods: {
     login() {
       this.$store.commit("LOGIN", {
+        type: "client",
         email: this.emailLogin,
         password: this.passwordLogin
-      }, "client");
+      });
     }
   }
 };
