@@ -43,6 +43,34 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: "Login",
+  data: () => ({
+    emailLogin: "",
+    passwordLogin: ""
+  }),
+  created: function() {
+    if (localStorage.getItem("restaurants")) {
+      this.$store.state.users = JSON.parse(localStorage.getItem("restaurants"));
+    }
+    if (localStorage.getItem("loggedUser")) {
+      this.$store.state.loggedUser = JSON.parse(
+        localStorage.getItem("loggedUser")
+      );
+    }
+  },
+  methods: {
+    login() {
+      this.$store.commit("LOGIN", {
+        email: this.emailLogin,
+        password: this.passwordLogin
+      }, "restaurant");
+    }
+  }
+};
+</script>
+
 <style>
 body {
   overflow-y: hidden;
