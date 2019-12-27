@@ -92,6 +92,56 @@ export default new Vuex.Store({
       }
     },
 
+    ADD_RESTAURANT(state, payload) {
+      //check se email já está registado
+      if (!state.restaurants.some(restaurant => restaurant.email === payload.email)) {
+
+        //adicionar novo restaurante ao array
+        state.restaurants.push({
+          id: payload.id,
+          username: payload.username,
+          email: payload.email,
+          password: payload.password,
+          profilePic: "../assets/main_user.png",
+          phone: "",
+          address: payload.address,
+          approval:false,
+          available:true,
+          postalCode: "",
+          info: "Pode colocar aqui a informação do seu restaurante",
+          album: [],
+          promotions: [],
+          comments: [],
+          tags: [],
+          menu: [],
+          tables: [],
+          reservations: []
+        });
+
+        //user agora está registado e o login é feito
+        state.loggedUser.id = payload.id
+        state.loggedUser.username = payload.username
+        state.loggedUser.profilePic = "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg"
+        
+        
+
+        state.logged = true;
+
+        localStorage.setItem(
+          "loggedUser",
+          JSON.stringify(state.loggedUser)
+        );
+
+        alert("Registado");
+
+        //levar user pra pagina inicial?
+
+      } else {
+        alert("E-MAIL JÁ REGISTADO");
+      }
+    },
+
+
     LOGIN(state, payload) {
       if (payload.type == "client") {
         //check se conta existe
@@ -191,7 +241,8 @@ export default new Vuex.Store({
           adress: "Vila do Conde",
           approval: true,
           available: true,
-          cod_postal: "4480",
+          postalCode: "4480-912",
+          local: "não sei onde é dread",
           info: "descritivo do restaurante",
           album: [],
           promotions: [],
@@ -200,8 +251,7 @@ export default new Vuex.Store({
           menu: [],
           tables: [],
           reservations: [],
-          phone: ""
-          
+          phone: ""        
         }];
       }
     }

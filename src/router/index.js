@@ -36,6 +36,13 @@ const routes = [
     
   },
   {
+    //register cliente e restaurante
+    path: "/registerRestaurant",
+    name: "registerRestaurant",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../components/RegisterFormRestaurant.vue")
+  },
+  {
     path: "/profileClient",
     name: "profileClient"
 
@@ -50,7 +57,6 @@ const routes = [
   {
     path: "/editMenu",
     name: "menuEditor"
-
   }
 ];
 
