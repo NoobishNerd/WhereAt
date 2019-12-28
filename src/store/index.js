@@ -252,6 +252,27 @@ export default new Vuex.Store({
           tables: [],
           reservations: [],
           phone: ""        
+        },
+        {
+          id: 0,
+          username: "McRui 2",
+          password: "chato",
+          email: "nah@gmail.com",
+          profilePic: "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg",
+          adress: "Vila del Conde",
+          approval: false,
+          available: false,
+          postalCode: "4480-912",
+          local: "não sei onde é dread v2",
+          info: "a sequela",
+          album: [],
+          promotions: [],
+          comments: [],
+          tags: [],
+          menu: [],
+          tables: [],
+          reservations: [],
+          phone: "91199porfavornaumincomode"        
         }];
       }
     }
