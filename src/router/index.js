@@ -42,6 +42,13 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "login" */ "../components/RegisterFormRestaurant.vue")
   },
+  {    
+    //register cliente e restaurante
+    path: "/tableEditor",
+    name: "tableEditor",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../components/TableEditor.vue")
+  },
   {
     path: "/profileClient",
     name: "profileClient"

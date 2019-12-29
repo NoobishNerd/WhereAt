@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-      <img @click="checkStatus" alt="WhereAt logo" src="../assets/Logotipo_Where_Texto.png" />
+    <router-link to="/tableEditor">
+      <img alt="WhereAt logo" src="../assets/Logotipo_Where_Texto.png" />
+      </router-link>
         <RestaurantCard :restaurants="restaurants" />
   </div>
 </template>
