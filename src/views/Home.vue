@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <router-link to="/tableEditor">
+    <router-link to="/editRestaurantProfile">
       <img alt="WhereAt logo" src="../assets/Logotipo_Where_Texto.png" />
       </router-link>
         <RestaurantCard :restaurants="restaurants" />

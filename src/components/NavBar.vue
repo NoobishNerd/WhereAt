@@ -11,11 +11,12 @@
       <form class="form-inline">
         <img src="../assets/main_lupa.png" height="40px"/>
         <div v-if="this.$store.state.logged == true">
+          <router-link to="/clientProfile">
           <h6>
             Logged in as: 
           </h6>
           <h5>{{ this.$store.state.loggedUser.username }}</h5>
-
+          </router-link>
           <span >
           <a @click="logout">Logout</a>
           </span>

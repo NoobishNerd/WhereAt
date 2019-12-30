@@ -2,7 +2,7 @@
   <div class="card" >
     <h5>{{restaurant.username}}</h5>
     
-        <router-link to="/profileRestaurant"
+        <router-link to="/aboutRestaurant"
       ><img :src="restaurant.profilePic"
     /></router-link>
 
