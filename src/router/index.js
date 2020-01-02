@@ -32,7 +32,7 @@ const routes = [
     path: "/register",
     name: "register",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../components/RegisterForm.vue")
+      import(/* webpackChunkName: "register" */ "../components/RegisterForm.vue")
     
   },
   {
@@ -40,26 +40,26 @@ const routes = [
     path: "/registerRestaurant",
     name: "registerRestaurant",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../components/RegisterFormRestaurant.vue")
+      import(/* webpackChunkName: "registerRestaurant" */ "../components/RegisterFormRestaurant.vue")
   },
   {    
     //register cliente e restaurante
     path: "/tableEditor",
     name: "tableEditor",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../components/TableEditor.vue")
+      import(/* webpackChunkName: "tableEditor" */ "../components/TableEditor.vue")
   },
   {
     path: "/clientProfile",
     name: "clientProfile",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/ClientProfile.vue")
+      import(/* webpackChunkName: "clientProfile" */ "../views/ClientProfile.vue")
 
   },{
     path: "/editRestaurantProfile",
     name: "restaurantEditor",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/RestaurantEditor.vue")
+      import(/* webpackChunkName: "restaurantEditor" */ "../views/RestaurantEditor.vue")
 
   },
   {
@@ -69,7 +69,14 @@ const routes = [
   {
     path: "/editMenu",
     name: "menuEditor"
-  }
+  },
+  {
+    path: "*",
+    name: "404",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/Secure.vue")
+  },
+
 ];
 
 const router = new VueRouter({

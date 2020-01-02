@@ -3,15 +3,15 @@
     <router-link to="/editRestaurantProfile">
       <img alt="WhereAt logo" src="../assets/Logotipo_Where_Texto.png" />
       </router-link>
-        <RestaurantCard :restaurants="restaurants" />
+       
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import RestaurantCard from "@/components/RestaurantCard.vue";
+//import RestaurantCard from "@/components/RestaurantCard.vue";
 
-
+//<RestaurantCard v-bind="r" v-for="r in restaurants"> </RestaurantCard>
 export default {
   name: "home",
 
@@ -42,9 +42,10 @@ export default {
       
     }
   },
+  /*
   components: {
     RestaurantCard
   }
-
+  */
 };
 </script>

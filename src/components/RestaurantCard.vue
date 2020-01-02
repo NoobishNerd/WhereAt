@@ -1,4 +1,4 @@
-<template v-for="r in restaurants" :restaurant="r">
+<template>
   <div class="card" >
     <h5>{{restaurant.username}}</h5>
     
@@ -18,8 +18,8 @@ export default {
     restaurant: ""    
   }),
   props: {
-   restaurants: {
-    type: Array,
+   restaurant: {
+    type: Object,
     required: true
    }
   }
