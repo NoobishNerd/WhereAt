@@ -11,11 +11,9 @@ export default {
   components: {
     navbar: NavBar
   },
- 
-  created: function(){
-    
-    this.$store.commit("CREATE_BASE")
 
+  created: function() {
+    this.$store.commit("CREATE_BASE");
   }
 };
 </script>

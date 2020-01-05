@@ -1,13 +1,13 @@
 <template>
-  <div class="card" >
-    <h5>{{restaurant.username}}</h5>
-    
-        <router-link to="/aboutRestaurant"
+  <div class="card">
+    <h5>{{ restaurant.username }}</h5>
+
+    <router-link to="/aboutRestaurant"
       ><img :src="restaurant.profilePic"
     /></router-link>
 
-    <h3>{{restaurant.local}}</h3>
-    <h1>{{restaurant.info}}</h1>
+    <h3>{{ restaurant.local }}</h3>
+    <h1>{{ restaurant.info }}</h1>
   </div>
 </template>
 
@@ -15,15 +15,14 @@
 export default {
   name: "RestaurantCard",
   data: () => ({
-    restaurant: ""    
+    restaurant: ""
   }),
   props: {
-   restaurant: {
-    type: Object,
-    required: true
-   }
+    restaurant: {
+      type: Object,
+      required: true
+    }
   }
-
 };
 </script>
 

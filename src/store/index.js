@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     //array com todas as reservas para algoritmo de recomendações
     bookingHistory: [],
-    
+
     //array de users (c/exmplos pra testar)
     users: [],
 
@@ -32,11 +32,8 @@ export default new Vuex.Store({
   getters: {
     //get last user Id in array
     getLastUserId(state) {
-      
       if (!state.users.length) {
-        
         return state.users[state.users.length - 1].id;
-
       } else {
         return 0;
       }
@@ -44,9 +41,7 @@ export default new Vuex.Store({
 
     getLastRestaurantId(state) {
       if (!state.restaurants.length) {
-
         return state.restaurants[state.restaurants.length - 1].id;
-
       } else {
         return 0;
       }
@@ -57,7 +52,6 @@ export default new Vuex.Store({
     ADD_USER(state, payload) {
       //check se email já está registado
       if (!state.users.some(user => user.email === payload.email)) {
-
         //adicionar novo user ao array
         state.users.push({
           id: payload.id,
@@ -70,23 +64,18 @@ export default new Vuex.Store({
         });
 
         //user agora está registado e o login é feito
-        state.loggedUser.id = payload.id
-        state.loggedUser.username = payload.username
-        state.loggedUser.profilePic = "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg"
-        
-        
+        state.loggedUser.id = payload.id;
+        state.loggedUser.username = payload.username;
+        state.loggedUser.profilePic =
+          "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg";
 
         state.logged = true;
 
-        localStorage.setItem(
-          "loggedUser",
-          JSON.stringify(state.loggedUser)
-        );
+        localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
 
         alert("Registado");
 
         //levar user pra pagina inicial?
-
       } else {
         alert("E-MAIL JÁ REGISTADO");
       }
@@ -94,8 +83,11 @@ export default new Vuex.Store({
 
     ADD_RESTAURANT(state, payload) {
       //check se email já está registado
-      if (!state.restaurants.some(restaurant => restaurant.email === payload.email)) {
-
+      if (
+        !state.restaurants.some(
+          restaurant => restaurant.email === payload.email
+        )
+      ) {
         //adicionar novo restaurante ao array
         state.restaurants.push({
           id: payload.id,
@@ -105,8 +97,8 @@ export default new Vuex.Store({
           profilePic: "../assets/main_user.png",
           phone: "",
           address: payload.address,
-          approval:false,
-          available:true,
+          approval: false,
+          available: true,
           postalCode: "",
           info: "Pode colocar aqui a informação do seu restaurante",
           album: [],
@@ -119,28 +111,22 @@ export default new Vuex.Store({
         });
 
         //user agora está registado e o login é feito
-        state.loggedUser.id = payload.id
-        state.loggedUser.username = payload.username
-        state.loggedUser.profilePic = "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg"
-        
-        
+        state.loggedUser.id = payload.id;
+        state.loggedUser.username = payload.username;
+        state.loggedUser.profilePic =
+          "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg";
 
         state.logged = true;
 
-        localStorage.setItem(
-          "loggedUser",
-          JSON.stringify(state.loggedUser)
-        );
+        localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
 
         alert("Registado");
 
         //levar user pra pagina inicial?
-
       } else {
         alert("E-MAIL JÁ REGISTADO");
       }
     },
-
 
     LOGIN(state, payload) {
       if (payload.type == "client") {
@@ -151,10 +137,10 @@ export default new Vuex.Store({
             user.email === payload.email &&
             user.password === payload.password
           ) {
-            state.loggedUser.admin = user.admin
-            state.loggedUser.id = user.id
-            state.loggedUser.username = user.username
-            state.loggedUser.profilePic = user.profilePic
+            state.loggedUser.admin = user.admin;
+            state.loggedUser.id = user.id;
+            state.loggedUser.username = user.username;
+            state.loggedUser.profilePic = user.profilePic;
 
             localStorage.setItem(
               "loggedUser",
@@ -198,7 +184,6 @@ export default new Vuex.Store({
         } else {
           state.existUser = false;
           state.logged = true;
-
         }
       }
     },
@@ -210,7 +195,8 @@ export default new Vuex.Store({
 
     CREATE_BASE(state) {
       if (!state.users.length) {
-        state.users = [{
+        state.users = [
+          {
             id: 0,
             username: "Rui",
             password: "chato",
@@ -232,48 +218,50 @@ export default new Vuex.Store({
         ];
       }
       if (!state.restaurants.length) {
-        state.restaurants = [{
-          id: 0,
-          username: "McRui",
-          password: "chato",
-          email: "yo@gmail.com",
-          profilePic: "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg",
-          adress: "Vila do Conde",
-          approval: true,
-          available: true,
-          postalCode: "4480-912",
-          local: "não sei onde é dread",
-          info: "descritivo do restaurante",
-          album: [],
-          promotions: [],
-          comments: [],
-          tags: [],
-          menu: [],
-          tables: [],
-          reservations: [],
-          phone: ""        
-        },
-        {
-          id: 0,
-          username: "McRui 2",
-          password: "chato",
-          email: "nah@gmail.com",
-          profilePic: "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg",
-          adress: "Vila del Conde",
-          approval: false,
-          available: false,
-          postalCode: "4480-912",
-          local: "não sei onde é dread v2",
-          info: "a sequela",
-          album: [],
-          promotions: [],
-          comments: [],
-          tags: [],
-          menu: [],
-          tables: [],
-          reservations: [],
-          phone: "91199porfavornaumincomode"        
-        }];
+        state.restaurants = [
+          {
+            id: 0,
+            username: "McRui",
+            password: "chato",
+            email: "yo@gmail.com",
+            profilePic: "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg",
+            adress: "Vila do Conde",
+            approval: true,
+            available: true,
+            postalCode: "4480-912",
+            local: "não sei onde é dread",
+            info: "descritivo do restaurante",
+            album: [],
+            promotions: [],
+            comments: [],
+            tags: [],
+            menu: [],
+            tables: [],
+            reservations: [],
+            phone: ""
+          },
+          {
+            id: 0,
+            username: "McRui 2",
+            password: "chato",
+            email: "nah@gmail.com",
+            profilePic: "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg",
+            adress: "Vila del Conde",
+            approval: false,
+            available: false,
+            postalCode: "4480-912",
+            local: "não sei onde é dread v2",
+            info: "a sequela",
+            album: [],
+            promotions: [],
+            comments: [],
+            tags: [],
+            menu: [],
+            tables: [],
+            reservations: [],
+            phone: "91199porfavornaumincomode"
+          }
+        ];
       }
     }
   },
