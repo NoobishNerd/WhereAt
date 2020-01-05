@@ -1,17 +1,11 @@
 <template>
-  <div class="container">
-    <div class="row d-flex justify-content-sm-center">
-      <div class="col-sm-5 text-center">
-        <br />
-        <br />
+  <div class="about">
+    <div class="row">
+      <div class="col-6 text-center">
         <h5 class="pt-2">Mac Circunvalacao</h5>
-        <img src="../assets/circunvalacao-9.jpg" width="300px" height="300px" />
-        <br />
+        <img src="../assets/circunvalacao-9.jpg" />
       </div>
-      <div class="col-sm-2"></div>
-      <div class="col-sm-5">
-        <br />
-        <br />
+      <div class="col-6 text-center">
         <h5>Fotos do restaurante</h5>
         <div
           id="carouselExampleIndicators"
@@ -72,34 +66,32 @@
       </div>
     </div>
     <div class="row">
-      <div class="container">
-        <div class="col-sm-5">
-          <h5>Número de Pessoas:</h5>
-          <input type="number" />
-          <br />
-          <br />
-          <input type="date" id="start" name="start" />
-          <br />
-          <br />
-          <button>Reservar</button>
-        </div>
+      <div class="col-5">
+        <h5>Número de Pessoas:</h5>
+        <input type="number" />
+        <br />
+        <br />
+        <input type="date" id="start" name="start" />
+        <br />
+        <br />
+        <button>Reservar</button>
+      </div>
 
-        <div class="col-sm-2">
-          <h5>Mesas:</h5>
-          <div class="form-group">
-            <select multiple class="form-control" id="sltTables">
-              <option>Mesa 1 | 3 pessoas</option>
-              <option>Mesa 2 | 4 pessoas</option>
-              <option>Mesa 3 | 3 pessoas</option>
-            </select>
-          </div>
+      <div class="col-2">
+        <h5>Mesas:</h5>
+        <div class="form-group">
+          <select multiple class="form-control" id="sltTables">
+            <option>Mesa 1 | 3 pessoas</option>
+            <option>Mesa 2 | 4 pessoas</option>
+            <option>Mesa 3 | 3 pessoas</option>
+          </select>
         </div>
-        <div class="col-sm-5">
-          <img src="../assets/googlemaps.jpg" alt="" />
-          <br />
-          <br />
-          <button>Abrir em google maps</button>
-        </div>
+      </div>
+      <div class="col-5">
+        <img src="../assets/googlemaps.jpg" alt="" />
+        <br />
+        <br />
+        <button>Abrir em google maps</button>
       </div>
     </div>
   </div>
@@ -124,7 +116,16 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  margin-top: 150px;
+img {
+  height: 300px;
+  width: auto;
+}
+
+.carousel {
+  margin: 0px 100px;
+}
+
+.row {
+  margin-top: 50px;
 }
 </style>
