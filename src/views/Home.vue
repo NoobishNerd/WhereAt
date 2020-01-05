@@ -1,9 +1,27 @@
 <template>
   <div class="home">
-    <router-link to="/editRestaurantProfile">
-      <img alt="WhereAt logo" src="../assets/Logotipo_Where_Texto.png" />
-      </router-link>
-       
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <router-link to="/editRestaurantProfile">
+            <img alt="WhereAt logo" src="../assets/Logotipo_Where_Texto.png"/>
+          </router-link>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="img-wrapper">
+          <img class="img-responsive" src="../assets/Nice Restaurant.png">
+            <div class="img-overlay">
+              <button id="jumboBtn" class="btn btn-responsive">Where at?</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
   </div>
 </template>
 
@@ -49,3 +67,56 @@ export default {
   */
 };
 </script>
+
+<style>
+.img-wrapper {
+  position: relative;
+ }
+
+.img-responsive {
+  width: 100%;
+  height: auto;
+}
+
+.img-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.img-overlay:before {
+  content: ' ';
+  display: block;
+  /* adjust 'height' to position overlay content vertically */
+  height: 30%;
+}
+#jumboBtn {
+  /* matches 'btn-md' */
+  width:15%;
+  height:16%;
+  font-family: "Raleway", bold;
+  font-size: 45px;
+  color:#966227;
+  background-color: white;
+  line-height: 120%;
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+  border-radius: 15px;
+
+}
+
+@media (max-width:760px) { 
+    /* matches 'btn-xs' */
+    .btn-responsive {
+        padding: 1px 5px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+}
+
+</style>
