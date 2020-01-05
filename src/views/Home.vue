@@ -22,7 +22,7 @@
         <div class="col-sm-2">
         </div>
         <div class="col-sm-8">
-          <h3 class="text-left" id="recommendationText">Recomendações Where@</h3>
+          <h4 class="text-left" id="recommendationText">Recomendações Where@</h4>
           <hr>
           aqui é para meter as cartas do restaurante
         </div>
@@ -34,7 +34,7 @@
         <div class="col-sm-2">
         </div>
         <div class="col-sm-8">
-          <h3 class="text-left" id="recommendationText">Recomendações Porto</h3>
+          <h4 class="text-left" id="recommendationText">Recomendações Porto</h4>
           <hr>
           e aqui também
         </div>
@@ -87,6 +87,12 @@ export default {
 </script>
 
 <style>
+#recommendationText {
+  font-family: "Raleway";
+  font-weight: bold;
+  color: #966227
+}
+
 .img-wrapper {
   position: relative;
 }
@@ -115,8 +121,9 @@ export default {
   /* matches 'btn-md' */
   width: 15%;
   height: 16%;
-  font-family: "Raleway", bold;
-  font-size: 45px;
+  font-family: "Raleway";
+  font-weight: bold;
+  font-size: 43px;
   color: #966227;
   background-color: white;
   line-height: 120%;
