@@ -3,20 +3,14 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12">
-          <router-link to="/editRestaurantProfile">
-            <img alt="WhereAt logo" src="../assets/Logotipo_Where_Texto.png" />
-          </router-link>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-12">
           <div class="img-wrapper">
             <img class="img-responsive" src="../assets/Nice Restaurant.png" />
             <div class="img-overlay">
+              <router-link to="/editRestaurantProfile">
               <button id="jumboBtn" class="btn btn-responsive">
                 Where at?
               </button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -30,6 +24,19 @@
         <div class="col-sm-8">
           <h3 class="text-left" id="recommendationText">Recomendações Where@</h3>
           <hr>
+          aqui é para meter as cartas do restaurante
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8">
+          <h3 class="text-left" id="recommendationText">Recomendações Porto</h3>
+          <hr>
+          e aqui também
         </div>
       </div>
 
