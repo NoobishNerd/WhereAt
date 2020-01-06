@@ -2,17 +2,22 @@
   <div class="container">
     <div class="about">
       <div class="row">
-        <div class="col-5 text-center img-thumbnail">
+        <div id="windowPhoto" class="col-5 text-center img-thumbnail">
           <h5 class="pt-2 font-weight-bold">Mac Circunvalacao</h5>
-          <img src="../assets/circunvalacao-9.jpg" />
+          <img
+            id="fotoRestaurante"
+            src="../assets/circunvalacao-9.jpg"
+            class="pb-2"
+          />
         </div>
         <div class="col-1"></div>
-        <div class="col-6 text-center img-thumbnail">
+        <div id="windowCarrousel" class="col-6 text-center img-thumbnail">
           <h5 class="font-weight-bold">Fotos do restaurante</h5>
           <div
             id="carouselExampleIndicators"
             class="carousel slide"
             data-ride="carousel"
+            data-interval="4000"
           >
             <ol class="carousel-indicators">
               <li
@@ -80,7 +85,7 @@
         </div>
       </div>
       <div class="row ">
-        <div class="col-6 img-thumbnail">
+        <div id="windowReservation" class="col-6 img-thumbnail">
           <div class="row">
             <div class="col-5">
               <h5>Número de Pessoas:</h5>
@@ -90,7 +95,7 @@
               <input type="date" id="start" name="start" />
               <br />
               <br />
-              <button>Reservar</button>
+              <button id="smallerButton">Reservar</button>
             </div>
             <div class="col-2"></div>
             <div class="col-5">
@@ -107,16 +112,16 @@
         </div>
         <div class="col-1"></div>
         <div class="col-5 ">
-          <img src="../assets/googlemaps.jpg" alt="" />
+          <img src="../assets/ze.png" alt="" />
           <br />
           <br />
-          <button>Abrir em google maps</button>
+          <button id="mapsButton">Abrir em google maps</button>
         </div>
       </div>
     </div>
     <br />
 
-    <div class="row d-flex" style="border:1px solid black;">
+    <div id="finalCrate" class="row d-flex" style="border:1px solid black;">
       <div class="col-sm-3 pt-3" style="border-bottom:1px solid black;">
         <h5 class="font-weight-bold">Ementa</h5>
       </div>
@@ -127,6 +132,7 @@
         <h5 class="font-weight-bold">Promoções</h5>
       </div>
       <div
+        id="comentary"
         class="col-sm-3 pt-3 font-weight-bold "
         style="border-bottom:1px solid black; border-left:1px solid black;"
       >
@@ -134,6 +140,7 @@
       </div>
       <div class="col-sm-1" style="border-left:1px solid black;"></div>
       <div
+        id="information"
         class="col-sm-2 pt-2 "
         style="border-bottom:1px solid black; border-left:1px solid black;"
       >
@@ -181,7 +188,69 @@ img {
 .row {
   margin-top: 50px;
 }
+
 html * {
   color: #966227;
 }
+#smallerButton {
+  background-color: #e3b814;
+  border: none;
+  color: #af2831;
+  padding: 10px 45px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 10px 20px 40px 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+#mapsButton {
+  background-color: #e3b814;
+  border: none;
+  color: #af2831;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: bold;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 30px 20px 40px 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+#fotoRestaurante {
+  width: 400px;
+  border-color: white;
+  height: 300px;
+}
+#windowPhoto {
+  border-color: white;
+  box-shadow: 0 30px 60px 15px rgba(0, 0, 0, 0.1);
+}
+#windowCarrousel {
+  box-shadow: 0 30px 60px 15px rgba(0, 0, 0, 0.1);
+}
+#windowReservation {
+  border-color: white;
+  box-shadow: 0 30px 60px 15px rgba(0, 0, 0, 0.1);
+}
+#finalCrate {
+  border-radius: 10px 10px 0px 0px;
+}
+
+
 </style>
