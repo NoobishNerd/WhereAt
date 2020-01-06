@@ -17,3 +17,9 @@ export default {
   }
 };
 </script>
+
+<style>
+html * {
+  font-family: "Raleway";
+}
+</style>
