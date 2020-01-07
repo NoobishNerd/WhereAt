@@ -4,34 +4,65 @@
     <br />
     <div class="row">
       <div class="col-sm-12">
-        <h5>Nome</h5>
-        <input type="text" placeholder="Rui Gonçalves" />
+        <h5 id="boldText">Nome</h5>
+        <input class="rale" type="text" placeholder="Rui Gonçalves"/>
       </div>
     </div>
     <br />
     <div class="row">
       <div class="col-sm-12">
-        <h5>Telemóvel</h5>
-        <input type="text" placeholder="914206969" />
+        <h5 id="boldText">Telemóvel</h5>
+        <input class="rale" type="text" placeholder="914206969"/>
       </div>
     </div>
     <br />
     <div class="row">
       <div class="col-sm-12">
-        <h5>Email</h5>
-        <input type="text" placeholder="querofalecer@gmail.com" />
+        <h5 id="boldText">Email</h5>
+        <input class="rale" type="text" placeholder="querofalecer@gmail.com" />
       </div>
     </div>
     <br />
     <div class="row">
       <div class="col-sm-8"></div>
       <div class="col-sm-4">
-        <button>Guardar Alterações</button>
+        <button id="smallerButton">Guardar Alterações</button>
       </div>
     </div>
-    <br />
   </div>
 </template>
 <script>
 export default {};
 </script>
+
+<style scoped>
+#boldText{
+  font-style: "Raleway";
+  font-weight: bold;
+}
+
+.rale{
+  font-style: "Raleway"
+}
+
+#smallerButton {
+  background-color: #e3b814;
+  border: none;
+  color: #af2831;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 0px 20px 20px 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+</style>
