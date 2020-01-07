@@ -69,6 +69,7 @@ export default {
         password: this.passwordLogin,
         type: "restaurant"
       });
+      this.$router.replace("/")
     }
   }
 };

@@ -71,6 +71,7 @@ export default {
         password: this.passwordLogin,
         type: "client"
       });
+      this.$router.replace("/")
     }
   }
 };
