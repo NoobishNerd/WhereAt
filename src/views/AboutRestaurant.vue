@@ -152,15 +152,22 @@
       na gastronomia portuguesa confeccionado com bacalhau de alta qualidade,
       acompanha com salada Pataniscas de Bacalhau 14,2 € cozinhadas com
       saborosas lascas de bacalhau, servidas com arroz de feijão ou arroz de
-      tomate Preço médio 25 €
+      tomate Preço médio 25 €  
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data: () => ({
-    component: "info"
+    component: "info",
+    //id utilizador retirado do link do router
+    params: ""
   }),
+
+  created: function() {
+    this.params = this.$route.params.id
+  },
 
   methods: {
     call(newComponent) {

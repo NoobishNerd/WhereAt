@@ -36,7 +36,10 @@
         <div class="col-sm-8">
           <h4 class="text-left" id="recommendationText">Recomendações Porto</h4>
           <hr>
-          e aqui também
+          <RestaurantCard v-for="restaurant in restaurants"
+              v-bind:restaurant="restaurant"
+              v-bind:key="restaurant.id"></RestaurantCard>
+
         </div>
       </div>
 
@@ -47,9 +50,9 @@
 
 <script>
 // @ is an alias to /src
-//import RestaurantCard from "@/components/RestaurantCard.vue";
+import RestaurantCard from "@/components/RestaurantCard.vue";
 
-//<RestaurantCard v-bind="r" v-for="r in restaurants"> </RestaurantCard>
+
 export default {
   name: "home",
 
@@ -69,20 +72,13 @@ export default {
   },
 
   methods: {
-    checkStatus() {
-      //WHAT'S GOING ON ELE VAI BUSCAR O ARRAY À STORAGE MAS LEVA TUDO UNDEFINED WHY???
-      for (const restaurant in this.restaurants) {
-        alert(restaurant.username);
-        alert(restaurant.profilePic);
-        alert(restaurant.approval);
-      }
-    }
-  }
-  /*
+    
+  },
+  
   components: {
     RestaurantCard
   }
-  */
+  
 };
 </script>
 

@@ -27,6 +27,9 @@
         </div>
 </template>
 
+
+
+
 <style lang="stylus" scoped>
 .card-img-top{
     padding: 5px 5px 0;

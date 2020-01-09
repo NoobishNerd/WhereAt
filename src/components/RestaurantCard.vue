@@ -2,9 +2,9 @@
   <div class="card">
     <h5>{{ restaurant.username }}</h5>
 
-    <router-link to="/aboutRestaurant"
-      ><img :src="restaurant.profilePic"
-    /></router-link>
+    >
+    <img :src="restaurant.profilePic" @click="routerLink"/>
+    
 
     <h3>{{ restaurant.local }}</h3>
     <h1>{{ restaurant.info }}</h1>
@@ -14,13 +14,17 @@
 <script>
 export default {
   name: "RestaurantCard",
-  data: () => ({
-    restaurant: ""
-  }),
+  
   props: {
     restaurant: {
       type: Object,
       required: true
+    }
+  },
+  //COMO FAÇO ISTO EM ROUTER-LINK TO=""???
+  methods: {
+    routerLink() {
+      this.$router.push({ name: 'aboutRestaurant', params: { id: this.restaurant.id } })
     }
   }
 };
