@@ -3,7 +3,7 @@
     <div class="about">
       <div class="row">
         <div id="windowPhoto" class="col-5 text-center img-thumbnail">
-          <h5 class="pt-2 font-weight-bold">Mac Circunvalacao</h5>
+          <h5 class="pt-2 font-weight-bold">{{restaurant.username}}</h5>
           <img
             id="fotoRestaurante"
             src="../assets/circunvalacao-9.jpg"
@@ -161,12 +161,16 @@
 export default {
   data: () => ({
     component: "info",
-    //id utilizador retirado do link do router
-    params: ""
+    id: "",
+    restaurant: {
+      username: "jk"
+    }
   }),
 
   created: function() {
-    this.params = this.$route.params.id
+    this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id);
+
+
   },
 
   methods: {

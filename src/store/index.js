@@ -45,7 +45,12 @@ export default new Vuex.Store({
       } else {
         return 0;
       }
+    },
+
+    getRestaurantById: (state) => (id) => {
+      return state.restaurants.find(restaurant => restaurant.id === id)
     }
+  
   },
 
   mutations: {

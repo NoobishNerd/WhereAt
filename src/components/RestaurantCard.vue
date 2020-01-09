@@ -1,14 +1,16 @@
 <template>
-  <div class="card">
+  <div class="card mb-3">
     <h5>{{ restaurant.username }}</h5>
 
-    >
+    
     <img :src="restaurant.profilePic" @click="routerLink"/>
     
 
     <h3>{{ restaurant.local }}</h3>
     <h1>{{ restaurant.info }}</h1>
+
   </div>
+  
 </template>
 
 <script>
