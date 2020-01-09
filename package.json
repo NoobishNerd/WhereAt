@@ -32,6 +32,9 @@
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
+    "globals": {
+      "google":{}
+   },
     "root": true,
     "env": {
       "node": true
@@ -44,6 +47,7 @@
     "parserOptions": {
       "parser": "babel-eslint"
     }
+
   },
   "browserslist": [
     "> 1%",
