@@ -46,9 +46,9 @@ export default {};
 }
 
 #smallerButton {
-  background-color: #e3b814;
+  background-color: #F17526;
   border: none;
-  color: #af2831;
+  color: white;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
