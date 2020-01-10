@@ -102,6 +102,10 @@ export default {
     local: ""
   }),
   
+  created: function() {
+    this.$store.commit("CREATE_BASE");
+  },
+  
   methods: {
     getLastId() {
       return this.$store.getters.getLastRestaurantId;
