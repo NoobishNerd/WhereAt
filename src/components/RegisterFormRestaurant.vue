@@ -90,7 +90,7 @@
 
 <script>
 export default {
-  name: "RegisterForm",
+  name: "RegisterFormRestaurant",
   data: () => ({
     id: 0,
     username: "",
