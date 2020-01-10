@@ -161,7 +161,6 @@
 export default {
   data: () => ({
     component: "info",
-    id: "",
     restaurant: {
       username: "jk"
     }
@@ -169,8 +168,6 @@ export default {
 
   created: function() {
     this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id);
-
-
   },
 
   methods: {

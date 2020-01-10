@@ -143,10 +143,6 @@ export default new Vuex.Store({
             state.loggedUser.username = user.username;
             state.loggedUser.profilePic = user.profilePic;
 
-            localStorage.setItem(
-              "loggedUser",
-              JSON.stringify(state.loggedUser)
-            );
             alert("LOGIN");
 
             state.existUser = true;
@@ -172,10 +168,7 @@ export default new Vuex.Store({
               email: restaurant.email,
               password: restaurant.password
             };
-            localStorage.setItem(
-              "loggedUser",
-              JSON.stringify(state.loggedUser)
-            );
+
             alert("LOGIN");
             state.existUser = true;
           }
