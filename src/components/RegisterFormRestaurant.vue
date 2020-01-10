@@ -102,9 +102,7 @@ export default {
     local: ""
   }),
   
-  created: function() {
-    this.$store.commit("CREATE_BASE");
-  },
+  
 
   methods: {
     getLastId() {

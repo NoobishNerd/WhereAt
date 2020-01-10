@@ -49,8 +49,12 @@ export default new Vuex.Store({
 
     getRestaurantById: (state) => (id) => {
       return state.restaurants.find(restaurant => restaurant.id === id)
-    }
-  
+    },
+
+    getUserById: (state) => (id) => {
+      return state.users.find(user => user.id === id)
+    },
+
   },
 
   mutations: {
@@ -187,6 +191,19 @@ export default new Vuex.Store({
       state.logged = false;
     },
 
+    CHANGE_USER_PROFILE(state, payload) {
+      let newUserArray = []
+      for (let user of state.users){
+        if (user.id == payload.id){
+          newUserArray.push(payload)
+          alert("Alterações Salvas")
+        }else{
+          newUserArray.push(user)
+        }
+      }
+      state.users = newUserArray
+    },
+
 
     
     CREATE_BASE(state) {
@@ -207,7 +224,7 @@ export default new Vuex.Store({
             username: "Zé Mockups",
             password: "12345",
             email: "where@mail",
-            profilePic: "../assets/main_user.png",
+            profilePic: "https://i.imgur.com/jr7av.jpg",
             phone: "",
             admin: true
           }

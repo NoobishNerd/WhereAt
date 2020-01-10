@@ -4,35 +4,49 @@
     <br />
     <div class="row">
       <div class="col-sm-12">
-        <h5 id="boldText">Nome</h5>
-        <input class="rale" type="text" placeholder="Rui Gonçalves"/>
+        <h5 id="boldText">Nome de Utilizador</h5>
+        <input v-model="user.username" class="rale" type="text"/>
       </div>
     </div>
     <br />
     <div class="row">
       <div class="col-sm-12">
         <h5 id="boldText">Telemóvel</h5>
-        <input class="rale" type="text" placeholder="914206969"/>
+        <input v-model="user.phone" class="rale" type="text" />
       </div>
     </div>
     <br />
     <div class="row">
       <div class="col-sm-12">
         <h5 id="boldText">Email</h5>
-        <input class="rale" type="text" placeholder="querofalecer@gmail.com" />
+        <input v-model="user.email" class="rale" type="text" />
       </div>
     </div>
     <br />
     <div class="row">
       <div class="col-sm-8"></div>
       <div class="col-sm-4">
-        <button id="smallerButton">Guardar Alterações</button>
+        <button @click="saveChanges" id="smallerButton">Guardar Alterações</button>
       </div>
     </div>
   </div>
 </template>
 <script>
-export default {};
+
+export default {
+  props:{
+    user:{
+      type: Object,
+      required: true
+    }
+  },
+
+  methods:{
+    saveChanges(){
+      this.$store.commit("CHANGE_USER_PROFILE", this.user)
+    }
+  }
+}
 </script>
 
 <style scoped>

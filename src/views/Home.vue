@@ -87,9 +87,7 @@ export default {
   }),
 
   created: function() {
-    //making sure there is an array there ffs
-    this.$store.commit("CREATE_BASE");
-
+    
     this.restaurants = this.$store.state.restaurants;
 
     window.addEventListener("onload", function() {
