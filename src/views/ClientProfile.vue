@@ -60,8 +60,15 @@ import ClientInfo from "@/components/ClientInfo.vue";
 import ClientHistory from "@/components/ClientHistory.vue";
 export default {
   data: () => ({
-    component: "info"
+    component: "info",
+    user: {
+      id: ""
+    }
   }),
+
+  created: function() {
+    this.user = this.$store.getters.getUserById(this.$route.params.id);
+  },
 
   methods: {
     call(newComponent) {
@@ -72,6 +79,7 @@ export default {
       localStorage.setItem("loggedUser", "")
       this.$router.replace("/")
     }
+  
   },
   components: {
     ClientInfo,

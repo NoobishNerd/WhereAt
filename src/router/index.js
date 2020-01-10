@@ -51,7 +51,7 @@ const routes = [
       )
   },
   {
-    path: "/clientProfile",
+    path: "/clientProfile/:id",
     name: "clientProfile",
     component: () =>
       import(
