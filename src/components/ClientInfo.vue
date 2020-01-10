@@ -44,6 +44,10 @@ export default {
   methods:{
     saveChanges(){
       this.$store.commit("CHANGE_USER_PROFILE", this.user)
+      this.saveStorage()
+    },
+    saveStorage(){
+      localStorage.setItem("users", JSON.stringify(this.$store.state.users));
     }
   }
 }

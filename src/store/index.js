@@ -80,6 +80,9 @@ export default new Vuex.Store({
 
         state.logged = true;
 
+        localStorage.setItem("loggedUser", JSON.stringify(this.$store.state.loggedUser));
+
+
         alert("Registado");
 
       } else {
@@ -147,6 +150,8 @@ export default new Vuex.Store({
             state.loggedUser.username = user.username;
             state.loggedUser.profilePic = user.profilePic;
 
+            localStorage.setItem("loggedUser", JSON.stringify(this.$store.state.loggedUser));
+
             alert("LOGIN");
 
             state.existUser = true;
@@ -172,6 +177,8 @@ export default new Vuex.Store({
               email: restaurant.email,
               password: restaurant.password
             };
+
+            localStorage.setItem("loggedUser", JSON.stringify(this.$store.state.loggedUser));
 
             alert("LOGIN");
             state.existUser = true;
