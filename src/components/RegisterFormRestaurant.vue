@@ -90,7 +90,7 @@
 
 <script>
 export default {
-  name: "RegisterForm",
+  name: "RegisterFormRestaurant",
   data: () => ({
     id: 0,
     username: "",
@@ -102,6 +102,10 @@ export default {
     local: ""
   }),
   
+  created: function() {
+    this.$store.commit("CREATE_BASE");
+  },
+
   methods: {
     getLastId() {
       return this.$store.getters.getLastRestaurantId;
@@ -120,9 +124,14 @@ export default {
           postalCode: this.postalCode,
           local: this.local
         });
+        
+        this.saveStorage()
 
         this.$router.replace("/")
       }
+    },
+    saveStorage(){
+      localStorage.setItem("restaurants", JSON.stringify(this.$store.state.restaurants));
     }
   }
 };

@@ -187,8 +187,10 @@ export default new Vuex.Store({
       state.logged = false;
     },
 
+
+    
     CREATE_BASE(state) {
-      if (!state.users.length) {
+      if (!localStorage.getItem("users")) {
         state.users = [
           {
             id: 0,
@@ -210,8 +212,10 @@ export default new Vuex.Store({
             admin: true
           }
         ];
+      }else{
+        state.users = JSON.parse(localStorage.getItem("users"));
       }
-      if (!state.restaurants.length) {
+      if (localStorage.getItem("restaurants")) {
         state.restaurants = [
           {
             id: 0,
@@ -277,6 +281,8 @@ export default new Vuex.Store({
             phone: "91199porfavornaumincomode"
           }
         ];
+      }else{
+        state.restaurants = JSON.parse(localStorage.getItem("restaurants"));
       }
     }
   },

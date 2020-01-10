@@ -54,6 +54,11 @@ export default {
     emailLogin: "",
     passwordLogin: ""
   }),
+
+  created: function() {
+    this.$store.commit("CREATE_BASE");
+  },
+
   methods: {
     login() {
       this.$store.commit("LOGIN", {
