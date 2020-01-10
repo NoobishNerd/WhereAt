@@ -215,9 +215,11 @@ export default new Vuex.Store({
     
     CREATE_BASE(state) {
       if(localStorage.getItem("loggedUser")){
-        if(JSON.parse(localStorage.getItem("loggedUser")) != ""){
+        if(localStorage.getItem("loggedUser") != ""){
           state.loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
           state.logged = true
+
+          
         }
       }
 
@@ -246,7 +248,8 @@ export default new Vuex.Store({
       }else{
         state.users = JSON.parse(localStorage.getItem("users"));
       }
-      if (localStorage.getItem("restaurants")) {
+
+      if (!localStorage.getItem("restaurants")) {
         state.restaurants = [
           {
             id: 0,
