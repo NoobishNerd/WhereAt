@@ -211,7 +211,7 @@ export default new Vuex.Store({
           }
         ];
       }else{
-        this.$store.state.users = JSON.parse(localStorage.getItem("users"));
+        state.users = JSON.parse(localStorage.getItem("users"));
       }
       if (localStorage.getItem("restaurants")) {
         state.restaurants = [

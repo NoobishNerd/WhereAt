@@ -71,7 +71,7 @@ export default {
     password: "",
     confPassword: ""
   }),
-  
+
   created: function() {
     this.$store.commit("CREATE_BASE");
   },
@@ -96,6 +96,9 @@ export default {
 
         this.$router.replace("/")
       }
+    },
+    saveStorage(){
+      localStorage.setItem("users", JSON.stringify(this.$store.state.users));
     }
   }
 };
