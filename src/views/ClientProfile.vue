@@ -82,20 +82,20 @@ export default {
 
 <style>
 #brownBoldText{
-  color: #966227;
+  color: #F17526;
   font-family: "Raleway";
   font-weight: bold;
 }
 
 #brownText{
-  color: #966227;
+  color: #F17526;
   font-family: "Raleway";
 }
 
 #smallerButton {
-  background-color: #e3b814;
+  background-color: #F17526;
   border: none;
-  color: #af2831;
+  color: white;
   padding: 10px 45px;
   text-align: center;
   text-decoration: none;
