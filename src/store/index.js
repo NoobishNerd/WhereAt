@@ -187,6 +187,8 @@ export default new Vuex.Store({
       state.logged = false;
     },
 
+
+    
     CREATE_BASE(state) {
       if (!localStorage.getItem("users")) {
         state.users = [

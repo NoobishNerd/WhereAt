@@ -3,7 +3,7 @@
     <h5>{{ restaurant.username }}</h5>
 
     
-    <img :src="restaurant.profilePic" @click="routerLink"/>
+    <img :src="restaurant.profilePic" @click="getAboutRestaurant"/>
     
 
     <h3>{{ restaurant.local }}</h3>
@@ -16,7 +16,7 @@
 <script>
 export default {
   name: "RestaurantCard",
-  
+
   props: {
     restaurant: {
       type: Object,
@@ -25,8 +25,13 @@ export default {
   },
   //COMO FAÇO ISTO EM ROUTER-LINK TO=""???
   methods: {
-    routerLink() {
-      this.$router.push({ name: 'aboutRestaurant', params: { id: this.restaurant.id } })
+    getAboutRestaurant() {
+      this.$router.push({
+        name: 'aboutRestaurant',
+        params: {
+          id: this.restaurant.id
+        }
+      })
     }
   }
 };
