@@ -101,18 +101,7 @@ export default {
     postalCode: "",
     local: ""
   }),
-  created: function() {
-    //quando sai guarda o user autenticado e array users na localStorage
-    window.addEventListener("unload", this.saveStorage);
-    if (localStorage.getItem("users")) {
-      this.$store.state.users = JSON.parse(localStorage.getItem("users"));
-    }
-    if (localStorage.getItem("loggedUser")) {
-      this.$store.state.loggedUser = JSON.parse(
-        localStorage.getItem("loggedUser")
-      );
-    }
-  },
+  
   methods: {
     getLastId() {
       return this.$store.getters.getLastRestaurantId;
@@ -132,18 +121,8 @@ export default {
           local: this.local
         });
 
-        this.saveStorage();
+        this.$router.replace("/")
       }
-    },
-    saveStorage() {
-      localStorage.setItem(
-        "restaurants",
-        JSON.stringify(this.$store.state.restaurants)
-      );
-      localStorage.setItem(
-        "loggedUser",
-        JSON.stringify(this.$store.state.loggedUser)
-      );
     }
   }
 };

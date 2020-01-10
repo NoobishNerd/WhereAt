@@ -71,18 +71,6 @@ export default {
     password: "",
     confPassword: ""
   }),
-  created: function() {
-    //quando sai guarda o user autenticado e array users na localStorage
-    window.addEventListener("unload", this.saveStorage);
-    if (localStorage.getItem("users")) {
-      this.$store.state.users = JSON.parse(localStorage.getItem("users"));
-    }
-    if (localStorage.getItem("loggedUser")) {
-      this.$store.state.loggedUser = JSON.parse(
-        localStorage.getItem("loggedUser")
-      );
-    }
-  },
   methods: {
     getLastId() {
       return this.$store.getters.getLastUserId;
@@ -100,14 +88,9 @@ export default {
         });
 
         this.saveStorage();
+
+        this.$router.replace("/")
       }
-    },
-    saveStorage() {
-      localStorage.setItem("users", JSON.stringify(this.$store.state.users));
-      localStorage.setItem(
-        "loggedUser",
-        JSON.stringify(this.$store.state.loggedUser)
-      );
     }
   }
 };

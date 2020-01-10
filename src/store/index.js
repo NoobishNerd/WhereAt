@@ -76,11 +76,8 @@ export default new Vuex.Store({
 
         state.logged = true;
 
-        localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
-
         alert("Registado");
 
-        //levar user pra pagina inicial?
       } else {
         alert("E-MAIL JÁ REGISTADO");
       }
@@ -127,7 +124,6 @@ export default new Vuex.Store({
 
         alert("Registado");
 
-        //levar user pra pagina inicial?
       } else {
         alert("E-MAIL JÁ REGISTADO");
       }
@@ -136,7 +132,7 @@ export default new Vuex.Store({
     LOGIN(state, payload) {
       if (payload.type == "client") {
         //check se conta existe
-        //substituir alerts por returns de strings
+        //substituir alerts por returns de strings?
         for (const user of state.users) {
           if (
             user.email === payload.email &&

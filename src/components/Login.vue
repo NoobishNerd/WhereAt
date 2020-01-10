@@ -54,16 +54,6 @@ export default {
     emailLogin: "",
     passwordLogin: ""
   }),
-  created: function() {
-    if (localStorage.getItem("users")) {
-      this.$store.state.users = JSON.parse(localStorage.getItem("users"));
-    }
-    if (localStorage.getItem("loggedUser")) {
-      this.$store.state.loggedUser = JSON.parse(
-        localStorage.getItem("loggedUser")
-      );
-    }
-  },
   methods: {
     login() {
       this.$store.commit("LOGIN", {
@@ -71,7 +61,8 @@ export default {
         password: this.passwordLogin,
         type: "client"
       });
-      this.$router.replace("/")
+        this.$router.replace("/")
+      
     }
   }
 };
