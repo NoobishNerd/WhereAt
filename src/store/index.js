@@ -150,7 +150,7 @@ export default new Vuex.Store({
             state.loggedUser.username = user.username;
             state.loggedUser.profilePic = user.profilePic;
 
-            localStorage.setItem("loggedUser", JSON.stringify(this.$store.state.loggedUser));
+            localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
 
             alert("LOGIN");
 
@@ -214,6 +214,13 @@ export default new Vuex.Store({
 
     
     CREATE_BASE(state) {
+      if(localStorage.getItem("loggedUser")){
+        if(JSON.parse(localStorage.getItem("loggedUser")) != ""){
+          state.loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
+          state.logged = true
+        }
+      }
+
       if (!localStorage.getItem("users")) {
         state.users = [
           {

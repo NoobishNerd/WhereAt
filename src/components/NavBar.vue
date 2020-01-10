@@ -27,6 +27,7 @@ export default {
   methods: {
     logout() {
       this.$store.commit("LOGOUT");
+      localStorage.setItem("loggedUser", "");
     },
 
     getClientProfile() {
