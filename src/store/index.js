@@ -49,8 +49,12 @@ export default new Vuex.Store({
 
     getRestaurantById: (state) => (id) => {
       return state.restaurants.find(restaurant => restaurant.id === id)
-    }
-  
+    },
+
+    getUserById: (state) => (id) => {
+      return state.users.find(user => user.id === id)
+    },
+
   },
 
   mutations: {
@@ -75,6 +79,9 @@ export default new Vuex.Store({
           "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg";
 
         state.logged = true;
+
+        localStorage.setItem("loggedUser", JSON.stringify(this.$store.state.loggedUser));
+
 
         alert("Registado");
 
@@ -143,6 +150,8 @@ export default new Vuex.Store({
             state.loggedUser.username = user.username;
             state.loggedUser.profilePic = user.profilePic;
 
+            localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
+
             alert("LOGIN");
 
             state.existUser = true;
@@ -169,6 +178,8 @@ export default new Vuex.Store({
               password: restaurant.password
             };
 
+            localStorage.setItem("loggedUser", JSON.stringify(this.$store.state.loggedUser));
+
             alert("LOGIN");
             state.existUser = true;
           }
@@ -187,9 +198,31 @@ export default new Vuex.Store({
       state.logged = false;
     },
 
+    CHANGE_USER_PROFILE(state, payload) {
+      let newUserArray = []
+      for (let user of state.users){
+        if (user.id == payload.id){
+          newUserArray.push(payload)
+          alert("Alterações Salvas")
+        }else{
+          newUserArray.push(user)
+        }
+      }
+      state.users = newUserArray
+    },
+
 
     
     CREATE_BASE(state) {
+      if(localStorage.getItem("loggedUser")){
+        if(localStorage.getItem("loggedUser") != ""){
+          state.loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
+          state.logged = true
+
+          
+        }
+      }
+
       if (!localStorage.getItem("users")) {
         state.users = [
           {
@@ -207,7 +240,7 @@ export default new Vuex.Store({
             username: "Zé Mockups",
             password: "12345",
             email: "where@mail",
-            profilePic: "../assets/main_user.png",
+            profilePic: "https://i.imgur.com/jr7av.jpg",
             phone: "",
             admin: true
           }
@@ -215,7 +248,8 @@ export default new Vuex.Store({
       }else{
         state.users = JSON.parse(localStorage.getItem("users"));
       }
-      if (localStorage.getItem("restaurants")) {
+
+      if (!localStorage.getItem("restaurants")) {
         state.restaurants = [
           {
             id: 0,

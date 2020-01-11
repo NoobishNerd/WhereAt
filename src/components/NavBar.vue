@@ -2,34 +2,14 @@
   <div id="navBar">
     <nav class="navbar navbar-light bg-light">
       <router-link to="/">
-        <img
-          src="../assets/Logotipo_Where_Texto.png"
-          class="navbar-brand ml-1"
-          height="50px"
-        />
+        <img src="../assets/Logotipo_Where_Texto.png" class="navbar-brand ml-1" height="50px" />
       </router-link>
       <form class="form-inline">
         <router-link to="/aboutRestaurant">
           <img src="../assets/main_lupa.png" height="40px" />
         </router-link>
-        <div v-if="this.$store.state.logged == true">
-          <router-link to="/clientProfile">
-            <h6>
-              Logged in as:
-            </h6>
-            <h5>{{ this.$store.state.loggedUser.username }}</h5>
-          </router-link>
-          <span>
-            <a @click="logout">Logout</a>
-          </span>
-        </div>
-        <img
-          v-if="this.$store.state.logged == true"
-          v-bind:src="this.$store.state.loggedUser.profilePic"
-          class="rounded-circle"
-          width="40px"
-          height="40px"
-        />
+        <img @click="getClientProfile" v-if="this.$store.state.logged == true" v-bind:src="this.$store.state.loggedUser.profilePic"
+          class="rounded-circle" width="40px" height="40px" style="cursor: pointer"/>
         <div v-else text-center>
           <router-link to="/login">
             <img src="../assets/main_user.png" height="40px" />
@@ -47,6 +27,11 @@ export default {
   methods: {
     logout() {
       this.$store.commit("LOGOUT");
+      localStorage.setItem("loggedUser", "");
+    },
+
+    getClientProfile() {
+      this.$router.push({name:"clientProfile", params:{id: this.$store.state.loggedUser.id}})
     }
   }
 };

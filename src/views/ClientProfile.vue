@@ -8,9 +8,9 @@
           <div class="col-sm-3 text-center">
             <br />
             <br />
-            <img src="../assets/Hachiman Profile Pic 1.jpg" class="rounded-circle" width="95px" height="95px" />
+            <img :src=user.profilePic class="rounded-circle" width="95px" height="95px" />
             <br />
-            <h5 class="pt-2" id="brownBoldText">Rui Gonçalves</h5>
+            <h5 class="pt-2" id="brownBoldText">{{user.username}}</h5>
             <button id="smallerButton" class="mt-2">Alterar Foto de Perfil</button>
           </div>
 
@@ -47,8 +47,8 @@
                 </div>
               </div>
             </div>
-            <ClientInfo v-if="component == 'info'"> </ClientInfo>
-            <ClientHistory v-if="component == 'history'"> </ClientHistory>
+            <ClientInfo :user="user" v-if="component == 'info'"> </ClientInfo>
+            <ClientHistory :id="user.id" v-if="component == 'history'"> </ClientHistory>
           </div>
         </div>
       </div>
@@ -59,9 +59,21 @@
 import ClientInfo from "@/components/ClientInfo.vue";
 import ClientHistory from "@/components/ClientHistory.vue";
 export default {
+  name: "profileClient",
   data: () => ({
-    component: "info"
+    component: "info",
+    user: {
+      id: "",
+      username:"",
+      profilePic:"",
+      email:"",
+      phone:"",
+    }
   }),
+
+  created: function() {
+    this.user = this.$store.getters.getUserById(this.$route.params.id);
+  },
 
   methods: {
     call(newComponent) {
@@ -72,6 +84,7 @@ export default {
       localStorage.setItem("loggedUser", "")
       this.$router.replace("/")
     }
+  
   },
   components: {
     ClientInfo,
