@@ -6,6 +6,7 @@
           class="card-img-top img-fluid"
           src="../assets/banana.jpg"
           alt="Card image cap"
+          @click="routerLink"
         />
         <div class="card-body">
           <h6 class="card-title text-left">Cozinha Gourmet</h6>
