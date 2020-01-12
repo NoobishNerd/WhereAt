@@ -218,8 +218,6 @@ export default new Vuex.Store({
         if(localStorage.getItem("loggedUser") != ""){
           state.loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
           state.logged = true
-
-          
         }
       }
 
@@ -268,7 +266,7 @@ export default new Vuex.Store({
             comments: [],
             tags: [],
             menu: [],
-            tables: [],
+            tables: [4, 4, 3, 2, 2, 2],
             reservations: [],
             phone: ""
           },
