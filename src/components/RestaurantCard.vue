@@ -58,6 +58,7 @@ export default {
 .card-body {
   padding: 0px;
   word-spacing: 1px;
+  margin-top: 5px;
 }
 .card {
   border: none;
@@ -67,13 +68,13 @@ export default {
 }
 p {
   color: #f17526;
-  margin:0px;
+  margin: 0px;
 }
 h6 {
   color: #f17526;
   margin: 0px;
 }
-h4{
-  margin:0px;
+h4 {
+  margin: 0px;
 }
 </style>
