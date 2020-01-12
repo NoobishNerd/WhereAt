@@ -7,69 +7,62 @@
             <img class="img-responsive" src="../assets/Nice Restaurant.png" />
             <div class="img-overlay">
               <router-link to="/editRestaurantProfile">
-              <button id="jumboBtn" class="btn btn-responsive">
-                Where at?
-              </button>
+                <button id="jumboBtn" class="btn btn-responsive"> 
+                  Where at?
+                </button>
               </router-link>
             </div>
           </div>
         </div>
       </div>
 
-      <br>
+      <br />
 
       <div class="row">
-        <div class="col-sm-2">
-        </div>
+        <div class="col-sm-2"></div>
         <div class="col-sm-8">
-          <h4 class="text-left" id="recommendationText">Recomendações Where@</h4>
-          <hr>
+          <h4 class="text-left" id="recommendationText">
+            Recomendações Where@
+          </h4>
+          <hr />
           aqui é para meter as cartas do restaurante
         </div>
       </div>
 
-      <br>
+      <br />
 
       <div class="row">
-        <div class="col-sm-2">
-        </div>
+        <div class="col-sm-2"></div>
         <div class="col-sm-8">
           <h4 class="text-left" id="recommendationText">Recomendações Porto</h4>
-          <hr>
+          <hr />
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm-2">
-          
-        </div>
+        <div class="col-sm-2"></div>
         <div class="col-sm-8">
           <div class="row">
             <div class="col-sm-5">
-              <RestaurantCard v-for="restaurant in restaurants"
-              v-bind:restaurant="restaurant"
-              v-bind:key="restaurant.id"></RestaurantCard>
+              <RestaurantCard
+                v-for="restaurant in restaurants"
+                v-bind:restaurant="restaurant"
+                v-bind:key="restaurant.id"
+              ></RestaurantCard>
             </div>
-            <div class="col-sm-2">
-              
-            </div>
+            <div class="col-sm-2"></div>
             <div class="col-sm-5">
-              <RestaurantCard v-for="restaurant in restaurants"
-              v-bind:restaurant="restaurant"
-              v-bind:key="restaurant.id"></RestaurantCard>
+              <RestaurantCard
+                v-for="restaurant in restaurants"
+                v-bind:restaurant="restaurant"
+                v-bind:key="restaurant.id"
+              ></RestaurantCard>
             </div>
           </div>
-          
         </div>
-       
-        
-        <div class="col-sm-2">
-          
-        </div>
-      </div>
-      
-      
 
+        <div class="col-sm-2"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -77,7 +70,6 @@
 <script>
 // @ is an alias to /src
 import RestaurantCard from "@/components/RestaurantCard.vue";
-
 
 export default {
   name: "home",
@@ -87,7 +79,6 @@ export default {
   }),
 
   created: function() {
-    
     this.restaurants = this.$store.state.restaurants;
 
     window.addEventListener("onload", function() {
@@ -95,14 +86,11 @@ export default {
     });
   },
 
-  methods: {
-    
-  },
-  
+  methods: {},
+
   components: {
     RestaurantCard
   }
-  
 };
 </script>
 
@@ -110,7 +98,7 @@ export default {
 #recommendationText {
   font-family: "Raleway";
   font-weight: bold;
-  color: #966227
+  color: #966227;
 }
 
 .img-wrapper {
