@@ -1,5 +1,5 @@
 <template>
-  <div class="container border border-light rounded">
+  <div class="container">
     <div class="row">
       <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
         <h5 class="pt-2 font-weight-bold"></h5>
@@ -110,8 +110,8 @@
           style="border-bottom-lg light:1px; border-left-lg light:3px;"
         >
           <h1 class="font-weight-bold">i</h1>
-        </div>
-        <p class="text-justify pt-2">
+        </div>  
+        <p class="text-justify pt-2 ml-3 mr-3">
           Ementa do Restaurante: Recomendações Do Chef: Bacalhau Lascado
           Especial – prato de eleição dos clientes da casa 15,5 € um delicioso
           bacalhau assado na brasa com batatas assadas “a murro” Bacalhau à Brás
@@ -192,11 +192,14 @@ html * {
   height: 300px;
 }
 #windowPhoto {
-  border-color: white;
-  box-shadow: 0 30px 60px 15px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
 }
 #windowCarrousel {
-  box-shadow: 0 30px 60px 15px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
 }
 #windowReservation {
   border-color: white;
@@ -206,10 +209,6 @@ html * {
   border-radius: 10px 10px 0px 0px;
 }
 .container {
-  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  background-color: #fffffe;
 }
 .border-primary {
   border-width: 3px;
@@ -244,5 +243,16 @@ html * {
   -webkit-box-shadow: -1px 3px 0px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: -1px 2px 0px 0px rgba(0, 0, 0, 0.25);
   box-shadow: -1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+}
+#windowEditor {
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+}
+
+#myMap {
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
 }
 </style>
