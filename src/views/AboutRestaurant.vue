@@ -2,7 +2,7 @@
   <div class="container border border-light rounded">
     <div class="row">
       <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
-        <h5 class="pt-2 font-weight-bold">{{ restaurant.username }}</h5>
+        <h5 class="pt-2 font-weight-bold"></h5>
         <img
           id="fotoRestaurante"
           src="../assets/Hachiman Profile Pic 1.jpg"
@@ -103,9 +103,6 @@
       <div class="col-sm-1"></div>
       <div class="col-sm-5 ">
         <img src="../assets/ze.png" alt="" />
-        <br />
-        <br />
-        <button id="mapsButton">Abrir em google maps</button>
       </div>
     </div>
     <br />
