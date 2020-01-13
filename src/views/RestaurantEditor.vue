@@ -3,71 +3,35 @@
     <div class="row">
       <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
         <h5 class="pt-2 font-weight-bold"></h5>
-        <img
-          id="fotoRestaurante"
-          src="../assets/Hachiman Profile Pic 1.jpg"
-          class="pb-2 img-fluid"
-        />
+        <router-link to="restaurantProfile">
+        <img id="fotoRestaurante" src="../assets/circunvalacao-9.jpg" class="pb-2 img-fluid" />
+        </router-link>
       </div>
       <div class="col-sm-1"></div>
-      <div
-        id="windowCarrousel"
-        class="col-sm-6 text-center img-thumbnail img-fluid  "
-      >
+      <div id="windowCarrousel" class="col-sm-6 text-center img-thumbnail img-fluid  ">
         <h5 class="font-weight-bold">Fotos do restaurante</h5>
-        <div
-          id="carouselExampleIndicators"
-          class="carousel slide"
-          data-ride="carousel"
-          data-interval="4000"
-        >
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
           <ol class="carousel-indicators">
-            <li
-              data-target="#carouselExampleIndicators"
-              data-slide-to="0"
-              class="active"
-            ></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
           </ol>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img
-                class="d-block w-100 img-fluid"
-                src="../assets/banana.jpg"
-                alt="First slide"
-              />
+              <img class="d-block w-100 img-fluid" src="../assets/banana.jpg" alt="First slide" />
             </div>
             <div class="carousel-item">
-              <img
-                class="d-block w-100 img-fluid"
-                src="../assets/circunvalacao-9.jpg"
-                alt="Second slide"
-              />
+              <img class="d-block w-100 img-fluid" src="../assets/circunvalacao-9.jpg" alt="Second slide" />
             </div>
             <div class="carousel-item">
-              <img
-                class="d-block w-100 img-fluid"
-                src="../assets/banana.jpg"
-                alt="Third slide"
-              />
+              <img class="d-block w-100 img-fluid" src="../assets/banana.jpg" alt="Third slide" />
             </div>
           </div>
-          <a
-            class="carousel-control-prev"
-            href="#carouselExampleIndicators"
-            role="button"
-            data-slide="prev"
-          >
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
           </a>
-          <a
-            class="carousel-control-next"
-            href="#carouselExampleIndicators"
-            role="button"
-            data-slide="next"
-          >
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
@@ -89,28 +53,18 @@
         <div id="menu" class="col-sm-3 pt-3" style="border-bottom-lg light:1px">
           <h5 class="font-weight-bold">Ementa</h5>
         </div>
-        <div
-          id="promotion"
-          class="col-sm-3 pt-3"
-          style="border-bottom-lg light:1px solid black; border-left-lg light:1px"
-        >
+        <div id="promotion" class="col-sm-3 pt-3"
+          style="border-bottom-lg light:1px solid black; border-left-lg light:1px">
           <h5 class="font-weight-bold">Promoções</h5>
         </div>
-        <div
-          id="comentary"
-          class="col-sm-3 pt-3 font-weight-bold "
-          style="border-bottom-lg light:1px; border-left-lg light:1px;"
-        >
+        <div id="comentary" class="col-sm-3 pt-3 font-weight-bold "
+          style="border-bottom-lg light:1px; border-left-lg light:1px;">
           <h5 class="font-weight-bold">Comentários</h5>
         </div>
         <div class="col-sm-1" style="border-left-lg light:1px"></div>
-        <div
-          id="information"
-          class="col-sm-2 pt-2 "
-          style="border-bottom-lg light:1px; border-left-lg light:3px;"
-        >
+        <div id="information" class="col-sm-2 pt-2 " style="border-bottom-lg light:1px; border-left-lg light:3px;">
           <h1 class="font-weight-bold">i</h1>
-        </div>  
+        </div>
         <p class="text-justify pt-2 ml-3 mr-3">
           Ementa do Restaurante: Recomendações Do Chef: Bacalhau Lascado
           Especial – prato de eleição dos clientes da casa 15,5 € um delicioso
@@ -207,8 +161,6 @@ html * {
 }
 #finalCrate {
   border-radius: 10px 10px 0px 0px;
-}
-.container {
 }
 .border-primary {
   border-width: 3px;
