@@ -67,6 +67,14 @@ const routes = [
       )
   },
   {
+    path: "/restaurantProfile",
+    name: "restaurantProfile",
+    component: () =>
+      import(
+        /* webpackChunkName: "restaurantEditor" */ "../views/RestaurantProfile.vue"
+      )
+  },
+  {
     path: "/editPromotion",
     name: "promotioneditor"
   },
