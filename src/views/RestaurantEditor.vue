@@ -1,7 +1,7 @@
 <template>
   <div class="container border border-light rounded">
     <div class="row">
-      <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail ml-2">
+      <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
         <h5 class="pt-2 font-weight-bold"></h5>
         <img
           id="fotoRestaurante"
@@ -9,10 +9,10 @@
           class="pb-2 img-fluid"
         />
       </div>
-
+      <div class="col-sm-1"></div>
       <div
         id="windowCarrousel"
-        class="col-sm-6 text-center img-thumbnail img-fluid ml-5 "
+        class="col-sm-6 text-center img-thumbnail img-fluid  "
       >
         <h5 class="font-weight-bold">Fotos do restaurante</h5>
         <div
@@ -85,38 +85,41 @@
       </div>
     </div>
     <div class="container-fluid">
-      <div id="finalCrate" class="row d-flex" style="border:1px solid black;">
-        <div class="col-sm-3 pt-3" style="border-bottom:1px solid black;">
+      <div id="finalCrate" class="row d-flex">
+        <div id="menu" class="col-sm-3 pt-3" style="border-bottom-lg light:1px">
           <h5 class="font-weight-bold">Ementa</h5>
         </div>
         <div
+          id="promotion"
           class="col-sm-3 pt-3"
-          style="border-bottom:1px solid black; border-left:1px solid black;"
+          style="border-bottom-lg light:1px solid black; border-left-lg light:1px"
         >
           <h5 class="font-weight-bold">Promoções</h5>
         </div>
         <div
           id="comentary"
           class="col-sm-3 pt-3 font-weight-bold "
-          style="border-bottom:1px solid black; border-left:1px solid black;"
+          style="border-bottom-lg light:1px; border-left-lg light:1px;"
         >
           <h5 class="font-weight-bold">Comentários</h5>
         </div>
-        <div class="col-sm-1" style="border-left:1px solid black;"></div>
+        <div class="col-sm-1" style="border-left-lg light:1px"></div>
         <div
           id="information"
           class="col-sm-2 pt-2 "
-          style="border-bottom:1px solid black; border-left:1px solid black;"
+          style="border-bottom-lg light:1px; border-left-lg light:3px;"
         >
           <h1 class="font-weight-bold">i</h1>
         </div>
-        Ementa do Restaurante: Recomendações Do Chef: Bacalhau Lascado Especial
-        – prato de eleição dos clientes da casa 15,5 € um delicioso bacalhau
-        assado na brasa com batatas assadas “a murro” Bacalhau à Brás 13,8 € um
-        clássico na gastronomia portuguesa confeccionado com bacalhau de alta
-        qualidade, acompanha com salada Pataniscas de Bacalhau 14,2 € cozinhadas
-        com saborosas lascas de bacalhau, servidas com arroz de feijão ou arroz
-        de tomate Preço médio 25 €
+        <p class="text-justify pt-2">
+          Ementa do Restaurante: Recomendações Do Chef: Bacalhau Lascado
+          Especial – prato de eleição dos clientes da casa 15,5 € um delicioso
+          bacalhau assado na brasa com batatas assadas “a murro” Bacalhau à Brás
+          13,8 € um clássico na gastronomia portuguesa confeccionado com
+          bacalhau de alta qualidade, acompanha com salada Pataniscas de
+          Bacalhau 14,2 € cozinhadas com saborosas lascas de bacalhau, servidas
+          com arroz de feijão ou arroz de tomate Preço médio 25 €
+        </p>
       </div>
     </div>
   </div>
@@ -203,10 +206,10 @@ html * {
   border-radius: 10px 10px 0px 0px;
 }
 .container {
-  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
-  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
-  background-color: #fffffe
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  background-color: #fffffe;
 }
 .border-primary {
   border-width: 3px;
@@ -215,5 +218,31 @@ html * {
   width: 500px;
   height: 500px;
   margin: 0 auto;
+}
+#finalCrate {
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  border: none;
+}
+#promotion {
+  -webkit-box-shadow: 1px 3px 0px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+}
+#menu {
+  -webkit-box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+}
+#comentary {
+  -webkit-box-shadow: 1px 3px 0px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+}
+#information {
+  -webkit-box-shadow: -1px 3px 0px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: -1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: -1px 2px 0px 0px rgba(0, 0, 0, 0.25);
 }
 </style>
