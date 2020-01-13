@@ -1,7 +1,7 @@
 <template>
   <div class="card-group">
     <div class="container-fluid">
-      <div class="card">
+      <div class="card img-thumbnail">
         <img
           class="card-img-top img-fluid"
           src="../assets/banana.jpg"
@@ -61,7 +61,13 @@ export default {
   margin-top: 5px;
 }
 .card {
-  border: none;
+
+  border-width: 1px;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+
+  padding-top: 3px;
 }
 .container-fluid {
   padding: 0px;

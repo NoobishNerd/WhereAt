@@ -77,7 +77,7 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 #historyRow{
   border-style: solid;
   border-width: 2px
