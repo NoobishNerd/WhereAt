@@ -24,6 +24,7 @@
               data-hs-cos-general-type="widget"
               data-hs-cos-type="raw_html"
               ><form
+                v-on:submit.prevent="getSearchResults()"
                 method="GET"
                 action="https://www.shopwithscrip.com/Search?"
                 role="search"
@@ -32,6 +33,7 @@
                 novalidate=""
               >
                 <input
+                  v-model="searchText"
                   required=""
                   name="q"
                   id="express-form-typeahead"
@@ -74,6 +76,11 @@
 export default {
   name: "NavBar",
 
+  data: () => ({
+    searchText: "",
+    filterMaybe: "",
+    restaurants: ""
+  }),
   methods: {
     logout() {
       this.$store.commit("LOGOUT");
@@ -85,6 +92,10 @@ export default {
         name: "clientProfile",
         params: { id: this.$store.state.loggedUser.id }
       });
+    },
+
+    getSearchResults(){
+	    this.restaurants = this.$store.getters.getSearchResults(this.searchText)
     }
   }
 };

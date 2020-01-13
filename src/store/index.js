@@ -55,6 +55,10 @@ export default new Vuex.Store({
       return state.users.find(user => user.id === id)
     },
 
+    getSearchResults: (state) => (searchText) => {
+      return state.restaurants.filter(restaurant => restaurant.username === searchText || restaurant.adress === searchText || restaurant.local === searchText ) //tags not implemented || restaurant.tags === searchText
+    }
+
   },
 
   mutations: {
