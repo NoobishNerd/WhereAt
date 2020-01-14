@@ -57,6 +57,24 @@ export default new Vuex.Store({
 
     getSearchResults: (state) => (searchText) => {
       return state.restaurants.filter(restaurant => restaurant.username.includes(searchText) || restaurant.adress.includes(searchText) || restaurant.local.includes(searchText) ) //tags not implemented || restaurant.tags === searchText
+    },
+
+
+    getAvailableTables: (state) => (date, id, tables) => {
+      let availableTables = tables
+      for (const reservation of state.bookingHistory) {
+        //se estiver confirmada & for à mesma hora no mesmo restaurante
+        if(reservation.confirmation && reservation.id_restaurant == id && reservation.date == date){
+          for (let i= 0; i < reservation.num_people.length; i++) {
+              for (let j= 0; j < availableTables.length; j++) {
+              if(availableTables[j] == reservation.num_people[i])
+                availableTables[j] = `Mesa para ${availableTables[j]} - reservada`
+              break;
+            }
+          }
+        }
+      }
+      return availableTables
     }
 
   },

@@ -41,10 +41,10 @@
         <div class="row">
           <div class="col-sm-5">
             <h5>Número de Pessoas:</h5>
-            <input type="number" />
+            <input readonly v-model="num_people.length" type="number" />
             <br />
             <br />
-            <input type="date" id="start" name="start" />
+            <input v-model="date" type="date" id="start" name="start" />
             <br />
             <br />
             <button id="smallerButton">Reservar</button>
@@ -54,9 +54,8 @@
             <h5>Mesas:</h5>
             <div class="form-group">
               <select multiple class="form-control" id="sltTables">
-                <option>Mesa 1 | 3 pessoas</option>
-                <option>Mesa 2 | 4 pessoas</option>
-                <option>Mesa 3 | 3 pessoas</option>
+                <option v-for="n in restaurant.tables.length - 1" v-bind:key="n"> Mesa {{n}} | {{restaurant.tables[n]}} pessoas</option>
+                
               </select>
             </div>
           </div>
@@ -86,18 +85,18 @@
       <div @click="call('info')" id="information" class="col-sm-2 pt-2 " style="border-bottom:1px solid black; border-left:1px solid black;">
         <h1 class="font-weight-bold">i</h1>
       </div>
-      <div v-if="component='info'">
+      <div v-show="component='info'">
         <h5>{{restaurant.info}}</h5>
       </div>
-      <div v-if="component='comments'">
+      <div v-show="component='comments'">
         <Comments v-for="comment in restaurant.comments"
                 v-bind:comment="comment"
                 v-bind:key="comment.username"></Comments>
       </div>
-      <div v-if="component='promos'">
+      <div v-show="component='promos'">
         <h5>promos</h5>
       </div>
-      <div v-if="component='menu'">
+      <div v-show="component='menu'">
         <h5>ementa</h5>
       </div>
       
@@ -111,15 +110,19 @@ export default {
   data: () => ({
     component: "comments",
     restaurant: {
-      username: "jk"
+      type: Object,
+      required: true
     },
-    map: ""
+    date: "",
+    availableTables: [],
+    num_people: [], //mesas selecionadas sltTables
+    map: "",
   }),
-  mounted: function() {
+  mounted: function () {
     this.renderMap();
   },
 
-  created: function() {
+  created: function () {
     this.restaurant = this.$store.getters.getRestaurantById(
       this.$route.params.id
     );
@@ -129,15 +132,56 @@ export default {
     call(newComponent) {
       this.component = newComponent;
     },
+    checkAvailability() {
+      this.availableTables = this.$store.getters.getAvailableTables(this.date, this.restaurant.id, this.restaurant.tables)
+      let limit = 0
+      let num_pp = 0
+      for (let index = 0; index < this.num_people.length; index++) {
+        limit += this.num_people[index]
+      }
+
+      for (let j = 0; j < this.availableTables.length; j++) {
+        if (this.availableTables[j].typeof == "Number") {
+          num_pp += this.availableTables[j]
+        }
+      }
+      if (num_pp > limit) {
+        alert("Capacidade Excedida")
+        return false
+      } else {
+        alert("Pedido enviado")
+        return true
+      }
+
+    },
+    reservation() {
+      //fazer check se está logged in ou fazer v-if para n haver opção de reserva caso n esteja autenticado ou seja um restaurante
+      if (this.checkAvailability(this.date)) {
+        this.$store.commit("ADD_RESERVATION", {
+          id_restaurant: this.restaurant.id,
+          id_client: JSON.parse(localStorage.getItem("loggedUser")).id,
+          date: this.date,
+          dateOfRes: "", //buscar data atual
+          num_people: this.num_people,
+          presence: false,
+          confirmation: "pending"
+        })
+      } else {
+        //show "no no" message
+      }
+    },
     renderMap() {
       this.map = new google.maps.Map(document.querySelector("#myMap"), {
-        center: { lat: -34.397, lng: 150.644 },
+        center: {
+          lat: -34.397,
+          lng: 150.644
+        },
         zoom: 8
       });
       this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
     }
   },
-  
+
   components: {
     Comments
   }
