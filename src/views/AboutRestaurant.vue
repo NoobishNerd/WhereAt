@@ -124,9 +124,6 @@ export default {
       this.$route.params.id
     );
   },
-  mounted: function() {
-    this.renderMap();
-  },
 
   methods: {
     call(newComponent) {
