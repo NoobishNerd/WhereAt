@@ -2,16 +2,11 @@
   <div class="card-group">
     <div class="container-fluid">
       <div class="card img-thumbnail">
-        <img
-          class="card-img-top img-fluid"
-          src="../assets/banana.jpg"
-          alt="Card image cap"
-          @click="routerLink"
-        />
+        <img class="card-img-top img-fluid" :src="restaurant.profilePic" alt="Card image cap" @click="routerLink" />
         <div class="card-body">
-          <h6 class="card-title text-left">Cozinha Gourmet</h6>
+          <h6 class="card-title text-left">{{restaurant.local}}</h6>
           <h4 class="card-title text-left font-weight-bold">
-            Screaming Bananas
+           {{restaurant.username}}
           </h4>
           <p class="card-text text-left">
             <small>
@@ -19,7 +14,7 @@
             </small>
           </p>
           <p class="card-text text-left">
-            <small>4.5-4012 avaliações</small>
+            <small>{{rate}}-{{num_comments}} avaliações</small>
           </p>
         </div>
       </div>
@@ -30,6 +25,11 @@
 <script>
 export default {
   name: "RestaurantCard",
+
+  data: () => ({
+    rate: 0,
+    num_comments: 0,
+  }),
 
   props: {
     restaurant: {
@@ -44,7 +44,15 @@ export default {
         name: "aboutRestaurant",
         params: { id: this.restaurant.id }
       });
+    },
+
+    getAverageAndNumber(){
+      //counting number of comments and sum of ratings
+       for (let i = 0; i < this.restaurant.comments.length; i++) {this.num_comments++; this.rate+= this.comments[i].rate}
+      //average de ratings
+      this.rate = this.rate/this.num_comments
     }
+
   }
 };
 </script>
