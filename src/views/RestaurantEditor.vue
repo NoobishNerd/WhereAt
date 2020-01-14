@@ -4,7 +4,7 @@
       <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
         <h5 class="pt-2 font-weight-bold"></h5>
           <input type="button" value="cúmulo do design">
-          <img @click="replaceRoute" id="fotoRestaurante" src="../assets/circunvalacao-9.jpg" class="pb-2 img-fluid" />
+          <img @click="replaceRouteProfile" id="fotoRestaurante" src="../assets/circunvalacao-9.jpg" class="pb-2 img-fluid" />
       </div>
       <div class="col-sm-1"></div>
       <div id="windowCarrousel" class="col-sm-6 text-center img-thumbnail img-fluid  ">
@@ -49,30 +49,41 @@
     </div>
     <div class="container-fluid">
       <div id="finalCrate" class="row d-flex">
-        <div id="menu" class="col-sm-3 pt-3" style="border-bottom-lg light:1px">
+        <div @click="call('menu')" id="menu" class="col-sm-3 pt-3" style="border-bottom-lg light:1px">
           <h5 class="font-weight-bold">Ementa</h5>
         </div>
-        <div id="promotion" class="col-sm-3 pt-3"
+        <div @click="call('promos')" id="promotion" class="col-sm-3 pt-3"
           style="border-bottom-lg light:1px solid black; border-left-lg light:1px">
           <h5 class="font-weight-bold">Promoções</h5>
         </div>
-        <div id="comentary" class="col-sm-3 pt-3 font-weight-bold "
+        <div @click="call('comments')" id="comentary" class="col-sm-3 pt-3 font-weight-bold "
           style="border-bottom-lg light:1px; border-left-lg light:1px;">
           <h5 class="font-weight-bold">Comentários</h5>
         </div>
-        <div class="col-sm-1" style="border-left-lg light:1px"></div>
+        <div @click="call('info')" class="col-sm-1" style="border-left-lg light:1px"></div>
         <div id="information" class="col-sm-2 pt-2 " style="border-bottom-lg light:1px; border-left-lg light:3px;">
           <h1 class="font-weight-bold">i</h1>
         </div>
-        <p class="text-justify pt-2 ml-3 mr-3">
-          {{restaurant.info}}
+        <p v-show="component == 'info'" class="text-justify pt-2 ml-3 mr-3">
+          <!-- componente editar info -->
+          info
         </p>
+        <Comments v-show="component == 'comments'" 
+                v-for="comment in restaurant.comments"
+                v-bind:comment="comment"
+                v-bind:key="comment.username"></Comments>
+        <PromotionEditor v-show="component == 'promos'"></PromotionEditor>
+        <MenuEditor v-show="component == 'menu'"></MenuEditor>
       </div>
     </div>
   </div>
 </template>
 <script>
 import TableEditor from "../components/TableEditor.vue";
+import Comments from "@/components/Comments.vue"
+import PromotionEditor from "@/components/PromotionEditor.vue"
+import MenuEditor from "@/components/MenuEditor.vue"
+
 export default {
   data: () => ({
     component: "info",
@@ -98,7 +109,7 @@ export default {
       });
       this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
     },
-    replaceRoute(){
+    replaceRouteProfile(){
       this.$router.replace({
           name: "restaurantProfile",
           params: { id: this.restaurant.id }
@@ -107,7 +118,10 @@ export default {
   },
 
   components: {
-    TableEditor
+    TableEditor,
+    Comments,
+    PromotionEditor,
+    MenuEditor
   }
 };
 </script>

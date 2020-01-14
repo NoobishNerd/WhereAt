@@ -14,6 +14,10 @@
             <button id="smallerButton" class="mt-2">Alterar Foto de Perfil</button>
           </div>
 
+
+                                                                                            <input @click="replaceRouteEditor" type="button" value="cúmulo do design">
+
+
           <div class="col-sm-9">
             <div class="row justify-content-sm-around">
               <div @click="call('history')" class="col-sm-4 " style="border-bottom:1px solid black; border-left:1px solid black; border-radius: 0px 0px 0px 6px; cursor:pointer;">
@@ -62,7 +66,7 @@ export default {
   name: "profileRestaurant",
   data: () => ({
     component: "history",
-    user: {
+    restaurant: {
       id: "",
       username:"",
       profilePic:"",
@@ -70,6 +74,9 @@ export default {
       phone:"",
     }
   }),
+  created: function(){
+    this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id)
+  },
 
   methods: {
     call(newComponent) {
@@ -79,6 +86,12 @@ export default {
       this.$store.commit("LOGOUT")
       localStorage.setItem("loggedUser", "")
       this.$router.replace("/")
+    },
+    replaceRouteEditor(){
+      this.$router.replace({
+          name: "restaurantEditor",
+          params: { id: this.restaurant.id }
+      }); 
     }
   
   },

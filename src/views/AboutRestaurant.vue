@@ -85,18 +85,18 @@
       <div @click="call('info')" id="information" class="col-sm-2 pt-2 " style="border-bottom:1px solid black; border-left:1px solid black;">
         <h1 class="font-weight-bold">i</h1>
       </div>
-      <div v-show="component='info'">
+      <div v-show="component=='info'">
         <h5>{{restaurant.info}}</h5>
       </div>
-      <div v-show="component='comments'">
+      <div v-show="component=='comments'">
         <Comments v-for="comment in restaurant.comments"
                 v-bind:comment="comment"
                 v-bind:key="comment.username"></Comments>
       </div>
-      <div v-show="component='promos'">
+      <div v-show="component=='promos'">
         <h5>promos</h5>
       </div>
-      <div v-show="component='menu'">
+      <div v-show="component=='menu'">
         <h5>ementa</h5>
       </div>
       
