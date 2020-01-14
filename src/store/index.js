@@ -56,7 +56,7 @@ export default new Vuex.Store({
     },
 
     getSearchResults: (state) => (searchText) => {
-      return state.restaurants.filter(restaurant => restaurant.username === searchText || restaurant.adress === searchText || restaurant.local === searchText ) //tags not implemented || restaurant.tags === searchText
+      return state.restaurants.filter(restaurant => restaurant.username.includes(searchText) || restaurant.adress.includes(searchText) || restaurant.local.includes(searchText) ) //tags not implemented || restaurant.tags === searchText
     }
 
   },
