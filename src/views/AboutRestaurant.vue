@@ -1,11 +1,11 @@
 <template>
-  <div class="container border border-light rounded">
+  <div class="container">
     <div class="row">
       <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
         <h5 class="pt-2 font-weight-bold"></h5>
         <img id="fotoRestaurante" :src="restaurant.profilePic" class="pb-2 img-fluid" />
       </div>
-      <div class="col-1"></div>
+      <div class="col-sm-1"></div>
       <div id="windowCarrousel" class="col-sm-6 text-center img-thumbnail img-fluid">
         <h5 class="font-weight-bold">Fotos do restaurante</h5>
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
@@ -115,6 +115,9 @@ export default {
     },
     map: ""
   }),
+  mounted: function() {
+    this.renderMap();
+  },
 
   created: function() {
     this.restaurant = this.$store.getters.getRestaurantById(
