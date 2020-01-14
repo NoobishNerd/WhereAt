@@ -2,48 +2,19 @@
   <div id="navBar">
     <nav class="navbar navbar-light bg-light">
       <router-link to="/">
-        <img
-          src="../assets/Logotipo_Where_Texto.png"
-          class="navbar-brand ml-1"
-          height="50px"
-        />
+        <img src="../assets/Logotipo_Where_Texto.png" class="navbar-brand ml-1" height="50px" />
       </router-link>
       <form class="form-inline">
-        <div
-          class="span3 widget-span widget-type-raw_html custom-search"
-          style=""
-          data-widget-type="raw_html"
-          data-x="4"
-          data-w="3"
-        >
+        <div class="span3 widget-span widget-type-raw_html custom-search" style="" data-widget-type="raw_html"
+          data-x="4" data-w="3">
           <div class="cell-wrapper layout-widget-wrapper">
-            <span
-              id="hs_cos_wrapper_module_14308928327274411"
-              class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_raw_html"
-              style=""
-              data-hs-cos-general-type="widget"
-              data-hs-cos-type="raw_html"
-              ><form
-                v-on:submit.prevent="getSearchResults()"
-                method="GET"
-                action="https://www.shopwithscrip.com/Search?"
-                role="search"
-                class="navbar-form navbar-left ng-pristine ng-valid"
-                id="express-form"
-                novalidate=""
-              >
-                <input
-                  v-model="searchText"
-                  required=""
-                  name="q"
-                  id="express-form-typeahead"
-                  placeholder="Search"
-                  class="form-control tt-input"
-                  autocomplete="off"
-                  spellcheck="false"
-                  dir="auto"
-                  type="text"
-                />
+            <span id="hs_cos_wrapper_module_14308928327274411"
+              class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_raw_html" style=""
+              data-hs-cos-general-type="widget" data-hs-cos-type="raw_html">
+              <form v-on:submit.prevent="getSearchResults()" method="GET" action="https://www.shopwithscrip.com/Search?"
+                role="search" class="navbar-form navbar-left ng-pristine ng-valid" id="express-form" novalidate="">
+                <input v-model="searchText" required="" name="q" id="express-form-typeahead" placeholder="Search"
+                  class="form-control tt-input" autocomplete="off" spellcheck="false" dir="auto" type="text" />
                 <button class="search-btn" type="submit">
                   <span class="icon"></span>
                 </button>
@@ -53,15 +24,9 @@
           <!--end layout-widget-wrapper -->
         </div>
 
-        <img
-          @click="getClientProfile"
-          v-if="this.$store.state.logged == true"
-          v-bind:src="this.$store.state.loggedUser.profilePic"
-          class="rounded-circle"
-          width="40px"
-          height="40px"
-          style="cursor: pointer"
-        />
+        <img @click="getClientProfile" v-if="this.$store.state.logged == true"
+          v-bind:src="this.$store.state.loggedUser.profilePic" class="rounded-circle" width="40px" height="40px"
+          style="cursor: pointer" />
         <div v-else text-center>
           <router-link to="/login">
             <img src="../assets/main_user.png" height="40px" />

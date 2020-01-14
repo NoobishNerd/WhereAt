@@ -12,14 +12,8 @@
 
     <div class="col-sm-6">
       <div class="form-group">
-        <input
-          type="number"
-          class="form-control"
-          id="txtAddTable"
-          aria-describedby="helpId"
-          placeholder="Capacidade"
-          min="0"
-        />
+        <input type="number" class="form-control" id="txtAddTable" aria-describedby="helpId" placeholder="Capacidade"
+          min="0" />
       </div>
       <button @click="addTable" id="addButtontables">Adicionar Mesa</button>
 

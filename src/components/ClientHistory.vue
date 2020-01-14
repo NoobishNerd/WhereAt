@@ -40,7 +40,7 @@
             <p class="text-left mb-2" id="whiteText">Reservar novamente</p>
           </div>
         </div>
-      </div>      
+      </div>
     </div>
 
     <div id="historyRow" class="row mb-3 mr-1">
