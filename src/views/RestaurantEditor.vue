@@ -39,7 +39,7 @@
     </div>
     <div class="row ">
       <div id="windowEditor" class="col-sm-6 img-thumbnail">
-        <TableEditor></TableEditor>
+        <TableEditor :restaurant="restaurant"></TableEditor>
       </div>
       <div class="col-sm-6 ">
         <div>

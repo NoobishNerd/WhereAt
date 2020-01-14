@@ -28,6 +28,12 @@ export default {
   data: () => ({
     tables: []
   }),
+  props:{
+    restaurant:{
+      type: Object,
+      required: true
+    }
+  },
   methods: {
     addTable() {
       document.getElementById("txtAddTable").value;
