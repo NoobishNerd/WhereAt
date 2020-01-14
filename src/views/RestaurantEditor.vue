@@ -3,9 +3,8 @@
     <div class="row">
       <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
         <h5 class="pt-2 font-weight-bold"></h5>
-        <router-link to="restaurantProfile">
-          <img id="fotoRestaurante" src="../assets/circunvalacao-9.jpg" class="pb-2 img-fluid" />
-        </router-link>
+          <input type="button" value="cúmulo do design">
+          <img @click="replaceRoute" id="fotoRestaurante" src="../assets/circunvalacao-9.jpg" class="pb-2 img-fluid" />
       </div>
       <div class="col-sm-1"></div>
       <div id="windowCarrousel" class="col-sm-6 text-center img-thumbnail img-fluid  ">
@@ -98,6 +97,12 @@ export default {
         zoom: 8
       });
       this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+    },
+    replaceRoute(){
+      this.$router.replace({
+          name: "restaurantProfile",
+          params: { id: this.restaurant.id }
+      }); 
     }
   },
 

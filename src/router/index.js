@@ -74,7 +74,7 @@ const routes = [
       )
   },
   {
-    path: "/restaurantProfile",
+    path: "/restaurantProfile/:id",
     name: "restaurantProfile",
     component: () =>
       import(
