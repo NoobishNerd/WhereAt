@@ -22,7 +22,7 @@
                     <img src="../assets/Reservations Icon.png" width="47px"> 
                   </div>
                   <div class="col-sm-10 pt-3">
-                    <h5 id="brownText">Gerir Reservas</h5>                    
+                    <h5 class="text-center" id="brownText">Gerir Reservas</h5>                    
                   </div>
                 </div>
               </div>
@@ -32,7 +32,7 @@
                     <img src="../assets/Vacation Icon.png" width="45px"> 
                   </div>
                   <div class="col-sm-10 pt-3">
-                    <h5 id="brownText">Encerramento</h5>                    
+                    <h5 class="text-center" id="brownText">Encerramento</h5>                    
                   </div>
                 </div>
               </div>
@@ -42,7 +42,7 @@
                     <img src="../assets/Logout Icon.png" width="42px"> 
                   </div>
                   <div class="col-sm-10 pt-3">
-                    <h5 id="brownText">Terminar Sessão</h5>                    
+                    <h5 class="text-center" id="brownText">Terminar Sessão</h5>                    
                   </div>
                 </div>
               </div>
