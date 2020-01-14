@@ -5,13 +5,13 @@
       <div class="row">
         <div class="col-12">
           <form v-on:submit.prevent="login()">
-            <input v-model="emailLoginRest" type="text" id="login" class="fadeIn second" name="login"
+            <input v-model="emailLogin" type="text" id="login" class="fadeIn second" name="login"
               placeholder="Endereço de email" />
-            <input v-model="passwordLoginRest" type="password" id="password" class="fadeIn third" name="login"
+            <input v-model="passwordLogin" type="password" id="password" class="fadeIn third" name="login"
               placeholder="Password" />
             <input type="submit" class="fadeIn fourth" value="Login" />
             <span class="psw">
-              <router-link to="/register">Não está registado?</router-link>
+              <router-link to="/registerRestaurant">Não está registado?</router-link>
             </span>
             <link href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap" rel="stylesheet" />
           </form>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: "Login",
+  name: "LoginRestaurant",
   data: () => ({
     emailLogin: "",
     passwordLogin: ""

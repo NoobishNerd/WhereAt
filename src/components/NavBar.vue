@@ -24,8 +24,8 @@
           <!--end layout-widget-wrapper -->
         </div>
 
-        <img @click="getClientProfile" v-if="this.$store.state.logged == true"
-          v-bind:src="this.$store.state.loggedUser.profilePic" class="rounded-circle" width="40px" height="40px"
+        <img @click="getProfile" v-if="this.$store.state.logged == true"
+          v-bind:src="loggedUser.profilePic" class="rounded-circle" width="40px" height="40px"
           style="cursor: pointer" />
         <div v-else text-center>
           <router-link to="/login">
@@ -44,19 +44,34 @@ export default {
   data: () => ({
     searchText: "",
     filterMaybe: "",
-    restaurants: ""
+    restaurants: "",
+    loggedUser: ""
+
   }),
+
+  created: function(){
+    this.loggedUser = this.$store.getters.getLoggedUser
+  },
   methods: {
     logout() {
       this.$store.commit("LOGOUT");
       localStorage.setItem("loggedUser", "");
     },
 
-    getClientProfile() {
-      this.$router.push({
-        name: "clientProfile",
-        params: { id: this.$store.state.loggedUser.id }
-      });
+    getProfile() {
+      if(this.loggedUser.type == "client"){
+        this.$router.push({
+          name: "clientProfile",
+          params: { id: this.loggedUser.id }
+        });
+      }
+      if(this.loggedUser.type == "restaurant"){
+        this.$router.push({
+          name: "restaurantEditor",
+          params: { id: this.loggedUser.id }
+        });
+      }
+      
     },
 
     getSearchResults(){

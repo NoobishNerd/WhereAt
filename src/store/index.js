@@ -59,6 +59,10 @@ export default new Vuex.Store({
       return state.restaurants.filter(restaurant => restaurant.username.includes(searchText) || restaurant.adress.includes(searchText) || restaurant.local.includes(searchText) ) //tags not implemented || restaurant.tags === searchText
     },
 
+    getLoggedUser: (state) => {
+      return state.loggedUser
+    },
+
 
     getAvailableTables: (state) => (date, id, tables) => {
       let availableTables = tables
@@ -102,7 +106,7 @@ export default new Vuex.Store({
 
         state.logged = true;
 
-        localStorage.setItem("loggedUser", JSON.stringify(this.$store.state.loggedUser));
+        localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
 
 
         alert("Registado");
@@ -167,6 +171,7 @@ export default new Vuex.Store({
             user.email === payload.email &&
             user.password === payload.password
           ) {
+            state.loggedUser.type = "client"
             state.loggedUser.admin = user.admin;
             state.loggedUser.id = user.id;
             state.loggedUser.username = user.username;
@@ -193,14 +198,13 @@ export default new Vuex.Store({
             restaurant.email === payload.email &&
             restaurant.password === payload.password
           ) {
-            state.loggedUser = {
-              id: restaurant.id,
-              username: restaurant.username,
-              email: restaurant.email,
-              password: restaurant.password
-            };
+            state.loggedUser.type = "restaurant"
+            state.loggedUser.admin = false;
+            state.loggedUser.id = restaurant.id;
+            state.loggedUser.username = restaurant.username;
+            state.loggedUser.profilePic = restaurant.profilePic;
 
-            localStorage.setItem("loggedUser", JSON.stringify(this.$store.state.loggedUser));
+            localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
 
             alert("LOGIN");
             state.existUser = true;
@@ -265,6 +269,8 @@ export default new Vuex.Store({
             admin: true
           }
         ];
+
+        localStorage.setItem("users", JSON.stringify(state.users))
       }else{
         state.users = JSON.parse(localStorage.getItem("users"));
       }
@@ -335,6 +341,8 @@ export default new Vuex.Store({
             phone: "91199porfavornaumincomode"
           }
         ];
+
+        localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
       }else{
         state.restaurants = JSON.parse(localStorage.getItem("restaurants"));
       }

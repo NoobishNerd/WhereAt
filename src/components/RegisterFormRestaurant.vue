@@ -30,9 +30,7 @@
           <button type="submit" class="btn btn-primary  float-right">
             Criar Conta
           </button>
-          <button type="button" class="btn btn-link float-right">
-            <router-link to="/login">Login</router-link>
-          </button>
+          <button type="button" @click="goToLoginRestaurant" class="btn btn-link float-right">Login</button>
         </form>
       </div>
     </div>
@@ -81,6 +79,11 @@ export default {
     },
     saveStorage(){
       localStorage.setItem("restaurants", JSON.stringify(this.$store.state.restaurants));
+    },
+
+  
+    goToLoginRestaurant(){
+      this.$router.push({path: '/loginRestaurant'})
     }
   }
 };
