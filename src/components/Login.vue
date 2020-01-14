@@ -1,45 +1,23 @@
 <template>
-  <div
-    class="login d-flex align-items-center justify-content-center position-relative"
-  >
-    <div
-      id="formContent"
-      class="container d-flex justify-content-center position-absolute"
-    >
+  <div class="login d-flex align-items-center justify-content-center position-relative">
+    <div id="formContent" class="container d-flex justify-content-center position-absolute">
       <!-- Login Form -->
       <div class="row">
         <div class="col-12">
           <form v-on:submit.prevent="login()">
-            <input
-              v-model="emailLogin"
-              type="email"
-              id="login"
-              class="fadeIn second"
-              name="login"
-              placeholder="Endereço de email"
-            />
-            <input
-              v-model="passwordLogin"
-              type="password"
-              id="password"
-              class="fadeIn third"
-              name="login"
-              placeholder="Password"
-            />
+            <input v-model="emailLogin" type="email" id="login" class="fadeIn second" name="login"
+              placeholder="Endereço de email" />
+            <input v-model="passwordLogin" type="password" id="password" class="fadeIn third" name="login"
+              placeholder="Password" />
             <input type="submit" class="fadeIn fourth" value="Login" />
             <span class="psw">
               <router-link to="/register">Não está registado?</router-link>
             </span>
             <hr />
             <span class="psw">
-              <router-link to="/registerRestaurant"
-                >É um restaurante? (BURIBANKA tempopário)</router-link
-              >
+              <router-link to="/registerRestaurant">É um restaurante? (BURIBANKA tempopário)</router-link>
             </span>
-            <link
-              href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap"
-              rel="stylesheet"
-            />
+            <link href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap" rel="stylesheet" />
           </form>
         </div>
       </div>

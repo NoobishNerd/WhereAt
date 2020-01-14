@@ -1,80 +1,31 @@
 <template>
   <div id="fromrRegister">
-    <div
-      class="login d-flex align-items-center justify-content-center position-relative"
-    >
+    <div class="login d-flex align-items-center justify-content-center position-relative">
       <div class="container col-sm-4">
         <form v-on:submit.prevent="addUser()">
           <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              id="registerName"
-              placeholder="Nome do Restaurante"
-              required
-              v-model="username"
-            />
+            <input type="text" class="form-control" id="registerName" placeholder="Nome do Restaurante" required
+              v-model="username" />
           </div>
           <div class="form-group">
-            <input
-              type="email"
-              class="form-control"
-              id="registerEmail"
-              aria-describedby="emailHelp"
-              placeholder="Endereço Email"
-              required
-              v-model="email"
-            />
-            <small id="emailHelp" class="form-text text-muted"
-              >Nunca partilharemos o seu email com ninguém :D</small
-            >
+            <input type="email" class="form-control" id="registerEmail" aria-describedby="emailHelp"
+              placeholder="Endereço Email" required v-model="email" />
+            <small id="emailHelp" class="form-text text-muted">Nunca partilharemos o seu email com ninguém :D</small>
           </div>
           <div class="form-group">
-            <input
-              type="password"
-              class="form-control"
-              id="registerPass"
-              placeholder="Password"
-              required
-              v-model="password"
-            />
-            <input
-              type="password"
-              class="form-control"
-              id="registerConfPass"
-              placeholder="Confirmar Password"
-              required
-              v-model="confPassword"
-            />
+            <input type="password" class="form-control" id="registerPass" placeholder="Password" required
+              v-model="password" />
+            <input type="password" class="form-control" id="registerConfPass" placeholder="Confirmar Password" required
+              v-model="confPassword" />
           </div>
           <hr />
           <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              id="address"
-              placeholder="Morada"
-              required
-              v-model="address"
-            />
+            <input type="text" class="form-control" id="address" placeholder="Morada" required v-model="address" />
           </div>
           <div class="form-group">
-            <input
-              type="text"
-              class="form-control"
-              id="postalCode"
-              placeholder="Código Postal"
-              required
-              v-model="postalCode"
-            />
-            <input
-              type="text"
-              class="form-control"
-              id="local"
-              placeholder="Localidade"
-              required
-              v-model="local"
-            />
+            <input type="text" class="form-control" id="postalCode" placeholder="Código Postal" required
+              v-model="postalCode" />
+            <input type="text" class="form-control" id="local" placeholder="Localidade" required v-model="local" />
           </div>
           <button type="submit" class="btn btn-primary  float-right">
             Criar Conta
