@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-6">
       <div class="form-group">
-        <select multiple class="form-control" id="sltTables">
+        <select size="200" v-model="selectedTable" class="form-control" id="sltTables">
           <option v-for="table in restaurant.tables" v-bind:key="table.id">Mesa {{table.id + 1}} | {{table.capacity}} pessoas</option>
         </select>
       </div>
@@ -15,7 +15,7 @@
       </div>
       <button @click="addTable" id="addButtontables">Adicionar Mesa</button>
 
-      <button id="removeButtontables">Remover Mesa</button>
+      <button class="mt-4" @click="removeTable" id="removeButtontables">Remover Mesa</button>
     </div>
   </div>
 </template>
@@ -25,7 +25,8 @@ export default {
   name: "TableEditor",
   data: () => ({
     tables: [],
-    newTableCapacity: ""
+    newTableCapacity: "",
+    selectedTable: ""
   }),
   props:{
     restaurant:{
@@ -45,7 +46,6 @@ export default {
           restaurantId:this.restaurant.id
         })
       }
-
     },
 
     getLastTableId(){
@@ -54,10 +54,20 @@ export default {
       } else {
         return 0;
       }
-    }
+    },
 
-  }
-};
+    removeTable(){
+      //vou ter de manipular bué o string
+      let start = this.selectedTable.indexOf(" ") + 1
+      let end = this.selectedTable.indexOf("|") - 1
+      let removeId = parseInt(this.selectedTable.slice(start, end)) - 1
+      this.$store.commit("REMOVE_TABLE", {
+        removeId: removeId,
+        restaurantId: this.restaurant.id
+      })
+  },
+}
+}
 </script>
 <style scoped>
 #sltTables {
