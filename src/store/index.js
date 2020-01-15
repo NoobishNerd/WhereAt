@@ -163,17 +163,15 @@ export default new Vuex.Store({
     },
 
     ADD_TABLE(state, payload) {
-      for(const restaurant in state.restaurants){
-        alert(payload.restaurantId)
-        alert(payload.id) //este Id está a passar 0, devia passar 4
-        alert(payload.capacity)
+      for(let restaurant of state.restaurants){
         if (restaurant.id == payload.restaurantId){
-          state.restaurant.tables.push({
-            id: payload.id,
+          restaurant.tables.push({
+            id: payload.id + 1,
             capacity: payload.capacity
           });
+          localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
           alert("Mesa Adicionada!")
-        }
+        } 
       }
     },
 

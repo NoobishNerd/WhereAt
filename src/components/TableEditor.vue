@@ -36,7 +36,7 @@ export default {
   methods: {
     addTable() {
       if (this.newTableCapacity == ""){
-        alert("Escola a capacidade da mesa")
+        alert("Escolha a capacidade da mesa")
       }
       else{
         this.$store.commit("ADD_TABLE", {
@@ -49,7 +49,7 @@ export default {
     },
 
     getLastTableId(){
-        if (!this.restaurant.tables.length) {
+        if (this.restaurant.tables.length != 0) {
         return this.restaurant.tables[this.restaurant.tables.length - 1].id;
       } else {
         return 0;
