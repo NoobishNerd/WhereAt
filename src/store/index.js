@@ -359,7 +359,7 @@ export default new Vuex.Store({
             profilePic: "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg",
             adress: "Vila del Conde",
             approval: false,
-            available: false,
+            available: true,
             postalCode: "4480-912",
             local: "não sei onde é dread v3",
             info: "a sequela",
