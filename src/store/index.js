@@ -162,6 +162,21 @@ export default new Vuex.Store({
       }
     },
 
+    ADD_TABLE(state, payload) {
+      for(const restaurant in state.restaurants){
+        alert(payload.restaurantId)
+        alert(payload.id) //este Id está a passar 0, devia passar 4
+        alert(payload.capacity)
+        if (restaurant.id == payload.restaurantId){
+          state.restaurant.tables.push({
+            id: payload.id,
+            capacity: payload.capacity
+          });
+          alert("Mesa Adicionada!")
+        }
+      }
+    },
+
     LOGIN(state, payload) {
       if (payload.type == "client") {
         //check se conta existe
@@ -294,7 +309,24 @@ export default new Vuex.Store({
             comments: [],
             tags: [],
             menu: [],
-            tables: [4, 4, 3, 2, 2, 2],
+            tables: [
+              {
+              id: 0,
+              capacity: 4
+              },
+              {
+              id: 1,
+              capacity: 4
+              },
+              {
+              id: 2,
+              capacity: 2
+              },
+              {
+              id: 3,
+              capacity: 3
+              },          
+          ],
             reservations: [],
             phone: ""
           },

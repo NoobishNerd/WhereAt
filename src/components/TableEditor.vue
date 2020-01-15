@@ -3,16 +3,14 @@
     <div class="col-sm-6">
       <div class="form-group">
         <select multiple class="form-control" id="sltTables">
-          <option>Mesa 1 | 3 pessoas</option>
-          <option>Mesa 2 | 4 pessoas</option>
-          <option>Mesa 3 | 3 pessoas</option>
+          <option v-for="table in restaurant.tables" v-bind:key="table.id">Mesa {{table.id + 1}} | {{table.capacity}} pessoas</option>
         </select>
       </div>
     </div>
 
     <div class="col-sm-6">
       <div class="form-group">
-        <input type="number" class="form-control" id="txtAddTable" aria-describedby="helpId" placeholder="Capacidade"
+        <input v-model="newTableCapacity" type="number" class="form-control" id="txtAddTable" aria-describedby="helpId" placeholder="Capacidade"
           min="0" />
       </div>
       <button @click="addTable" id="addButtontables">Adicionar Mesa</button>
@@ -26,7 +24,8 @@
 export default {
   name: "TableEditor",
   data: () => ({
-    tables: []
+    tables: [],
+    newTableCapacity: ""
   }),
   props:{
     restaurant:{
@@ -36,8 +35,27 @@ export default {
   },
   methods: {
     addTable() {
-      document.getElementById("txtAddTable").value;
+      if (this.newTableCapacity == ""){
+        alert("Escola a capacidade da mesa")
+      }
+      else{
+        this.$store.commit("ADD_TABLE", {
+          id: this.getLastTableId(),
+          capacity: this.newTableCapacity,
+          restaurantId:this.restaurant.id
+        })
+      }
+
+    },
+
+    getLastTableId(){
+        if (!this.restaurant.tables.length) {
+        return this.restaurant.tables[this.restaurant.tables.length - 1].id;
+      } else {
+        return 0;
+      }
     }
+
   }
 };
 </script>
