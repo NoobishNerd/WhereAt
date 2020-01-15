@@ -54,7 +54,7 @@
             <h5>Mesas:</h5>
             <div class="form-group">
               <select v-if="restaurant.tables.length && restaurant.available" multiple class="form-control" id="sltTables">
-                <option  v-for="table in restaurant.tables" v-bind:key="table.id"> Mesa {{table.id}} | {{table.capacity}} pessoas</option> 
+                <option  v-for="table in restaurant.tables" v-bind:key="table.id"> Mesa {{table.id + 1}} | {{table.capacity}} pessoas</option> 
               </select>
               <div v-else>
                 <h5>De momento o restaurante não está disponivel para reservas... :(</h5>

@@ -323,27 +323,26 @@ export default new Vuex.Store({
             info: "descritivo do restaurante",
             album: [],
             promotions: [],
-            comments: [],
+            comments: [{id: 0, username:"Best Girl Vibe Check" , profilePic: "https://cdn.discordapp.com/attachments/640604184965677072/665652451877322762/25a39n98i7a41.png", rate: 5, text: "Nice place, i bet they make a lot of money", userId:42}],
             tags: [],
             menu: [],
-            tables: [
-              {
-              id: 0,
-              capacity: 4
+            tables: [{
+                id: 0,
+                capacity: 4
               },
               {
-              id: 1,
-              capacity: 4
+                id: 1,
+                capacity: 4
               },
               {
-              id: 2,
-              capacity: 2
+                id: 2,
+                capacity: 2
               },
               {
-              id: 3,
-              capacity: 3
-              },          
-          ],
+                id: 3,
+                capacity: 3
+              },
+            ],
             reservations: [],
             phone: ""
           },
