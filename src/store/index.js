@@ -40,7 +40,7 @@ export default new Vuex.Store({
     },
 
     getLastRestaurantId(state) {
-      if (!state.restaurants.length) {
+      if (state.restaurants.length != 0 ) {
         return state.restaurants[state.restaurants.length - 1].id;
       } else {
         return 0;
@@ -101,7 +101,7 @@ export default new Vuex.Store({
         //user agora está registado e o login é feito
         state.loggedUser.id = payload.id;
         state.loggedUser.username = payload.username;
-        state.loggedUser.profilePic = "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg"
+        state.loggedUser.profilePic = "https://upload.wikimedia.org/wikipedia/en/8/8b/Purplecom.jpg"
         state.loggedUser.type = "client"  
         state.loggedUser.admin = false;
 
@@ -130,7 +130,7 @@ export default new Vuex.Store({
           username: payload.username,
           email: payload.email,
           password: payload.password,
-          profilePic: "../assets/main_user.png",
+          profilePic: "https://upload.wikimedia.org/wikipedia/en/8/8b/Purplecom.jpg",
           phone: "",
           address: payload.address,
           approval: false,
@@ -149,7 +149,7 @@ export default new Vuex.Store({
         //user agora está registado e o login é feito
         state.loggedUser.id = payload.id;
         state.loggedUser.username = payload.username;
-        state.loggedUser.profilePic = "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg"
+        state.loggedUser.profilePic = "https://upload.wikimedia.org/wikipedia/en/8/8b/Purplecom.jpg"
         state.loggedUser.type = "restaurant"  
         state.loggedUser.admin = false;
 
@@ -323,7 +323,7 @@ export default new Vuex.Store({
             username: "Rui",
             password: "chato",
             email: "bitaites@gmail.com",
-            profilePic: "../assets/main_user.png",
+            profilePic: "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg",
             phone: "",
             admin: false
           },
