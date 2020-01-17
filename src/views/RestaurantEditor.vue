@@ -73,7 +73,7 @@
                 v-bind:comment="comment"
                 v-bind:key="comment.username"></Comments>
         <PromotionEditor v-show="component == 'promos'"></PromotionEditor>
-        <MenuEditor v-show="component == 'menu'"></MenuEditor>
+        <MenuEditor :restaurant="restaurant" v-show="component == 'menu'"></MenuEditor>
       </div>
     </div>
   </div>
