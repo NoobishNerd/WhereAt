@@ -1,8 +1,8 @@
 <template>
-  <div class="card-group">
+  <div class="card-group" style="width: 30rem">
     <div class="container-fluid">
       <div class="card img-thumbnail">
-        <img class="card-img-top img-fluid" :src="restaurant.profilePic" alt="Card image cap" @click="routerLink" />
+        <img class="card-img-top img-fluid" style="height: 20vw; object-fit: cover" :src="restaurant.profilePic" alt="Card image cap" @click="routerLink" />
         <div class="card-body">
           <h6 class="card-title text-left">{{restaurant.local}}</h6>
           <h4 class="card-title text-left font-weight-bold">
