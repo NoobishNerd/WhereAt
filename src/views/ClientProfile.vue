@@ -48,6 +48,7 @@
               </div>
             </div>
             <ClientInfo :user="user" v-if="component == 'info'"> </ClientInfo>
+            <input @click="getAdminAuth" v-if="component == 'history' && user.admin == true" type="button" value="Autorizar Restaurants">
             <ClientHistory :id="user.id" v-if="component == 'history'"> </ClientHistory>
           </div>
         </div>
@@ -68,10 +69,14 @@ export default {
       profilePic:"",
       email:"",
       phone:"",
+      admin:""
     }
   }),
 
   created: function() {
+    this.user = this.$store.getters.getUserById(this.$route.params.id);
+  },
+  updated: function() {
     this.user = this.$store.getters.getUserById(this.$route.params.id);
   },
 
@@ -83,6 +88,9 @@ export default {
       this.$store.commit("LOGOUT")
       localStorage.setItem("loggedUser", "")
       this.$router.replace("/")
+    },
+    getAdminAuth(){
+      this.$router.push("/adminAuth")
     }
   
   },

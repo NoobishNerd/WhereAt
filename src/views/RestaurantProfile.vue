@@ -77,6 +77,9 @@ export default {
   created: function(){
     this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id)
   },
+  updated: function(){
+    this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id)
+  },
 
   methods: {
     call(newComponent) {

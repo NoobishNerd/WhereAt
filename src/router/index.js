@@ -82,12 +82,12 @@ const routes = [
       )
   },
   {
-    path: "/editPromotion",
-    name: "promotioneditor"
-  },
-  {
-    path: "/editMenu",
-    name: "menuEditor"
+    path: "/adminAuth",
+    name: "adminAuth",
+    component: () =>
+      import(
+        /* webpackChunkName: "restaurantEditor" */ "../components/AdminAuth.vue"
+      )
   },
   {
     path: "*",

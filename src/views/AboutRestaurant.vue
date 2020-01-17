@@ -125,10 +125,14 @@ export default {
   },
 
   created: function () {
-    this.restaurant = this.$store.getters.getRestaurantById(
-      this.$route.params.id
-    );
+    this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id);
   },
+
+  updated: function () {
+    this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id);
+    this.renderMap();
+  },
+  
 
   methods: {
     call(newComponent) {

@@ -98,6 +98,11 @@ export default {
     this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id)
   },
 
+  updated: function(){
+    this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id)
+    this.renderMap();
+  },
+
   methods: {
     call(newComponent) {
       this.component = newComponent;

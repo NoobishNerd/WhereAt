@@ -52,11 +52,7 @@
             </div>
             <div class="col-sm-2"></div>
             <div class="col-sm-5">
-              <RestaurantCard
-                v-for="restaurant in restaurants"
-                v-bind:restaurant="restaurant"
-                v-bind:key="restaurant.id"
-              ></RestaurantCard>
+              
             </div>
           </div>
         </div>
@@ -80,10 +76,9 @@ export default {
 
   created: function() {
     this.restaurants = this.$store.state.restaurants;
-
-    window.addEventListener("onload", function() {
-      this.restaurants = this.$store.state.restaurants;
-    });
+  },
+  updated: function() {
+    this.restaurants = this.$store.state.restaurants;
   },
 
   methods: {},

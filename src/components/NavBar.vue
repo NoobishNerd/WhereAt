@@ -52,6 +52,9 @@ export default {
   created: function(){
     this.loggedUser = this.$store.getters.getLoggedUser
   },
+  updated: function(){
+    this.loggedUser = this.$store.getters.getLoggedUser
+  },
   methods: {
     logout() {
       this.$store.commit("LOGOUT");
