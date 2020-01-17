@@ -11,13 +11,9 @@
             <img src="../assets/circunvalacao-9.jpg" class="rounded-circle" width="95px" height="95px" />
             <br />
             <h5 class="pt-2" id="brownBoldText">Restaurante Circunvalacao</h5>
+            <input @click="replaceRouteEditor" type="button" value="esqueci-me onde o pôr">
             <button id="smallerButton" class="mt-2">Alterar Foto de Perfil</button>
           </div>
-
-
-                                                                                            <input @click="replaceRouteEditor" type="button" value="cúmulo do design">
-
-
           <div class="col-sm-9">
             <div class="row justify-content-sm-around">
               <div @click="call('history')" class="col-sm-4 " style="border-bottom:1px solid black; border-left:1px solid black; border-radius: 0px 0px 0px 6px; cursor:pointer;">
@@ -52,7 +48,7 @@
               </div>
             </div>
             <RestaurantHistory v-if="component == 'history'"> </RestaurantHistory>
-            <RestaurantVacations v-if="component == 'vacations'"> </RestaurantVacations>
+            <RestaurantVacations :restaurant="restaurant" v-if="component == 'vacations'"> </RestaurantVacations>
           </div>
         </div>
       </div>

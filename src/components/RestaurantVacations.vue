@@ -4,14 +4,14 @@
     <br />
     <div class="row mb-5 pb-5">
       <div class="col-sm-12">
-          <h4 class="text-left pt-2 pb-4 mb-4">Pretende encerrar o restaurante para férias?</h4>
+          <h4 class="text-left pt-2 pb-4 mb-4">{{vacationQuestion}}</h4>
       </div>
     </div>
 
     <div class="row pt-4 mt-4">
       <div class="col-sm-9"></div>
       <div class="col-sm-3">
-        <button id="smallerButton">Ir de Férias</button>
+        <button @click="goOnVacation" id="smallerButton">{{vacationBtn}}</button>
       </div>
     </div>
   </div>
@@ -19,7 +19,45 @@
 <script>
 
 export default {
-
+  data: () => ({
+    vacationBtn: "",
+    vacationQuestion: "",
+    id: ""
+  }),
+  created: function(){
+    this.id = this.$route.params.id
+    //get available do restaurante
+    if(!(this.$store.getters.getRestaurantById(this.$route.params.id).available)){
+      this.vacationBtn="Reabrir Reservas"
+      this.vacationQuestion="Pretender reativar as reservas para o restaurante?"
+    }else{
+      this.vacationBtn="Ir de Férias"
+      this.vacationQuestion="Pretende encerrar o restaurante para férias?"
+    }
+  },
+  updated: function(){
+    this.id = this.$route.params.id
+    //get available do restaurante
+    if(!(this.$store.getters.getRestaurantById(this.$route.params.id).available)){
+      this.vacationBtn="Reabrir Reservas"
+      this.vacationQuestion="Pretender reativar as reservas para o restaurante?"
+    }else{
+      this.vacationBtn="Ir de Férias"
+      this.vacationQuestion="Pretende encerrar o restaurante para férias?"
+    }
+  },
+  methods: {
+    goOnVacation(){
+      //commit retorna available atual
+      if(!(this.$store.commit("VACATION", {id: this.id}))){
+        this.vacationBtn="Reabrir Reservas"
+        this.vacationQuestion="Pretender reativar as reservas para o restaurante?"
+      }else{
+        this.vacationBtn="Ir de Férias"
+        this.vacationQuestion="Pretende encerrar o restaurante para férias?"
+      }
+    }
+  }
 }
 </script>
 

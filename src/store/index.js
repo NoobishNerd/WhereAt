@@ -270,6 +270,26 @@ export default new Vuex.Store({
     },
 
 
+    VACATION(state, payload){
+      
+      alert(payload.id)
+      for (let restaurant  of state.restaurants) {
+        alert(restaurant.id)
+        if (payload.id == restaurant.id) {
+          alert("yeah")
+          if(restaurant.available){
+            restaurant.available = false
+            return false
+          }else{
+            restaurant.available = true
+            return true
+          }
+        }
+      }
+      localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
+    },
+
+
     
     CREATE_BASE(state) {
       if(localStorage.getItem("loggedUser")){
