@@ -1,11 +1,11 @@
 <template>
     <div class="container-fluid">
         <div class="row pt-2">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <label for="itemTxt">Item</label>
                 <input v-model="item" type="text" class="form-control" id="itemTxt">
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <label for="itemTypeSlt">Tipo do Item</label>
                 <select v-model="itemType" id="itemTypeSlt" class="form-control">
                     <option value="Entradas">Entradas</option>
@@ -16,8 +16,14 @@
                     <option value="Sobremesas">Sobremesas</option>                    
                 </select>
             </div>
-            <div class="col-sm-4 text-center">
-                <button @click="addItem" class="mt-4 py-3" id="addItemBtn">Adicionar Item</button>    
+            <div class="col-sm-3">
+                <div class="input-group-prepend">
+                    <label for="itemPriceTxt">Preço</label>
+                    <input v-model="price" step="any" type="text" class="form-control" id="itemPriceTxt">
+            </div>
+
+            <div class="col-sm-3 text-center">
+                <button @click="addItem" class="mt-4 py-3" id="addItemBtn">Adicionar</button>    
             </div>
         </div>
         <br>
@@ -59,6 +65,7 @@ export default {
       menu: [],
       item: "",
       itemType: "",
+      price: "",
   }),
   props:{
     restaurant:{
@@ -69,14 +76,15 @@ export default {
 
   methods: {
       addItem(){
-          if (this.item == "" || this.itemType == ""){
-              alert("Escreva o item que quer adicionar e escolha o seu tipo!")
+          if (this.item == "" || this.itemType == "" || this.price == ""){
+              alert("Preencha todos os campos")
           }
           else {
             this.$store.commit("ADD_ITEM", {
             id: this.getLastItemId(),
             item: this.item,
             itemType: this.itemType,
+            price: this.price,
             restaurantId:this.restaurant.id
             })
           }
@@ -93,7 +101,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 #addItemBtn {
   background-color: #f17526;
   border: none;

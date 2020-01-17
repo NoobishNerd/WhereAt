@@ -194,6 +194,21 @@ export default new Vuex.Store({
       }
     },
 
+    ADD_ITEM(state, payload) {
+      for (let restaurant of state.restaurants){
+        if (restaurant.id == payload.restaurantId){
+          restaurant.menu.push({
+            id: payload.id + 1,
+            item: payload.item,
+            itemType:payload.itemType,
+            price:payload.price
+          });
+          localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
+          alert("Item adicionado!")
+        }
+      }
+    },
+
     LOGIN(state, payload) {
       if (payload.type == "client") {
         //check se conta existe
