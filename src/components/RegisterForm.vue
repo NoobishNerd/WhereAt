@@ -55,7 +55,7 @@ export default {
         alert("PASSWORDS DIFERENTES");
       } else {
         this.$store.commit("ADD_USER", {
-          id: this.getLastId(),
+          id: this.getLastId() + 1,
           email: this.email,
           username: this.username,
           password: this.password
