@@ -3,7 +3,6 @@
     <div class="row">
       <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
         <h5 class="pt-2 font-weight-bold"></h5>
-          <input type="button" value="cúmulo do design">
           <img @click="replaceRouteProfile" id="fotoRestaurante" src="../assets/circunvalacao-9.jpg" class="pb-2 img-fluid" />
       </div>
       <div class="col-sm-1"></div>
