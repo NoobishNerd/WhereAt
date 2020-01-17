@@ -13,17 +13,19 @@
                     <option value="Carne">Pratos de Carne</option>
                     <option value="Peixe">Pratos de Peixe</option>
                     <option value="Vegetariano">Pratos Vegetarianos</option>
-                    <option value="Sobremesas">Sobremesas</option>                    
+                    <option value="Sobremesas">Sobremesas</option>
                 </select>
             </div>
             <div class="col-sm-3">
-                <div class="input-group-prepend">
-                    <label for="itemPriceTxt">Preço</label>
+                <label for="itemPriceTxt">Preço</label>
+                <div class="input-group-append">
                     <input v-model="price" step="any" type="text" class="form-control" id="itemPriceTxt">
+                    <span class="input-group-text">€</span>
+                </div>
             </div>
 
             <div class="col-sm-3 text-center">
-                <button @click="addItem" class="mt-4 py-3" id="addItemBtn">Adicionar</button>    
+                <button @click="addItem" class="mt-4 py-3" id="addItemBtn">Adicionar</button>
             </div>
         </div>
         <br>
@@ -31,19 +33,27 @@
             <div class="col-sm-12">
                 <h3>Entradas</h3>
                 <hr>
-                <!-- v-for com todos os pratos -->
+                <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id">
+                    <h5 v-if="menuItem.itemType == 'Entradas'">{{menuItem.item}} - {{menuItem.price}}€</h5>
+                </div>
                 <br>
                 <h3>Bebidas</h3>
                 <hr>
-                <!-- v-for com todos os pratos -->
+                <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id">
+                    <h5 v-if="menuItem.itemType == 'Bebidas'">{{menuItem.item}} - {{menuItem.price}}€</h5>
+                </div>
                 <br>
                 <h3>Pratos de Carne</h3>
                 <hr>
-                <!-- v-for com todos os pratos -->
+                <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id">
+                    <h5 v-if="menuItem.itemType == 'Carne'">{{menuItem.item}} - {{menuItem.price}}€</h5>
+                </div>
                 <br>
                 <h3>Pratos de Peixe</h3>
                 <hr>
-                <!-- v-for com todos os pratos -->
+                <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id">
+                    <h5 v-if="menuItem.itemType == 'Peixe'">{{menuItem.item}} - {{menuItem.price}}€</h5>
+                </div>
                 <br>
                 <h3>Pratos Vegetarianos</h3>
                 <hr>
@@ -59,66 +69,64 @@
 </template>
 
 <script>
-export default {
-  name: "MenuEditor",
-  data: () => ({
-      menu: [],
-      item: "",
-      itemType: "",
-      price: "",
-  }),
-  props:{
-    restaurant:{
-      type: Object,
-      required: true
+    export default {
+        name: "MenuEditor",
+        data: () => ({
+            menu: [],
+            item: "",
+            itemType: "",
+            price: "",
+        }),
+        props: {
+            restaurant: {
+                type: Object,
+                required: true
+            }
+        },
+
+        methods: {
+            addItem() {
+                if (this.item == "" || this.itemType == "" || this.price == "") {
+                    alert("Preencha todos os campos")
+                } else {
+                    this.$store.commit("ADD_ITEM", {
+                        id: this.getLastItemId(),
+                        item: this.item,
+                        itemType: this.itemType,
+                        price: this.price,
+                        restaurantId: this.restaurant.id
+                    })
+                }
+            },
+            getLastItemId() {
+                if (this.restaurant.menu.length != 0) {
+                    return this.restaurant.menu[this.restaurant.menu.length - 1].id;
+                } else {
+                    return 0;
+                }
+            },
+
+        }
     }
-  },
-
-  methods: {
-      addItem(){
-          if (this.item == "" || this.itemType == "" || this.price == ""){
-              alert("Preencha todos os campos")
-          }
-          else {
-            this.$store.commit("ADD_ITEM", {
-            id: this.getLastItemId(),
-            item: this.item,
-            itemType: this.itemType,
-            price: this.price,
-            restaurantId:this.restaurant.id
-            })
-          }
-      },
-      getLastItemId(){
-        if (this.restaurant.menu.length != 0) {
-        return this.restaurant.menu[this.restaurant.menu.length - 1].id;
-      } else {
-        return 0;
-      }
-    },
-
-  }
-}
 </script>
 
 <style scoped>
-#addItemBtn {
-  background-color: #f17526;
-  border: none;
-  color: #ffffff;
-  padding: 10px 60px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 15px;
-  font-weight: bold;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
+    #addItemBtn {
+        background-color: #f17526;
+        border: none;
+        color: #ffffff;
+        padding: 10px 60px;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 15px;
+        font-weight: bold;
+        -webkit-border-radius: 5px 5px 5px 5px;
+        border-radius: 5px 5px 5px 5px;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
 </style>
