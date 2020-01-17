@@ -4,7 +4,7 @@
     <br>
     <div class="row d-flex justify-content-sm-center">
       <div class="col-sm-12">
-        <div class="row" style="border:1px solid black; border-radius: 6px;">
+        <div class="row">
           <div class="col-sm-3 text-center">
             <br />
             <br />
@@ -16,33 +16,33 @@
           </div>
           <div class="col-sm-9">
             <div class="row justify-content-sm-around">
-              <div @click="call('history')" class="col-sm-4 " style="border-bottom:1px solid black; border-left:1px solid black; border-radius: 0px 0px 0px 6px; cursor:pointer;">
+              <div @click="call('history')" class="col-sm-4 " style="cursor:pointer;">
                 <div class="row">
                   <div class="col-sm-2 pt-1">
                     <img src="../assets/Reservations Icon.png" width="47px"> 
                   </div>
                   <div class="col-sm-10 pt-3">
-                    <h5 class="text-center" id="brownText">Gerir Reservas</h5>                    
+                    <h5 id="brownText">Gerir Reservas</h5>                    
                   </div>
                 </div>
               </div>
-              <div @click="call('vacations')" class="col-sm-4" style="border-bottom:1px solid black; border-left:1px solid black; cursor: pointer;">
+              <div @click="call('vacations')" class="col-sm-4" style="cursor: pointer;">
                 <div class="row">
                   <div class="col-sm-2">
                     <img src="../assets/Vacation Icon.png" width="45px"> 
                   </div>
                   <div class="col-sm-10 pt-3">
-                    <h5 class="text-center" id="brownText">Encerramento</h5>                    
+                    <h5 id="brownText">Encerramento</h5>                    
                   </div>
                 </div>
               </div>
-              <div @click="logout()" class="col-sm-4" style="border-bottom:1px solid black; border-left:1px solid black; cursor: pointer;">
+              <div @click="logout()" class="col-sm-4" style="cursor: pointer;">
                 <div class="row">
                   <div class="col-sm-2 pt-2">
                     <img src="../assets/Logout Icon.png" width="42px"> 
                   </div>
                   <div class="col-sm-10 pt-3">
-                    <h5 class="text-center" id="brownText">Terminar Sessão</h5>                    
+                    <h5 id="brownText">Terminar Sessão</h5>                    
                   </div>
                 </div>
               </div>
@@ -134,5 +134,6 @@ export default {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
 </style>
 
