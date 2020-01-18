@@ -225,7 +225,7 @@ export default new Vuex.Store({
           }
           restaurant.menu = newItemArray
           localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
-          alert("Mesa Removida!")
+          alert("Item removido!")
         }
       }
     },
