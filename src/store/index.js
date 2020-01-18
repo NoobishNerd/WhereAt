@@ -168,7 +168,7 @@ export default new Vuex.Store({
       for(let restaurant of state.restaurants){
         if (restaurant.id == payload.restaurantId){
           restaurant.tables.push({
-            id: payload.id + 1,
+            id: payload.id,
             capacity: payload.capacity
           });
           localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
@@ -200,7 +200,7 @@ export default new Vuex.Store({
       for (let restaurant of state.restaurants){
         if (restaurant.id == payload.restaurantId){
           restaurant.menu.push({
-            id: payload.id + 1,
+            id: payload.id,
             item: payload.item,
             itemType:payload.itemType,
             price:payload.price

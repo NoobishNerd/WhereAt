@@ -50,7 +50,7 @@ export default {
 
     getLastTableId(){
         if (this.restaurant.tables.length != 0) {
-        return this.restaurant.tables[this.restaurant.tables.length - 1].id;
+        return this.restaurant.tables[this.restaurant.tables.length - 1].id + 1;
       } else {
         return 0;
       }

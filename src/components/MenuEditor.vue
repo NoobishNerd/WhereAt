@@ -36,32 +36,47 @@
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id">
                     <h5 v-if="menuItem.itemType == 'Entradas'">{{menuItem.item}} - {{menuItem.price}}€</h5>
                 </div>
+
                 <br>
+
                 <h3>Bebidas</h3>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id">
                     <h5 v-if="menuItem.itemType == 'Bebidas'">{{menuItem.item}} - {{menuItem.price}}€</h5>
                 </div>
+
                 <br>
+
                 <h3>Pratos de Carne</h3>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id">
                     <h5 v-if="menuItem.itemType == 'Carne'">{{menuItem.item}} - {{menuItem.price}}€</h5>
                 </div>
+
                 <br>
+
                 <h3>Pratos de Peixe</h3>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id">
                     <h5 v-if="menuItem.itemType == 'Peixe'">{{menuItem.item}} - {{menuItem.price}}€</h5>
                 </div>
+
                 <br>
+
                 <h3>Pratos Vegetarianos</h3>
                 <hr>
-                <!-- v-for com todos os pratos -->
+                <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id">
+                    <h5 v-if="menuItem.itemType == 'Vegetariano'">{{menuItem.item}} - {{menuItem.price}}€</h5>
+                </div>
+
                 <br>
+
                 <h3>Sobremesas</h3>
                 <hr>
-                <!-- v-for com todos os pratos -->
+                <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id">
+                    <h5 v-if="menuItem.itemType == 'Sobremesas'">{{menuItem.item}} - {{menuItem.price}}€</h5>
+                </div>
+
                 <br>
             </div>
         </div>
@@ -100,7 +115,7 @@
             },
             getLastItemId() {
                 if (this.restaurant.menu.length != 0) {
-                    return this.restaurant.menu[this.restaurant.menu.length - 1].id;
+                    return this.restaurant.menu[this.restaurant.menu.length - 1].id + 1;
                 } else {
                     return 0;
                 }
