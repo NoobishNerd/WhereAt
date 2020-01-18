@@ -211,6 +211,26 @@ export default new Vuex.Store({
       }
     },
 
+    REMOVE_ITEM(state, payload) {
+      let newItemId = 0 //para reescrever o id de todas as tables 
+      let newItemArray = []
+      for(let restaurant of state.restaurants){
+        if (restaurant.id == payload.restaurantId){
+          for (let item of restaurant.menu){
+            if(payload.id != item.id){
+              item.id = newItemId
+              newItemArray.push(item)
+              newItemId ++
+            }
+          }
+          restaurant.menu = newItemArray
+          localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
+          alert("Mesa Removida!")
+        }
+      }
+    },
+
+
     LOGIN(state, payload) {
       if (payload.type == "client") {
         //check se conta existe
