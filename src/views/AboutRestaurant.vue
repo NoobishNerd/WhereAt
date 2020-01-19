@@ -40,21 +40,23 @@
       <div id="windowReservation" class="col-sm-6 img-thumbnail">
         <div class="row">
           <div class="col-sm-5">
-            <h5>Número de Pessoas:</h5>
-            <input readonly v-model="num_people.length" type="number" />
+            <h5>Hora:</h5>
+            <input v-model="hour" required type="time" />
             <br />
             <br />
-            <input v-model="date" type="date" id="start" name="start" />
+            <input @input="checkAvailability" required v-model="date" type="date" id="start" name="start" />
             <br />
             <br />
-            <button id="smallerButton">Reservar</button>
+            <button @click="reservation" v-if="this.$store.state.logged == true && this.$store.state.loggedUser.type == 'client'" id="smallerButton">Reservar</button>
+            <h5 v-if="this.$store.state.logged == false">Precisa de estar ligado para fazer reservas</h5>
+            <h5 v-if="this.$store.state.loggedUser.type == 'restaurant'">Contas restaurantes não podem fazer reservas. Por favor crie uma conta cliente para si.</h5>
           </div>
           <div class="col-sm-2"></div>
           <div class="col-sm-5">
             <h5>Mesas:</h5>
             <div class="form-group">
-              <select v-if="restaurant.tables.length && restaurant.available" multiple class="form-control" id="sltTables">
-                <option  v-for="table in restaurant.tables" v-bind:key="table.id"> Mesa {{table.id + 1}} | {{table.capacity}} pessoas</option> 
+              <select v-if="availableTables.length && restaurant.available" multiple class="form-control" id="sltTables">
+                <option  v-for="table in availableTables.tables" v-bind:key="table.id"> Mesa {{table.id + 1}} | {{table.capacity}} pessoas</option> 
               </select>
               <div v-else>
                 <h5>De momento o restaurante não está disponivel para reservas... :(</h5>
@@ -70,7 +72,7 @@
         </div>
       </div>
     </div>
-    <br />
+    <br/>
 
     <div id="finalCrate" class="row d-flex" style="border:1px solid black;">
       <div @click="call('menu')" class="col-sm-3 pt-3" style="border-bottom:1px solid black;">
@@ -115,9 +117,10 @@ export default {
       type: Object,
       required: true
     },
+    hour: "",
     date: "",
     availableTables: [],
-    num_people: [], //mesas selecionadas sltTables
+    num_people: [2], //mesas selecionadas sltTables
     map: "",
   }),
   mounted: function () {
@@ -126,11 +129,13 @@ export default {
 
   created: function () {
     this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id);
+    this.availableTables = this.restaurant.tables
   },
 
   updated: function () {
     this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id);
     this.renderMap();
+    this.availableTables = this.restaurant.tables
   },
   
 
@@ -143,19 +148,20 @@ export default {
       let limit = 0
       let num_pp = 0
       for (let index = 0; index < this.num_people.length; index++) {
-        limit += this.num_people[index]
+         num_pp+= this.num_people[index]
       }
 
       for (let j = 0; j < this.availableTables.length; j++) {
-        if (this.availableTables[j].typeof == "Number") {
-          num_pp += this.availableTables[j]
+        if (this.availableTables[j].capacity.typeof == "Number") {
+          limit += this.availableTables[j].capacity
         }
       }
+
+      
+      
       if (num_pp > limit) {
-        alert("Capacidade Excedida")
         return false
       } else {
-        alert("Pedido enviado")
         return true
       }
 
@@ -166,14 +172,18 @@ export default {
         this.$store.commit("ADD_RESERVATION", {
           id_restaurant: this.restaurant.id,
           id_client: JSON.parse(localStorage.getItem("loggedUser")).id,
+          hour: this.hour,
           date: this.date,
-          dateOfRes: "", //buscar data atual
+          dateOfRes: this.getSystemDate(), //buscar data atual
           num_people: this.num_people,
           presence: false,
           confirmation: "pending"
         })
+        alert("Pedido enviado")
       } else {
         //show "no no" message
+        alert("Capacidade Excedida")
+        alert("no no")
       }
     },
     renderMap() {
@@ -185,6 +195,10 @@ export default {
         zoom: 8
       });
       this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+    },
+    getSystemDate(){
+      let today = new Date()
+      return `${today.getHours()}:${today.getMinutes()}  ${today.getDate()}/${today.getMonth()+ 1}/${today.getFullYear()}`
     }
   },
 
