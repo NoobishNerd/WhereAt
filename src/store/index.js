@@ -306,6 +306,16 @@ export default new Vuex.Store({
       state.users = newUserArray
     },
 
+    CHANGE_USER_IMG(state, payload) {
+      for (let user of state.users){
+        if (user.id == payload.id){
+          user.profilePic = payload.profilePic
+          alert("Imagem de Perfil Mudada!")
+        }
+      }
+      localStorage.setItem("users", JSON.stringify(state.users))
+    },
+
 
     VACATION(state, payload){
       

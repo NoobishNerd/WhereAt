@@ -11,7 +11,7 @@
             <img :src=user.profilePic class="rounded-circle" width="95px" height="95px" />
             <br />
             <h5 class="pt-2" id="brownBoldText">{{user.username}}</h5>
-            <button id="smallerButton" class="mt-2">Alterar Foto de Perfil</button>
+            <button @click="changeUserImg" id="smallerButton" class="mt-2 py-2 px-3">Alterar Foto de Perfil</button>
           </div>
 
           <div class="col-sm-9">
@@ -84,15 +84,27 @@ export default {
     call(newComponent) {
       this.component = newComponent;
     },
-    logout() {
+
+    logout() {      
       this.$store.commit("LOGOUT")
       localStorage.setItem("loggedUser", "")
       this.$router.replace("/")
     },
+
     getAdminAuth(){
       this.$router.push("/adminAuth")
+    },
+
+    changeUserImg(){
+      let newUserImg = prompt("Link da imagem:")
+      if (newUserImg !== ""){
+        this.user.profilePic = newUserImg
+        this.$store.commit("CHANGE_USER_IMG",{
+          id: this.user.id,
+          profilePic: this.user.profilePic
+        })
+      }
     }
-  
   },
   components: {
     ClientInfo,
@@ -117,7 +129,6 @@ export default {
   background-color: #F17526;
   border: none;
   color: white;
-  padding: 10px 45px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -126,7 +137,6 @@ export default {
   font-weight: bold;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
-  margin: 10px 20px 40px 20px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
