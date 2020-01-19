@@ -31,62 +31,62 @@
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <h3>Entradas</h3>
+                <h4>Entradas</h4>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 0"> <!-- Eu não queria nada usar esta resolução, mas é a unica forma de usar v-for várias vezes no mesmo array e na mesma página-->
-                    <h5 v-if="menuItem.itemType == 'Entradas'">{{menuItem.item}} - {{menuItem.price}}€
+                    <h6 v-if="menuItem.itemType == 'Entradas'">{{menuItem.item}} - {{menuItem.price}}€
                         <button @click="removeItem(menuItem.id)" id="removeItemBtn" class="ml-2">X</button>
-                    </h5>
+                    </h6>
                 </div>
 
                 <br>
 
-                <h3>Bebidas</h3>
+                <h4>Bebidas</h4>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 1000">
-                    <h5 v-if="menuItem.itemType == 'Bebidas'">{{menuItem.item}} - {{menuItem.price}}€
+                    <h6 v-if="menuItem.itemType == 'Bebidas'">{{menuItem.item}} - {{menuItem.price}}€
                         <button @click="removeItem(menuItem.id)" id="removeItemBtn" class="ml-2">X</button>
-                    </h5>
+                    </h6>
                 </div>
 
                 <br>
 
-                <h3>Pratos de Carne</h3>
+                <h4>Pratos de Carne</h4>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 2000">
-                    <h5 v-if="menuItem.itemType == 'Carne'">{{menuItem.item}} - {{menuItem.price}}€
+                    <h6 v-if="menuItem.itemType == 'Carne'">{{menuItem.item}} - {{menuItem.price}}€
                         <button @click="removeItem(menuItem.id)" id="removeItemBtn" class="ml-2">X</button>
-                    </h5>
+                    </h6>
                 </div>
 
                 <br>
 
-                <h3>Pratos de Peixe</h3>
+                <h4>Pratos de Peixe</h4>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 3000">
-                    <h5 v-if="menuItem.itemType == 'Peixe'">{{menuItem.item}} - {{menuItem.price}}€
+                    <h6 v-if="menuItem.itemType == 'Peixe'">{{menuItem.item}} - {{menuItem.price}}€
                         <button @click="removeItem(menuItem.id)" id="removeItemBtn" class="ml-2">X</button>
-                    </h5>
+                    </h6>
                 </div>
 
                 <br>
 
-                <h3>Pratos Vegetarianos</h3>
+                <h4>Pratos Vegetarianos</h4>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 4000">
-                    <h5 v-if="menuItem.itemType == 'Vegetariano'">{{menuItem.item}} - {{menuItem.price}}€
+                    <h6 v-if="menuItem.itemType == 'Vegetariano'">{{menuItem.item}} - {{menuItem.price}}€
                         <button @click="removeItem(menuItem.id)" id="removeItemBtn" class="ml-2">X</button>
-                    </h5>
+                    </h6>
                 </div>
 
                 <br>
 
-                <h3>Sobremesas</h3>
+                <h4>Sobremesas</h4>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 5000">
-                    <h5 v-if="menuItem.itemType == 'Sobremesas'">{{menuItem.item}} - {{menuItem.price}}€ 
+                    <h6 v-if="menuItem.itemType == 'Sobremesas'">{{menuItem.item}} - {{menuItem.price}}€ 
                         <button @click="removeItem(menuItem.id)" id="removeItemBtn" class="ml-2">X</button> 
-                    </h5>
+                    </h6>
                 </div>
 
                 <br>
