@@ -18,7 +18,7 @@
                 <h4>Informações relevantes</h4>
                 <hr>
                 <h6 v-if="restaurant.info == ''">Este restaurante ainda não adicionou informações adicionais</h6>
-                <h6 v-else>{{restaurant.info}}</h6>
+                <h6 v-else style="white-space: pre-wrap">{{restaurant.info}}</h6>
             </div>
         </div>
     </div>
@@ -40,8 +40,8 @@ export default {
 
   methods: {
       saveChanges() {
-          //Isto já muda no state só quero pôr o state na local storage
-          alert("Work in Progress")
+          localStorage.setItem("restaurants", JSON.stringify(this.$store.state.restaurants))
+          alert("Mudanças Salvas")
       }
   }
 
