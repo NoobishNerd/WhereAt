@@ -22,40 +22,35 @@ export default {
   data: () => ({
     vacationBtn: "",
     vacationQuestion: "",
-    id: ""
+    id: "",
+    available: ""
   }),
   created: function(){
     this.id = this.$route.params.id
     //get available do restaurante
-    if(!(this.$store.getters.getRestaurantById(this.$route.params.id).available)){
-      this.vacationBtn="Reabrir Reservas"
-      this.vacationQuestion="Pretender reativar as reservas para o restaurante?"
-    }else{
-      this.vacationBtn="Ir de Férias"
-      this.vacationQuestion="Pretende encerrar o restaurante para férias?"
-    }
+    
   },
   updated: function(){
     this.id = this.$route.params.id
-    //get available do restaurante
-    if(!(this.$store.getters.getRestaurantById(this.$route.params.id).available)){
-      this.vacationBtn="Reabrir Reservas"
-      this.vacationQuestion="Pretender reativar as reservas para o restaurante?"
-    }else{
-      this.vacationBtn="Ir de Férias"
-      this.vacationQuestion="Pretende encerrar o restaurante para férias?"
-    }
+    this.available = this.$store.getters.getRestaurantById(this.id).available
+    alert(this.available)
+    this.updateText()
   },
   methods: {
+    updateText(){
+      alert("update text")
+      if (this.available == false) {
+        this.vacationBtn = "Reabrir Reservas"
+        this.vacationQuestion = "Pretender reativar as reservas para o restaurante?"
+      } else {
+        this.vacationBtn = "Ir de Férias"
+        this.vacationQuestion = "Pretende encerrar o restaurante para férias?"
+      }
+    },
     goOnVacation(){
       //commit retorna available atual
-      if(!(this.$store.commit("VACATION", {id: this.id}))){
-        this.vacationBtn="Reabrir Reservas"
-        this.vacationQuestion="Pretender reativar as reservas para o restaurante?"
-      }else{
-        this.vacationBtn="Ir de Férias"
-        this.vacationQuestion="Pretende encerrar o restaurante para férias?"
-      }
+      this.$store.commit("VACATION", {id: this.id})
+      this.updateText()
     }
   }
 }

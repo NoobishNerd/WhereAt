@@ -316,10 +316,10 @@ export default new Vuex.Store({
           alert("yeah")
           if(restaurant.available){
             restaurant.available = false
-            return false
+            alert("Now its false")
           }else{
             restaurant.available = true
-            return true
+            alert("Now its tru")
           }
         }
       }
