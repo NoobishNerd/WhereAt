@@ -68,11 +68,11 @@ export default new Vuex.Store({
       let availableTables = tables
       for (const reservation of state.bookingHistory) {
         //se estiver confirmada & for à mesma hora no mesmo restaurante
-        if(reservation.confirmation && reservation.id_restaurant == id && reservation.date == date){
+        if(reservation.confirmation == "pending" && reservation.id_restaurant == id && reservation.date == date){
           for (let i= 0; i < reservation.num_people.length; i++) {
               for (let j= 0; j < availableTables.length; j++) {
-              if(availableTables[j] == reservation.num_people[i])
-                availableTables[j] = `Mesa para ${availableTables[j]} - reservada`
+              if(availableTables[j].capacity == reservation.num_people[i].capacity)
+                availableTables[j].capacity = `Mesa para ${availableTables[j].capacity} - reservada`
               break;
             }
           }
@@ -318,7 +318,6 @@ export default new Vuex.Store({
 
 
     VACATION(state, payload){
-      
       alert(payload.id)
       for (let restaurant  of state.restaurants) {
         alert(restaurant.id)
@@ -336,13 +335,32 @@ export default new Vuex.Store({
       localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
     },
 
+    ADD_RESERVATION(state, payload){
+      state.bookingHistory.push({
+        id_restaurant: payload.id_restaurant,
+        id_client: payload.id_client,
+        hour: payload.hour,
+        date: payload.date,
+        dateOfRes: payload.dateOfRes, 
+        num_people: payload.num_people,
+        presence: payload.presence,
+        confirmation: payload.confirmation
+      })
 
+      localStorage.setItem("bookingHistory",JSON.stringify( state.bookingHistory))    
+    },
     
     CREATE_BASE(state) {
       if(localStorage.getItem("loggedUser")){
         if(localStorage.getItem("loggedUser") != ""){
           state.loggedUser = JSON.parse(localStorage.getItem("loggedUser"))
           state.logged = true
+        }
+      }
+
+      if(localStorage.getItem("bookingHistory")){
+        if(localStorage.getItem("bookingHistory") != ""){
+          state.bookingHistory = JSON.parse(localStorage.getItem("bookingHistory"))
         }
       }
 
