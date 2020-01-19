@@ -46,35 +46,30 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid">
       <div id="finalCrate" class="row d-flex">
-        <div @click="call('menu')" id="menu" class="col-sm-3 pt-3" style="border-bottom-lg light:1px">
+        <div @click="call('menu')" id="menu" class="col-sm-3 pt-3" style="border-bottom-lg light:1px; cursor:pointer">
           <h5 class="font-weight-bold">Ementa</h5>
         </div>
         <div @click="call('promos')" id="promotion" class="col-sm-3 pt-3"
-          style="border-bottom-lg light:1px solid black; border-left-lg light:1px">
+          style="border-bottom-lg light:1px solid black; border-left-lg light:1px; cursor:pointer">
           <h5 class="font-weight-bold">Promoções</h5>
         </div>
         <div @click="call('comments')" id="comentary" class="col-sm-3 pt-3 font-weight-bold "
-          style="border-bottom-lg light:1px; border-left-lg light:1px;">
+          style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
           <h5 class="font-weight-bold">Comentários</h5>
         </div>
-        <div @click="call('info')" class="col-sm-1" style="border-left-lg light:1px"></div>
-        <div id="information" class="col-sm-2 pt-2 " style="border-bottom-lg light:1px; border-left-lg light:3px;">
-          <h1 class="font-weight-bold">i</h1>
+        <div class="col-sm-1" style="border-left-lg light:1px"></div>
+        <div @click="call('info')" id="information" class="col-sm-2 pt-2 " style="border-bottom-lg light:1px; border-left-lg light:3px; cursor:pointer">
+          <h1 class="text-center font-weight-bold">i</h1>
         </div>
-        <p v-show="component == 'info'" class="text-justify pt-2 ml-3 mr-3">
-          <!-- componente editar info -->
-          info
-        </p>
         <Comments v-show="component == 'comments'" 
                 v-for="comment in restaurant.comments"
                 v-bind:comment="comment"
                 v-bind:key="comment.username"></Comments>
         <PromotionEditor v-show="component == 'promos'"></PromotionEditor>
         <MenuEditor :restaurant="restaurant" v-show="component == 'menu'"></MenuEditor>
+        <InfoEditor :restaurant="restaurant" v-show="component == 'info'"></InfoEditor>
       </div>
-    </div>
   </div>
 </template>
 <script>
@@ -82,6 +77,7 @@ import TableEditor from "../components/TableEditor.vue";
 import Comments from "@/components/Comments.vue"
 import PromotionEditor from "@/components/PromotionEditor.vue"
 import MenuEditor from "@/components/MenuEditor.vue"
+import InfoEditor from "@/components/InfoEditor.vue"
 
 export default {
   data: () => ({
@@ -125,7 +121,8 @@ export default {
     TableEditor,
     Comments,
     PromotionEditor,
-    MenuEditor
+    MenuEditor,
+    InfoEditor
   }
 };
 </script>
