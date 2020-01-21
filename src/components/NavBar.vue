@@ -67,7 +67,7 @@ export default {
           name: "clientProfile",
           params: { id: this.loggedUser.id }
         });
-      }
+      } 
       if(this.loggedUser.type == "restaurant"){
         this.$router.push({
           name: "restaurantEditor",
