@@ -59,7 +59,8 @@
             <h5>Mesas:</h5>
             <div class="form-group">
               <select v-if="availableTables.length && restaurant.available" multiple class="form-control"
-                id="sltTables">
+                id="sltTables" v-model="selectedTables">
+                
                 <option v-for="table in availableTables" v-bind:key="table.id"> Mesa {{table.id + 1}} |
                   {{table.capacity}} pessoas</option>
               </select>
@@ -111,7 +112,7 @@
       </div>
 
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -123,7 +124,8 @@ export default {
       hour: "",
       date: "",
       availableTables: [],
-      num_people: [2], //mesas selecionadas sltTables
+      selectedTablesReady: [],
+      selectedTables: [2], //mesas selecionadas sltTables
       map: "",
     }),
     mounted: function () {
@@ -135,6 +137,11 @@ export default {
       this.availableTables = this.restaurant.tables
     },
 
+    updated: function () {
+      this.renderMap();
+      this.getObjectTableArray();
+    },
+
     methods: {
       call(newComponent) {
         this.component = newComponent;
@@ -143,17 +150,15 @@ export default {
         this.availableTables = this.$store.getters.getAvailableTables(this.date, this.restaurant.id, this.restaurant.tables)
         let limit = 0
         let num_pp = 0
-        for (let index = 0; index < this.num_people.length; index++) {
-          num_pp += this.num_people[index]
+        for (let index = 0; index < this.selectedTables.length; index++) {
+          num_pp += this.selectedTablesReady[index].capacity
         }
 
         for (let j = 0; j < this.availableTables.length; j++) {
-          if (this.availableTables[j].capacity.typeof == "Number") {
+          if (typeof(this.availableTables[j].capacity) == "number") {
             limit += this.availableTables[j].capacity
           }
         }
-
-
 
         if (num_pp > limit) {
           return false
@@ -162,7 +167,8 @@ export default {
         }
 
       },
-      reservation() {
+
+      reservation() { 
         //fazer check se está logged in ou fazer v-if para n haver opção de reserva caso n esteja autenticado ou seja um restaurante
         if (this.checkAvailability(this.date)) {
           this.$store.commit("ADD_RESERVATION", {
@@ -171,7 +177,7 @@ export default {
             hour: this.hour,
             date: this.date,
             dateOfRes: this.getSystemDate(), //buscar data atual
-            num_people: this.num_people,
+            num_people: this.selectedTablesReady,
             presence: false,
             confirmation: "pending"
           })
@@ -182,6 +188,7 @@ export default {
           alert("no no")
         }
       },
+
       renderMap() {
         this.map = new google.maps.Map(document.querySelector("#myMap"), {
           center: {
@@ -192,9 +199,29 @@ export default {
         });
         this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
       },
+
       getSystemDate() {
         let today = new Date()
         return `${today.getHours()}:${today.getMinutes()}  ${today.getDate()}/${today.getMonth()+ 1}/${today.getFullYear()}`
+      },
+
+      getObjectTableArray(){
+        let start;
+        let end;
+        let selectedId;
+        for (let i = 0; i < this.selectedTables.length; i++) {
+          start = this.selectedTables[i].indexOf(" ") + 1
+          end = this.selectedTables[i].indexOf("|") - 1
+          selectedId = parseInt(this.selectedTables[i].slice(start, end)) - 1
+          
+          for (const table of this.availableTables) {
+            if (table.id == selectedId && typeof(table.capacity) == "number") {
+              this.selectedTablesReady.push({id: selectedId, capacity: table.capacity})
+              
+            }
+          }
+          
+        }
       }
     },
 
