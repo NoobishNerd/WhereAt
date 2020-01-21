@@ -56,7 +56,7 @@
             <h5>Mesas:</h5>
             <div class="form-group">
               <select v-if="availableTables.length && restaurant.available" multiple class="form-control" id="sltTables">
-                <option  v-for="table in availableTables.tables" v-bind:key="table.id"> Mesa {{table.id + 1}} | {{table.capacity}} pessoas</option> 
+                  <option  v-for="table in availableTables.tables" v-bind:key="table.id"> Mesa {{table.id + 1}} | {{table.capacity}} pessoas</option> 
               </select>
               <div v-else>
                 <h5>De momento o restaurante não está disponivel para reservas... :(</h5>
@@ -93,23 +93,26 @@
         <h5>{{restaurant.info}}</h5>
       </div>
       <div v-show="component=='comments'">
+        <AddComment :restaurant="restaurant"></AddComment>
+
         <Comments v-for="comment in restaurant.comments"
                 v-bind:comment="comment"
                 v-bind:key="comment.username"></Comments>
       </div>
-      <div v-show="component=='promos'">
-        <h5>promos</h5>
-      </div>
-      <div v-show="component=='menu'">
-        <h5>ementa</h5>
-      </div>
-      
+      <PromotionEditor v-show="component=='promos'"></PromotionEditor>
+      <MenuEditor v-show="component=='menu'"></MenuEditor>
+      <InfoEditor v-show="component=='info'"></InfoEditor>
     </div>
   </div>
 </template>
 
 <script>
 import Comments from "@/components/Comments.vue"
+import AddComment from "@/components/AddComment.vue"
+import PromotionEditor from "@/components/PromotionEditor.vue"
+import MenuEditor from "@/components/MenuEditor.vue"
+import InfoEditor from "@/components/InfoEditor.vue"
+
 export default {
   data: () => ({
     component: "comments",
@@ -193,7 +196,11 @@ export default {
   },
 
   components: {
-    Comments
+    Comments,
+    AddComment,
+    PromotionEditor,
+    MenuEditor,
+    InfoEditor
   }
 };
 </script>
@@ -251,10 +258,7 @@ html * {
   box-shadow: 0 30px 60px 15px rgba(0, 0, 0, 0.1);
 }
 #finalCrate {
-  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  border: none;
+  border-radius: 10px 10px 0px 0px;
 }
 .border-primary {
   border-width: 3px;
