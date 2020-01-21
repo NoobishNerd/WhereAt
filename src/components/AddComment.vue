@@ -7,12 +7,21 @@
             <div class="col-sm-1">
                 <img class="mt-2 ml-1" :src="loggedUser.profilePic" style="object-fit: cover" width="60" height="60">
             </div>
-            <div class="col-sm-11">
-                <div class="form-group">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <div class="col-sm-11 pl-0">
+                <div class="mt-2 form-group">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
                 </div>
+            </div>        
+        </div>
+        <div class="row">
+            <div class="col-sm-10">
+            </div>
+            <div class="col-sm-2">
+                <button id="cancelBtn" class="mt-0 px-1 mr-2 py-1">Cancelar</button>
+                <button id="commentBtn" class="mt-0 px-2 py-1 mb-2">Comentar</button>
             </div>
         </div>
+        <hr>
     </div>
 </template>
 <script>
@@ -33,3 +42,37 @@ export default {
 
 }
 </script>
+
+<style scoped>
+    #commentBtn {
+        background-color: #f17526;
+        border: none;
+        color: #ffffff;
+        text-align: center;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: bold;
+        -webkit-border-radius: 3px 3px 3px 3px;
+        border-radius: 3px 3px 3px 3px;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
+
+    #cancelBtn {
+        border-width: 1px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: bold;
+        -webkit-border-radius: 3px 3px 3px 3px;
+        border-radius: 3px 3px 3px 3px;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
+</style>
