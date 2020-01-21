@@ -6,16 +6,17 @@
           <div class="img-wrapper">
             <img class="img-responsive" src="../assets/Nice Restaurant.png" />
             <div class="img-overlay">
+
               <div class="span3 widget-span widget-type-raw_html custom-search" style="" data-widget-type="raw_html"
                 data-x="4" data-w="3">
                 <div class="cell-wrapper layout-widget-wrapper">
                   <span id="hs_cos_wrapper_module_14308928327274411"
                     class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_raw_html" style=""
                     data-hs-cos-general-type="widget" data-hs-cos-type="raw_html">
-                    <form method="GET"
+                    <form v-on:submit.prevent="getSearchResults()" method="GET"
                       action="https://www.shopwithscrip.com/Search?" role="search"
                       class="navbar-form navbar-left ng-pristine ng-valid" id="express-form" novalidate="">
-                      <input @input="getSearchResults()" v-model="searchText" required="" name="q" id="express-form-typeahead" placeholder="Search"
+                      <input v-model="searchText" required="" name="q" id="express-form-typeahead" placeholder="Search"
                         class="form-control tt-input" autocomplete="off" spellcheck="false" dir="auto" type="text" />
                       <button class="search-btn" type="submit">
                         <span class="icon"></span>
@@ -25,6 +26,7 @@
                 </div>
                 <!--end layout-widget-wrapper -->
               </div>
+
             </div>
           </div>
         </div>

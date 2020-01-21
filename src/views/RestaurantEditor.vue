@@ -94,7 +94,6 @@ export default {
   },
 
   updated: function(){
-    this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id)
     this.renderMap();
   },
 
@@ -104,7 +103,10 @@ export default {
     },
     renderMap() {
       this.map = new google.maps.Map(document.querySelector("#myMap"), {
-        center: { lat: -34.397, lng: 150.644 },
+        center: {
+          lat: -34.397,
+          lng: 150.644
+        },
         zoom: 8
       });
       this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
