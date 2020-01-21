@@ -14,7 +14,14 @@
             </div>        
         </div>
         <div class="row">
-            <div class="col-sm-10">
+            <div class="col-sm-1 pr-0">
+            </div>
+            <div class="col-sm-9 pl-0">
+                <img src="../assets/Star.png" width="30px">
+                <img src="../assets/Star.png" width="30px">
+                <img src="../assets/Star.png" width="30px">
+                <img src="../assets/Star.png" width="30px">
+                <img src="../assets/Star.png" width="30px">
             </div>
             <div class="col-sm-2">
                 <button id="cancelBtn" class="mt-0 px-1 mr-2 py-1">Cancelar</button>
@@ -28,7 +35,7 @@
 export default {
   name: "AddComment",
   data: () => ({
-      loggedUser: {}
+      loggedUser: {},
   }),
   props:{
     restaurant:{
