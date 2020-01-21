@@ -1,9 +1,6 @@
 <template>
     <div class="container-fluid">
-        <div class="row">
-            <h5 class="mt-2 ml-3">Comentários</h5>
-        </div>
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-sm-1">
                 <img class="mt-2 ml-1" :src="loggedUser.profilePic" style="object-fit: cover" width="60" height="60">
             </div>
@@ -60,8 +57,9 @@
                     <img @click="ratingStar(5)" src="../assets/Star Colored.png" width="30px">
                 </div>
             <div class="col-sm-2">
-                <button id="cancelBtn" class="mt-0 px-1 mr-2 py-1">Cancelar</button>
-                <button id="commentBtn" class="mt-0 px-2 py-1 mb-2">Comentar</button>
+                <button @click="cancelComment" id="cancelBtn" class="mt-0 px-1 mr-2 py-1 ml-2">Cancelar</button>
+                <button v-if="newComment==''" @click="addComment" id="commentBtn" class="mt-0 px-2 py-1 mb-2" disabled>Comentar</button>
+                <button v-if="newComment!=''" @click="addComment" id="commentBtn" class="mt-0 px-2 py-1 mb-2">Comentar</button>
             </div>
         </div>
         <hr>
@@ -89,6 +87,39 @@
         methods: {
             ratingStar(rating) {
                 this.newRating = rating
+            },
+
+            cancelComment() {
+                this.newRating = ""
+                this.newComment = ""
+            },
+
+            addComment() {
+                if (this.newRating == ""){
+                    alert("Por favor avalie o restaurante!")
+                } 
+                else if (this.loggedUser.type == "restaurant"){
+                    alert("Contas restaurante não podem comentar")                    
+                }
+                else{
+                    this.$store.commit("ADD_COMMENT", {
+                    id: this.getLastCommentId(),
+                    username: this.loggedUser.username,
+                    profilePic: this.loggedUser.profilePic,
+                    text: this.newComment,
+                    rate: this.newRating,
+                    userId: this.loggedUser.id,
+                    restaurantId: this.restaurant.id
+                    })
+                }
+            },
+
+            getLastCommentId() {
+                if (this.restaurant.comments.length != 0){
+                    return this.restaurant.comments[this.restaurant.comments.length - 1].id + 1;
+                } else {
+                    return 0;
+                }     
             }
         }
     }
@@ -101,7 +132,7 @@
         color: #ffffff;
         text-align: center;
         text-decoration: none;
-        font-size: 15px;
+        font-size: 14px;
         font-weight: bold;
         -webkit-border-radius: 3px 3px 3px 3px;
         border-radius: 3px 3px 3px 3px;
@@ -116,7 +147,7 @@
         border-width: 1px;
         text-align: center;
         text-decoration: none;
-        font-size: 15px;
+        font-size: 14px;
         font-weight: bold;
         -webkit-border-radius: 3px 3px 3px 3px;
         border-radius: 3px 3px 3px 3px;

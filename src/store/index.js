@@ -230,6 +230,13 @@ export default new Vuex.Store({
       }
     },
 
+    ADD_COMMENT(state, payload){
+      for(let restaurant of state.restaurants){
+        if (restaurant.id == payload.restaurantId){
+          alert("Isto até aqui está perfeito, agora só falta ter um exemplo de uma reserva")
+        }
+      }
+    },
 
     LOGIN(state, payload) {
       if (payload.type == "client") {
