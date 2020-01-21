@@ -113,10 +113,7 @@ import Comments from "@/components/Comments.vue"
 export default {
   data: () => ({
     component: "comments",
-    restaurant: {
-      type: Object,
-      required: true
-    },
+    restaurant: {},
     hour: "",
     date: "",
     availableTables: [],
@@ -128,16 +125,12 @@ export default {
   },
 
   created: function () {
+    alert(this.$route.params.id);
+    
     this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id);
+    alert(this.restaurant);
     this.availableTables = this.restaurant.tables
-  },
-
-  updated: function () {
-    this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id);
-    this.renderMap();
-    this.availableTables = this.restaurant.tables
-  },
-  
+  },  
 
   methods: {
     call(newComponent) {

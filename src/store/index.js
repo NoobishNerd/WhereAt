@@ -48,15 +48,15 @@ export default new Vuex.Store({
     },
 
     getRestaurantById: (state) => (id) => {
-      return state.restaurants.find(restaurant => restaurant.id === id)
+      return state.restaurants.find(restaurant => restaurant.id == id)
     },
 
     getUserById: (state) => (id) => {
-      return state.users.find(user => user.id === id)
+      return state.users.find(user => user.id == id)
     },
 
     getSearchResults: (state) => (searchText) => {
-      return state.restaurants.filter(restaurant => restaurant.username.includes(searchText) || restaurant.adress.includes(searchText) || restaurant.local.includes(searchText) ) //tags not implemented || restaurant.tags === searchText
+      return state.restaurants.filter(restaurant => restaurant.username.includes(searchText) || restaurant.adress.includes(searchText) || restaurant.local.includes(searchText) ) //tags not implemented || restaurant.tags == searchText
     },
 
     getLoggedUser: (state) => {
@@ -86,7 +86,7 @@ export default new Vuex.Store({
   mutations: {
     ADD_USER(state, payload) {
       //check se email já está registado
-      if (!state.users.some(user => user.email === payload.email)) {
+      if (!state.users.some(user => user.email == payload.email)) {
         //adicionar novo user ao array
         state.users.push({
           id: payload.id,
@@ -121,7 +121,7 @@ export default new Vuex.Store({
       //check se email já está registado
       if (
         !state.restaurants.some(
-          restaurant => restaurant.email === payload.email
+          restaurant => restaurant.email == payload.email
         )
       ) {
         //adicionar novo restaurante ao array
@@ -237,8 +237,8 @@ export default new Vuex.Store({
         //substituir alerts por returns de strings?
         for (const user of state.users) {
           if (
-            user.email === payload.email &&
-            user.password === payload.password
+            user.email == payload.email &&
+            user.password == payload.password
           ) {
             state.loggedUser.type = "client"
             state.loggedUser.admin = user.admin;
@@ -253,7 +253,7 @@ export default new Vuex.Store({
             state.existUser = true;
           }
         }
-        if (state.existUser === false) {
+        if (state.existUser == false) {
           alert("Credenciais Inválidas");
         } else {
           state.existUser = false;
@@ -264,8 +264,8 @@ export default new Vuex.Store({
       if (payload.type == "restaurant") {
         for (const restaurant of state.restaurants) {
           if (
-            restaurant.email === payload.email &&
-            restaurant.password === payload.password
+            restaurant.email == payload.email &&
+            restaurant.password == payload.password
           ) {
             state.loggedUser.type = "restaurant"
             state.loggedUser.admin = false;
@@ -279,7 +279,7 @@ export default new Vuex.Store({
             state.existUser = true;
           }
         }
-        if (state.existUser === false) {
+        if (state.existUser == false) {
           alert("Credenciais Inválidas");
         } else {
           state.existUser = false;
