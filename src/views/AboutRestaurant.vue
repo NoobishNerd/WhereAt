@@ -80,46 +80,40 @@
     </div>
     <br />
 
-    <div id="finalCrate" class="row d-flex" style="border:1px solid black;">
-      <div @click="call('menu')" class="col-sm-3 pt-3" style="border-bottom:1px solid black;">
-        <h5 class="font-weight-bold">Ementa</h5>
-      </div>
-      <div @click="call('promos')" class="col-sm-3 pt-3"
-        style="border-bottom:1px solid black; border-left:1px solid black;">
-        <h5 class="font-weight-bold">Promoções</h5>
-      </div>
-      <div @click="call('comments')" id="comments" class="col-sm-3 pt-3 font-weight-bold "
-        style="border-bottom:1px solid black; border-left:1px solid black;">
-        <h5 class="font-weight-bold">Comentários</h5>
-      </div>
-      <div class="col-sm-1" style="border-left:1px solid black;"></div>
-      <div @click="call('info')" id="information" class="col-sm-2 pt-2 "
-        style="border-bottom:1px solid black; border-left:1px solid black;">
-        <h1 class="font-weight-bold">i</h1>
-      </div>
-      <div v-show="component=='info'">
-        <h5>{{restaurant.info}}</h5>
-      </div>
-      <div v-show="component=='comments'">
-        <AddComment :restaurant="restaurant"></AddComment>
-
-        <Comments v-for="comment in restaurant.comments"
+      <div id="finalCrate" class="row d-flex">
+        <div @click="call('menu')" id="menu" class="col-sm-3 pt-3" style="border-bottom-lg light:1px; cursor:pointer">
+          <h5 class="font-weight-bold">Ementa</h5>
+        </div>
+        <div @click="call('promos')" id="promotion" class="col-sm-3 pt-3"
+          style="border-bottom-lg light:1px solid black; border-left-lg light:1px; cursor:pointer">
+          <h5 class="font-weight-bold">Promoções</h5>
+        </div>
+        <div @click="call('comments')" id="comentary" class="col-sm-3 pt-3 font-weight-bold "
+          style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
+          <h5 class="font-weight-bold">Comentários</h5>
+        </div>
+        <div class="col-sm-1" style="border-left-lg light:1px"></div>
+        <div @click="call('info')" id="information" class="col-sm-2 pt-2 " style="border-bottom-lg light:1px; border-left-lg light:3px; cursor:pointer">
+          <h1 class="text-center font-weight-bold">i</h1>
+        </div>
+        <AddComment :restaurant="restaurant" v-show="component == 'comments'"> </AddComment>
+        <Comments v-show="component == 'comments'" 
+                v-for="comment in restaurant.comments"
                 v-bind:comment="comment"
                 v-bind:key="comment.username"></Comments>
+        <PromotionEditor v-show="component == 'promos'"></PromotionEditor>
+        <DisplayMenu :restaurant="restaurant" v-show="component == 'menu'"></DisplayMenu>
+        <DisplayInfo :restaurant="restaurant" v-show="component == 'info'"></DisplayInfo>
       </div>
-      <PromotionEditor v-show="component=='promos'"></PromotionEditor>
-      <MenuEditor v-show="component=='menu'"></MenuEditor>
-      <InfoEditor v-show="component=='info'"></InfoEditor>
-    </div>
   </div>
 </template>
-
 <script>
 import Comments from "@/components/Comments.vue"
-import AddComment from "@/components/AddComment.vue"
 import PromotionEditor from "@/components/PromotionEditor.vue"
-import MenuEditor from "@/components/MenuEditor.vue"
-import InfoEditor from "@/components/InfoEditor.vue"
+import DisplayMenu from "@/components/DisplayMenu.vue"
+import DisplayInfo from "@/components/DisplayInfo.vue"
+import AddComment from "@/components/AddComment.vue"
+
 
 export default {
   data: () => ({
@@ -231,10 +225,10 @@ export default {
 
   components: {
     Comments,
-    AddComment,
     PromotionEditor,
-    MenuEditor,
-    InfoEditor
+    DisplayMenu,
+    DisplayInfo,
+    AddComment
   }
 };
 </script>
