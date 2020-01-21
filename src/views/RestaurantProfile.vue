@@ -8,11 +8,10 @@
           <div class="col-sm-3 text-center">
             <br />
             <br />
-            <img src="../assets/circunvalacao-9.jpg" class="rounded-circle" width="95px" height="95px" />
+            <img :src=restaurant.profilePic class="rounded-circle" width="95px" height="95px" />
             <br />
             <h5 class="pt-2" id="brownBoldText">Restaurante Circunvalacao</h5>
-            <input @click="replaceRouteEditor" type="button" value="esqueci-me onde o pôr">
-            <button id="smallerButton" class="mt-2">Alterar Foto de Perfil</button>
+            <button @click="changeRestaurantImg" id="smallerButton" class="mt-2">Alterar Foto de Perfil</button>
           </div>
           <div class="col-sm-9">
             <div class="row justify-content-sm-around">
@@ -81,18 +80,26 @@ export default {
     call(newComponent) {
       this.component = newComponent;
     },
+
     logout() {
       this.$store.commit("LOGOUT")
       localStorage.setItem("loggedUser", "")
       this.$router.replace("/")
     },
-    replaceRouteEditor(){
-      this.$router.replace({
-          name: "restaurantEditor",
-          params: { id: this.restaurant.id }
-      }); 
+
+    changeRestaurantImg(){
+      let newRestaurantImg = prompt("Link da imagem:")
+      if (newRestaurantImg != ""){
+        this.restaurant.profilePic = newRestaurantImg
+        this.$store.commit("CHANGE_RESTAURANT_IMG",{
+          id: this.restaurant.id,
+          profilePic: this.restaurant.profilePic
+        })
+      }
+      else{
+        alert("Coloque o link da imagem!")
+      }
     }
-  
   },
   components: {
     RestaurantHistory,
