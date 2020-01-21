@@ -125,10 +125,7 @@ export default {
   },
 
   created: function () {
-    alert(this.$route.params.id);
-    
     this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id);
-    alert(this.restaurant);
     this.availableTables = this.restaurant.tables
   },  
 
