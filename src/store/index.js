@@ -312,11 +312,22 @@ export default new Vuex.Store({
         if (user.id == payload.id){
           user.profilePic = payload.profilePic
           alert("Imagem de Perfil Mudada!")
+          state.loggedUser.profilePic = payload.profilePic
         }
       }
       localStorage.setItem("users", JSON.stringify(state.users))
     },
 
+    CHANGE_RESTAURANT_IMG(state, payload) {
+      for (let restaurant of state.restaurants){
+        if (restaurant.id == payload.id){
+          restaurant.profilePic = payload.profilePic
+          alert("Imagem de Perfil Mudada!")
+          state.loggedUser.profilePic = payload.profilePic
+        }
+      }
+      localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
+    },
 
     VACATION(state, payload){
       alert(payload.id)

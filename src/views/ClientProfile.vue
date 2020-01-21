@@ -97,12 +97,15 @@ export default {
 
     changeUserImg(){
       let newUserImg = prompt("Link da imagem:")
-      if (newUserImg !== ""){
+      if (newUserImg != ""){
         this.user.profilePic = newUserImg
         this.$store.commit("CHANGE_USER_IMG",{
           id: this.user.id,
           profilePic: this.user.profilePic
         })
+      }
+      else{
+        alert("Coloque o link da imagem!")
       }
     }
   },
