@@ -6,6 +6,7 @@
           <div class="img-wrapper">
             <img class="img-responsive" src="../assets/Nice Restaurant.png" />
             <div class="img-overlay">
+
               <div class="span3 widget-span widget-type-raw_html custom-search" style="" data-widget-type="raw_html"
                 data-x="4" data-w="3">
                 <div class="cell-wrapper layout-widget-wrapper">
@@ -25,6 +26,7 @@
                 </div>
                 <!--end layout-widget-wrapper -->
               </div>
+              
             </div>
           </div>
         </div>

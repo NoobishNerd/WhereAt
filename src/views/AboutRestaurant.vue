@@ -47,16 +47,21 @@
             <input @input="checkAvailability" required v-model="date" type="date" id="start" name="start" />
             <br />
             <br />
-            <button @click="reservation" v-if="this.$store.state.logged == true && this.$store.state.loggedUser.type == 'client'" id="smallerButton">Reservar</button>
+            <button @click="reservation"
+              v-if="this.$store.state.logged == true && this.$store.state.loggedUser.type == 'client'"
+              id="smallerButton">Reservar</button>
             <h5 v-if="this.$store.state.logged == false">Precisa de estar ligado para fazer reservas</h5>
-            <h5 v-if="this.$store.state.loggedUser.type == 'restaurant'">Contas restaurantes não podem fazer reservas. Por favor crie uma conta cliente para si.</h5>
+            <h5 v-if="this.$store.state.loggedUser.type == 'restaurant'">Contas restaurantes não podem fazer reservas.
+              Por favor crie uma conta cliente para si.</h5>
           </div>
           <div class="col-sm-2"></div>
           <div class="col-sm-5">
             <h5>Mesas:</h5>
             <div class="form-group">
-              <select v-if="availableTables.length && restaurant.available" multiple class="form-control" id="sltTables">
-                <option  v-for="table in availableTables" v-bind:key="table.id"> Mesa {{table.id + 1}} | {{table.capacity}} pessoas</option> 
+              <select v-if="availableTables.length && restaurant.available" multiple class="form-control"
+                id="sltTables">
+                <option v-for="table in availableTables" v-bind:key="table.id"> Mesa {{table.id + 1}} |
+                  {{table.capacity}} pessoas</option>
               </select>
               <div v-else>
                 <h5>De momento o restaurante não está disponivel para reservas... :(</h5>
@@ -72,13 +77,14 @@
         </div>
       </div>
     </div>
-    <br/>
+    <br />
 
     <div id="finalCrate" class="row d-flex" style="border:1px solid black;">
       <div @click="call('menu')" class="col-sm-3 pt-3" style="border-bottom:1px solid black;">
         <h5 class="font-weight-bold">Ementa</h5>
       </div>
-      <div @click="call('promos')" class="col-sm-3 pt-3" style="border-bottom:1px solid black; border-left:1px solid black;">
+      <div @click="call('promos')" class="col-sm-3 pt-3"
+        style="border-bottom:1px solid black; border-left:1px solid black;">
         <h5 class="font-weight-bold">Promoções</h5>
       </div>
       <div @click="call('comments')" id="comments" class="col-sm-3 pt-3 font-weight-bold "
@@ -86,16 +92,16 @@
         <h5 class="font-weight-bold">Comentários</h5>
       </div>
       <div class="col-sm-1" style="border-left:1px solid black;"></div>
-      <div @click="call('info')" id="information" class="col-sm-2 pt-2 " style="border-bottom:1px solid black; border-left:1px solid black;">
+      <div @click="call('info')" id="information" class="col-sm-2 pt-2 "
+        style="border-bottom:1px solid black; border-left:1px solid black;">
         <h1 class="font-weight-bold">i</h1>
       </div>
       <div v-show="component=='info'">
         <h5>{{restaurant.info}}</h5>
       </div>
       <div v-show="component=='comments'">
-        <Comments v-for="comment in restaurant.comments"
-                v-bind:comment="comment"
-                v-bind:key="comment.username"></Comments>
+        <Comments v-for="comment in restaurant.comments" v-bind:comment="comment" v-bind:key="comment.username">
+        </Comments>
       </div>
       <div v-show="component=='promos'">
         <h5>promos</h5>
@@ -103,99 +109,99 @@
       <div v-show="component=='menu'">
         <h5>ementa</h5>
       </div>
-      
+
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
 import Comments from "@/components/Comments.vue"
 export default {
   data: () => ({
-    component: "comments",
-    restaurant: {},
-    hour: "",
-    date: "",
-    availableTables: [],
-    num_people: [2], //mesas selecionadas sltTables
-    map: "",
-  }),
-  mounted: function () {
-    this.renderMap();
-  },
-
-  created: function () {
-    this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id);
-    this.availableTables = this.restaurant.tables
-  },  
-
-  methods: {
-    call(newComponent) {
-      this.component = newComponent;
+      component: "comments",
+      restaurant: {},
+      hour: "",
+      date: "",
+      availableTables: [],
+      num_people: [2], //mesas selecionadas sltTables
+      map: "",
+    }),
+    mounted: function () {
+      this.renderMap();
     },
-    checkAvailability() {
-      this.availableTables = this.$store.getters.getAvailableTables(this.date, this.restaurant.id, this.restaurant.tables)
-      let limit = 0
-      let num_pp = 0
-      for (let index = 0; index < this.num_people.length; index++) {
-         num_pp+= this.num_people[index]
-      }
 
-      for (let j = 0; j < this.availableTables.length; j++) {
-        if (this.availableTables[j].capacity.typeof == "Number") {
-          limit += this.availableTables[j].capacity
+    created: function () {
+      this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id);
+      this.availableTables = this.restaurant.tables
+    },
+
+    methods: {
+      call(newComponent) {
+        this.component = newComponent;
+      },
+      checkAvailability() {
+        this.availableTables = this.$store.getters.getAvailableTables(this.date, this.restaurant.id, this.restaurant.tables)
+        let limit = 0
+        let num_pp = 0
+        for (let index = 0; index < this.num_people.length; index++) {
+          num_pp += this.num_people[index]
         }
-      }
 
-      
-      
-      if (num_pp > limit) {
-        return false
-      } else {
-        return true
-      }
+        for (let j = 0; j < this.availableTables.length; j++) {
+          if (this.availableTables[j].capacity.typeof == "Number") {
+            limit += this.availableTables[j].capacity
+          }
+        }
 
-    },
-    reservation() {
-      //fazer check se está logged in ou fazer v-if para n haver opção de reserva caso n esteja autenticado ou seja um restaurante
-      if (this.checkAvailability(this.date)) {
-        this.$store.commit("ADD_RESERVATION", {
-          id_restaurant: this.restaurant.id,
-          id_client: JSON.parse(localStorage.getItem("loggedUser")).id,
-          hour: this.hour,
-          date: this.date,
-          dateOfRes: this.getSystemDate(), //buscar data atual
-          num_people: this.num_people,
-          presence: false,
-          confirmation: "pending"
-        })
-        alert("Pedido enviado")
-      } else {
-        //show "no no" message
-        alert("Capacidade Excedida")
-        alert("no no")
+
+
+        if (num_pp > limit) {
+          return false
+        } else {
+          return true
+        }
+
+      },
+      reservation() {
+        //fazer check se está logged in ou fazer v-if para n haver opção de reserva caso n esteja autenticado ou seja um restaurante
+        if (this.checkAvailability(this.date)) {
+          this.$store.commit("ADD_RESERVATION", {
+            id_restaurant: this.restaurant.id,
+            id_client: JSON.parse(localStorage.getItem("loggedUser")).id,
+            hour: this.hour,
+            date: this.date,
+            dateOfRes: this.getSystemDate(), //buscar data atual
+            num_people: this.num_people,
+            presence: false,
+            confirmation: "pending"
+          })
+          alert("Pedido enviado")
+        } else {
+          //show "no no" message
+          alert("Capacidade Excedida")
+          alert("no no")
+        }
+      },
+      renderMap() {
+        this.map = new google.maps.Map(document.querySelector("#myMap"), {
+          center: {
+            lat: -34.397,
+            lng: 150.644
+          },
+          zoom: 8
+        });
+        this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+      },
+      getSystemDate() {
+        let today = new Date()
+        return `${today.getHours()}:${today.getMinutes()}  ${today.getDate()}/${today.getMonth()+ 1}/${today.getFullYear()}`
       }
     },
-    renderMap() {
-      this.map = new google.maps.Map(document.querySelector("#myMap"), {
-        center: {
-          lat: -34.397,
-          lng: 150.644
-        },
-        zoom: 8
-      });
-      this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
-    },
-    getSystemDate(){
-      let today = new Date()
-      return `${today.getHours()}:${today.getMinutes()}  ${today.getDate()}/${today.getMonth()+ 1}/${today.getFullYear()}`
+
+    components: {
+      Comments
     }
-  },
-
-  components: {
-    Comments
-  }
-};
+  };
 </script>
 
 <style scoped>
