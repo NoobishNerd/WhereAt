@@ -4,14 +4,16 @@
     <br />
     <div class="row mb-5 pb-5">
       <div class="col-sm-12">
-          <h4 class="text-left pt-2 pb-4 mb-4">{{vacationQuestion}}</h4>
+          <h4 v-if="available == true" class="text-left pt-2 pb-4 mb-4">Pretende encerrar o restaurante para férias?</h4>
+          <h4 v-if="available == false" class="text-left pt-2 pb-4 mb-4">Pretender reativar as reservas para o restaurante?</h4>
       </div>
     </div>
 
     <div class="row pt-4 mt-4">
       <div class="col-sm-9"></div>
       <div class="col-sm-3">
-        <button @click="goOnVacation" id="smallerButton">{{vacationBtn}}</button>
+        <button v-if="available == true" @click="goOnVacation" id="smallerButton">Ir de Férias</button>
+        <button v-if="available == false" @click="goOnVacation" id="smallerButton">Reabrir Reservas</button>
       </div>
     </div>
   </div>
@@ -20,37 +22,25 @@
 
 export default {
   data: () => ({
-    vacationBtn: "",
-    vacationQuestion: "",
     id: "",
     available: ""
   }),
   created: function(){
     this.id = this.$route.params.id
-    //get available do restaurante
-    
-  },
-  updated: function(){
-    this.id = this.$route.params.id
     this.available = this.$store.getters.getRestaurantById(this.id).available
-    alert(this.available)
     this.updateText()
   },
+
   methods: {
-    updateText(){
-      alert("update text")
-      if (this.available == false) {
-        this.vacationBtn = "Reabrir Reservas"
-        this.vacationQuestion = "Pretender reativar as reservas para o restaurante?"
-      } else {
-        this.vacationBtn = "Ir de Férias"
-        this.vacationQuestion = "Pretende encerrar o restaurante para férias?"
-      }
-    },
     goOnVacation(){
       //commit retorna available atual
       this.$store.commit("VACATION", {id: this.id})
-      this.updateText()
+      if (this.available == true){
+        this.available = false
+      }
+      else if (this.available == false){
+        this.available = true
+      }
     }
   }
 }

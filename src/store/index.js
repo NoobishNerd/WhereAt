@@ -329,17 +329,14 @@ export default new Vuex.Store({
     },
 
     VACATION(state, payload){
-      alert(payload.id)
       for (let restaurant  of state.restaurants) {
-        alert(restaurant.id)
         if (payload.id == restaurant.id) {
-          alert("yeah")
           if(restaurant.available){
             restaurant.available = false
-            alert("Now its false")
+            alert("O restaurante está agora de férias!")
           }else{
             restaurant.available = true
-            alert("Now its tru")
+            alert("Reservas reativadas!")
           }
         }
       }
