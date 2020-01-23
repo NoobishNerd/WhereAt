@@ -66,21 +66,23 @@ export default new Vuex.Store({
 
     getAvailableTables: (state) => (date, id, tables) => {
       let availableTables = tables
+      let occupiedTables = []
+    
       for (const reservation of state.bookingHistory) {
         //se estiver confirmada & for à mesma hora no mesmo restaurante
-        if(reservation.confirmation == "pending" && reservation.id_restaurant == id && reservation.date == date){
-          for (let i= 0; i < reservation.num_people.length; i++) {
-              for (let j= 0; j < availableTables.length; j++) {
-              if(availableTables[j].capacity == reservation.num_people[i].capacity)
-                availableTables[j].capacity = `Mesa para ${availableTables[j].capacity} - reservada`
-              break;
-            }
+        if((reservation.confirmation == "p" || reservation.confirmation == "d") && reservation.id_restaurant == id && reservation.date == date ){
+          occupiedTables.push(reservation.num_people)
+        }
+      }
+      for (let table of availableTables) {
+        for (let i = 0; i < occupiedTables.length; i++) {
+          if (table.id == occupiedTables[i].id && typeof(table.capacity) == "number") {
+            table.capacity = "Ocupada [X]"
           }
         }
       }
       return availableTables
     }
-
   },
 
   mutations: {
@@ -361,7 +363,7 @@ export default new Vuex.Store({
         presence: payload.presence,
         confirmation: payload.confirmation
       })
-
+      alert("Pedido Enviado")
       localStorage.setItem("bookingHistory",JSON.stringify( state.bookingHistory))    
     },
     

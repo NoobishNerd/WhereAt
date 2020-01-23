@@ -26,6 +26,15 @@
 export default {
   name: "Comments",
 
+  methods:{
+    
+    getCommentData(){
+        //username: this.loggedUser.username,
+                   // profilePic: this.loggedUser.profilePic,
+    }
+    
+  },
+
   props: {
     comment: {
       type: Object,

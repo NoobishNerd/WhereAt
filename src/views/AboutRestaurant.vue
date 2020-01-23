@@ -40,28 +40,30 @@
       <div id="windowReservation" class="col-sm-6 img-thumbnail">
         <div class="row">
           <div class="col-sm-5">
+            <form v-on:submit.prevent="reservation()">
             <h5>Hora:</h5>
-            <input v-model="hour" required type="time" />
+            <input @input="getAvailableTables" v-model="hour" required type="time" />
             <br />
             <br />
-            <input @input="checkAvailability" required v-model="date" type="date" id="start" name="start" />
+            <input @input="getAvailableTables" required v-model="date" type="date" id="start" name="start" />
             <br />
             <br />
-            <button @click="reservation"
+            <button type="submit"
               v-if="this.$store.state.logged == true && this.$store.state.loggedUser.type == 'client'"
               id="smallerButton">Reservar</button>
             <h5 v-if="this.$store.state.logged == false">Precisa de estar ligado para fazer reservas</h5>
             <h5 v-if="this.$store.state.loggedUser.type == 'restaurant'">Contas restaurantes não podem fazer reservas.
               Por favor crie uma conta cliente para si.</h5>
+            </form>
           </div>
-          <div class="col-sm-2"></div>
-          <div class="col-sm-5">
+          
+          <div class="col-sm-7">
             <h5>Mesas:</h5>
             <div class="form-group">
-              <select v-if="availableTables.length && restaurant.available" multiple class="form-control"
-                id="sltTables" v-model="selectedTables">
+              <select size="6" v-if="availableTables.length && restaurant.available" class="form-control"
+                id="sltTables" v-model="selectedTable">
                 
-                <option v-for="table in availableTables" v-bind:key="table.id"> Mesa {{table.id + 1}} |
+                <option  v-for="table in availableTables" v-bind:key="table.id" > Mesa {{table.id + 1}} |
                   {{table.capacity}} pessoas</option>
               </select>
               <div v-else>
@@ -122,8 +124,8 @@ export default {
       hour: "",
       date: "",
       availableTables: [],
-      selectedTablesReady: [],
-      selectedTables: [2], //mesas selecionadas sltTables
+      selectedTableReady: [],
+      selectedTable: "", 
       map: "",
     }),
     mounted: function () {
@@ -136,55 +138,51 @@ export default {
     },
 
     updated: function () {
-      this.renderMap();
-      this.getObjectTableArray();
+      if(this.selectedTable != ""){
+        this.getObjectTable();
+      }
     },
 
     methods: {
       call(newComponent) {
         this.component = newComponent;
       },
-      checkAvailability() {
+
+      getAvailableTables(){
+        if(this.date != undefined ){
         this.availableTables = this.$store.getters.getAvailableTables(this.date, this.restaurant.id, this.restaurant.tables)
-        let limit = 0
-        let num_pp = 0
-        for (let index = 0; index < this.selectedTables.length; index++) {
-          num_pp += this.selectedTablesReady[index].capacity
         }
+      },
 
-        for (let j = 0; j < this.availableTables.length; j++) {
-          if (typeof(this.availableTables[j].capacity) == "number") {
-            limit += this.availableTables[j].capacity
-          }
-        }
-
-        if (num_pp > limit) {
+      checkAvailability() {
+        this.getAvailableTables();
+        this.getObjectTable();
+        if(typeof(this.selectedTableReady.capacity) == "string"){
+          alert("A mesa selecionada não está disponivel")
           return false
-        } else {
+        }else{
           return true
         }
-
       },
 
       reservation() { 
         //fazer check se está logged in ou fazer v-if para n haver opção de reserva caso n esteja autenticado ou seja um restaurante
-        if (this.checkAvailability(this.date)) {
+        if (this.checkAvailability() && this.selectedTable != "") {
           this.$store.commit("ADD_RESERVATION", {
             id_restaurant: this.restaurant.id,
             id_client: JSON.parse(localStorage.getItem("loggedUser")).id,
             hour: this.hour,
             date: this.date,
             dateOfRes: this.getSystemDate(), //buscar data atual
-            num_people: this.selectedTablesReady,
+            num_people: this.selectedTableReady,
             presence: false,
-            confirmation: "pending"
+            confirmation: "p"
           })
-          alert("Pedido enviado")
-        } else {
-          //show "no no" message
-          alert("Capacidade Excedida")
-          alert("no no")
+          this.getAvailableTables();
+        } else if(this.selectedTable ==  "") {
+          alert("Por favor selecione uma mesa")
         }
+        
       },
 
       renderMap() {
@@ -203,23 +201,28 @@ export default {
         return `${today.getHours()}:${today.getMinutes()}  ${today.getDate()}/${today.getMonth()+ 1}/${today.getFullYear()}`
       },
 
-      getObjectTableArray(){
-        let start;
-        let end;
-        let selectedId;
-        for (let i = 0; i < this.selectedTables.length; i++) {
-          start = this.selectedTables[i].indexOf(" ") + 1
-          end = this.selectedTables[i].indexOf("|") - 1
-          selectedId = parseInt(this.selectedTables[i].slice(start, end)) - 1
-          
+      getObjectTable(){
+        if(this.selectedTable.includes("Ocupada")){
+          this.selectedTableReady = {
+            id: -1,
+            capacity: "occupied"
+          }
+        }else{
+          let start = this.selectedTable.indexOf(" ") + 1
+          let end = this.selectedTable.indexOf("|") - 1
+          let selectedId = parseInt(this.selectedTable.slice(start, end)) - 1
+
           for (const table of this.availableTables) {
             if (table.id == selectedId && typeof(table.capacity) == "number") {
-              this.selectedTablesReady.push({id: selectedId, capacity: table.capacity})
-              
+              this.selectedTableReady = {
+                id: selectedId,
+                capacity: table.capacity
+              }
             }
           }
-          
         }
+        
+
       }
     },
 

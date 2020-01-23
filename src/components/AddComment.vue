@@ -85,6 +85,7 @@
         },
 
         methods: {
+            
             ratingStar(rating) {
                 this.newRating = rating
             },
@@ -104,15 +105,20 @@
                 else{
                     this.$store.commit("ADD_COMMENT", {
                     id: this.getLastCommentId(),
-                    username: this.loggedUser.username,
-                    profilePic: this.loggedUser.profilePic,
                     text: this.newComment,
                     rate: this.newRating,
                     userId: this.loggedUser.id,
-                    restaurantId: this.restaurant.id
+                    restaurantId: this.restaurant.id,
+                    date: this.getSystemDate()
                     })
                 }
             },
+
+            getSystemDate() {
+                let today = new Date()
+                return `${today.getHours()}:${today.getMinutes()}  ${today.getDate()}/${today.getMonth()+ 1}/${today.getFullYear()}`
+            },
+
 
             getLastCommentId() {
                 if (this.restaurant.comments.length != 0){
