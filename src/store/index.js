@@ -77,7 +77,7 @@ export default new Vuex.Store({
       for (let table of availableTables) {
         for (let i = 0; i < occupiedTables.length; i++) {
           if (table.id == occupiedTables[i].id && typeof(table.capacity) == "number") {
-            table.capacity = "Ocupada [X]"
+            table.capacity = "Ocupada [X] " + table.capacity
           }
         }
       }
@@ -366,6 +366,12 @@ export default new Vuex.Store({
       alert("Pedido Enviado")
       localStorage.setItem("bookingHistory",JSON.stringify( state.bookingHistory))    
     },
+/*
+    MANAGE_RESERVATION(state, payload){
+      payload = payload;
+      alert("HOI")
+      localStorage.setItem("bookingHistory",JSON.stringify( state.bookingHistory))    
+    },*/
     
     CREATE_BASE(state) {
       if(localStorage.getItem("loggedUser")){

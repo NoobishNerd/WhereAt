@@ -28,6 +28,9 @@ export default {
   created: function(){
     this.id = this.$route.params.id
     this.available = this.$store.getters.getRestaurantById(this.id).available
+    
+  },
+  updated: function(){
     this.updateText()
   },
 
@@ -41,6 +44,7 @@ export default {
       else if (this.available == false){
         this.available = true
       }
+      this.updateText()
     }
   }
 }
