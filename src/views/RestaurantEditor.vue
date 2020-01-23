@@ -3,7 +3,7 @@
     <div class="row">
       <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
         <h5 class="pt-2 font-weight-bold"></h5>
-          <img @click="replaceRouteProfile" id="fotoRestaurante" src="../assets/circunvalacao-9.jpg" class="pb-2 img-fluid" />
+          <img @click="replaceRouteProfile" id="fotoRestaurante" :src="restaurant.profilePic" class="pb-2 img-fluid" />
       </div>
       <div class="col-sm-1"></div>
       <div id="windowCarrousel" class="col-sm-6 text-center img-thumbnail img-fluid  ">
@@ -19,7 +19,7 @@
               <img class="d-block w-100 img-fluid" src="../assets/banana.jpg" alt="First slide" />
             </div>
             <div class="carousel-item">
-              <img class="d-block w-100 img-fluid" src="../assets/circunvalacao-9.jpg" alt="Second slide" />
+              <img class="d-block w-100 img-fluid" :src="restaurant.profilePic" alt="Second slide" />
             </div>
             <div class="carousel-item">
               <img class="d-block w-100 img-fluid" src="../assets/banana.jpg" alt="Third slide" />
@@ -50,9 +50,9 @@
         <div @click="call('menu')" id="menu" class="col-sm-3 pt-3" style="border-bottom-lg light:1px; cursor:pointer">
           <h5 class="font-weight-bold">Ementa</h5>
         </div>
-        <div @click="call('promos')" id="promotion" class="col-sm-3 pt-3"
+        <div @click="call('album')" id="album" class="col-sm-3 pt-3"
           style="border-bottom-lg light:1px solid black; border-left-lg light:1px; cursor:pointer">
-          <h5 class="font-weight-bold">Promoções</h5>
+          <h5 class="font-weight-bold">Album</h5>
         </div>
         <div @click="call('comments')" id="comentary" class="col-sm-3 pt-3 font-weight-bold "
           style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
@@ -66,7 +66,7 @@
                 v-for="comment in restaurant.comments"
                 v-bind:comment="comment"
                 v-bind:key="comment.username"></Comments>
-        <PromotionEditor v-show="component == 'promos'"></PromotionEditor>
+        <PromotionEditor v-show="component == 'album'"></PromotionEditor>
         <MenuEditor :restaurant="restaurant" v-show="component == 'menu'"></MenuEditor>
         <InfoEditor :restaurant="restaurant" v-show="component == 'info'"></InfoEditor>
       </div>
