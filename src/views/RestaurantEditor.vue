@@ -6,24 +6,20 @@
           <img @click="replaceRouteProfile" id="fotoRestaurante" :src="restaurant.profilePic" class="pb-2 img-fluid" />
       </div>
       <div class="col-sm-1"></div>
-      <div id="windowCarrousel" class="col-sm-6 text-center img-thumbnail img-fluid  ">
+      <div v-if="restaurant.album.length != 0" id="windowCarrousel" class="col-sm-6 text-center img-thumbnail img-fluid">
         <h5 class="font-weight-bold">Fotos do restaurante</h5>
+
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
           <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              <li v-for="photo in restaurant.album" v-bind:key="photo.id" data-target="#carouselExampleIndicators" :data-slide-to="photo.id" :class="{ active: photo.id==0 }"></li>
           </ol>
           <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img class="d-block w-100 img-fluid" src="../assets/banana.jpg" alt="First slide" />
+
+            <div class="carousel-item" v-for="photo in restaurant.album" v-bind:key="photo.id + photo.url"
+              :class="{ active: photo.id==0 }">
+              <img :src="photo.url" class="d-block w-100 img-fluid" :alt="'slide ' + photo.id">
             </div>
-            <div class="carousel-item">
-              <img class="d-block w-100 img-fluid" :src="restaurant.profilePic" alt="Second slide" />
-            </div>
-            <div class="carousel-item">
-              <img class="d-block w-100 img-fluid" src="../assets/banana.jpg" alt="Third slide" />
-            </div>
+
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -34,6 +30,10 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
+
+      </div>
+      <div v-else>
+        <h5>Nenhuma photo foi carregada</h5>
       </div>
     </div>
     <div class="row ">
