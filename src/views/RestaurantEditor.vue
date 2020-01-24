@@ -3,24 +3,26 @@
     <div class="row">
       <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
         <h5 class="pt-2 font-weight-bold"></h5>
-          <img @click="replaceRouteProfile" id="fotoRestaurante" :src="restaurant.profilePic" class="pb-2 img-fluid" />
+        <img @click="replaceRouteProfile" id="fotoRestaurante" :src="restaurant.profilePic" class="pb-2 img-fluid" />
       </div>
       <div class="col-sm-1"></div>
-      <div v-if="restaurant.album.length != 0" id="windowCarrousel" class="col-sm-6 text-center img-thumbnail img-fluid">
+      <div v-if="restaurant.album.length != 0" id="windowCarrousel"
+        class="col-sm-6 text-center img-thumbnail img-fluid">
         <h5 class="font-weight-bold">Fotos do restaurante</h5>
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
           <ol class="carousel-indicators">
-              <li v-for="photo in restaurant.album" v-bind:key="photo.id" data-target="#carouselExampleIndicators" :data-slide-to="photo.id" :class="{ active: photo.id==0 }"></li>
+            <li v-for="photo in restaurant.album" v-bind:key="photo.id" data-target="#carouselExampleIndicators"
+              :data-slide-to="photo.id" :class="{ active: photo.id==0 }"></li>
           </ol>
           <div class="carousel-inner">
 
             <div class="carousel-item" v-for="photo in restaurant.album" v-bind:key="photo.id + photo.url"
               :class="{ active: photo.id==0 }">
-              
+
               <button @click="removePhoto(photo.id)" id="removePhotoBtn" class="px-5 mb-2 mt-2">Remover foto</button>
               <img :src="photo.url" class="d-block w-100 img-fluid" :alt="'slide ' + photo.id">
-              
+
             </div>
 
           </div>
@@ -39,6 +41,16 @@
         <h5>Nenhuma foto foi carregada</h5>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm-5">
+        <button @click="replaceRouteProfile" id="manageBtn" type="button" class="btn btn-block">Gerir Reservas</button>
+      </div>
+      <div class="col-sm-1">
+      </div>
+      <div class="col-sm-6">
+        <button id="addPhotoBtn" type="button" class="btn btn-block">Adicionar Foto</button>
+      </div>
+    </div>
     <div class="row ">
       <div id="windowEditor" class="col-sm-6 img-thumbnail">
         <TableEditor :restaurant="restaurant"></TableEditor>
@@ -49,30 +61,29 @@
         </div>
       </div>
     </div>
-      <div id="finalCrate" class="row d-flex">
-        <div @click="call('menu')" id="menu" class="col-sm-3 pt-3" style="border-bottom-lg light:1px; cursor:pointer">
-          <h5 class="font-weight-bold">Ementa</h5>
-        </div>
-        <div @click="call('album')" id="album" class="col-sm-3 pt-3"
-          style="border-bottom-lg light:1px solid black; border-left-lg light:1px; cursor:pointer">
-          <h5 class="font-weight-bold">Album</h5>
-        </div>
-        <div @click="call('comments')" id="comentary" class="col-sm-3 pt-3 font-weight-bold "
-          style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
-          <h5 class="font-weight-bold">Comentários</h5>
-        </div>
-        <div class="col-sm-1" style="border-left-lg light:1px"></div>
-        <div @click="call('info')" id="information" class="col-sm-2 pt-2 " style="border-bottom-lg light:1px; border-left-lg light:3px; cursor:pointer">
-          <h1 class="text-center font-weight-bold">i</h1>
-        </div>
-        <Comments v-show="component == 'comments'" 
-                v-for="comment in restaurant.comments"
-                v-bind:comment="comment"
-                v-bind:key="comment.username"></Comments>
-        <PromotionEditor v-show="component == 'album'"></PromotionEditor>
-        <MenuEditor :restaurant="restaurant" v-show="component == 'menu'"></MenuEditor>
-        <InfoEditor :restaurant="restaurant" v-show="component == 'info'"></InfoEditor>
+    <div id="finalCrate" class="row d-flex">
+      <div @click="call('menu')" id="menu" class="col-sm-3 pt-3" style="border-bottom-lg light:1px; cursor:pointer">
+        <h5 class="font-weight-bold">Ementa</h5>
       </div>
+      <div @click="call('album')" id="album" class="col-sm-3 pt-3"
+        style="border-bottom-lg light:1px solid black; border-left-lg light:1px; cursor:pointer">
+        <h5 class="font-weight-bold">Album</h5>
+      </div>
+      <div @click="call('comments')" id="comentary" class="col-sm-3 pt-3 font-weight-bold "
+        style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
+        <h5 class="font-weight-bold">Comentários</h5>
+      </div>
+      <div class="col-sm-1" style="border-left-lg light:1px"></div>
+      <div @click="call('info')" id="information" class="col-sm-2 pt-2 "
+        style="border-bottom-lg light:1px; border-left-lg light:3px; cursor:pointer">
+        <h1 class="text-center font-weight-bold">i</h1>
+      </div>
+      <Comments v-show="component == 'comments'" v-for="comment in restaurant.comments" v-bind:comment="comment"
+        v-bind:key="comment.username"></Comments>
+      <PromotionEditor v-show="component == 'album'"></PromotionEditor>
+      <MenuEditor :restaurant="restaurant" v-show="component == 'menu'"></MenuEditor>
+      <InfoEditor :restaurant="restaurant" v-show="component == 'info'"></InfoEditor>
+    </div>
   </div>
 </template>
 <script>
@@ -88,15 +99,15 @@ export default {
     map: "",
     restaurant: ""
   }),
-  mounted: function() {
+  mounted: function () {
     this.renderMap();
   },
 
-  created: function(){
+  created: function () {
     this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id)
   },
 
-  updated: function(){
+  updated: function () {
     this.renderMap();
   },
 
@@ -114,14 +125,16 @@ export default {
       });
       this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
     },
-    replaceRouteProfile(){
+    replaceRouteProfile() {
       this.$router.replace({
-          name: "restaurantProfile",
-          params: { id: this.restaurant.id }
-      }); 
+        name: "restaurantProfile",
+        params: {
+          id: this.restaurant.id
+        }
+      });
     },
 
-    removePhoto(id){
+    removePhoto(id) {
       this.$store.commit("REMOVE_PHOTO", {
         removeId: id,
         restaurantId: this.restaurant.id
@@ -144,6 +157,7 @@ img {
   height: 300px;
   width: auto;
 }
+
 .row {
   margin-top: 50px;
 }
@@ -151,6 +165,7 @@ img {
 html * {
   color: #f17526;
 }
+
 #smallerButton {
   background-color: #f17526;
   border: none;
@@ -171,62 +186,75 @@ html * {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
 #fotoRestaurante {
   width: 400px;
   border-color: white;
   height: 300px;
 }
+
 #windowPhoto {
   -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
 }
+
 #windowCarrousel {
   -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
 }
+
 #windowReservation {
   border-color: white;
   box-shadow: 0 30px 60px 15px rgba(0, 0, 0, 0.1);
 }
+
 #finalCrate {
   border-radius: 10px 10px 0px 0px;
 }
+
 .border-primary {
   border-width: 3px;
 }
+
 .google-map {
   width: 500px;
   height: 500px;
   margin: 0 auto;
 }
+
 #finalCrate {
   -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
   border: none;
 }
+
 #promotion {
   -webkit-box-shadow: 1px 3px 0px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
   box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
 }
+
 #menu {
   -webkit-box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
   box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
 }
+
 #comentary {
   -webkit-box-shadow: 1px 3px 0px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
   box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
 }
+
 #information {
   -webkit-box-shadow: -1px 3px 0px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: -1px 2px 0px 0px rgba(0, 0, 0, 0.25);
   box-shadow: -1px 2px 0px 0px rgba(0, 0, 0, 0.25);
 }
+
 #windowEditor {
   -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
@@ -239,19 +267,52 @@ html * {
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
 }
 
+#manageBtn {
+  background-color: #f17526;
+  border: none;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#addPhotoBtn {
+  background-color: #f17526;
+  border: none;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
+}
+
 #removePhotoBtn {
-        background-color: #f17526;
-        border: none;
-        color: #ffffff;
-        font-weight: bold;
-        text-decoration: none;
-        text-transform: uppercase;
-        -webkit-border-radius: 5px 5px 5px 5px;
-        border-radius: 5px 5px 5px 5px;
-        -webkit-transition: all 0.3s ease-in-out;
-        -moz-transition: all 0.3s ease-in-out;
-        -ms-transition: all 0.3s ease-in-out;
-        -o-transition: all 0.3s ease-in-out;
-        transition: all 0.3s ease-in-out;
-    }
+  background-color: #f17526;
+  border: none;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
 </style>
