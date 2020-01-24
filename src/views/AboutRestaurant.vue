@@ -34,7 +34,7 @@
 
       </div>
       <div v-else>
-        <h5>Nenhuma photo foi carregada</h5>
+        <h5>O restaurante ainda não adicionou fotos</h5>
       </div>
     </div>
     <div class="row ">

@@ -17,7 +17,10 @@
 
             <div class="carousel-item" v-for="photo in restaurant.album" v-bind:key="photo.id + photo.url"
               :class="{ active: photo.id==0 }">
+              
+              <button @click="removePhoto(photo.id)" id="removePhotoBtn" class="px-5 mb-2 mt-2">Remover foto</button>
               <img :src="photo.url" class="d-block w-100 img-fluid" :alt="'slide ' + photo.id">
+              
             </div>
 
           </div>
@@ -33,7 +36,7 @@
 
       </div>
       <div v-else>
-        <h5>Nenhuma photo foi carregada</h5>
+        <h5>Nenhuma foto foi carregada</h5>
       </div>
     </div>
     <div class="row ">
@@ -116,6 +119,13 @@ export default {
           name: "restaurantProfile",
           params: { id: this.restaurant.id }
       }); 
+    },
+
+    removePhoto(id){
+      this.$store.commit("REMOVE_PHOTO", {
+        removeId: id,
+        restaurantId: this.restaurant.id
+      })
     }
   },
 
@@ -228,4 +238,20 @@ html * {
   -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
 }
+
+#removePhotoBtn {
+        background-color: #f17526;
+        border: none;
+        color: #ffffff;
+        font-weight: bold;
+        text-decoration: none;
+        text-transform: uppercase;
+        -webkit-border-radius: 5px 5px 5px 5px;
+        border-radius: 5px 5px 5px 5px;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
 </style>

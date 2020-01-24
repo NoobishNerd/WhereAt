@@ -202,6 +202,25 @@ export default new Vuex.Store({
       }
     },
 
+    REMOVE_PHOTO(state, payload) {
+      let newPhotoId = 0 //para reescrever o id de todas as tables 
+      let newAlbum = []
+      for(let restaurant of state.restaurants){
+        if (restaurant.id == payload.restaurantId){
+          for (let photo of restaurant.album){
+            if(payload.removeId != photo.id){
+              photo.id = newPhotoId
+              newAlbum.push(photo)
+              newPhotoId ++
+            }
+          }
+          restaurant.album = newAlbum
+          localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
+          alert("Foto Removida!")
+        }
+      }
+    },
+
     ADD_ITEM(state, payload) {
       for (let restaurant of state.restaurants){
         if (restaurant.id == payload.restaurantId){
@@ -451,7 +470,7 @@ export default new Vuex.Store({
             postalCode: "4480-912",
             local: "não sei onde é dread",
             info: "descritivo do restaurante",
-            album: [{id: 0, url:"https://i.imgur.com/hym8WuD.jpg"}, {id: 1, url:"https://i.imgur.com/MuH4mfH.jpg"}, {id: 2, url:"https://i.imgur.com/s6dX9yF.jpg"}, {id: 3, url:"https://i.imgur.com/s6dX9yF.jpg"}],
+            album: [{id: 0, url:"https://i.imgur.com/hym8WuD.jpg"}, {id: 1, url:"https://i.imgur.com/MuH4mfH.jpg"}, {id: 2, url:"https://i.imgur.com/s6dX9yF.jpg"}, {id: 3, url:"https://i.imgur.com/tfEis8D.jpg"}],
             promotions: [],
             comments: [{id: 0, username:"Best Girl Vibe Check" , profilePic: "https://cdn.discordapp.com/attachments/640604184965677072/665652451877322762/25a39n98i7a41.png", rate: 5, text: "Nice place, i bet they make a lot of money", userId:42}],
             tags: [],
