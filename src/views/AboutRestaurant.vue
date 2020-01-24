@@ -125,7 +125,7 @@ export default {
       date: "",
       availableTables: [],
       selectedTableReady: [],
-      selectedTable: "", 
+      selectedTable: "",
       map: "",
     }),
     mounted: function () {
@@ -138,7 +138,7 @@ export default {
     },
 
     updated: function () {
-      if(this.selectedTable != ""){
+      if (this.selectedTable != "") {
         this.getObjectTable();
       }
     },
@@ -148,24 +148,28 @@ export default {
         this.component = newComponent;
       },
 
-      getAvailableTables(){
-        if(this.date != undefined ){
-        this.availableTables = this.$store.getters.getAvailableTables(this.date, this.restaurant.id, this.restaurant.tables)
-        }
+      getSystemDate() {
+        let today = new Date()
+        return `${today.getHours()}:${today.getMinutes()}  ${today.getDate()}/${today.getMonth()+ 1}/${today.getFullYear()}`
       },
 
-      checkAvailability() {
-        this.getAvailableTables();
-        this.getObjectTable();
-        if(typeof(this.selectedTableReady.capacity) == "string"){
-          alert("A mesa selecionada não está disponivel")
-          return false
-        }else{
-          return true
-        }
+      renderMap() {
+        alert("renderMap")
+        
+        this.map = new google.maps.Map(document.querySelector("#myMap"), {
+          center: {
+            lat: -34.397,
+            lng: 150.644
+          },
+          zoom: 8
+        });
+        this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+
+        alert(this.map)
       },
 
-      reservation() { 
+
+      reservation() {
         //fazer check se está logged in ou fazer v-if para n haver opção de reserva caso n esteja autenticado ou seja um restaurante
         if (this.checkAvailability() && this.selectedTable != "") {
           this.$store.commit("ADD_RESERVATION", {
@@ -179,41 +183,47 @@ export default {
             confirmation: "p"
           })
           this.getAvailableTables();
-        } else if(this.selectedTable ==  "") {
+        } else if (this.selectedTable == "") {
           alert("Por favor selecione uma mesa")
+        }
+
+      },
+
+      getAvailableTables() {
+        if (this.date != undefined) {
+          alert("i")
+          this.availableTables = this.$store.getters.getAvailableTables(this.date, this.restaurant.id,
+            this.restaurant.tables)
         }
         
       },
 
-      renderMap() {
-        this.map = new google.maps.Map(document.querySelector("#myMap"), {
-          center: {
-            lat: -34.397,
-            lng: 150.644
-          },
-          zoom: 8
-        });
-        this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+      checkAvailability() {
+        this.getAvailableTables();
+        this.getObjectTable();
+        if (typeof (this.selectedTableReady.capacity) == "string") {
+          alert("A mesa selecionada não está disponivel")
+          return false
+        } else {
+          return true
+        }
       },
 
-      getSystemDate() {
-        let today = new Date()
-        return `${today.getHours()}:${today.getMinutes()}  ${today.getDate()}/${today.getMonth()+ 1}/${today.getFullYear()}`
-      },
 
-      getObjectTable(){
-        if(this.selectedTable.includes("Ocupada")){
+
+      getObjectTable() {
+        if (this.selectedTable.includes("Ocupada")) {
           this.selectedTableReady = {
             id: -1,
             capacity: "occupied"
           }
-        }else{
+        } else {
           let start = this.selectedTable.indexOf(" ") + 1
           let end = this.selectedTable.indexOf("|") - 1
           let selectedId = parseInt(this.selectedTable.slice(start, end)) - 1
 
           for (const table of this.availableTables) {
-            if (table.id == selectedId && typeof(table.capacity) == "number") {
+            if (table.id == selectedId && typeof (table.capacity) == "number") {
               this.selectedTableReady = {
                 id: selectedId,
                 capacity: table.capacity
@@ -221,19 +231,19 @@ export default {
             }
           }
         }
-        
+
 
       }
     },
 
-  components: {
-    Comments,
-    PromotionEditor,
-    DisplayMenu,
-    DisplayInfo,
-    AddComment
-  }
-};
+    components: {
+      Comments,
+      PromotionEditor,
+      DisplayMenu,
+      DisplayInfo,
+      AddComment
+    }
+  };
 </script>
 
 <style scoped>
