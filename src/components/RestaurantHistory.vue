@@ -63,8 +63,14 @@
               </div>
               <div class="col-sm-9 mt-2">
                 <div class="custom-control custom-checkbox mr-sm-2">
-                  <input @click="checkPresence(reservation.date, reservation.hour, reservation.id_client, reservation.id_restaurant, reservation.num_people.id)" type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                  <label class="custom-control-label" for="customControlAutosizing">Presença</label>
+                  <div v-if="reservation.presence == false">
+                   <input @click="checkPresence(reservation.date, reservation.hour, reservation.id_client, reservation.id_restaurant, reservation.num_people.id)" type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                   <label class="custom-control-label" for="customControlAutosizing">Presença</label>
+                  </div>
+                  <div v-if="reservation.presence == true">
+                   <input checked disabled type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                   <label class="custom-control-label" for="customControlAutosizing">Presença</label>
+                  </div>
                 </div>
               </div>
             </div>

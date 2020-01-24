@@ -74,14 +74,14 @@ export default new Vuex.Store({
     
       for (const reservation of state.bookingHistory) {
         //se estiver confirmada & for à mesma hora no mesmo restaurante
-        if((reservation.confirmation == "p" || reservation.confirmation == "d") && reservation.id_restaurant == id && reservation.date == date ){
+        if(reservation.confirmation == "c" && reservation.id_restaurant == id && reservation.date == date ){
           occupiedTables.push(reservation.num_people)
         }
       }
       for (let table of availableTables) {
         for (let i = 0; i < occupiedTables.length; i++) {
           if (table.id == occupiedTables[i].id && typeof(table.capacity) == "number") {
-            table.capacity = "Ocupada [X] " + table.capacity
+            table.capacity = "Ocupada [X] | " + table.capacity
           }
         }
       }
