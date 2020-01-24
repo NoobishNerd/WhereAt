@@ -382,6 +382,18 @@ export default new Vuex.Store({
       }
       localStorage.setItem("bookingHistory",JSON.stringify( state.bookingHistory))    
     },
+
+    AUTHORIZE_COMMENT(state, payload){
+      for (let reservation of state.bookingHistory) {
+        if (reservation.date == payload.date && reservation.hour == payload.hour && 
+          reservation.id_client == payload.id_client && reservation.id_restaurant == payload.id_restaurant 
+          && reservation.num_people.id == payload.tableId) {
+          reservation.presence = true
+          alert(reservation.presence)
+        }
+      }
+      localStorage.setItem("bookingHistory",JSON.stringify( state.bookingHistory))    
+    },
     
     CREATE_BASE(state) {
       if(localStorage.getItem("loggedUser")){
