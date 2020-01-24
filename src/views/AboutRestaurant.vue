@@ -6,24 +6,21 @@
         <img id="fotoRestaurante" :src="restaurant.profilePic" class="pb-2 img-fluid" />
       </div>
       <div class="col-sm-1"></div>
-      <div id="windowCarrousel" class="col-sm-6 text-center img-thumbnail img-fluid">
+      <div v-if="restaurant.album.length != 0" id="windowCarrousel"
+        class="col-sm-6 text-center img-thumbnail img-fluid">
         <h5 class="font-weight-bold">Fotos do restaurante</h5>
+
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
           <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              <li v-for="photo in restaurant.album" v-bind:key="photo.id" data-target="#carouselExampleIndicators" :data-slide-to="photo.id" :class="{ active: photo.id==0 }"></li>
           </ol>
           <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img class="d-block w-100 img-fluid" src="../assets/banana.jpg" alt="First slide" />
+
+            <div class="carousel-item" v-for="photo in restaurant.album" v-bind:key="photo.id + photo.url"
+              :class="{ active: photo.id==0 }">
+              <img :src="photo.url" class="d-block w-100 img-fluid" :alt="'slide ' + photo.id">
             </div>
-            <div class="carousel-item">
-              <img class="d-block w-100 img-fluid" src="../assets/circunvalacao-9.jpg" alt="Second slide" />
-            </div>
-            <div class="carousel-item">
-              <img class="d-block w-100 img-fluid" src="../assets/banana.jpg" alt="Third slide" />
-            </div>
+
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -34,6 +31,10 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
+
+      </div>
+      <div v-else>
+        <h5>Nenhuma photo foi carregada</h5>
       </div>
     </div>
     <div class="row ">
@@ -41,29 +42,29 @@
         <div class="row">
           <div class="col-sm-5">
             <form v-on:submit.prevent="reservation()">
-            <h5>Hora:</h5>
-            <input @input="getAvailableTables" v-model="hour" required type="time" />
-            <br />
-            <br />
-            <input @input="getAvailableTables" required v-model="date" type="date" id="start" name="start" />
-            <br />
-            <br />
-            <button type="submit"
-              v-if="this.$store.state.logged == true && this.$store.state.loggedUser.type == 'client'"
-              id="smallerButton">Reservar</button>
-            <h5 v-if="this.$store.state.logged == false">Precisa de estar ligado para fazer reservas</h5>
-            <h5 v-if="this.$store.state.loggedUser.type == 'restaurant'">Contas restaurantes não podem fazer reservas.
-              Por favor crie uma conta cliente para si.</h5>
+              <h5>Hora:</h5>
+              <input @input="getAvailableTables" v-model="hour" required type="time" />
+              <br />
+              <br />
+              <input @input="getAvailableTables" required v-model="date" type="date" id="start" name="start" />
+              <br />
+              <br />
+              <button type="submit"
+                v-if="this.$store.state.logged == true && this.$store.state.loggedUser.type == 'client'"
+                id="smallerButton">Reservar</button>
+              <h5 v-if="this.$store.state.logged == false">Precisa de estar ligado para fazer reservas</h5>
+              <h5 v-if="this.$store.state.loggedUser.type == 'restaurant'">Contas restaurantes não podem fazer reservas.
+                Por favor crie uma conta cliente para si.</h5>
             </form>
           </div>
-          
+
           <div class="col-sm-7">
             <h5>Mesas:</h5>
             <div class="form-group">
-              <select size="6" v-if="availableTables.length && restaurant.available" class="form-control"
-                id="sltTables" v-model="selectedTable">
-                
-                <option  v-for="table in availableTables" v-bind:key="table.id" > Mesa {{table.id + 1}} |
+              <select size="6" v-if="availableTables.length && restaurant.available" class="form-control" id="sltTables"
+                v-model="selectedTable">
+
+                <option v-for="table in availableTables" v-bind:key="table.id"> Mesa {{table.id + 1}} |
                   {{table.capacity}} pessoas</option>
               </select>
               <div v-else>
@@ -82,31 +83,30 @@
     </div>
     <br />
 
-      <div id="finalCrate" class="row d-flex">
-        <div @click="call('menu')" id="menu" class="col-sm-3 pt-3" style="border-bottom-lg light:1px; cursor:pointer">
-          <h5 class="font-weight-bold">Ementa</h5>
-        </div>
-        <div @click="call('promos')" id="promotion" class="col-sm-3 pt-3"
-          style="border-bottom-lg light:1px solid black; border-left-lg light:1px; cursor:pointer">
-          <h5 class="font-weight-bold">Promoções</h5>
-        </div>
-        <div @click="call('comments')" id="comentary" class="col-sm-3 pt-3 font-weight-bold "
-          style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
-          <h5 class="font-weight-bold">Comentários</h5>
-        </div>
-        <div class="col-sm-1" style="border-left-lg light:1px"></div>
-        <div @click="call('info')" id="information" class="col-sm-2 pt-2 " style="border-bottom-lg light:1px; border-left-lg light:3px; cursor:pointer">
-          <h1 class="text-center font-weight-bold">i</h1>
-        </div>
-        <AddComment :restaurant="restaurant" v-show="component == 'comments'"> </AddComment>
-        <Comments v-show="component == 'comments'" 
-                v-for="comment in restaurant.comments"
-                v-bind:comment="comment"
-                v-bind:key="comment.username"></Comments>
-        <PromotionEditor v-show="component == 'promos'"></PromotionEditor>
-        <DisplayMenu :restaurant="restaurant" v-show="component == 'menu'"></DisplayMenu>
-        <DisplayInfo :restaurant="restaurant" v-show="component == 'info'"></DisplayInfo>
+    <div id="finalCrate" class="row d-flex">
+      <div @click="call('menu')" id="menu" class="col-sm-3 pt-3" style="border-bottom-lg light:1px; cursor:pointer">
+        <h5 class="font-weight-bold">Ementa</h5>
       </div>
+      <div @click="call('promos')" id="promotion" class="col-sm-3 pt-3"
+        style="border-bottom-lg light:1px solid black; border-left-lg light:1px; cursor:pointer">
+        <h5 class="font-weight-bold">Promoções</h5>
+      </div>
+      <div @click="call('comments')" id="comentary" class="col-sm-3 pt-3 font-weight-bold "
+        style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
+        <h5 class="font-weight-bold">Comentários</h5>
+      </div>
+      <div class="col-sm-1" style="border-left-lg light:1px"></div>
+      <div @click="call('info')" id="information" class="col-sm-2 pt-2 "
+        style="border-bottom-lg light:1px; border-left-lg light:3px; cursor:pointer">
+        <h1 class="text-center font-weight-bold">i</h1>
+      </div>
+      <AddComment :restaurant="restaurant" v-show="component == 'comments'"> </AddComment>
+      <Comments v-show="component == 'comments'" v-for="comment in restaurant.comments" v-bind:comment="comment"
+        v-bind:key="comment.username"></Comments>
+      <PromotionEditor v-show="component == 'promos'"></PromotionEditor>
+      <DisplayMenu :restaurant="restaurant" v-show="component == 'menu'"></DisplayMenu>
+      <DisplayInfo :restaurant="restaurant" v-show="component == 'info'"></DisplayInfo>
+    </div>
   </div>
 </template>
 <script>
