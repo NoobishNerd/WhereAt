@@ -55,6 +55,10 @@ export default new Vuex.Store({
       return state.users.find(user => user.id == id)
     },
 
+    getReservsByRestId: (state) => (id) => {
+      return state.bookingHistory.filter(reservation => reservation.id_restaurant == id)
+    },
+
     getSearchResults: (state) => (searchText) => {
       return state.restaurants.filter(restaurant => restaurant.username.toLowerCase().includes(searchText.toLowerCase())) /*|| restaurant.adress.includes(searchText) || restaurant.local.includes(searchText))*/  //tags not implemented || restaurant.tags == searchText
     },
@@ -366,12 +370,18 @@ export default new Vuex.Store({
       alert("Pedido Enviado")
       localStorage.setItem("bookingHistory",JSON.stringify( state.bookingHistory))    
     },
-/*
+
     MANAGE_RESERVATION(state, payload){
-      payload = payload;
-      alert("HOI")
+      for (let reservation of state.bookingHistory) {
+        if (reservation.date == payload.date && reservation.hour == payload.hour && 
+          reservation.id_client == payload.id_client && reservation.id_restaurant == payload.id_restaurant 
+          && reservation.num_people.id == payload.tableId) {
+          reservation.confirmation = payload.action
+          alert(reservation.confirmation)
+        }
+      }
       localStorage.setItem("bookingHistory",JSON.stringify( state.bookingHistory))    
-    },*/
+    },
     
     CREATE_BASE(state) {
       if(localStorage.getItem("loggedUser")){

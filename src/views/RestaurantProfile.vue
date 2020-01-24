@@ -46,7 +46,7 @@
                 </div>
               </div>
             </div>
-            <RestaurantHistory v-if="component == 'history'"> </RestaurantHistory>
+            <RestaurantHistory :id="restaurant.id" v-if="component == 'history'"> </RestaurantHistory>
             <RestaurantVacations :restaurant="restaurant" v-if="component == 'vacations'"> </RestaurantVacations>
           </div>
         </div>
