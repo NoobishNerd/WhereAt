@@ -69,22 +69,31 @@ export default new Vuex.Store({
 
 
     getAvailableTables: (state) => (date, id, tables) => {
-      let availableTables = tables
-      let occupiedTables = []
-    
-      for (const reservation of state.bookingHistory) {
-        //se estiver confirmada & for à mesma hora no mesmo restaurante
-        if(reservation.confirmation == "c" && reservation.id_restaurant == id && reservation.date == date ){
-          occupiedTables.push(reservation.num_people)
-        }
-      }
-      for (let table of availableTables) {
-        for (let i = 0; i < occupiedTables.length; i++) {
-          if (table.id == occupiedTables[i].id && typeof(table.capacity) == "number") {
-            table.capacity = "Ocupada [X] | " + table.capacity
+      let availableTables = []
+      let forBreak = false // se deve acontecer um "break" (sair do primeiro for de reservas)
+
+      for (let table of tables) {
+        alert("table: " + JSON.stringify(table))
+        for (const reservation of state.bookingHistory) {
+          alert("reservation: " + JSON.stringify(reservation))
+          alert(table.id +" vs "+ reservation.sltdTable.id)
+          if(forBreak == false && String(table.id) == String(reservation.sltdTable.id) && reservation.confirmation == "c" 
+            && reservation.date == date && reservation.id_restaurant == id){
+            alert("mesa ocupada")
+            availableTables.push({id: table.id, capacity: 0})//estando a mesa ocupada adiciona-se com capcidade 0
+            forBreak = true
           }
         }
+
+        if(forBreak == true){ 
+          alert("mesa ocupada ja adicionada seguindo pa frente")
+          forBreak = false
+        }else{
+          alert("adicionar table: " + JSON.stringify(table))
+          availableTables.push({id: table.id, capacity: table.capacity})
+        } //adicionar mesa normalmente se n existir reserva confirmada com ela
       }
+      alert(JSON.stringify( availableTables))
       return availableTables
     }
   },
@@ -221,6 +230,22 @@ export default new Vuex.Store({
       }
     },
 
+    ADD_PHOTO(state, payload) {
+      let newId
+      for (let restaurant of state.restaurants){
+        if (restaurant.id == payload.id){
+          
+          newId = (restaurant.album.length != 0) ? restaurant.album[restaurant.album.length-1].id + 1 : 0 ;
+          restaurant.album.push({
+            id: newId,
+            url: payload.url
+          })
+          alert("Foto Adicionada!")
+        }
+      }
+      localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
+    },
+
     ADD_ITEM(state, payload) {
       for (let restaurant of state.restaurants){
         if (restaurant.id == payload.restaurantId){
@@ -336,6 +361,7 @@ export default new Vuex.Store({
         }
       }
       state.users = newUserArray
+      localStorage.setItem("users", JSON.stringify(state.users))
     },
 
     CHANGE_USER_IMG(state, payload) {
@@ -382,7 +408,7 @@ export default new Vuex.Store({
         hour: payload.hour,
         date: payload.date,
         dateOfRes: payload.dateOfRes, 
-        num_people: payload.num_people,
+        sltdTable: payload.sltdTable,
         presence: payload.presence,
         confirmation: payload.confirmation
       })
@@ -394,7 +420,7 @@ export default new Vuex.Store({
       for (let reservation of state.bookingHistory) {
         if (reservation.date == payload.date && reservation.hour == payload.hour && 
           reservation.id_client == payload.id_client && reservation.id_restaurant == payload.id_restaurant 
-          && reservation.num_people.id == payload.tableId) {
+          && reservation.sltdTable.id == payload.tableId) {
           reservation.confirmation = payload.action
           alert(reservation.confirmation)
         }
@@ -406,7 +432,7 @@ export default new Vuex.Store({
       for (let reservation of state.bookingHistory) {
         if (reservation.date == payload.date && reservation.hour == payload.hour && 
           reservation.id_client == payload.id_client && reservation.id_restaurant == payload.id_restaurant 
-          && reservation.num_people.id == payload.tableId) {
+          && reservation.sltdTable.id == payload.tableId) {
           reservation.presence = true
           alert(reservation.presence)
         }
@@ -422,7 +448,44 @@ export default new Vuex.Store({
         }
       }
 
-      if(localStorage.getItem("bookingHistory")){
+      if(!localStorage.getItem("bookingHistory")){
+        state.bookingHistory = [
+          {
+            id_restaurant: 0,
+            id_client: 1,
+            hour: "23:59",
+            date: "2020-12-31",
+            dateOfRes: "15:15  24/1/2020",
+            sltdTable: {id: 0, capacity: 4},
+            presence: false,
+            confirmation: "c"
+          },
+          {
+            id_restaurant: 0,
+            id_client: 1,
+            hour: "23:59",
+            date: "2020-12-31",
+            dateOfRes: "15:15  24/1/2020",
+            sltdTable: {id: 0, capacity: 4},
+            presence: false,
+            confirmation: "p"
+          },
+          {
+            id_restaurant: 0,
+            id_client: 1,
+            hour: "23:59",
+            date: "2020-12-31",
+            dateOfRes: "15:15  24/1/2020",
+            sltdTable: {id: 0, capacity: 4},
+            presence: false,
+            confirmation: "d"
+          },
+        ];
+
+        localStorage.setItem("bookingHistory", JSON.stringify(state.bookingHistory))
+
+
+      }else{
         if(localStorage.getItem("bookingHistory") != ""){
           state.bookingHistory = JSON.parse(localStorage.getItem("bookingHistory"))
         }
@@ -492,7 +555,6 @@ export default new Vuex.Store({
                 capacity: 3
               },
             ],
-            reservations: [],
             phone: ""
           },
           {
@@ -513,7 +575,6 @@ export default new Vuex.Store({
             tags: [],
             menu: [],
             tables: [],
-            reservations: [],
             phone: "91199porfavornaumincomode"
           },
           {
@@ -534,7 +595,6 @@ export default new Vuex.Store({
             tags: [],
             menu: [],
             tables: [],
-            reservations: [],
             phone: "91199porfavornaumincomode"
           }
         ];

@@ -43,10 +43,9 @@
           <div class="col-sm-5">
             <form v-on:submit.prevent="reservation()">
               <h5>Hora:</h5>
-              <input @input="getAvailableTables" v-model="hour" required type="time" />
-              <br />
-              <br />
-              <input @input="getAvailableTables" required v-model="date" type="date" id="start" name="start" />
+              <input  v-model="hour" required type="time" />
+              <input  required v-model="date" type="date" id="start" name="start" />
+              <input @click="updateAvailableTables" type="button" value="Ver mesas disponiveis">
               <br />
               <br />
               <button type="submit"
@@ -64,8 +63,9 @@
               <select size="6" v-if="availableTables.length && restaurant.available" class="form-control" id="sltTables"
                 v-model="selectedTable">
 
-                <option v-for="table in availableTables" v-bind:key="table.id"> Mesa {{table.id + 1}} |
-                  {{table.capacity}} pessoas</option>
+                <option v-for="table in availableTables" v-bind:key="table.id"> <p v-if="table.capacity != 0">
+                  Mesa {{table.id + 1}} | {{table.capacity}} pessoas </p> <p v-if="table.capacity == 0">
+                  Mesa {{table.id + 1}} | [X] Ocupada </p></option>
               </select>
               <div v-else>
                 <h5>De momento o restaurante não está disponivel para reservas... :(</h5>
@@ -137,12 +137,6 @@ export default {
       this.availableTables = this.restaurant.tables
     },
 
-    updated: function () {
-      if (this.selectedTable != "") {
-        this.getObjectTable();
-      }
-    },
-
     methods: {
       call(newComponent) {
         this.component = newComponent;
@@ -154,8 +148,6 @@ export default {
       },
 
       renderMap() {
-        alert("renderMap")
-        
         this.map = new google.maps.Map(document.querySelector("#myMap"), {
           center: {
             lat: -34.397,
@@ -164,12 +156,11 @@ export default {
           zoom: 8
         });
         this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
-
-        alert(this.map)
       },
 
 
       reservation() {
+        this.updateAvailableTables();
         //fazer check se está logged in ou fazer v-if para n haver opção de reserva caso n esteja autenticado ou seja um restaurante
         if (this.checkAvailability() && this.selectedTable != "") {
           this.$store.commit("ADD_RESERVATION", {
@@ -178,30 +169,28 @@ export default {
             hour: this.hour,
             date: this.date,
             dateOfRes: this.getSystemDate(), //buscar data atual
-            num_people: this.selectedTableReady,
+            sltdTable: this.selectedTableReady,
             presence: false,
             confirmation: "p"
           })
-          this.getAvailableTables();
+          this.updateAvailableTables();
         } else if (this.selectedTable == "") {
           alert("Por favor selecione uma mesa")
         }
 
       },
 
-      getAvailableTables() {
+      updateAvailableTables() {
         if (this.date != undefined) {
-          alert("i")
-          this.availableTables = this.$store.getters.getAvailableTables(this.date, this.restaurant.id,
-            this.restaurant.tables)
+          this.availableTables = this.$store.getters.getAvailableTables(this.date, this.restaurant.id, this.restaurant.tables)
         }
-        
+        alert(JSON.stringify(this.availableTables))
       },
 
       checkAvailability() {
-        this.getAvailableTables();
-        this.getObjectTable();
-        if (typeof (this.selectedTableReady.capacity) == "string") {
+        this.updateAvailableTables();
+        this.updateObjectTable();
+        if (this.selectedTableReady.capacity == 0) {
           alert("A mesa selecionada não está disponivel")
           return false
         } else {
@@ -211,26 +200,21 @@ export default {
 
 
 
-      getObjectTable() {
-        if (this.selectedTable.includes("Ocupada")) {
-          this.selectedTableReady = {
-            id: -1,
-            capacity: "occupied"
-          }
-        } else {
-          let start = this.selectedTable.indexOf(" ") + 1
-          let end = this.selectedTable.indexOf("|") - 1
-          let selectedId = parseInt(this.selectedTable.slice(start, end)) - 1
+      updateObjectTable() {
 
-          for (const table of this.availableTables) {
-            if (table.id == selectedId && typeof (table.capacity) == "number") {
-              this.selectedTableReady = {
-                id: selectedId,
-                capacity: table.capacity
-              }
+        let start = this.selectedTable.indexOf(" ") + 1
+        let end = this.selectedTable.indexOf("|") - 1
+        let selectedId = parseInt(this.selectedTable.slice(start, end)) - 1
+
+        for (const table of this.availableTables) {
+          if (table.id == selectedId && table.capacity != 0) {
+            this.selectedTableReady = {
+              id: selectedId,
+              capacity: table.capacity
             }
           }
         }
+
 
 
       }

@@ -43,12 +43,12 @@
     </div>
     <div class="row">
       <div class="col-sm-5">
-        <button @click="replaceRouteProfile" id="manageBtn" type="button" class="btn btn-block">Gerir Reservas</button>
+        <button @click="replaceRouteProfile()" id="manageBtn" type="button" class="btn btn-block">Gerir Reservas</button>
       </div>
       <div class="col-sm-1">
       </div>
       <div class="col-sm-6">
-        <button id="addPhotoBtn" type="button" class="btn btn-block">Adicionar Foto</button>
+        <button @click="addPhoto()" id="addPhotoBtn" type="button" class="btn btn-block">Adicionar Foto</button>
       </div>
     </div>
     <div class="row ">
@@ -133,6 +133,20 @@ export default {
         }
       });
     },
+
+
+    addPhoto() {
+      let newPhoto = prompt("Link da imagem:")
+      if (newPhoto != "") {
+        this.$store.commit("ADD_PHOTO", {
+          id: this.$route.params.id,
+          url: newPhoto
+        })
+      } else {
+        alert("Coloque o link da imagem!")
+      }
+    },
+
 
     removePhoto(id) {
       this.$store.commit("REMOVE_PHOTO", {
