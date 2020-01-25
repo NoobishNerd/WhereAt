@@ -160,7 +160,6 @@ export default {
 
 
       reservation() {
-        this.updateAvailableTables();
         //fazer check se está logged in ou fazer v-if para n haver opção de reserva caso n esteja autenticado ou seja um restaurante
         if (this.checkAvailability() && this.selectedTable != "") {
           this.$store.commit("ADD_RESERVATION", {
@@ -181,9 +180,9 @@ export default {
       },
 
       updateAvailableTables() {
-        if (this.date != undefined) {
-          this.availableTables = this.$store.getters.getAvailableTables(this.date, this.restaurant.id, this.restaurant.tables)
-        }
+       
+        this.availableTables = this.$store.getters.getAvailableTables(this.date, this.restaurant.id, this.restaurant.tables)
+  
         alert(JSON.stringify(this.availableTables))
       },
 
@@ -207,7 +206,7 @@ export default {
         let selectedId = parseInt(this.selectedTable.slice(start, end)) - 1
 
         for (const table of this.availableTables) {
-          if (table.id == selectedId && table.capacity != 0) {
+          if (table.id == selectedId) {
             this.selectedTableReady = {
               id: selectedId,
               capacity: table.capacity

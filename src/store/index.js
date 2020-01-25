@@ -76,8 +76,7 @@ export default new Vuex.Store({
         alert("table: " + JSON.stringify(table))
         for (const reservation of state.bookingHistory) {
           alert("reservation: " + JSON.stringify(reservation))
-          alert(table.id +" vs "+ reservation.sltdTable.id)
-          if(forBreak == false && String(table.id) == String(reservation.sltdTable.id) && reservation.confirmation == "c" 
+          if(forBreak == false && table.id == reservation.sltdTable.id && reservation.confirmation == "c" 
             && reservation.date == date && reservation.id_restaurant == id){
             alert("mesa ocupada")
             availableTables.push({id: table.id, capacity: 0})//estando a mesa ocupada adiciona-se com capcidade 0
