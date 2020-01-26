@@ -534,7 +534,8 @@ export default new Vuex.Store({
             info: "descritivo do restaurante",
             album: [{id: 0, url:"https://i.imgur.com/hym8WuD.jpg"}, {id: 1, url:"https://i.imgur.com/MuH4mfH.jpg"}, {id: 2, url:"https://i.imgur.com/s6dX9yF.jpg"}, {id: 3, url:"https://i.imgur.com/tfEis8D.jpg"}],
             promotions: [],
-            comments: [{id: 0, username:"Best Girl Vibe Check" , profilePic: "https://cdn.discordapp.com/attachments/640604184965677072/665652451877322762/25a39n98i7a41.png", rate: 5, text: "Nice place, i bet they make a lot of money", userId:42}],
+            comments: [{id: 0, username:"Best Girl Vibe Check" , profilePic: "https://cdn.discordapp.com/attachments/640604184965677072/665652451877322762/25a39n98i7a41.png", rate: 5, text: "Nice place, I bet they make a lot of money", userId:42},
+            {id: 1, username:"ZéBitzz" , profilePic: "https://avatars2.githubusercontent.com/u/44086730?s=400&v=4", rate: 2, text: "O site feio e eu aqui", userId:43}],
             tags: [],
             menu: [],
             tables: [{
