@@ -126,12 +126,12 @@ export default {
       });
       this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
       const geocoder = new google.maps.Geocoder();
-      this.geocodeAdress(geocoder, this.map)
+      this.geocodeAddress(geocoder, this.map)
     },
 
-    geocodeAdress(geocoder, resultsMap){
-      const adress = this.restaurant.adress + ", " + this.restaurant.postalCode + " " + this.restaurant.local;
-      geocoder.geocode({ 'address': adress},
+    geocodeAddress(geocoder, resultsMap){
+      const address = this.restaurant.address + ", " + this.restaurant.postalCode + " " + this.restaurant.local;
+      geocoder.geocode({ 'address': address},
       (results, status) => {
         if (status === 'OK') {
           resultsMap.setCenter(results[0].geometry.location);
