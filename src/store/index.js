@@ -59,6 +59,11 @@ export default new Vuex.Store({
       return state.bookingHistory.filter(reservation => reservation.id_restaurant == id)
     },
 
+    getReservsByClntId: (state) => (id) => {
+      alert("tell me why")
+      return state.bookingHistory.filter(reservation => reservation.id_client == id)
+    },
+
     getSearchResults: (state) => (searchText) => {
       return state.restaurants.filter(restaurant => restaurant.username.toLowerCase().includes(searchText.toLowerCase())) /*|| restaurant.adress.includes(searchText) || restaurant.local.includes(searchText))*/  //tags not implemented || restaurant.tags == searchText
     },
