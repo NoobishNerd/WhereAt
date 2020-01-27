@@ -1,21 +1,13 @@
 <template>
-  <div class="card-group" style="width: 30rem">
+  <div class="card-group" style="width: 30rem; cursor:pointer">
     <div class="container-fluid">
       <div class="card img-thumbnail">
         <img class="card-img-top img-fluid" style="height: 20vw; object-fit: cover" :src="restaurant.profilePic" alt="Card image cap" @click="getAboutRestaurant" />
         <div class="card-body">
           <h6 class="card-title text-left">{{restaurant.local}}</h6>
-          <h4 class="card-title text-left font-weight-bold">
-           {{restaurant.username}}
-          </h4>
-          <p class="card-text text-left">
-            <small>
-              Preço médio:25€
-            </small>
-          </p>
-          <p class="card-text text-left">
-            <small>{{rate}}-{{num_comments}} avaliações</small>
-          </p>
+          <h4 class="card-title text-left font-weight-bold" id="restaurantCardName">{{restaurant.username}}</h4>
+          <p class="card-text text-left">Tag Principal</p>
+          <p class="card-text text-left">{{rate}} | {{num_comments}} avaliações</p>
         </div>
       </div>
     </div>
@@ -37,7 +29,13 @@ export default {
       required: true
     }
   },
-  //COMO FAÇO ISTO EM ROUTER-LINK TO=""???
+  
+  mounted: function() {
+    if (this.restaurant.comments.length != 0){
+      this.getAverageAndNumber()
+    }
+  },
+
   methods: {
     getAboutRestaurant() {
       this.$router.push({
@@ -47,8 +45,10 @@ export default {
     },
 
     getAverageAndNumber(){
-      //counting number of comments and sum of ratings
-       for (let i = 0; i < this.restaurant.comments.length; i++) {this.num_comments++; this.rate+= this.comments[i].rate}
+      for (let comment of this.restaurant.comments){
+        this.num_comments ++
+        this.rate += comment.rate
+      }
       //average de ratings
       this.rate = this.rate/this.num_comments
     }
@@ -69,26 +69,25 @@ export default {
   margin-top: 5px;
 }
 .card {
-
-  border-width: 1px;
-  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
-  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
-
   padding-top: 3px;
+  border: 0px;
+  border-radius: 0px;
 }
 .container-fluid {
   padding: 0px;
 }
 p {
-  color: #f17526;
+  color: black;
   margin: 0px;
 }
 h6 {
-  color: #f17526;
+  color: black;
   margin: 0px;
 }
 h4 {
   margin: 0px;
+}
+#restaurantCardName{
+  color: #f17526;
 }
 </style>
