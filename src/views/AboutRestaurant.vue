@@ -3,12 +3,12 @@
     <div class="row">
       <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
         <h5 class="pt-2 font-weight-bold"></h5>
-        <img id="fotoRestaurante" :src="restaurant.profilePic" class="pb-2 img-fluid" />
+        <img id="fotoRestaurante" :src="restaurant.profilePic" class="pb-3 img-fluid" style="height: 17vw; object-fit: cover"/>
       </div>
       <div class="col-sm-1"></div>
       <div v-if="restaurant.album.length != 0" id="windowCarrousel"
         class="col-sm-6 text-center img-thumbnail img-fluid">
-        <h5 class="font-weight-bold">Fotos do restaurante</h5>
+        <h5 class="font-weight-bold pt-1">Fotos do restaurante</h5>
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
           <ol class="carousel-indicators">
