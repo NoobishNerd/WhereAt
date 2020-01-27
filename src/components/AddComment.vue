@@ -14,49 +14,49 @@
         <div class="row">
             <div class="col-sm-1 pr-0">
             </div>
-                <div v-if="newRating == ''" class="col-sm-9 pl-0" style="cursor: pointer">
+                <div v-if="newRating == ''" class="col-sm-8 pl-0" style="cursor: pointer">
                     <img @click="ratingStar(1)" src="../assets/Star.png" width="30px">
                     <img @click="ratingStar(2)" src="../assets/Star.png" width="30px">
                     <img @click="ratingStar(3)" src="../assets/Star.png" width="30px">
                     <img @click="ratingStar(4)" src="../assets/Star.png" width="30px">
                     <img @click="ratingStar(5)" src="../assets/Star.png" width="30px">
                 </div>
-                <div v-if="newRating == 1" class="col-sm-9 pl-0" style="cursor: pointer">
+                <div v-if="newRating == 1" class="col-sm-8 pl-0" style="cursor: pointer">
                     <img @click="ratingStar(1)" src="../assets/Star Colored.png" width="30px">
                     <img @click="ratingStar(2)" src="../assets/Star.png" width="30px">
                     <img @click="ratingStar(3)" src="../assets/Star.png" width="30px">
                     <img @click="ratingStar(4)" src="../assets/Star.png" width="30px">
                     <img @click="ratingStar(5)" src="../assets/Star.png" width="30px">
                 </div>
-                <div v-if="newRating == 2" class="col-sm-9 pl-0" style="cursor: pointer" >
+                <div v-if="newRating == 2" class="col-sm-8 pl-0" style="cursor: pointer" >
                     <img @click="ratingStar(1)" src="../assets/Star Colored.png" width="30px">
                     <img @click="ratingStar(2)" src="../assets/Star Colored.png" width="30px">
                     <img @click="ratingStar(3)" src="../assets/Star.png" width="30px">
                     <img @click="ratingStar(4)" src="../assets/Star.png" width="30px">
                     <img @click="ratingStar(5)" src="../assets/Star.png" width="30px">
                 </div>
-                <div v-if="newRating == 3" class="col-sm-9 pl-0" style="cursor: pointer">
+                <div v-if="newRating == 3" class="col-sm-8 pl-0" style="cursor: pointer">
                     <img @click="ratingStar(1)" src="../assets/Star Colored.png" width="30px">
                     <img @click="ratingStar(2)" src="../assets/Star Colored.png" width="30px">
                     <img @click="ratingStar(3)" src="../assets/Star Colored.png" width="30px">
                     <img @click="ratingStar(4)" src="../assets/Star.png" width="30px">
                     <img @click="ratingStar(5)" src="../assets/Star.png" width="30px">
                 </div>
-                <div v-if="newRating == 4" class="col-sm-9 pl-0" style="cursor: pointer">
+                <div v-if="newRating == 4" class="col-sm-8 pl-0" style="cursor: pointer">
                     <img @click="ratingStar(1)" src="../assets/Star Colored.png" width="30px">
                     <img @click="ratingStar(2)" src="../assets/Star Colored.png" width="30px">
                     <img @click="ratingStar(3)" src="../assets/Star Colored.png" width="30px">
                     <img @click="ratingStar(4)" src="../assets/Star Colored.png" width="30px">
                     <img @click="ratingStar(5)" src="../assets/Star.png" width="30px">
                 </div>
-                <div v-if="newRating == 5" class="col-sm-9 pl-0" style="cursor: pointer">
+                <div v-if="newRating == 5" class="col-sm-8 pl-0" style="cursor: pointer">
                     <img @click="ratingStar(1)" src="../assets/Star Colored.png" width="30px">
                     <img @click="ratingStar(2)" src="../assets/Star Colored.png" width="30px">
                     <img @click="ratingStar(3)" src="../assets/Star Colored.png" width="30px">
                     <img @click="ratingStar(4)" src="../assets/Star Colored.png" width="30px">
                     <img @click="ratingStar(5)" src="../assets/Star Colored.png" width="30px">
                 </div>
-            <div class="col-sm-2">
+            <div class="col-sm-3 text-right">
                 <button @click="cancelComment" id="cancelBtn" class="mt-0 px-1 mr-2 py-1 ml-2">Cancelar</button>
                 <button v-if="newComment==''" @click="addComment" id="commentBtn" class="mt-0 px-2 py-1 mb-2" disabled>Comentar</button>
                 <button v-if="newComment!=''" @click="addComment" id="commentBtn" class="mt-0 px-2 py-1 mb-2">Comentar</button>

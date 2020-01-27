@@ -121,10 +121,31 @@ export default {
           lat: -34.397,
           lng: 150.644
         },
-        zoom: 8
+        zoom: 17,
+        mapTypeId: "roadmap"
       });
       this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+      const geocoder = new google.maps.Geocoder();
+      this.geocodeAdress(geocoder, this.map)
     },
+
+    geocodeAdress(geocoder, resultsMap){
+      const adress = this.restaurant.adress + ", " + this.restaurant.postalCode + " " + this.restaurant.local;
+      geocoder.geocode({ 'address': adress},
+      (results, status) => {
+        if (status === 'OK') {
+          resultsMap.setCenter(results[0].geometry.location);
+          new google.maps.Marker({
+            map: resultsMap,
+            position: results[0].geometry.location
+          });
+          resultsMap.setMapTypeId("roadmap")
+        } else {
+          alert("Geocode didn't work because of: " + status)
+        }
+      });
+    },
+
     replaceRouteProfile() {
       this.$router.replace({
         name: "restaurantProfile",
