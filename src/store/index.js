@@ -74,31 +74,18 @@ export default new Vuex.Store({
 
 
     getAvailableTables: (state) => (date, id, tables) => {
-      let availableTables = []
-      let forBreak = false // se deve acontecer um "break" (sair do primeiro for de reservas)
-
+    
       for (let table of tables) {
-        alert("table: " + JSON.stringify(table))
         for (const reservation of state.bookingHistory) {
-          alert("reservation: " + JSON.stringify(reservation))
-          if(forBreak == false && table.id == reservation.sltdTable.id && reservation.confirmation == "c" 
+          if(table.id == reservation.sltdTable.id && reservation.confirmation == "c" 
             && reservation.date == date && reservation.id_restaurant == id){
-            alert("mesa ocupada")
-            availableTables.push({id: table.id, capacity: 0})//estando a mesa ocupada adiciona-se com capcidade 0
-            forBreak = true
+            alert("mesa ocupada: " + table.id)
+            table.capacity = 0 //estando a mesa ocupada adiciona-se com capcidade 0
           }
         }
-
-        if(forBreak == true){ 
-          alert("mesa ocupada ja adicionada seguindo pa frente")
-          forBreak = false
-        }else{
-          alert("adicionar table: " + JSON.stringify(table))
-          availableTables.push({id: table.id, capacity: table.capacity})
-        } //adicionar mesa normalmente se n existir reserva confirmada com ela
       }
-      alert(JSON.stringify( availableTables))
-      return availableTables
+      
+      return tables
     }
   },
 
@@ -162,7 +149,6 @@ export default new Vuex.Store({
           tags: [],
           menu: [],
           tables: [],
-          reservations: []
         });
 
         //user agora está registado e o login é feito
