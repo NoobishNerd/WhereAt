@@ -59,6 +59,11 @@ export default new Vuex.Store({
       return state.bookingHistory.filter(reservation => reservation.id_restaurant == id)
     },
 
+    getReservsByClntId: (state) => (id) => {
+      alert("tell me why")
+      return state.bookingHistory.filter(reservation => reservation.id_client == id)
+    },
+
     getSearchResults: (state) => (searchText) => {
       return state.restaurants.filter(restaurant => restaurant.username.toLowerCase().includes(searchText.toLowerCase())) /*|| restaurant.adress.includes(searchText) || restaurant.local.includes(searchText))*/  //tags not implemented || restaurant.tags == searchText
     },
@@ -69,31 +74,18 @@ export default new Vuex.Store({
 
 
     getAvailableTables: (state) => (date, id, tables) => {
-      let availableTables = []
-      let forBreak = false // se deve acontecer um "break" (sair do primeiro for de reservas)
-
+    
       for (let table of tables) {
-        alert("table: " + JSON.stringify(table))
         for (const reservation of state.bookingHistory) {
-          alert("reservation: " + JSON.stringify(reservation))
-          if(forBreak == false && table.id == reservation.sltdTable.id && reservation.confirmation == "c" 
+          if(table.id == reservation.sltdTable.id && reservation.confirmation == "c" 
             && reservation.date == date && reservation.id_restaurant == id){
-            alert("mesa ocupada")
-            availableTables.push({id: table.id, capacity: 0})//estando a mesa ocupada adiciona-se com capcidade 0
-            forBreak = true
+            alert("mesa ocupada: " + table.id)
+            table.capacity = 0 //estando a mesa ocupada adiciona-se com capcidade 0
           }
         }
-
-        if(forBreak == true){ 
-          alert("mesa ocupada ja adicionada seguindo pa frente")
-          forBreak = false
-        }else{
-          alert("adicionar table: " + JSON.stringify(table))
-          availableTables.push({id: table.id, capacity: table.capacity})
-        } //adicionar mesa normalmente se n existir reserva confirmada com ela
       }
-      alert(JSON.stringify( availableTables))
-      return availableTables
+      
+      return tables
     }
   },
 
@@ -157,7 +149,6 @@ export default new Vuex.Store({
           tags: [],
           menu: [],
           tables: [],
-          reservations: []
         });
 
         //user agora está registado e o login é feito
@@ -526,7 +517,7 @@ export default new Vuex.Store({
             password: "chato",
             email: "yo@gmail.com",
             profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/671159178345054218/unknown.png",
-            adress: "Estrada Nacional 13, Lugar da Portas Fronhas",
+            address: "Estrada Nacional 13, Lugar da Portas Fronhas",
             approval: true,
             available: true,
             postalCode: "4480-739",
@@ -563,7 +554,7 @@ export default new Vuex.Store({
             password: "chato",
             email: "nah@gmail.com",
             profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/671159268887494686/unknown.png",
-            adress: "Vila del Conde",
+            address: "Vila del Conde",
             approval: false,
             available: false,
             postalCode: "4480-912",
@@ -583,7 +574,7 @@ export default new Vuex.Store({
             password: "x",
             email: "x@x",
             profilePic: "https://dictionary.cambridge.org/pt/images/thumb/house_noun_002_18270.jpg?version=5.0.65",
-            adress: "Vila del Conde",
+            address: "Vila del Conde",
             approval: false,
             available: true,
             postalCode: "4480-912",

@@ -30,9 +30,7 @@ export default {
     this.available = this.$store.getters.getRestaurantById(this.id).available
     
   },
-  updated: function(){
-    this.updateText()
-  },
+  
 
   methods: {
     goOnVacation(){
@@ -44,7 +42,7 @@ export default {
       else if (this.available == false){
         this.available = true
       }
-      this.updateText()
+      
     }
   }
 }

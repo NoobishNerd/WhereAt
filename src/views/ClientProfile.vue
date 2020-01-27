@@ -49,7 +49,7 @@
             </div>
             <ClientInfo :user="user" v-if="component == 'info'"> </ClientInfo>
             <input @click="getAdminAuth" v-if="component == 'history' && user.admin == true" type="button" value="Autorizar Restaurants">
-            <ClientHistory :id="user.id" v-if="component == 'history'"> </ClientHistory>
+            <ClientHistory :id="Number(user.id)" v-if="component == 'history'"> </ClientHistory>
           </div>
         </div>
       </div>
