@@ -1,5 +1,6 @@
 <template>
     <div class="container-fluid">
+        <div v-if="this.$store.state.logged == true">
         <div class="row mt-3">
             <div class="col-sm-1">
                 <img class="mt-2 ml-1" :src="loggedUser.profilePic" style="object-fit: cover" width="60" height="60">
@@ -58,11 +59,15 @@
                 </div>
             <div class="col-sm-3 text-right">
                 <button @click="cancelComment" id="cancelBtn" class="mt-0 px-1 mr-2 py-1 ml-2">Cancelar</button>
-                <button v-if="newComment==''" @click="addComment" id="commentBtn" class="mt-0 px-2 py-1 mb-2" disabled>Comentar</button>
+                <button v-if="newComment==''" @click="addComment" id="commentBtn" class="mt-0 px-2 py-1 mb-2" disabled style="cursor:not-allowed">Comentar</button>
                 <button v-if="newComment!=''" @click="addComment" id="commentBtn" class="mt-0 px-2 py-1 mb-2">Comentar</button>
             </div>
         </div>
-        <hr>
+    </div>
+    <div v-else class="row mt-3">
+        <h5 class="text-center mt-2">Precisa de estar autenticado para comentar!</h5>
+    </div>
+    <hr>
     </div>
 </template>
 <script>
@@ -98,20 +103,29 @@
             addComment() {
                 if (this.newRating == ""){
                     alert("Por favor avalie o restaurante!")
-                } 
+                }
                 else if (this.loggedUser.type == "restaurant"){
                     alert("Contas restaurante não podem comentar")                    
                 }
                 else{
-                    this.$store.commit("ADD_COMMENT", {
-                    id: this.getLastCommentId(),
-                    text: this.newComment,
-                    rate: this.newRating,
-                    userId: this.loggedUser.id,
-                    restaurantId: this.restaurant.id,
-                    date: this.getSystemDate()
+                    if(this.$store.getters.getCommentAuth(this.loggedUser.id, this.restaurant.id) == true){
+                        this.$store.commit("ADD_COMMENT", {
+                        commentId: this.getLastCommentId(),
+                        text: this.newComment,
+                        rate: this.newRating,
+                        userId: this.loggedUser.id,
+                        username: this.loggedUser.username,
+                        profilePic: this.loggedUser.profilePic,
+                        restaurantId: this.restaurant.id,
+                        date: this.getSystemDate()
                     })
+                    }
+                    else {
+                        alert("Não tem permissão para comentar, precisa de visitar o restaurante!")
+                    }
                 }
+                this.newComment = "";
+                this.newRating = "";
             },
 
             getSystemDate() {
