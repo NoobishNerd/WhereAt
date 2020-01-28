@@ -74,8 +74,9 @@ export default new Vuex.Store({
 
 
     getAvailableTables: (state) => (date, id, tables) => {
+      let availableTables = tables
     
-      for (let table of tables) {
+      for (let table of availableTables) {
         for (const reservation of state.bookingHistory) {
           if(table.id == reservation.sltdTable.id && reservation.confirmation == "c" 
             && reservation.date == date && reservation.id_restaurant == id){
@@ -85,7 +86,7 @@ export default new Vuex.Store({
         }
       }
       
-      return tables
+      return availableTables
     },
 
     getCommentAuth: (state) => (userId, restaurantId) => {
