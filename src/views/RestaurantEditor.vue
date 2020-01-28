@@ -1,4 +1,5 @@
 <template>
+
   <div class="container">
     <div class="row">
       <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
@@ -365,5 +366,8 @@ html * {
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+}
+template{
+  background-image: url("../assets/backgroundTempDark.png");
 }
 </style>

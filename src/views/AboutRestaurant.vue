@@ -38,17 +38,19 @@
       </div>
     </div>
     <div class="row ">
-      <div id="windowReservation" class="col-sm-6 img-thumbnail">
+      <div id="windowReservation" class="col-sm-6 pt-0">
         <div class="row">
-          <div class="col-sm-5">
+          <div class="col-sm-6 pt-0">
             <form v-on:submit.prevent="reservation()">
-              <h5>Hora:</h5>
-              <input  v-model="hour" required type="time" />
-              <input  required v-model="date" type="date" id="start" name="start" />
-              <input @click="updateAvailableTables" type="button" value="Ver mesas disponiveis">
+              <h4>Hora:</h4>
+              <input class="mt-2 mb-3" v-model="hour" required type="time" />
+              <input class="mb-3" required v-model="date" type="date" id="start" name="start" />
+              <input class="mt-2 mb-5 py-2 px-2 ml-0" @click="updateAvailableTables" type="button" value="Ver mesas disponiveis" id="reservationBtn">
               <br />
               <br />
-              <button type="submit"
+              <br/>
+              <b  r>
+              <button type="submit" class="py-2 px-5 pl-0 ml-0 mt-5"
                 v-if="this.$store.state.logged == true && this.$store.state.loggedUser.type == 'client'"
                 id="smallerButton">Reservar</button>
               <h5 v-if="this.$store.state.logged == false">Precisa de estar ligado para fazer reservas</h5>
@@ -57,10 +59,10 @@
             </form>
           </div>
 
-          <div class="col-sm-7">
-            <h5>Mesas:</h5>
-            <div class="form-group">
-              <select size="6" v-if="availableTables.length && restaurant.available" class="form-control" id="sltTables"
+          <div class="col-sm-6 pb-4">
+            <h4>Mesas:</h4>
+            <div  class="form-group">
+              <select size="17" v-if="availableTables.length && restaurant.available" class="form-control" id="sltTables"
                 v-model="selectedTable">
 
                 <option v-for="table in availableTables" v-bind:key="table.id"> <p v-if="table.capacity != 0">
@@ -238,9 +240,7 @@ img {
   margin-top: 50px;
 }
 
-html * {
-  color: #f17526;
-}
+
 #smallerButton {
   background-color: #f17526;
   border: none;
@@ -333,4 +333,27 @@ html * {
   -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
 }
+#inputBtn{
+  width: 100px;
+}
+#reservationBtn{
+    background-color: #f17526;
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 10px 20px 40px 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
 </style>
