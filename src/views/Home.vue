@@ -7,7 +7,20 @@
             <img class="img-responsive" src="../assets/Nice Restaurant.png" />
             <div class="img-overlay">
 
-              <div class="span3 widget-span widget-type-raw_html custom-search" style="" data-widget-type="raw_html"
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <br />
+
+      <div class="row">
+        <div class="col-sm-2"></div>
+          <h4 class="text-left" id="recommendationText">Recomendações Where@</h4>       
+                        <div id="searchBtn" class="span3 widget-span widget-type-raw_html custom-search d-flex " style="" data-widget-type="raw_html"
                 data-x="4" data-w="3">
                 <div class="cell-wrapper layout-widget-wrapper">
                   <span id="hs_cos_wrapper_module_14308928327274411"
@@ -26,20 +39,7 @@
                 </div>
                 <!--end layout-widget-wrapper -->
               </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <br />
-
-      <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8">
-          <h4 class="text-left" id="recommendationText">Recomendações Where@</h4>
           <hr />
-        </div>
       </div>
       <div class="row">
         <div class="col-sm-2">
@@ -189,9 +189,7 @@
     }
   }
 
-  .custom-search {
-    position: relative;
-  }
+
 
   #express-form-typeahead {
     background-color: transparent;
@@ -202,9 +200,9 @@
     border: none;
     cursor: pointer;
     height: 40px;
-    margin: 3px 0;
+    margin: -4px 0;
+
     padding: 0 0 0 42px;
-    position: relative;
     -webkit-transition: width 400ms ease, background 400ms ease;
     transition: width 400ms ease, background 400ms ease;
     width: 0;
@@ -221,6 +219,7 @@
   }
 
   .search-btn {
+    align-items: right ;
     display: none;
   }
 
