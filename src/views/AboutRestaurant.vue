@@ -49,7 +49,7 @@
               <br />
               <br />
               <br/>
-              <b  r>
+              <br>
               <button type="submit" class="py-2 px-5 pl-0 ml-0 mt-5"
                 v-if="this.$store.state.logged == true && this.$store.state.loggedUser.type == 'client'"
                 id="smallerButton">Reservar</button>
