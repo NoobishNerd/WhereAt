@@ -19,8 +19,8 @@
 
       <div class="row">
         <div class="col-sm-2"></div>
-          <h4 class="text-left" id="recommendationText">Recomendações Where@</h4>       
-                        <div id="searchBtn" class="span3 widget-span widget-type-raw_html custom-search d-flex " style="" data-widget-type="raw_html"
+          <h4 class="text-left mr-5" id="recommendationText">Recomendações Where@</h4>       
+                        <div id="searchBtn" class="span3 widget-span widget-type-raw_html custom-search d-flex mb-2 ml-5" style="" data-widget-type="raw_html"
                 data-x="4" data-w="3">
                 <div class="cell-wrapper layout-widget-wrapper">
                   <span id="hs_cos_wrapper_module_14308928327274411"
@@ -219,8 +219,8 @@
   }
 
   .search-btn {
-    align-items: right ;
     display: none;
+    
   }
 
   input[type="search"] {
