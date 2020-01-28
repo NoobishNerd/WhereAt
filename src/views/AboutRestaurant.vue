@@ -299,12 +299,14 @@ html * {
   -moz-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   background-color:#f17526;
+  border-radius: 2px 2px 2px 2px;
 }
 #menu {
   -webkit-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   background-color:#f17526;
+  border-radius: 2px 2px 2px 2px;
 
 }
 #comentary {
@@ -312,12 +314,14 @@ html * {
   -moz-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   background-color:#f17526;
+  border-radius: 2px 2px 2px 2px;
 }
 #information {
   -webkit-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   box-shadow: -1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   background-color:#f17526;
+  border-radius: 2px 2px 2px 2px;
 }
 #windowEditor {
   -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
