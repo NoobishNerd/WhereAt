@@ -84,21 +84,21 @@
     <br />
 
     <div id="finalCrate" class="row d-flex">
-      <div @click="call('menu')" id="menu" class="col-sm-3 pt-3" style="border-bottom-lg light:1px; cursor:pointer">
-        <h5 class="font-weight-bold">Ementa</h5>
+      <div @click="call('menu')" id="menu" class="col-sm-2 pt-3 mr-3 ml-3 mt-3" style="border-bottom-lg light:1px; cursor:pointer">
+        <h5 class="font-weight-bold" style="color:white">Ementa</h5>
       </div>
-      <div @click="call('promos')" id="promotion" class="col-sm-3 pt-3"
+      <div @click="call('promos')" id="promotion" class="col-sm-2 mr-3 mt-3 pt-3"
         style="border-bottom-lg light:1px solid black; border-left-lg light:1px; cursor:pointer">
-        <h5 class="font-weight-bold">Promoções</h5>
+        <h5 class="font-weight-bold" style="color:white">Promoções</h5>
       </div>
-      <div @click="call('comments')" id="comentary" class="col-sm-3 pt-3 font-weight-bold "
+      <div @click="call('comments')" id="comentary" class="col-sm-2 mt-3 pt-3 mr-4 font-weight-bold "
         style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
-        <h5 class="font-weight-bold">Comentários</h5>
+        <h5 class="font-weight-bold" style="color:white">Comentários</h5>
       </div>
-      <div class="col-sm-1" style="border-left-lg light:1px"></div>
-      <div @click="call('info')" id="information" class="col-sm-2 pt-2 "
+      <div class="col-sm-3" style="border-left-lg light:1px"></div>
+      <div @click="call('info')" id="information" class="col-sm-2 mt-3 pt-1 "
         style="border-bottom-lg light:1px; border-left-lg light:3px; cursor:pointer">
-        <h1 class="text-center font-weight-bold">i</h1>
+        <h1 class="text-center font-weight-bold" style="color:white">i</h1>
       </div>
       <AddComment :restaurant="restaurant" v-show="component == 'comments'"> </AddComment>
       <Comments v-show="component == 'comments'" v-for="comment in restaurant.comments" v-bind:comment="comment"
@@ -272,40 +272,52 @@ html * {
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
 }
 #windowCarrousel {
-  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
 }
 
 #windowReservation {
-  border-color: white;
-  box-shadow: 0 30px 60px 15px rgba(0, 0, 0, 0.1);
+
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+
 }
 #finalCrate {
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+  border: none;
   border-radius: 10px 10px 0px 0px;
 }
 .border-primary {
   border-width: 3px;
 }
 #promotion {
-  -webkit-box-shadow: 1px 3px 0px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
-  box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
+  background-color:#f17526;
 }
 #menu {
-  -webkit-box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
-  box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
+  background-color:#f17526;
+
 }
 #comentary {
-  -webkit-box-shadow: 1px 3px 0px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
-  box-shadow: 1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
+  background-color:#f17526;
 }
 #information {
-  -webkit-box-shadow: -1px 3px 0px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: -1px 2px 0px 0px rgba(0, 0, 0, 0.25);
-  box-shadow: -1px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: -1px 2px 1px 1px rgba(0, 0, 0, 0.25);
+  background-color:#f17526;
 }
 #windowEditor {
   -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
