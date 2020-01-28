@@ -1,13 +1,13 @@
 <template>
   <div class="history container" v-if="bookingHistory.length != 0">
     <br>
-    <div v-if="reservations.length != 0">
+    <div v-if="bookingHistory.length != 0">
       <div v-for="reservation in bookingHistory" v-bind:key="reservation.id">
 
         <div v-if="reservation.confirmation == 'p'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8" style="border-right:2px solid">
             <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
-            <p class="text-left mb-0">Número de pessoas: {{reservation.num_people.capacity}}</p>
+            <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
             <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurant)}}</p>
             <p class="text-left mb-0">Horas: {{reservation.hour}}</p>
 
@@ -38,7 +38,7 @@
         <div v-if="reservation.confirmation == 'c'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8" style="border-right:2px solid">
             <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
-            <p class="text-left mb-0">Número de pessoas: {{reservation.num_people.capacity}}</p>
+            <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
             <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurant)}}</p>
             <p class="text-left mb-0">Horas: {{reservation.hour}}</p>
 
@@ -72,7 +72,7 @@
         <div v-if="reservation.confirmation == 'd'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8" style="border-right:2px solid">
             <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
-            <p class="text-left mb-0">Número de pessoas: {{reservation.num_people.capacity}}</p>
+            <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
             <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurant)}}</p>
             <p class="text-left mb-0">Horas: {{reservation.hour}}</p>
 
@@ -114,9 +114,9 @@ export default {
     required: true}
   },
   created: function(){
-    alert(this.$store.getters.getReservsByClntId(this.id))
+    alert("this.$store.getters.getReservsByClntId(this.id)")
     this.bookingHistory = this.$store.getters.getReservsByClntId(this.id)
-    alert(this.bookingHistory)
+    alert(JSON.stringify( this.bookingHistory))
   },
   methods:{
     getUsername(id_restaurant){

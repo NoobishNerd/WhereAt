@@ -7,7 +7,7 @@
         <div v-if="reservation.confirmation == 'p'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8" style="border-right:2px solid">
             <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
-            <p class="text-left mb-0">Número de pessoas: {{reservation.num_people.capacity}}</p>
+            <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
             <p class="text-left mb-0">Utilizador: {{getUsername(reservation.id_client)}}</p>
             <p class="text-left mb-0">Horas: {{reservation.hour}}</p>
 
@@ -19,12 +19,12 @@
               </div>
               <div class="col-sm-4 pt-4 mt-3">
                 <img
-                  @click="accept(reservation.date, reservation.hour, reservation.id_client, reservation.id_restaurant, reservation.num_people.id)"
+                  @click="accept(reservation.date, reservation.hour, reservation.id_client, reservation.id_restaurant, reservation.sltdTable.id)"
                   src="../assets/Yes Icon Border.png" width="51px">
               </div>
               <div class="col-sm-4 pt-4 mt-3">
                 <img
-                  @click="deny(reservation.date, reservation.hour, reservation.id_client, reservation.id_restaurant, reservation.num_people.id)"
+                  @click="deny(reservation.date, reservation.hour, reservation.id_client, reservation.id_restaurant, reservation.sltdTable.id)"
                   src="../assets/No Icon Border.png" width="46px">
               </div>
               <div class="col-sm-2">
@@ -42,7 +42,7 @@
         <div v-if="reservation.confirmation == 'c'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8" style="border-right:2px solid">
             <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
-            <p class="text-left mb-0">Número de pessoas: {{reservation.num_people.capacity}}</p>
+            <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
             <p class="text-left mb-0">Utilizador: {{getUsername(reservation.id_client)}}</p>
             <p class="text-left mb-0">Horas: {{reservation.hour}}</p>
 
@@ -64,7 +64,7 @@
               <div class="col-sm-9 mt-2">
                 <div class="custom-control custom-checkbox mr-sm-2">
                   <div v-if="reservation.presence == false">
-                   <input @click="checkPresence(reservation.date, reservation.hour, reservation.id_client, reservation.id_restaurant, reservation.num_people.id)" type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                   <input @click="checkPresence(reservation.date, reservation.hour, reservation.id_client, reservation.id_restaurant, reservation.sltdTable.id)" type="checkbox" class="custom-control-input" id="customControlAutosizing">
                    <label class="custom-control-label" for="customControlAutosizing">Presença</label>
                   </div>
                   <div v-if="reservation.presence == true">
@@ -85,7 +85,7 @@
         <div v-if="reservation.confirmation == 'd'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8" style="border-right:2px solid">
             <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
-            <p class="text-left mb-0">Número de pessoas: {{reservation.num_people.capacity}}</p>
+            <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
             <p class="text-left mb-0">Utilizador: {{getUsername(reservation.id_client)}}</p>
             <p class="text-left mb-0">Horas: {{reservation.hour}}</p>
 
@@ -122,10 +122,12 @@ export default {
     reservations: []
   }),
   props:{
-    id: String
+    id: {type:Number,
+    required: true}
   },
   created: function(){
     this.reservations = this.$store.getters.getReservsByRestId(this.id)
+    alert(this.reservations)
   },
   methods:{
     getUsername(id){

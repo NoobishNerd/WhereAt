@@ -56,16 +56,16 @@ export default new Vuex.Store({
     },
 
     getReservsByRestId: (state) => (id) => {
-      return state.bookingHistory.filter(reservation => reservation.id_restaurant == id)
+      return state.bookingHistory.filter(reservation => reservation.id_restaurant === id)
     },
 
     getReservsByClntId: (state) => (id) => {
-      alert("tell me why")
-      return state.bookingHistory.filter(reservation => reservation.id_client == id)
+      alert(id)
+      return state.bookingHistory.filter(reservation => reservation.id_client === id)
     },
 
     getSearchResults: (state) => (searchText) => {
-      return state.restaurants.filter(restaurant => restaurant.username.toLowerCase().includes(searchText.toLowerCase())) /*|| restaurant.adress.includes(searchText) || restaurant.local.includes(searchText))*/  //tags not implemented || restaurant.tags == searchText
+      return state.restaurants.filter(restaurant => restaurant.username.toLowerCase().includes(searchText.toLowerCase())) /*|| restaurant.address.includes(searchText) || restaurant.local.includes(searchText))*/  //tags not implemented || restaurant.tags == searchText
     },
 
     getLoggedUser: (state) => {
@@ -430,7 +430,7 @@ export default new Vuex.Store({
       for (let reservation of state.bookingHistory) {
         if (reservation.date == payload.date && reservation.hour == payload.hour && 
           reservation.id_client == payload.id_client && reservation.id_restaurant == payload.id_restaurant 
-          && reservation.sltdTable.id == payload.tableId) {
+          && reservation.sltdTable.id == payload.tableId && reservation.dateOfRes == payload.dateOfRes) {
           reservation.confirmation = payload.action
           alert(reservation.confirmation)
         }
