@@ -68,7 +68,7 @@
       </div>
       <div @click="call('album')" id="album" class="col-sm-2 pt-3 mr-3 ml-3 mt-3"
         style="border-bottom-lg light:1px solid black; border-left-lg light:1px; cursor:pointer">
-        <h5 class="font-weight-bold" style="color:white">Album</h5>
+        <h5 class="font-weight-bold" style="color:white">Categorias</h5>
       </div>
       <div @click="call('comments')" id="comentary" class="col-sm-2 pt-3 ml-3 mt-3 font-weight-bold "
         style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
@@ -81,7 +81,7 @@
       </div>
       <Comments v-show="component == 'comments'" v-for="comment in restaurant.comments" v-bind:comment="comment"
         v-bind:key="comment.username"></Comments>
-      <PromotionEditor v-show="component == 'album'"></PromotionEditor>
+      <TagEditor :restaurant="restaurant" v-show="component == 'album'"></TagEditor>
       <MenuEditor :restaurant="restaurant" v-show="component == 'menu'"></MenuEditor>
       <InfoEditor :restaurant="restaurant" v-show="component == 'info'"></InfoEditor>
     </div>
@@ -90,7 +90,7 @@
 <script>
 import TableEditor from "../components/TableEditor.vue";
 import Comments from "@/components/Comments.vue"
-import PromotionEditor from "@/components/PromotionEditor.vue"
+import TagEditor from "@/components/TagEditor.vue"
 import MenuEditor from "@/components/MenuEditor.vue"
 import InfoEditor from "@/components/InfoEditor.vue"
 
@@ -181,7 +181,7 @@ export default {
   components: {
     TableEditor,
     Comments,
-    PromotionEditor,
+    TagEditor,
     MenuEditor,
     InfoEditor
   }

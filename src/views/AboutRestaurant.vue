@@ -91,7 +91,7 @@
       </div>
       <div @click="call('promos')" id="promotion" class="col-sm-2 mr-3 mt-3 pt-3"
         style="border-bottom-lg light:1px solid black; border-left-lg light:1px; cursor:pointer">
-        <h5 class="font-weight-bold" style="color:white">Promoções</h5>
+        <h5 class="font-weight-bold" style="color:white">Categorias</h5>
       </div>
       <div @click="call('comments')" id="comentary" class="col-sm-2 mt-3 pt-3 mr-4 font-weight-bold "
         style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
@@ -105,7 +105,7 @@
       <AddComment :restaurant="restaurant" v-show="component == 'comments'"> </AddComment>
       <Comments v-show="component == 'comments'" v-for="comment in restaurant.comments" v-bind:comment="comment"
         v-bind:key="comment.username"></Comments>
-      <PromotionEditor v-show="component == 'promos'"></PromotionEditor>
+      <TagEditor :restaurant="restaurant" v-show="component == 'promos'"></TagEditor>
       <DisplayMenu :restaurant="restaurant" v-show="component == 'menu'"></DisplayMenu>
       <DisplayInfo :restaurant="restaurant" v-show="component == 'info'"></DisplayInfo>
     </div>
@@ -113,7 +113,7 @@
 </template>
 <script>
 import Comments from "@/components/Comments.vue"
-import PromotionEditor from "@/components/PromotionEditor.vue"
+import TagEditor from "@/components/TagEditor.vue"
 import DisplayMenu from "@/components/DisplayMenu.vue"
 import DisplayInfo from "@/components/DisplayInfo.vue"
 import AddComment from "@/components/AddComment.vue"
@@ -121,7 +121,7 @@ import AddComment from "@/components/AddComment.vue"
 
 export default {
   data: () => ({
-      component: "comments",
+      component: "info",
       restaurant: {},
       hour: "",
       date: "",
@@ -223,7 +223,7 @@ export default {
 
     components: {
       Comments,
-      PromotionEditor,
+      TagEditor,
       DisplayMenu,
       DisplayInfo,
       AddComment
