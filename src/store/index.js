@@ -293,6 +293,23 @@ export default new Vuex.Store({
       }
     },
 
+    CHANGE_PRINCIPAL_TAG(state, payload) {
+      for (let restaurant of state.restaurants){
+        if (restaurant.id == payload.restaurantId){
+          for (let tag of restaurant.tags){
+            if (tag.id == payload.tagId){
+              tag.principal = true
+            }
+            else{
+              tag.principal = false
+            }
+          }
+        }
+      }      
+      localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
+      alert("Tag principal mudada!")
+    },
+
     ADD_COMMENT(state, payload){
       for(let restaurant of state.restaurants){
         if (restaurant.id == payload.restaurantId){
