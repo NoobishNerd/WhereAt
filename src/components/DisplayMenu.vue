@@ -6,8 +6,7 @@
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 0">
                     <!-- Eu não queria nada usar esta resolução, mas é a unica forma de usar v-for várias vezes no mesmo array e na mesma página-->
-                    <h6 v-if="menuItem.itemType == 'Entradas'">{{menuItem.item}} - {{menuItem.price}}€
-                        <button @click="removeItem(menuItem.id)" id="removeItemBtn" class="ml-2">X</button></h6>
+                    <h6 v-if="menuItem.itemType == 'Entradas'">{{menuItem.item}} - {{menuItem.price}}€</h6>
                 </div>
 
                 <br>
