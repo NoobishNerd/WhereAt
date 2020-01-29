@@ -293,15 +293,15 @@ export default new Vuex.Store({
       }
     },
 
-    CHANGE_PRINCIPAL_TAG(state, payload) {
+    CHANGE_MAIN_TAG(state, payload) {
       for (let restaurant of state.restaurants){
         if (restaurant.id == payload.restaurantId){
           for (let tag of restaurant.tags){
             if (tag.id == payload.tagId){
-              tag.principal = true
+              tag.main = true
             }
             else{
-              tag.principal = false
+              tag.main = false
             }
           }
         }
@@ -578,7 +578,7 @@ export default new Vuex.Store({
             promotions: [],
             comments: [{id: 0, username:"Best Girl Vibe Check", profilePic: "https://cdn.discordapp.com/attachments/640604184965677072/665652451877322762/25a39n98i7a41.png", rate: 5, text: "Nice place, I bet they make a lot of money", userId:42},
             {id: 1, username:"ZéBitzz" , profilePic: "https://avatars2.githubusercontent.com/u/44086730?s=400&v=4", rate: 2, text: "O site feio e eu aqui", userId:43}],
-            tags: [{id: 0, tag_name:"Fast-Food", principal: true}, {id: 1, tag_name:"Vila", principal: false}, {id: 2, tag_name:"Saudável", principal: false}],
+            tags: [{id: 0, tag_name:"Fast-Food", main: true}, {id: 1, tag_name:"Vila", main: false}, {id: 2, tag_name:"Saudável", main: false}],
             menu: [],
             tables: [{
                 id: 0,

@@ -4,8 +4,8 @@
         <hr>
         <div class="row">
             <div class="col-sm-2" v-for="tag in restaurant.tags" v-bind:key="tag.id">                        
-                <p v-if="tag.principal == true" class="text-center principal" style="color: white;">{{tag.tag_name}}</p>
-                <p v-if="tag.principal == false" class="text-center side">{{tag.tag_name}}</p>
+                <p v-if="tag.main == true" class="text-center main" style="color: white;">{{tag.tag_name}}</p>
+                <p v-if="tag.main == false" class="text-center side">{{tag.tag_name}}</p>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style scoped>
-.principal {
+.main {
   border-style: solid;
   border-width: 4px;
   border-color: #f17526;

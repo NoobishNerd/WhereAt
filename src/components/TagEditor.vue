@@ -2,13 +2,13 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-2">
-                <label class="mt-2" for="principalTagSlt">Escolher tag principal</label>
-                <select v-model="newPrincipalTag" id="principalTagSlt" class="form-control">
+                <label class="mt-2" for="mainTagSlt">Escolher tag principal</label>
+                <select v-model="newMainTag" id="MainTagSlt" class="form-control">
                     <option v-for="tag in restaurant.tags" v-bind:key="tag.id" :value="tag.id">{{tag.tag_name}}</option>
                 </select>
             </div>
             <div class="col-sm-2 mt-3">
-                <button @click="changePrincipalTag()" id="changePrincipalBtn" class="mt-4 px-3 py-2">Salvar</button>
+                <button @click="changeMainTag()" id="changeMainBtn" class="mt-4 px-3 py-2">Salvar</button>
             </div>
         </div>        
 
@@ -16,8 +16,8 @@
         <hr>
         <div class="row">
             <div class="col-sm-2" v-for="tag in restaurant.tags" v-bind:key="tag.id + 1000">                        
-                <p v-if="tag.principal == true" class="text-center principal" style="color: white;">{{tag.tag_name}}</p>
-                <p v-if="tag.principal == false" class="text-center side">{{tag.tag_name}}</p>
+                <p v-if="tag.main == true" class="text-center main" style="color: white;">{{tag.tag_name}}</p>
+                <p v-if="tag.main == false" class="text-center side">{{tag.tag_name}}</p>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
 export default {
     name: "TagEditor",
     data: () => ({
-        newPrincipalTag: ""
+        newMainTag: ""
     }),
     props: {
         restaurant: {
@@ -37,9 +37,9 @@ export default {
     },
 
     methods: {
-        changePrincipalTag(){
-            this.$store.commit("CHANGE_PRINCIPAL_TAG", {
-                tagId: this.newPrincipalTag,
+        changeMainTag(){
+            this.$store.commit("CHANGE_MAIN_TAG", {
+                tagId: this.newMainTag,
                 restaurantId: this.restaurant.id
             })
         }
@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style scoped>
-.principal {
+.main {
   border-style: solid;
   border-width: 4px;
   border-color: #f17526;
@@ -61,7 +61,7 @@ export default {
   border-color: #f17526;    
   border-radius: 40px 40px 40px 40px;  
 }
-#changePrincipalBtn {
+#changeMainBtn {
     background-color: #f17526;
     border: none;
     color: #ffffff;
