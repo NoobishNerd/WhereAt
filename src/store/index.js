@@ -567,13 +567,13 @@ export default new Vuex.Store({
             username: "McDonald's - Vila do Conde",
             password: "chato",
             email: "yo@gmail.com",
-            profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/671159178345054218/unknown.png",
+            profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/672170232181161994/unknown.png",
             address: "Estrada Nacional 13, Lugar da Portas Fronhas",
             approval: true,
             available: true,
             postalCode: "4480-739",
             local: "Vila do Conde",
-            info: "descritivo do restaurante",
+            info: "Rede de fast-food conhecida por seus hambúrgueres, batatas fritas e milk shakes-shakes-shakes. Este estabelecimento em particular é mais do que só familiar para os estudantes universitários da região. :) párápäpápá",
             album: [{id: 0, url:"https://i.imgur.com/hym8WuD.jpg"}, {id: 1, url:"https://cdn.discordapp.com/attachments/499615761720147978/672154045137289226/2Q.png"}, {id: 2, url:"https://cdn.discordapp.com/attachments/499615761720147978/672154882425225216/334726.png"}, {id: 3, url:"https://cdn.discordapp.com/attachments/499615761720147978/672155664042164242/308479_1.png"}, {id: 4, url:"https://cdn.discordapp.com/attachments/499615761720147978/672155862453846056/nuggerts_770x433_acf_cropped.png"}],
             comments: [{id: 0, username:"Luís Senpai - o", profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/672157905771823104/cringe.jpg", rate: 3, text: "Ya, eu não sei porque estou aqui, mas o facto de estar aqui significa alguma coisa...", userId:9999},{id: 1, username:"Best Girl Vibe Check", profilePic: "https://cdn.discordapp.com/attachments/640604184965677072/665652451877322762/25a39n98i7a41.png", rate: 5, text: "Man, the things I do for a BIG MAC!", userId:42},{id: 2, username:"Rei Rui D.D. Ferrari", profilePic: "https://cdn.discordapp.com/attachments/516726056909275146/672165113054363648/IMG_20190511_224159.jpg", rate: 5, text: "Mano, não comia um hamburger à mais de 6 meses!", userId:69420}],
             tags: [{id: 0, tag_name:"Fast-Food", main: true}, {id: 1, tag_name:"Vila", main: false}, {id: 2, tag_name:"Saudável", main: false}],
@@ -595,7 +595,7 @@ export default new Vuex.Store({
                 capacity: 3
               },
             ],
-            phone: ""
+            phone: 252638257
           },
           {
             id: 1,
@@ -621,7 +621,7 @@ export default new Vuex.Store({
             username: "clone",
             password: "x",
             email: "x@x",
-            profilePic: "https://dictionary.cambridge.org/pt/images/thumb/house_noun_002_18270.jpg?version=5.0.65",
+            profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/671159178345054218/unknown.png",
             address: "Vila del Conde",
             approval: false,
             available: true,
