@@ -203,7 +203,7 @@ export default {
 
       updateAvailableTables() {
        
-        this.availableTables = this.$store.getters.getAvailableTables(this.date, this.restaurant.id, this.restaurant.tables)
+        this.availableTables = this.$store.getters.getAvailableTables(this.hour, this.date, this.restaurant.id, this.restaurant.tables)
   
         alert(JSON.stringify(this.availableTables))
       },

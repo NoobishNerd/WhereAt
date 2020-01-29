@@ -73,13 +73,30 @@ export default new Vuex.Store({
     },
 
 
-    getAvailableTables: (state) => (date, id, tables) => {
+    getAvailableTables: (state) => (hour, date, id, tables) => {
       let availableTables = []
       let capacity = true
+
+      //hora como numero
+      let numberHour = hour.slice(0, hour.indexOf(":") )
+      alert(numberHour)
+      //para testar intervalo de uma hora
+      let hourIntervalMin
+      let hourIntervalMax
+      
+
       for (let table of tables) {
         for (const reservation of state.bookingHistory) {
+
+          hourIntervalMin = parseInt(reservation.hour.slice(0, reservation.hour.indexOf(":") )) 
+          alert("min:"+hourIntervalMin)
+          hourIntervalMax = hourIntervalMin+1 == 24 ? 0 : hourIntervalMin+1
+          alert("max:"+hourIntervalMax)
+
+
           if(table.id == reservation.sltdTable.id && reservation.confirmation == "c" 
-            && reservation.date == date && reservation.id_restaurant == id){
+            && reservation.date == date && reservation.id_restaurant == id 
+            && (hourIntervalMin == numberHour || hourIntervalMax == numberHour) ){
             alert("mesa ocupada: " + table.id)
             capacity = false //estando a mesa ocupada adiciona-se com capcidade 0
           }
