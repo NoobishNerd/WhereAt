@@ -54,14 +54,14 @@
 
         </div>
         <div class="col-sm-8">
-          <div class="row" v-for="restaurant in restaurants" v-bind:key="restaurant.id">
+          <div class="row" >
             <div class="col-sm-5">
-              <RestaurantCard v-bind:restaurant="restaurant" v-if="restaurant.id%2 != 0"></RestaurantCard>
+              <RestaurantCard v-for="restaurant in leftRestaurants" v-bind:key="restaurant.id" v-bind:restaurant="restaurant"></RestaurantCard>
             </div>
             <div class="col-sm-2">
             </div>
             <div class="col-sm-5">
-              <RestaurantCard v-bind:restaurant="restaurant" v-if="restaurant.id%2 == 0"></RestaurantCard>
+              <RestaurantCard v-for="restaurant in rightRestaurants" v-bind:key="restaurant.id" v-bind:restaurant="restaurant" ></RestaurantCard>
             </div>
 
           </div>
@@ -86,17 +86,35 @@
     data: () => ({
       searchText: "",
       filterMaybe: "",
+      leftRestaurants: [],
+      rightRestaurants: [],
       restaurants: []
     }),
 
     created: function () {
       this.restaurants = this.$store.state.restaurants;
+      
+    },
+
+    mounted: function(){
+      this.separateLeftAndRight() 
     },
 
     methods: {
       getSearchResults() {
         this.restaurants = this.$store.getters.getSearchResults(this.searchText)
-        alert(JSON.stringify(this.restaurants))
+        this.separateLeftAndRight()
+      },
+      separateLeftAndRight(){
+        this.leftRestaurants = []
+        this.rightRestaurants = []
+        for (const restaurant of this.restaurants) {
+          if (restaurant.id%2 == 0) {
+            this.leftRestaurants.push(restaurant)
+          }else{
+            this.rightRestaurants.push(restaurant)
+          }
+        }
       }
     },
 
