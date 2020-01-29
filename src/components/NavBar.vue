@@ -7,16 +7,27 @@
       <form class="form-inline">
         
 
-        <img @click="getProfile" v-if="this.$store.state.logged == true"
+        <img @click="goToProfile" v-if="this.$store.state.logged == true"
           v-bind:src="loggedUser.profilePic" class="rounded-circle" width="40px" height="40px"
           style="cursor: pointer" />
         <div v-else text-center>
-          <router-link to="/login">
-            <img src="../assets/main_user.png" height="40px" />
-          </router-link>
+            <img @click="showOpts" src="../assets/main_user.png" height="40px" />
         </div>
       </form>
     </nav>
+    <div v-show="show == true">
+    <div class="row">
+      <router-link to="/login">
+        <button @click="showOpts">cliente</button>
+      </router-link>
+    </div>
+    <div class="row">
+      <router-link to="/loginRestaurant">
+        <button @click="showOpts">restaurante</button>
+      </router-link>
+    </div>
+    </div>
+    
   </div>
 </template>
 
@@ -26,7 +37,8 @@ export default {
 
   data: () => ({
     restaurants: "",
-    loggedUser: ""
+    loggedUser: "",
+    show: false
 
   }),
 
@@ -42,7 +54,12 @@ export default {
       localStorage.setItem("loggedUser", "");
     },
 
-    getProfile() {
+    showOpts(){
+      this.show = this.show ? false : true;
+      alert(this.show)
+    },
+
+    goToProfile() {
       if(this.loggedUser.type == "client"){
         this.$router.push({
           name: "clientProfile",
