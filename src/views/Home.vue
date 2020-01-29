@@ -54,14 +54,16 @@
 
         </div>
         <div class="col-sm-8">
-          <div class="row">
-            <div class="col-sm-10">
-              <RestaurantCard v-for="restaurant in restaurants" v-bind:restaurant="restaurant"
-                v-bind:key="restaurant.id"></RestaurantCard>
+          <div class="row" v-for="restaurant in restaurants" v-bind:key="restaurant.id">
+            <div class="col-sm-5">
+              <RestaurantCard v-bind:restaurant="restaurant" v-if="restaurant.id%2 != 0"></RestaurantCard>
             </div>
-            <div class="col-sm-1">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-5">
+              <RestaurantCard v-bind:restaurant="restaurant" v-if="restaurant.id%2 == 0"></RestaurantCard>
+            </div>
 
-            </div>
           </div>
 
 
