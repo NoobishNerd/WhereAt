@@ -324,14 +324,14 @@ img {
   border-radius: 2px 2px 2px 2px;
 }
 #windowEditor {
-  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
 }
 #myMap {
-  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
 }
 #inputBtn{
   width: 100px;

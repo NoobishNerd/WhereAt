@@ -5,7 +5,7 @@
       <div v-for="reservation in reservations" v-bind:key="reservation.id">
 
         <div v-if="reservation.confirmation == 'p'" id="historyRow" class="row mb-3 mr-1 mt-2">
-          <div class="col-sm-8" >
+           <div class="col-sm-8" style="border-right:2px solid">
             <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
             <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
             <p class="text-left mb-0">Utilizador: {{getUsername(reservation.id_client)}}</p>
@@ -13,7 +13,7 @@
 
             <br>
           </div>
-          <div class="col-sm-4" >
+          <div class="col-sm-4" style="background-color:#F17526">
             <div class="row">
               <div class="col-sm-2">
               </div>
@@ -40,7 +40,7 @@
 
 
         <div v-if="reservation.confirmation == 'c'" id="historyRow" class="row mb-3 mr-1 mt-2">
-          <div class="col-sm-8" >
+          <div class="col-sm-8" style="border-right:2px solid">
             <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
             <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
             <p class="text-left mb-0">Utilizador: {{getUsername(reservation.id_client)}}</p>
@@ -48,7 +48,7 @@
 
             <br>
           </div>
-          <div class="col-sm-4" >
+          <div class="col-sm-4" style="background-color:#F17526">
             <div class="row">
               <div class="col-sm-4">
               </div>
@@ -83,7 +83,7 @@
 
 
         <div v-if="reservation.confirmation == 'd'" id="historyRow" class="row mb-3 mr-1 mt-2">
-          <div class="col-sm-8" >
+          <div class="col-sm-8" style="border-right:2px solid">
             <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
             <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
             <p class="text-left mb-0">Utilizador: {{getUsername(reservation.id_client)}}</p>
@@ -91,7 +91,7 @@
 
             <br>
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-4" style="background-color:#F17526">
             <div class="row">
               <div class="col-sm-4">
               </div>
@@ -176,9 +176,8 @@ export default {
 }
 
 #historyRow{
-  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
-  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
-  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+  border-style: solid;
+  border-width: 2px
 }
 
 #brownBoldText{

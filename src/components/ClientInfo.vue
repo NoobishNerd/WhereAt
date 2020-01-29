@@ -83,7 +83,5 @@ export default {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-input{
-  border:none;
-}
+
 </style>

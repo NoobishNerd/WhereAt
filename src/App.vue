@@ -21,11 +21,6 @@ export default {
 <style>
 html * {
   font-family: "Raleway";
-  
 }
 
-#app{
-
- 
-}
 </style>

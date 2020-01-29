@@ -1,5 +1,7 @@
 <template>
-  <div class="container" id="containerRest" style="border-radius: 6px;" >
+    <div class="container">
+    <br>
+    <br>
     <div class="row d-flex justify-content-sm-center">
       <div class="col-sm-12">
         <div class="row" >
@@ -13,7 +15,7 @@
           </div>
           <div class="col-sm-9">
             <div class="row justify-content-sm-around">
-              <div @click="call('history')" class="col-sm-4 shadow-sm rounded " style="cursor:pointer;">
+              <div @click="call('history')" class="col-sm-4 " style="cursor:pointer;">
                 <div class="row">
                   <div class="col-sm-2 pt-1">
                     <img src="../assets/Reservations Icon.png" width="40px"> 
@@ -23,7 +25,7 @@
                   </div>
                 </div>
               </div>
-              <div @click="call('vacations')" class="col-sm-4 shadow-sm rounded" style="cursor: pointer;">
+              <div @click="call('vacations')" class="col-sm-4" style="cursor: pointer;">
                 <div class="row">
                   <div class="col-sm-2">
                     <img src="../assets/Vacation Icon.png" width="40px"> 
@@ -33,7 +35,7 @@
                   </div>
                 </div>
               </div>
-              <div @click="logout()" class="col-sm-4 shadow-sm rounded" style="cursor: pointer;">
+              <div @click="logout()" class="col-sm-4" style="cursor: pointer;">
                 <div class="row">
                   <div class="col-sm-2 pt-2">
                     <img src="../assets/Logout Icon.png" width="40px"> 
@@ -139,11 +141,7 @@ export default {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-#containerRest{
-    -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
-  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
-  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
-}
+
 
 </style>
 
