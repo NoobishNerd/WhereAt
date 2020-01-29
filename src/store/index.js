@@ -458,7 +458,9 @@ export default new Vuex.Store({
     },
 
     MANAGE_RESERVATION(state, payload){
+      
       for (let reservation of state.bookingHistory) {
+        
         if (reservation.date == payload.date && reservation.hour == payload.hour && 
           reservation.id_client == payload.id_client && reservation.id_restaurant == payload.id_restaurant 
           && reservation.sltdTable.id == payload.tableId && reservation.dateOfRes == payload.dateOfRes) {

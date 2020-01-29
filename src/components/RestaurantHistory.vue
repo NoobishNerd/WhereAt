@@ -19,13 +19,15 @@
               </div>
               <div class="col-sm-4 pt-4 mt-3">
                 <img
-                  @click="accept(reservation.date, reservation.hour, reservation.id_client, reservation.id_restaurant, reservation.sltdTable.id)"
-                  src="../assets/Yes Icon Border.png" width="51px">
+                  @click="accept(reservation.date, reservation.hour, reservation.id_client, reservation.id_restaurant, 
+                    reservation.sltdTable.id, reservation.dateOfRes)"
+                      src="../assets/Yes Icon Border.png" width="51px">
               </div>
               <div class="col-sm-4 pt-4 mt-3">
                 <img
-                  @click="deny(reservation.date, reservation.hour, reservation.id_client, reservation.id_restaurant, reservation.sltdTable.id)"
-                  src="../assets/No Icon Border.png" width="46px">
+                  @click="deny(reservation.date, reservation.hour, reservation.id_client, reservation.id_restaurant,
+                   reservation.sltdTable.id,reservation.dateOfRes)"
+                    src="../assets/No Icon Border.png" width="46px">
               </div>
               <div class="col-sm-2">
               </div>
@@ -68,8 +70,8 @@
                    <label class="custom-control-label" for="customControlAutosizing">Presença</label>
                   </div>
                   <div v-if="reservation.presence == true">
-                   <input checked disabled type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                   <label class="custom-control-label" for="customControlAutosizing">Presença</label>
+                    <!-- meter um simbolo -->
+                   <tiny>Presente</tiny>
                   </div>
                 </div>
               </div>
@@ -134,24 +136,28 @@ export default {
       return this.$store.getters.getUserById(id).username
     },
 
-    accept(date, hour, id_client, id_restaurant, tableId){
+    accept(date, hour, id_client, id_restaurant, tableId, dateOfRes){
+      
       this.$store.commit("MANAGE_RESERVATION", {
         date: date,
         hour: hour,
         id_client: id_client,
         id_restaurant: id_restaurant,
         tableId: tableId,
+        dateOfRes: dateOfRes,
         action: "c" //C === CONFIRM;  ZÉ! N MUDES!!!1111!
       })
     },
 
-    deny(date, hour, id_client, id_restaurant, tableId){
+    deny(date, hour, id_client, id_restaurant, tableId, dateOfRes){
+      
       this.$store.commit("MANAGE_RESERVATION", {
         date: date,
         hour: hour,
         id_client: id_client,
         id_restaurant: id_restaurant,
         tableId: tableId,
+        dateOfRes: dateOfRes,
         action: "d" //D === DENIED
       })
     },
