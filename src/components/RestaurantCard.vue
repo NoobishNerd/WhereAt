@@ -52,7 +52,7 @@ export default {
         this.rate += comment.rate
       }
       //average de ratings
-      this.rate = this.rate/this.num_comments
+      this.rate = (this.rate/this.num_comments).toFixed(1)
     }
 
   }
