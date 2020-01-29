@@ -77,7 +77,7 @@
         </div>
       </div>
       <div class="col-sm-1"></div>
-      <div class="col-sm-5 ">
+      <div class="col-sm-5">
         <div>
           <div class="google-map img-fluid" id="myMap"></div>
         </div>
@@ -122,13 +122,13 @@ import AddComment from "@/components/AddComment.vue"
 export default {
   data: () => ({
       component: "info",
+      map: "",
       restaurant: {},
       hour: "",
       date: "",
       availableTables: [],
       selectedTableReady: [],
       selectedTable: "",
-      map: "",
     }),
     mounted: function () {
       this.renderMap();
@@ -136,8 +136,9 @@ export default {
 
     created: function () {
       this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id);
-      this.availableTables = this.restaurant.tables
+      this.availableTables = this.restaurant.tables;
     },
+
 
     methods: {
       call(newComponent) {
@@ -148,17 +149,36 @@ export default {
         let today = new Date()
         return `${today.getHours()}:${today.getMinutes()}  ${today.getDate()}/${today.getMonth()+ 1}/${today.getFullYear()}`
       },
-
       renderMap() {
-        this.map = new google.maps.Map(document.querySelector("#myMap"), {
-          center: {
-            lat: -34.397,
-            lng: 150.644
-          },
-          zoom: 8
-        });
-        this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
-      },
+      this.map = new google.maps.Map(document.querySelector("#myMap"), {
+        center: {
+          lat: -34.397,
+          lng: 150.644
+        },
+        zoom: 17,
+        mapTypeId: "roadmap"
+      });
+      const geocoder = new google.maps.Geocoder();
+      this.geocodeAddress(geocoder, this.map)
+    },
+
+    geocodeAddress(geocoder, resultsMap){
+      const address = this.restaurant.address + ", " + this.restaurant.postalCode + " " + this.restaurant.local;
+      geocoder.geocode({ 'address': address},
+      (results, status) => {
+        if (status === 'OK') {
+          resultsMap.setCenter(results[0].geometry.location);
+          new google.maps.Marker({
+            map: resultsMap,
+            position: results[0].geometry.location
+          });
+          resultsMap.setMapTypeId("roadmap")
+        } else {
+          alert("Geocode didn't work because of: " + status)
+        }
+      });
+    },
+
 
 
       reservation() {

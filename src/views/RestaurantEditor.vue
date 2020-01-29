@@ -108,10 +108,6 @@ export default {
     this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id)
   },
 
-  updated: function () {
-    this.renderMap();
-  },
-
   methods: {
     call(newComponent) {
       this.component = newComponent;
@@ -125,7 +121,6 @@ export default {
         zoom: 17,
         mapTypeId: "roadmap"
       });
-      this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
       const geocoder = new google.maps.Geocoder();
       this.geocodeAddress(geocoder, this.map)
     },
