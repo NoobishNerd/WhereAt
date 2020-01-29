@@ -105,7 +105,7 @@
       <AddComment :restaurant="restaurant" v-show="component == 'comments'"> </AddComment>
       <Comments v-show="component == 'comments'" v-for="comment in restaurant.comments" v-bind:comment="comment"
         v-bind:key="comment.username"></Comments>
-      <TagEditor :restaurant="restaurant" v-show="component == 'promos'"></TagEditor>
+      <DisplayTags :restaurant="restaurant" v-show="component == 'promos'"></DisplayTags>
       <DisplayMenu :restaurant="restaurant" v-show="component == 'menu'"></DisplayMenu>
       <DisplayInfo :restaurant="restaurant" v-show="component == 'info'"></DisplayInfo>
     </div>
@@ -113,7 +113,7 @@
 </template>
 <script>
 import Comments from "@/components/Comments.vue"
-import TagEditor from "@/components/TagEditor.vue"
+import DisplayTags from "@/components/DisplayTags.vue"
 import DisplayMenu from "@/components/DisplayMenu.vue"
 import DisplayInfo from "@/components/DisplayInfo.vue"
 import AddComment from "@/components/AddComment.vue"
@@ -223,7 +223,7 @@ export default {
 
     components: {
       Comments,
-      TagEditor,
+      DisplayTags,
       DisplayMenu,
       DisplayInfo,
       AddComment
