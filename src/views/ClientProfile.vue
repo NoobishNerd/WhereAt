@@ -151,7 +151,5 @@ export default {
   -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.25);
 }
-html{
-  background-color:#FFFCF2;
-}
+
 </style>

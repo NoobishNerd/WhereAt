@@ -25,7 +25,7 @@ html * {
 }
 
 #app{
-  background-color:#FFFCF2;
+
  
 }
 </style>
