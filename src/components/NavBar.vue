@@ -18,12 +18,12 @@
     <div v-show="show == true">
       <router-link to="/login">
     <div class="row">
-        <button id="btnAmClient" @click="showOpts" type="button" class="btn btn-primary btn-block">Cliente</button>
+        <button id="btnAmClient" @click="showOpts" type="button" class="btn btn-block"><span>Cliente</span></button>
     </div>
     </router-link>
     <router-link to="/loginRestaurant">
     <div class="row">
-        <button id="btnAmRestaurant" @click="showOpts" type="button" class="btn btn-primary btn-block">Restaurante</button>
+        <button id="btnAmRestaurant" @click="showOpts" type="button" class="btn btn-block"><span>Restaurante</span></button>
     </div>
     </router-link>
     </div>
@@ -107,6 +107,7 @@ export default {
   background-color: #e3b814;
   border: none;
   color: #af2831;
+  padding: 25px 0px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -114,19 +115,15 @@ export default {
   font-size: 20px;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
-  margin: 30px 20px 40px 20px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s;
+  cursor: pointer;  
 }
 
 #btnAmRestaurant{
   background-color: #af2831;
   border: none;
   color: #e3b814;
-  padding: 15px 80px;
+  padding: 25px 0px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -134,12 +131,8 @@ export default {
   font-size: 20px;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
-  margin: 30px 20px 40px 20px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s;
+  cursor: pointer;
 }
 
 </style>
