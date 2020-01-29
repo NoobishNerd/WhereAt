@@ -126,7 +126,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
 #historyRow{
  border-style: solid; 
   border-width: 2px
