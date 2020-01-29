@@ -16,16 +16,16 @@
       </form>
     </nav>
     <div v-show="show == true">
-    <div class="row">
       <router-link to="/login">
-        <button @click="showOpts">cliente</button>
-      </router-link>
-    </div>
     <div class="row">
-      <router-link to="/loginRestaurant">
-        <button @click="showOpts">restaurante</button>
-      </router-link>
+        <button id="btnAmClient" @click="showOpts" type="button" class="btn btn-primary btn-block">Cliente</button>
     </div>
+    </router-link>
+    <router-link to="/loginRestaurant">
+    <div class="row">
+        <button id="btnAmRestaurant" @click="showOpts" type="button" class="btn btn-primary btn-block">Restaurante</button>
+    </div>
+    </router-link>
     </div>
     
   </div>
@@ -54,9 +54,8 @@ export default {
       localStorage.setItem("loggedUser", "");
     },
 
-    showOpts(){
+    showOpts(){ //show options or nah?
       this.show = this.show ? false : true;
-      alert(this.show)
     },
 
     goToProfile() {
@@ -102,6 +101,45 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+#btnAmClient{
+  background-color: #e3b814;
+  border: none;
+  color: #af2831;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 20px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 30px 20px 40px 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#btnAmRestaurant{
+  background-color: #af2831;
+  border: none;
+  color: #e3b814;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 20px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 30px 20px 40px 20px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 </style>
