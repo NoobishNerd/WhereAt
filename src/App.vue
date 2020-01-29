@@ -21,5 +21,11 @@ export default {
 <style>
 html * {
   font-family: "Raleway";
+  
+}
+
+#app{
+  background-color:#FFFCF2;
+ 
 }
 </style>

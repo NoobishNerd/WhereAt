@@ -267,9 +267,9 @@ img {
   height: 300px;
 }
 #windowPhoto {
-  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
 }
 #windowCarrousel {
   -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.50);
