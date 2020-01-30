@@ -444,6 +444,18 @@ export default new Vuex.Store({
       localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
     },
 
+    CHANGE_APPROVAL(state, payload){
+      
+      for (let restaurant of state.restaurants) {
+        
+        if (restaurant.id == payload.id) {
+          restaurant.approval = payload.value
+          alert(restaurant.approval)
+        }
+      }
+      localStorage.setItem("restaurants",JSON.stringify( state.restaurants))    
+    },
+
     VACATION(state, payload){
       for (let restaurant  of state.restaurants) {
         if (payload.id == restaurant.id) {
@@ -487,6 +499,8 @@ export default new Vuex.Store({
       }
       localStorage.setItem("bookingHistory",JSON.stringify( state.bookingHistory))    
     },
+
+    
 
     AUTHORIZE_COMMENT(state, payload){
       for (let reservation of state.bookingHistory) {

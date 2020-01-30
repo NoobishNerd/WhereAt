@@ -97,23 +97,33 @@
     },
 
     mounted: function(){
+
       this.separateLeftAndRight() 
     },
 
     methods: {
       getSearchResults() {
         this.restaurants = this.$store.getters.getSearchResults(this.searchText)
+        
         this.separateLeftAndRight()
       },
+      filterApproved(){
+        return this.restaurants.filter(restaurant => restaurant.approval === true)
+      },
       separateLeftAndRight(){
+        this.restaurants = this.filterApproved()
+
         this.leftRestaurants = []
         this.rightRestaurants = []
+        //já n podemos usar os ids para separar
+        let restaurantCount = 0
         for (const restaurant of this.restaurants) {
-          if (restaurant.id%2 == 0) {
+          if (restaurantCount%2 == 0) {
             this.leftRestaurants.push(restaurant)
           }else{
             this.rightRestaurants.push(restaurant)
           }
+          restaurantCount++
         }
       }
     },
