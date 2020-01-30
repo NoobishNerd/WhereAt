@@ -3,23 +3,23 @@
     <br />
     <br />
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-12" >
         <h5 id="boldText">Nome de Utilizador</h5>
-        <input v-model="user.username" class="rale" type="text"/>
+        <input v-model="user.username" class="form-control" type="text"/>
       </div>
     </div>
     <br />
     <div class="row">
       <div class="col-sm-12">
         <h5 id="boldText">Telemóvel</h5>
-        <input v-model="user.phone" class="rale" type="text" />
+        <input v-model="user.phone" class="form-control" type="text" />
       </div>
     </div>
     <br />
     <div class="row">
       <div class="col-sm-12">
         <h5 id="boldText">Email</h5>
-        <input v-model="user.email" class="rale" type="text" />
+        <input v-model="user.email" class="form-control" type="text"/>
       </div>
     </div>
     <br />
@@ -57,6 +57,7 @@ export default {
 #boldText{
   font-style: "Raleway";
   font-weight: bold;
+  
 }
 
 .rale{
@@ -83,5 +84,7 @@ export default {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-
+.form-control{
+  width: 200px;
+}
 </style>
