@@ -534,7 +534,7 @@ export default new Vuex.Store({
           {
             id_restaurant: 0,
             id_client: 1,
-            hour: "23:59",
+            hour: "11:59",
             date: "2020-12-31",
             dateOfRes: "15:15  24/1/2020",
             sltdTable: {id: 0, capacity: 4},
@@ -544,7 +544,7 @@ export default new Vuex.Store({
           {
             id_restaurant: 0,
             id_client: 1,
-            hour: "23:59",
+            hour: "6:59",
             date: "2020-12-31",
             dateOfRes: "15:15  24/1/2020",
             sltdTable: {id: 0, capacity: 4},
