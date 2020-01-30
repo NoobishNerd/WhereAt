@@ -218,6 +218,19 @@ export default {
 </script>
 
 <style scoped>
+
+#historyRow{
+        -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
+}
+
+#orangeRow{
+        -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
+}
+
 .custom-control-label {
   color: white;
   font-family: "Raleway";
