@@ -1,54 +1,56 @@
 <template>
-    <div class="container">
-    <br>
-    <br>
-    <div class="row d-flex justify-content-sm-center">
-      <div class="col-sm-12">
-        <div class="row" >
-          <div class="col-sm-3 text-center">
-            <br />
-            <br />
-            <img :src=restaurant.profilePic class="rounded-circle" width="95px" height="95px" />
-            <br />
-            <h5 class="pt-2" id="brownBoldText">Restaurante Circunvalacao</h5>
-            <button @click="changeRestaurantImg" id="smallerButton" class="mt-2">Alterar Foto de Perfil</button>
-          </div>
-          <div class="col-sm-9">
-            <div class="row justify-content-sm-around">
-              <div @click="call('history')" class="col-sm-4 " style="cursor:pointer;">
-                <div class="row">
-                  <div class="col-sm-2 pt-1">
-                    <img src="../assets/Reservations Icon.png" width="40px"> 
-                  </div>
-                  <div class="col-sm-10 pt-3">
-                    <h5 id="brownText">Gerir Reservas</h5>                    
-                  </div>
-                </div>
-              </div>
-              <div @click="call('vacations')" class="col-sm-4" style="cursor: pointer;">
-                <div class="row">
-                  <div class="col-sm-2">
-                    <img src="../assets/Vacation Icon.png" width="40px"> 
-                  </div>
-                  <div class="col-sm-10 pt-3">
-                    <h5 id="brownText">Encerramento</h5>                    
-                  </div>
-                </div>
-              </div>
-              <div @click="logout()" class="col-sm-4" style="cursor: pointer;">
-                <div class="row">
-                  <div class="col-sm-2 pt-2">
-                    <img src="../assets/Logout Icon.png" width="40px"> 
-                  </div>
-                  <div class="col-sm-10 pt-3">
-                    <h5 id="brownText">Terminar Sessão</h5>                    
-                  </div>
-                </div>
-              </div>
-            </div>
-            <RestaurantHistory :id="Number(restaurant.id)" v-if="component == 'history'"> </RestaurantHistory>
-            <RestaurantVacations :restaurant="restaurant" v-if="component == 'vacations'"> </RestaurantVacations>
-          </div>
+  <div class="container mt-5 " id="containerRest">
+    <div class="restaurant">
+      <div class="d-flex justify-content-end">
+        <div @click="call('history')" style="cursor:pointer;">
+          <img
+            src="../assets/Reservations Icon.png"
+            height="30px"
+            style="vertical-align: middle; margin-right: 5px;"
+          />
+          <div class="text" id="brownText">Gerir Reservas</div>
+        </div>
+        <div @click="call('vacations')" style="cursor: pointer;">
+          <img
+            src="../assets/Vacation Icon.png"
+            height="20px"
+            style="vertical-align: middle; margin-right: 5px;"
+          />
+          <div class="text" id="brownText">Encerramento</div>
+        </div>
+        <div @click="logout()" style="cursor: pointer;">
+          <img
+            src="../assets/Logout Icon.png"
+            height="20px"
+            style="vertical-align: middle; margin-right: 5px;"
+          />
+          <div class="text" id="brownText">Terminar Sessão</div>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-sm-center flex-wrap pt-3">
+        <div class="col-sm-3" id="colRest">
+          <img
+            :src="restaurant.profilePic"
+            class="rounded-circle"
+            width="95px"
+            height="95px"
+          />
+          <h5 class="pt-2 text-center" id="brownBoldText">{{ restaurant.username }}</h5>
+          <button @click="changeRestaurantImg" id="smallerButton" class="mt-2">
+            Alterar Foto de Perfil
+          </button>
+        </div>
+        <div class="col-sm-9">
+          <RestaurantHistory
+            :id="Number(restaurant.id)"
+            v-if="component == 'history'"
+          >
+          </RestaurantHistory>
+          <RestaurantVacations
+            :restaurant="restaurant"
+            v-if="component == 'vacations'"
+          >
+          </RestaurantVacations>
         </div>
       </div>
     </div>
@@ -63,17 +65,21 @@ export default {
     component: "history",
     restaurant: {
       id: "",
-      username:"",
-      profilePic:"",
-      email:"",
-      phone:"",
+      username: "",
+      profilePic: "",
+      email: "",
+      phone: ""
     }
   }),
-  created: function(){
-    this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id)
+  created: function() {
+    this.restaurant = this.$store.getters.getRestaurantById(
+      this.$route.params.id
+    );
   },
-  updated: function(){
-    this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id)
+  updated: function() {
+    this.restaurant = this.$store.getters.getRestaurantById(
+      this.$route.params.id
+    );
   },
 
   methods: {
@@ -82,22 +88,21 @@ export default {
     },
 
     logout() {
-      this.$store.commit("LOGOUT")
-      localStorage.setItem("loggedUser", "")
-      this.$router.replace("/")
+      this.$store.commit("LOGOUT");
+      localStorage.setItem("loggedUser", "");
+      this.$router.replace("/");
     },
 
-    changeRestaurantImg(){
-      let newRestaurantImg = prompt("Link da imagem:")
-      if (newRestaurantImg != ""){
-        this.restaurant.profilePic = newRestaurantImg
-        this.$store.commit("CHANGE_RESTAURANT_IMG",{
+    changeRestaurantImg() {
+      let newRestaurantImg = prompt("Link da imagem:");
+      if (newRestaurantImg != "") {
+        this.restaurant.profilePic = newRestaurantImg;
+        this.$store.commit("CHANGE_RESTAURANT_IMG", {
           id: this.restaurant.id,
           profilePic: this.restaurant.profilePic
-        })
-      }
-      else{
-        alert("Coloque o link da imagem!")
+        });
+      } else {
+        alert("Coloque o link da imagem!");
       }
     }
   },
@@ -105,24 +110,49 @@ export default {
     RestaurantHistory,
     RestaurantVacations
   }
-
-}
+};
 </script>
 
 <style>
-#brownBoldText{
-  color: #F17526;
+#containerRest{
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 10px 10px 10px 10px;
+
+}
+
+#colRest{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+}
+
+.text {
+  margin-right: 15px;
+  vertical-align: middle;
+  display: inline;
+  font-size: 20px;
+}
+.text-center {
+  vertical-align: middle !important;
+}
+
+#brownBoldText {
+  color: #f17526;
   font-family: "Raleway";
   font-weight: bold;
 }
 
-#brownText{
-  color: #F17526;
+#brownText {
+  color: #f17526;
   font-family: "Raleway";
 }
 
 #smallerButton {
-  background-color: #F17526;
+  background-color: #f17526;
   border: none;
   color: white;
   padding: 10px 45px;
@@ -141,7 +171,4 @@ export default {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-
-
 </style>
-
