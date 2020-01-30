@@ -2,13 +2,13 @@
   <div class="container">
     <div class="row">
       <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
-        <h5 class="pt-2 font-weight-bold"></h5>
+        <h5 class="pt-2 font-weight-bold" style="color:#f17526">{{restaurant.username}}</h5>
         <img id="fotoRestaurante" :src="restaurant.profilePic" class="pb-3 img-fluid" style="height: 17vw; object-fit: cover"/>
       </div>
       <div class="col-sm-1"></div>
       <div v-if="restaurant.album.length != 0" id="windowCarrousel"
         class="col-sm-6 text-center img-thumbnail img-fluid">
-        <h5 class="font-weight-bold pt-1">Fotos do restaurante</h5>
+        <h5 class="font-weight-bold pt-1" style="color:#f17526">Álbum do Restaurante</h5>
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
           <ol class="carousel-indicators">
@@ -42,7 +42,7 @@
         <div class="row">
           <div class="col-sm-6 pt-0">
             <form v-on:submit.prevent="reservation()">
-              <h4>Hora:</h4>
+              <h4 style="color:#f17526">Hora:</h4>
               <input class="mt-2 mb-3" v-model="hour" required type="time" />
               <input class="mb-3" required v-model="date" type="date" id="start" name="start" />
               <input class="mt-2 mb-5 py-2 px-2 ml-0" @click="updateAvailableTables" type="button" value="Ver mesas disponiveis" id="reservationBtn">
@@ -60,7 +60,7 @@
           </div>
 
           <div class="col-sm-6 pb-4">
-            <h4>Mesas:</h4>
+            <h4 style="color:#f17526">Mesas:</h4>
             <div  class="form-group">
               <select size="17" v-if="availableTables.length && restaurant.available" class="form-control" id="sltTables"
                 v-model="selectedTable">

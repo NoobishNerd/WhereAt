@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-sm-2" v-for="tag in restaurant.tags" v-bind:key="tag.id + 1000">                        
                 <p v-if="tag.main == true" class="text-center main" style="color: white;">{{tag.tag_name}}</p>
-                <p v-if="tag.main == false" class="text-center side">{{tag.tag_name}}</p>
+                <p style="color:black" v-if="tag.main == false" class="text-center side">{{tag.tag_name}}</p>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h4 class="mt-4">Entradas</h4>
+                <h4 class="mt-4" style="color:#f17526">Entradas</h4>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 0">
                     <!-- Eu não queria nada usar esta resolução, mas é a unica forma de usar v-for várias vezes no mesmo array e na mesma página-->
@@ -11,7 +11,7 @@
 
                 <br>
 
-                <h4>Bebidas</h4>
+                <h4 style="color:#f17526">Bebidas</h4>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 1000">
                     <h6 v-if="menuItem.itemType == 'Bebidas'">{{menuItem.item}} - {{menuItem.price}}€</h6>
@@ -19,7 +19,7 @@
 
                 <br>
 
-                <h4>Pratos de Carne</h4>
+                <h4 style="color:#f17526">Pratos de Carne</h4>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 2000">
                     <h6 v-if="menuItem.itemType == 'Carne'">{{menuItem.item}} - {{menuItem.price}}€</h6>
@@ -27,7 +27,7 @@
 
                 <br>
 
-                <h4>Pratos de Peixe</h4>
+                <h4 style="color:#f17526">Pratos de Peixe</h4>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 3000">
                     <h6 v-if="menuItem.itemType == 'Peixe'">{{menuItem.item}} - {{menuItem.price}}€</h6>
@@ -35,7 +35,7 @@
 
                 <br>
 
-                <h4>Pratos Vegetarianos</h4>
+                <h4 style="color:#f17526">Pratos Vegetarianos</h4>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 4000">
                     <h6 v-if="menuItem.itemType == 'Vegetariano'">{{menuItem.item}} - {{menuItem.price}}€</h6>
@@ -43,7 +43,7 @@
 
                 <br>
 
-                <h4>Sobremesas</h4>
+                <h4 style="color:#f17526">Sobremesas</h4>
                 <hr>
                 <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 5000">
                     <h6 v-if="menuItem.itemType == 'Sobremesas'">{{menuItem.item}} - {{menuItem.price}}€</h6>

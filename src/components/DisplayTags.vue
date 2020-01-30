@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h4 class="mt-3">Categorias do restaurante</h4>
+        <h4 class="mt-3" style="color:#f17526">Categorias do restaurante</h4>
         <hr>
         <div class="row">
             <div class="col-sm-2" v-for="tag in restaurant.tags" v-bind:key="tag.id">                        
