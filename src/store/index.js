@@ -82,7 +82,7 @@ export default new Vuex.Store({
       alert(numberHour)
       //para testar intervalo de uma hora
       let hourIntervalMin
-      let hourIntervalMax
+      let hourIntervalMax 
       
 
       for (let table of tables) {

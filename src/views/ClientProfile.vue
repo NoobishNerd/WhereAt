@@ -47,9 +47,12 @@
                 </div>
               </div>
             </div>
-            <ClientInfo :user="user" v-if="component == 'info'"> </ClientInfo>
-            <input @click="getAdminAuth" v-if="component == 'history' && user.admin == true" type="button" value="Autorizar Restaurants">
-            <ClientHistory :id="Number(user.id)" v-if="component == 'history'"> </ClientHistory>
+             <ClientInfo v-if="component == 'info'" :user="user"> </ClientInfo>
+             
+             <AdminAuth v-if="component == 'adminAuth'"></AdminAuth>
+
+             <input @click="call('adminAuth')" v-if="component == 'history' && user.admin == true" type="button" value="Autorizar Restaurants">
+             <ClientHistory :id="Number(user.id)" v-if="component == 'history'"> </ClientHistory>
           </div>
         </div>
       </div>
@@ -59,6 +62,7 @@
 <script>
 import ClientInfo from "@/components/ClientInfo.vue";
 import ClientHistory from "@/components/ClientHistory.vue";
+import AdminAuth from "@/components/AdminAuth.vue";
 export default {
   name: "profileClient",
   data: () => ({
@@ -91,9 +95,7 @@ export default {
       this.$router.replace("/")
     },
 
-    getAdminAuth(){
-      this.$router.push("/adminAuth")
-    },
+    
 
     changeUserImg(){
       let newUserImg = prompt("Link da imagem:")
@@ -111,7 +113,8 @@ export default {
   },
   components: {
     ClientInfo,
-    ClientHistory
+    ClientHistory,
+    AdminAuth
   }
 };
 </script>
