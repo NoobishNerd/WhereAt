@@ -90,11 +90,6 @@ import AdminAuth from "@/components/AdminAuth.vue";
         }
       }
     },
-    components: {
-      ClientInfo,
-      ClientHistory
-    }
-  },
   components: {
     ClientInfo,
     ClientHistory,
