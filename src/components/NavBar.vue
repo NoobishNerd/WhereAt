@@ -5,8 +5,6 @@
         <img src="../assets/Logotipo_Where_Texto.png" class="navbar-brand ml-1" height="50px" />
       </router-link>
       <form class="form-inline">
-        
-
         <img @click="goToProfile" v-if="this.$store.state.logged == true"
           v-bind:src="loggedUser.profilePic" class="rounded-circle" width="40px" height="40px"
           style="cursor: pointer" />
@@ -18,12 +16,14 @@
     <div v-show="show == true">
       <router-link to="/login">
     <div class="row">
-        <button id="btnAmClient" @click="showOpts" type="button" class="btn btn-block"><span>Cliente</span></button>
+      
+        <button id="btnAmClient" @click="showOpts" type="button" class="btn btn-primary btn-block"><h3 class="text-left ml-4"><img src="../assets/main_user.png" style=" vertical-align: middle;height:60px"><span class="ml-2">Cliente</span></h3></button>
     </div>
     </router-link>
     <router-link to="/loginRestaurant">
     <div class="row">
-        <button id="btnAmRestaurant" @click="showOpts" type="button" class="btn btn-block"><span>Restaurante</span></button>
+      
+        <button id="btnAmRestaurant" @click="showOpts" type="button" class="btn btn-block"><h3 class="text-left ml-4"><img src="../assets/fork.png" style=" vertical-align: middle ;height:60px" ><span class="ml-1"> Restaurante</span></h3></button>
     </div>
     </router-link>
     </div>
@@ -107,7 +107,7 @@ export default {
   background-color: #e3b814;
   border: none;
   color: #af2831;
-  padding: 25px 0px;
+  padding: 13px 0px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -116,14 +116,15 @@ export default {
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   transition: all 0.5s;
-  cursor: pointer;  
+  cursor: pointer; 
+  
 }
 
 #btnAmRestaurant{
   background-color: #af2831;
   border: none;
   color: #e3b814;
-  padding: 25px 0px;
+  padding: 13px 0px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -134,5 +135,10 @@ export default {
   transition: all 0.5s;
   cursor: pointer;
 }
+a:hover{
+  text-decoration: none;
+  
+}
+
 
 </style>
