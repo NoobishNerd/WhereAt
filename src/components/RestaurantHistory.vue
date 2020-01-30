@@ -173,7 +173,7 @@ export default {
   },
   created: function() {
     this.reservations = this.$store.getters.getReservsByRestId(this.id);
-    alert(this.reservations);
+    
   },
   methods: {
     getUsername(id) {
