@@ -60,7 +60,6 @@ export default new Vuex.Store({
     },
 
     getReservsByClntId: (state) => (id) => {
-      alert(id)
       return state.bookingHistory.filter(reservation => reservation.id_client === id)
     },
 
@@ -79,7 +78,7 @@ export default new Vuex.Store({
 
       //hora como numero
       let numberHour = hour.slice(0, hour.indexOf(":") )
-      alert(numberHour)
+      
       //para testar intervalo de uma hora
       let hourIntervalMin
       let hourIntervalMax 
@@ -89,15 +88,15 @@ export default new Vuex.Store({
         for (const reservation of state.bookingHistory) {
 
           hourIntervalMin = parseInt(reservation.hour.slice(0, reservation.hour.indexOf(":") )) 
-          alert("min:"+hourIntervalMin)
+          
           hourIntervalMax = hourIntervalMin+1 == 24 ? 0 : hourIntervalMin+1
-          alert("max:"+hourIntervalMax)
+          
 
 
           if(table.id == reservation.sltdTable.id && reservation.confirmation == "c" 
             && reservation.date == date && reservation.id_restaurant == id 
             && (hourIntervalMin == numberHour || hourIntervalMax == numberHour) ){
-            alert("mesa ocupada: " + table.id)
+            //alert("mesa ocupada: " + table.id)
             capacity = false //estando a mesa ocupada adiciona-se com capcidade 0
           }
         }
@@ -139,7 +138,7 @@ export default new Vuex.Store({
           username: payload.username,
           email: payload.email,
           password: payload.password,
-          profilePic: "https://upload.wikimedia.org/wikipedia/en/8/8b/Purplecom.jpg",
+          profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/672478521742065678/gdlRcXX33aYFwAAAABJRU5ErkJggg.png",
           phone: "",
           admin: false
         });
@@ -147,7 +146,7 @@ export default new Vuex.Store({
         //user agora está registado e o login é feito
         state.loggedUser.id = payload.id;
         state.loggedUser.username = payload.username;
-        state.loggedUser.profilePic = "https://upload.wikimedia.org/wikipedia/en/8/8b/Purplecom.jpg"
+        state.loggedUser.profilePic = "https://cdn.discordapp.com/attachments/499615761720147978/672478521742065678/gdlRcXX33aYFwAAAABJRU5ErkJggg.png"
         state.loggedUser.type = "client"  
         state.loggedUser.admin = false;
 
@@ -176,7 +175,7 @@ export default new Vuex.Store({
           username: payload.username,
           email: payload.email,
           password: payload.password,
-          profilePic: "https://upload.wikimedia.org/wikipedia/en/8/8b/Purplecom.jpg",
+          profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/672478045864460337/adlib-home-2.png",
           phone: "",
           address: payload.address,
           approval: false,
@@ -194,7 +193,7 @@ export default new Vuex.Store({
         //user agora está registado e o login é feito
         state.loggedUser.id = payload.id;
         state.loggedUser.username = payload.username;
-        state.loggedUser.profilePic = "https://upload.wikimedia.org/wikipedia/en/8/8b/Purplecom.jpg"
+        state.loggedUser.profilePic = "https://cdn.discordapp.com/attachments/499615761720147978/672478045864460337/adlib-home-2.png"
         state.loggedUser.type = "restaurant"  
         state.loggedUser.admin = false;
 
@@ -324,7 +323,7 @@ export default new Vuex.Store({
         }
       }      
       localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
-      alert("Tag principal mudada!")
+      alert("Tag principal alterada!")
     },
 
     ADD_COMMENT(state, payload){
@@ -450,7 +449,6 @@ export default new Vuex.Store({
         
         if (restaurant.id == payload.id) {
           restaurant.approval = payload.value
-          alert(restaurant.approval)
         }
       }
       localStorage.setItem("restaurants",JSON.stringify( state.restaurants))    
@@ -494,7 +492,6 @@ export default new Vuex.Store({
           reservation.id_client == payload.id_client && reservation.id_restaurant == payload.id_restaurant 
           && reservation.sltdTable.id == payload.tableId && reservation.dateOfRes == payload.dateOfRes) {
           reservation.confirmation = payload.action
-          alert(reservation.confirmation)
         }
       }
       localStorage.setItem("bookingHistory",JSON.stringify( state.bookingHistory))    
@@ -508,7 +505,7 @@ export default new Vuex.Store({
           reservation.id_client == payload.id_client && reservation.id_restaurant == payload.id_restaurant 
           && reservation.sltdTable.id == payload.tableId) {
           reservation.presence = true
-          alert(reservation.presence)
+          
         }
       }
       localStorage.setItem("bookingHistory",JSON.stringify( state.bookingHistory))    
@@ -671,16 +668,16 @@ export default new Vuex.Store({
           {
             id: 3,
             username: "Restaurante Carinho para Sustento",
-            password: "x",
+            password: "cuddlemeplease",
             email: "abraços@x",
-            profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/671159178345054218/unknown.png",
+            profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/672478045864460337/adlib-home-2.png",
             address: "Rua Abraços Ímpares de 49 a 165 4000-001 Porto",
             approval: false,
             available: true,
             postalCode: "4000-001",
             local: "Porto",
             info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse maximus euismod facilisis. Ut venenatis nulla finibus dolor rhoncus vulputate. Sed maximus commodo dolor vitae vehicula. Morbi scelerisque elit egestas libero condimentum, non hendrerit ex ultricies. Pellentesque vitae convallis magna, in facilisis metus. Mauris fringilla congue pharetra. Sed auctor eget orci a imperdiet. Phasellus ac interdum est. Donec velit dolor, iaculis ac dictum quis, vehicula sit amet arcu. In hac habitasse platea dictumst. Etiam laoreet nunc eleifend accumsan venenatis. Praesent a felis luctus, hendrerit diam ut, scelerisque risus. Vivamus volutpat vestibulum turpis quis luctus. Aliquam vel nisi condimentum, consectetur felis nec, tristique leo. Ut id ex elementum, pharetra libero ac, gravida nunc.Aenean magna felis, sollicitudin vel congue at, iaculis ut sapien. Praesent commodo arcu eu leo maximus, quis laoreet nunc lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus tempor ut nisi in condimentum. Duis imperdiet, augue vitae porta pellentesque, diam urna maximus lacus, vitae blandit nunc massa et nisl. Ut laoreet finibus rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer et libero quis libero rhoncus consequat. Duis condimentum iaculis magna, eget mollis nulla auctor vel. Nam dapibus, massa nec aliquet ultrices, elit tellus sollicitudin sapien, non tempor mauris enim viverra risus. Integer purus metus, porttitor eu ex eu, blandit vestibulum velit.Proin posuere maximus suscipit. Morbi porta nisl ac magna lacinia porttitor. Etiam gravida ex erat, et malesuada purus placerat eget. Nunc sit amet nisi ac neque molestie aliquam. Morbi eleifend arcu risus, nec sollicitudin nunc finibus sed. Morbi eget ultrices ex. Quisque finibus nulla ac elit bibendum, ac commodo ante interdum. Quisque malesuada eleifend nisl, sed varius dolor bibendum at. Vestibulum rutrum, dui vel pulvinar varius, orci libero volutpat enim, sed rhoncus dolor sem et risus. Proin vehicula eleifend purus nec viverra. Nullam eros justo, suscipit ut tincidunt nec, pellentesque eu mi. Curabitur venenatis mauris libero, sit amet tempor libero porttitor id. Donec malesuada nec erat a eleifend. Nunc sed rutrum arcu. Quisque accumsan fermentum rutrum. Donec vel ullamcorper elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris vestibulum condimentum lorem, ut rhoncus ante posuere ac. Morbi non velit elementum, feugiat quam eget, lacinia libero. Nulla facilisi. Nullam at nibh dapibus, sollicitudin quam vel, viverra tellus. Nullam molestie leo dignissim, porttitor sem ac, accumsan sem. In posuere ullamcorper est eu pretium. Etiam consectetur metus erat, et fermentum nibh porttitor mollis. Nulla maximus pretium tortor, et gravida quam congue quis. Suspendisse vel massa vitae lorem hendrerit pulvinar. Mauris mauris magna, dignissim non enim at, dapibus volutpat lorem. Vivamus pretium purus eu ipsum sodales, a dapibus orci faucibus. Praesent ut neque vestibulum, blandit metus in, commodo mi. In sit amet lacus interdum, fringilla enim at, tempus lectus. Maecenas sed enim tincidunt, laoreet urna ut, pulvinar risus. Morbi laoreet tortor arcu, a convallis risus gravida tempus. In scelerisque eros ac posuere condimentum. Cras quis augue est. In hac habitasse platea dictumst. Praesent blandit porttitor varius. Donec vehicula est sed dui cursus, eget facilisis sapien vestibulum.",
-            album: [],
+            album: [{id:0, url:"https://cdn.discordapp.com/attachments/499615761720147978/672475355499593758/2Q.png"},{id:1, url:"https://cdn.discordapp.com/attachments/499615761720147978/672475555668688936/casule-psicologia-juiz-de-fora-abraC3A7o.png"},{id:2, url:"https://i.imgur.com/tfEis8D.jpg"},{id:3, url:"https://i.imgur.com/MuH4mfH.jpg"}, {id:4, url:"https://i.imgur.com/s6dX9yF.jpg"}],
             comments: [{id: 0, username:"ZéBitzz" , profilePic: "https://avatars2.githubusercontent.com/u/44086730?s=400&v=4", rate: 2, text: "O site feio e eu aqui", userId:43},{id: 1, username:"ZéBitzz" , profilePic: "https://avatars2.githubusercontent.com/u/44086730?s=400&v=4", rate: 2, text: "O site feio e eu aqui", userId:43},{id: 2, username:"ZéBitzz" , profilePic: "https://avatars2.githubusercontent.com/u/44086730?s=400&v=4", rate: 2, text: "O site feio e eu aqui", userId:43},{id: 3, username:"ZéBitzz" , profilePic: "https://avatars2.githubusercontent.com/u/44086730?s=400&v=4", rate: 2, text: "O site feio e eu aqui", userId:43}],
             tags: [],
             menu: [],
