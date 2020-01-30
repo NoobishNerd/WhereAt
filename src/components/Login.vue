@@ -13,10 +13,7 @@
             <span class="psw">
               <router-link to="/register">Não está registado?</router-link>
             </span>
-            <hr />
-            <span class="psw">
-              <router-link to="/registerRestaurant">É um restaurante? (BURIBANKA tempopário)</router-link>
-            </span>
+            
             <link href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap" rel="stylesheet" />
           </form>
         </div>

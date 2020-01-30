@@ -73,13 +73,30 @@ export default new Vuex.Store({
     },
 
 
-    getAvailableTables: (state) => (date, id, tables) => {
+    getAvailableTables: (state) => (hour, date, id, tables) => {
       let availableTables = []
       let capacity = true
+
+      //hora como numero
+      let numberHour = hour.slice(0, hour.indexOf(":") )
+      alert(numberHour)
+      //para testar intervalo de uma hora
+      let hourIntervalMin
+      let hourIntervalMax
+      
+
       for (let table of tables) {
         for (const reservation of state.bookingHistory) {
+
+          hourIntervalMin = parseInt(reservation.hour.slice(0, reservation.hour.indexOf(":") )) 
+          alert("min:"+hourIntervalMin)
+          hourIntervalMax = hourIntervalMin+1 == 24 ? 0 : hourIntervalMin+1
+          alert("max:"+hourIntervalMax)
+
+
           if(table.id == reservation.sltdTable.id && reservation.confirmation == "c" 
-            && reservation.date == date && reservation.id_restaurant == id){
+            && reservation.date == date && reservation.id_restaurant == id 
+            && (hourIntervalMin == numberHour || hourIntervalMax == numberHour) ){
             alert("mesa ocupada: " + table.id)
             capacity = false //estando a mesa ocupada adiciona-se com capcidade 0
           }
@@ -293,6 +310,23 @@ export default new Vuex.Store({
       }
     },
 
+    CHANGE_MAIN_TAG(state, payload) {
+      for (let restaurant of state.restaurants){
+        if (restaurant.id == payload.restaurantId){
+          for (let tag of restaurant.tags){
+            if (tag.id == payload.tagId){
+              tag.main = true
+            }
+            else{
+              tag.main = false
+            }
+          }
+        }
+      }      
+      localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
+      alert("Tag principal mudada!")
+    },
+
     ADD_COMMENT(state, payload){
       for(let restaurant of state.restaurants){
         if (restaurant.id == payload.restaurantId){
@@ -441,7 +475,9 @@ export default new Vuex.Store({
     },
 
     MANAGE_RESERVATION(state, payload){
+      
       for (let reservation of state.bookingHistory) {
+        
         if (reservation.date == payload.date && reservation.hour == payload.hour && 
           reservation.id_client == payload.id_client && reservation.id_restaurant == payload.id_restaurant 
           && reservation.sltdTable.id == payload.tableId && reservation.dateOfRes == payload.dateOfRes) {
@@ -550,19 +586,17 @@ export default new Vuex.Store({
             username: "McDonald's - Vila do Conde",
             password: "chato",
             email: "yo@gmail.com",
-            profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/671159178345054218/unknown.png",
+            profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/672170232181161994/unknown.png",
             address: "Estrada Nacional 13, Lugar da Portas Fronhas",
             approval: true,
             available: true,
             postalCode: "4480-739",
             local: "Vila do Conde",
-            info: "descritivo do restaurante",
-            album: [{id: 0, url:"https://i.imgur.com/hym8WuD.jpg"}, {id: 1, url:"https://i.imgur.com/MuH4mfH.jpg"}, {id: 2, url:"https://i.imgur.com/s6dX9yF.jpg"}, {id: 3, url:"https://i.imgur.com/tfEis8D.jpg"}],
-            promotions: [],
-            comments: [{id: 0, username:"Best Girl Vibe Check", profilePic: "https://cdn.discordapp.com/attachments/640604184965677072/665652451877322762/25a39n98i7a41.png", rate: 5, text: "Nice place, I bet they make a lot of money", userId:42},
-            {id: 1, username:"ZéBitzz" , profilePic: "https://avatars2.githubusercontent.com/u/44086730?s=400&v=4", rate: 2, text: "O site feio e eu aqui", userId:43}],
-            tags: [],
-            menu: [],
+            info: "Rede de fast-food conhecida por seus hambúrgueres, batatas fritas e milk shakes-shakes-shakes. Este estabelecimento em particular é mais do que só familiar para os estudantes universitários da região. :) párápäpápá",
+            album: [{id: 0, url:"https://i.imgur.com/hym8WuD.jpg"}, {id: 1, url:"https://cdn.discordapp.com/attachments/499615761720147978/672154045137289226/2Q.png"}, {id: 2, url:"https://cdn.discordapp.com/attachments/499615761720147978/672154882425225216/334726.png"}, {id: 3, url:"https://cdn.discordapp.com/attachments/499615761720147978/672155664042164242/308479_1.png"}, {id: 4, url:"https://cdn.discordapp.com/attachments/499615761720147978/672155862453846056/nuggerts_770x433_acf_cropped.png"}],
+            comments: [{id: 0, username:"Luís Senpai - o", profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/672157905771823104/cringe.jpg", rate: 3, text: "Ya, eu não sei porque estou aqui, mas o facto de estar aqui significa alguma coisa...", userId:9999},{id: 1, username:"      zÉ", profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/672212073454764052/Screenshot_2020-01-29-22-50-25.jpg", rate: 5, text: "Manu, o que eu faço por um BIG MAC!", userId:42},{id: 2, username:"Rei Rui D.D. Ferrari", profilePic: "https://cdn.discordapp.com/attachments/516726056909275146/672165113054363648/IMG_20190511_224159.jpg", rate: 5, text: "Mano, não comia um hamburger à mais de 6 meses!", userId:69420}],
+            tags: [{id: 0, tag_name:"Fast-Food", main: true}, {id: 1, tag_name:"Vila", main: false}, {id: 2, tag_name:"Saudável", main: false}],
+            menu: [{id: 0, item: "McNuggéts", itemType: "Entradas", price: "1.00"}, {id: 1, item: "McWrap", itemType: "Entradas", price: "1.00"}, {id: 2, item: "Iced Tea", itemType: "Bebidas", price: "1.50"},{id: 3, item: "AICE-T", itemType: "Bebidas", price: "1.50"}, {id: 4, item: "Menu Big Mac c/ batata grande", itemType: "Carne", price: "4.50"}, {id: 5, item: "Menu McRoyal Bacon c/ batata grande", itemType: "Carne", price: "6.00"}, {id: 6, item: "Menu CBO c/ batata grande", itemType: "Carne", price: "6.00"}],
             tables: [{
                 id: 0,
                 capacity: 4
@@ -580,7 +614,7 @@ export default new Vuex.Store({
                 capacity: 3
               },
             ],
-            phone: ""
+            phone: 252638257
           },
           {
             id: 1,
@@ -595,8 +629,7 @@ export default new Vuex.Store({
             local: "não sei onde é dread v2",
             info: "a sequela",
             album: [],
-            promotions: [],
-            comments: [],
+            comments: [{id: 0, username:"ZéBitzz" , profilePic: "https://avatars2.githubusercontent.com/u/44086730?s=400&v=4", rate: 2, text: "O site feio e eu aqui", userId:43}],
             tags: [],
             menu: [],
             tables: [],
@@ -607,7 +640,7 @@ export default new Vuex.Store({
             username: "clone",
             password: "x",
             email: "x@x",
-            profilePic: "https://dictionary.cambridge.org/pt/images/thumb/house_noun_002_18270.jpg?version=5.0.65",
+            profilePic: "https://cdn.discordapp.com/attachments/499615761720147978/671159178345054218/unknown.png",
             address: "Vila del Conde",
             approval: false,
             available: true,
@@ -615,7 +648,6 @@ export default new Vuex.Store({
             local: "não sei onde é dread v3",
             info: "a sequela",
             album: [],
-            promotions: [],
             comments: [],
             tags: [],
             menu: [],

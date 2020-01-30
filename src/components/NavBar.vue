@@ -7,16 +7,27 @@
       <form class="form-inline">
         
 
-        <img @click="getProfile" v-if="this.$store.state.logged == true"
+        <img @click="goToProfile" v-if="this.$store.state.logged == true"
           v-bind:src="loggedUser.profilePic" class="rounded-circle" width="40px" height="40px"
           style="cursor: pointer" />
         <div v-else text-center>
-          <router-link to="/login">
-            <img src="../assets/main_user.png" height="40px" />
-          </router-link>
+            <img @click="showOpts" src="../assets/main_user.png" height="40px" />
         </div>
       </form>
     </nav>
+    <div v-show="show == true">
+      <router-link to="/login">
+    <div class="row">
+        <button id="btnAmClient" @click="showOpts" type="button" class="btn btn-block"><span>Cliente</span></button>
+    </div>
+    </router-link>
+    <router-link to="/loginRestaurant">
+    <div class="row">
+        <button id="btnAmRestaurant" @click="showOpts" type="button" class="btn btn-block"><span>Restaurante</span></button>
+    </div>
+    </router-link>
+    </div>
+    
   </div>
 </template>
 
@@ -26,7 +37,8 @@ export default {
 
   data: () => ({
     restaurants: "",
-    loggedUser: ""
+    loggedUser: "",
+    show: false
 
   }),
 
@@ -42,7 +54,11 @@ export default {
       localStorage.setItem("loggedUser", "");
     },
 
-    getProfile() {
+    showOpts(){ //show options or nah?
+      this.show = this.show ? false : true;
+    },
+
+    goToProfile() {
       if(this.loggedUser.type == "client"){
         this.$router.push({
           name: "clientProfile",
@@ -85,6 +101,38 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+#btnAmClient{
+  background-color: #e3b814;
+  border: none;
+  color: #af2831;
+  padding: 25px 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 20px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  transition: all 0.5s;
+  cursor: pointer;  
+}
+
+#btnAmRestaurant{
+  background-color: #af2831;
+  border: none;
+  color: #e3b814;
+  padding: 25px 0px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 20px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  transition: all 0.5s;
+  cursor: pointer;
 }
 
 </style>

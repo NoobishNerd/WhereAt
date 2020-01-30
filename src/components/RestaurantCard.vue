@@ -6,7 +6,9 @@
         <div class="card-body">
           <h6 class="card-title text-left">{{restaurant.local}}</h6>
           <h4 class="card-title text-left font-weight-bold" id="restaurantCardName">{{restaurant.username}}</h4>
-          <p class="card-text text-left">Tag Principal</p>
+          <div v-for="tag of restaurant.tags" :key="tag.id">
+          <p v-if="tag.main == true" class="card-text text-left">{{tag.tag_name}}</p>
+          </div>
           <p class="card-text text-left">{{rate}} | {{num_comments}} avaliações</p>
         </div>
       </div>
@@ -50,7 +52,7 @@ export default {
         this.rate += comment.rate
       }
       //average de ratings
-      this.rate = this.rate/this.num_comments
+      this.rate = (this.rate/this.num_comments).toFixed(1)
     }
 
   }

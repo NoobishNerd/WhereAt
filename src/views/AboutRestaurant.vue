@@ -77,7 +77,7 @@
         </div>
       </div>
       <div class="col-sm-1"></div>
-      <div class="col-sm-5 ">
+      <div class="col-sm-5">
         <div>
           <div class="google-map img-fluid" id="myMap"></div>
         </div>
@@ -91,7 +91,7 @@
       </div>
       <div @click="call('promos')" id="promotion" class="col-sm-2 mr-3 mt-3 pt-3"
         style="border-bottom-lg light:1px solid black; border-left-lg light:1px; cursor:pointer">
-        <h5 class="font-weight-bold" style="color:white">Promoções</h5>
+        <h5 class="font-weight-bold" style="color:white">Categorias</h5>
       </div>
       <div @click="call('comments')" id="comentary" class="col-sm-2 mt-3 pt-3 mr-4 font-weight-bold "
         style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
@@ -105,7 +105,7 @@
       <AddComment :restaurant="restaurant" v-show="component == 'comments'"> </AddComment>
       <Comments v-show="component == 'comments'" v-for="comment in restaurant.comments" v-bind:comment="comment"
         v-bind:key="comment.username"></Comments>
-      <PromotionEditor v-show="component == 'promos'"></PromotionEditor>
+      <DisplayTags :restaurant="restaurant" v-show="component == 'promos'"></DisplayTags>
       <DisplayMenu :restaurant="restaurant" v-show="component == 'menu'"></DisplayMenu>
       <DisplayInfo :restaurant="restaurant" v-show="component == 'info'"></DisplayInfo>
     </div>
@@ -113,7 +113,7 @@
 </template>
 <script>
 import Comments from "@/components/Comments.vue"
-import PromotionEditor from "@/components/PromotionEditor.vue"
+import DisplayTags from "@/components/DisplayTags.vue"
 import DisplayMenu from "@/components/DisplayMenu.vue"
 import DisplayInfo from "@/components/DisplayInfo.vue"
 import AddComment from "@/components/AddComment.vue"
@@ -121,14 +121,14 @@ import AddComment from "@/components/AddComment.vue"
 
 export default {
   data: () => ({
-      component: "comments",
+      component: "info",
+      map: "",
       restaurant: {},
       hour: "",
       date: "",
       availableTables: [],
       selectedTableReady: [],
       selectedTable: "",
-      map: "",
     }),
     mounted: function () {
       this.renderMap();
@@ -136,8 +136,9 @@ export default {
 
     created: function () {
       this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id);
-      this.availableTables = this.restaurant.tables
+      this.availableTables = this.restaurant.tables;
     },
+
 
     methods: {
       call(newComponent) {
@@ -148,17 +149,36 @@ export default {
         let today = new Date()
         return `${today.getHours()}:${today.getMinutes()}  ${today.getDate()}/${today.getMonth()+ 1}/${today.getFullYear()}`
       },
-
       renderMap() {
-        this.map = new google.maps.Map(document.querySelector("#myMap"), {
-          center: {
-            lat: -34.397,
-            lng: 150.644
-          },
-          zoom: 8
-        });
-        this.map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
-      },
+      this.map = new google.maps.Map(document.querySelector("#myMap"), {
+        center: {
+          lat: -34.397,
+          lng: 150.644
+        },
+        zoom: 17,
+        mapTypeId: "roadmap"
+      });
+      const geocoder = new google.maps.Geocoder();
+      this.geocodeAddress(geocoder, this.map)
+    },
+
+    geocodeAddress(geocoder, resultsMap){
+      const address = this.restaurant.address + ", " + this.restaurant.postalCode + " " + this.restaurant.local;
+      geocoder.geocode({ 'address': address},
+      (results, status) => {
+        if (status === 'OK') {
+          resultsMap.setCenter(results[0].geometry.location);
+          new google.maps.Marker({
+            map: resultsMap,
+            position: results[0].geometry.location
+          });
+          resultsMap.setMapTypeId("roadmap")
+        } else {
+          alert("Geocode didn't work because of: " + status)
+        }
+      });
+    },
+
 
 
       reservation() {
@@ -183,7 +203,7 @@ export default {
 
       updateAvailableTables() {
        
-        this.availableTables = this.$store.getters.getAvailableTables(this.date, this.restaurant.id, this.restaurant.tables)
+        this.availableTables = this.$store.getters.getAvailableTables(this.hour, this.date, this.restaurant.id, this.restaurant.tables)
   
         alert(JSON.stringify(this.availableTables))
       },
@@ -223,7 +243,7 @@ export default {
 
     components: {
       Comments,
-      PromotionEditor,
+      DisplayTags,
       DisplayMenu,
       DisplayInfo,
       AddComment
