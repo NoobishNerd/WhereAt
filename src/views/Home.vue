@@ -2,15 +2,15 @@
   <div class="home">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-12">
-          <div class="img-wrapper">
-            <img class="img-responsive" src="../assets/Nice Restaurant.png" />
+        <div class="col-sm-12 px-0">
+
+            <img class="img-responsive" src="../assets/restaurante.png" />
             <div class="img-overlay">
 
 
 
             </div>
-          </div>
+
         </div>
       </div>
 
@@ -22,7 +22,7 @@
         </div>
         <div class="col-sm-8">
         <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
         <h4 class="text-left" id="recommendationText">Recomendações Where@</h4>
         </div>
         <div id="searchBtn" class="span3 widget-span widget-type-raw_html custom-search d-flex" style=""

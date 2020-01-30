@@ -65,7 +65,7 @@
         </div>
     </div>
     <div v-else class="row mt-3">
-        <h5 class="text-center mt-2">Precisa de estar autenticado para comentar!</h5>
+        <h5 class="text-center mt-2 ml-3">Precisa de estar autenticado para comentar!</h5>
     </div>
     <hr>
     </div>

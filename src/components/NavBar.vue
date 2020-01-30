@@ -11,7 +11,7 @@
           v-bind:src="loggedUser.profilePic" class="rounded-circle" width="40px" height="40px"
           style="cursor: pointer" />
         <div v-else text-center>
-            <img @click="showOpts" src="../assets/main_user.png" height="40px" />
+            <img @click="showOpts" src="../assets/main_user.png" height="40px" style="cursor:pointer" />
         </div>
       </form>
     </nav>
