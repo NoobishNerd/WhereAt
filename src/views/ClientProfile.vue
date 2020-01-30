@@ -1,15 +1,18 @@
 <template>
-  <div class="client">
+<div class="container mt-5" id="containerPrfl">
+  
+
+  <div class="client ">
     <div class="d-flex justify-content-end">
-      <div @click="call('info')" style="cursor:pointer;">
+      <div @click="call('info')" style="cursor:pointer" class="mt-2">
         <img src="../assets/main_user.png" height="20px" style="vertical-align: middle; margin-right: 5px;" />
         <div class="text" id="brownText">Informações Pessoais</div>
       </div>
-      <div @click="call('history')" style="cursor: pointer;">
+      <div @click="call('history')" style="cursor: pointer;" class="mt-2">
         <img src="../assets/Reservations Icon.png" height="30px" style="vertical-align: middle; margin-right: 5px;" />
         <div class="text" id="brownText">As Minhas Reservas</div>
       </div>
-      <div @click="logout()" style="cursor: pointer;">
+      <div @click="logout()" style="cursor: pointer;" class="mt-2">
         <img src="../assets/Logout Icon.png" height="20px" style="vertical-align: middle; margin-right: 5px;" />
         <div class="text" id="brownText">
           Terminar Sessão
@@ -30,12 +33,13 @@
       <div class="col-sm-9">
         <ClientInfo :user="user" v-if="component == 'info'"> </ClientInfo>
         <input @click="call('adminAuth')" v-if="component == 'history' && user.admin == true" type="button"
-          value="Autorizar Restaurants" />
+          value="Autorizar Restaurants" id="autorizeBtn" class="px-2 py-1 mt-1" />
         <AdminAuth v-if="component == 'adminAuth'"></AdminAuth>
         <ClientHistory :id="Number(user.id)" v-if="component == 'history'"></ClientHistory>
 
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -124,6 +128,31 @@ import AdminAuth from "@/components/AdminAuth.vue";
 
   #smallerButton {
     background-color: #f17526;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: bold;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+  #containerPrfl{
+      -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
+    border: none;
+  border-radius: 10px 10px 10px 10px;
+  }
+  #autorizeBtn{
+        background-color: #f17526;
     border: none;
     color: white;
     text-align: center;

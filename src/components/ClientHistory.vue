@@ -5,7 +5,7 @@
       <div v-for="reservation in bookingHistory" v-bind:key="reservation.id">
 
         <div v-if="reservation.confirmation == 'p'" id="historyRow" class="row mb-3 mr-1 mt-2">
-          <div class="col-sm-8" style="border-right:2px solid">
+          <div class="col-sm-8" >
             <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
             <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
             <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurant)}}</p>
@@ -13,7 +13,7 @@
 
             <br>
           </div>
-          <div class="col-sm-4" style="background-color:#F17526">
+          <div class="col-sm-4" id="orangeRow" style="background-color:#F17526">
             <div class="row">
               <div class="col-sm-2">
               </div>
@@ -36,7 +36,7 @@
 
 
         <div v-if="reservation.confirmation == 'c'" id="historyRow" class="row mb-3 mr-1 mt-2">
-          <div class="col-sm-8" style="border-right:2px solid">
+          <div class="col-sm-8" >
             <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
             <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
             <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurant)}}</p>
@@ -44,7 +44,7 @@
 
             <br>
           </div>
-          <div class="col-sm-4" style="background-color:#F17526">
+          <div class="col-sm-4" id="orangeRow" style="background-color:#F17526">
             <div class="row">
               <div class="col-sm-4">
               </div>
@@ -70,7 +70,7 @@
 
 
         <div v-if="reservation.confirmation == 'd'" id="historyRow" class="row mb-3 mr-1 mt-2">
-          <div class="col-sm-8" style="border-right:2px solid">
+          <div class="col-sm-8" >
             <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
             <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
             <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurant)}}</p>
@@ -78,12 +78,12 @@
 
             <br>
           </div>
-           <div class="col-sm-4" style="background-color:#F17526">
+           <div class="col-sm-4" id="orangeRow" style="background-color:#F17526">
             <div class="row">
               <div class="col-sm-4">
               </div>
               <div class="col-sm-6 pt-4 mt-3 ml-1">
-                <img src="../assets/No Icon Border.png" width="47x">
+                <img src="../assets/No Icon Border.png" width="47px">
               </div>
               <div class="col-sm-2">
               </div>
@@ -128,14 +128,16 @@ export default {
 
 <style >
 #historyRow{
- border-style: solid; 
-  border-width: 2px
+      -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
 }
 
 #brownBoldText{
   color: #F17526;
   font-family: "Raleway";
   font-weight: bold;
+  
 }
 
 #brownText{
@@ -148,6 +150,12 @@ export default {
   font-family: "Raleway";
   font-weight: bold;
   cursor:pointer
+}
+#orangeRow{
+        -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
+
 }
 
 </style>
