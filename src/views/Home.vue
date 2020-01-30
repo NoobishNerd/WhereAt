@@ -115,7 +115,7 @@
 
         this.leftRestaurants = []
         this.rightRestaurants = []
-        //já n podemos usar os ids para separar
+        //já n podemos usar os ids para separar por isso contamos
         let restaurantCount = 0
         for (const restaurant of this.restaurants) {
           if (restaurantCount%2 == 0) {
