@@ -29,18 +29,19 @@
       </div>
       <div class="col-sm-9">
         <ClientInfo :user="user" v-if="component == 'info'"> </ClientInfo>
-        <input @click="getAdminAuth" v-if="component == 'history' && user.admin == true" type="button"
-          value="Autorizar Restaurants" />
+        
         <ClientHistory :id="Number(user.id)" v-if="component == 'history'">
         </ClientHistory>
+        <AdminAuth></AdminAuth>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import ClientInfo from "@/components/ClientInfo.vue";
-  import ClientHistory from "@/components/ClientHistory.vue";
+import ClientInfo from "@/components/ClientInfo.vue";
+import ClientHistory from "@/components/ClientHistory.vue";
+import AdminAuth from "@/components/AdminAuth.vue";
 
   export default {
     name: "profileClient",
@@ -74,9 +75,7 @@
         this.$router.replace("/");
       },
 
-      getAdminAuth() {
-        this.$router.push("/adminAuth");
-      },
+     
 
       changeUserImg() {
         let newUserImg = prompt("Link da imagem:");
@@ -95,7 +94,13 @@
       ClientInfo,
       ClientHistory
     }
-  };
+  },
+  components: {
+    ClientInfo,
+    ClientHistory,
+    AdminAuth
+  }
+};
 </script>
 
 <style scoped>
