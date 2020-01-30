@@ -114,9 +114,9 @@ export default {
     required: true}
   },
   created: function(){
-    alert("this.$store.getters.getReservsByClntId(this.id)")
+    
     this.bookingHistory = this.$store.getters.getReservsByClntId(this.id)
-    alert(JSON.stringify( this.bookingHistory))
+    
   },
   methods:{
     getUsername(id_restaurant){

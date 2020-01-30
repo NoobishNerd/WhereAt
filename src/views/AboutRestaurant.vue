@@ -205,7 +205,6 @@ export default {
        
         this.availableTables = this.$store.getters.getAvailableTables(this.hour, this.date, this.restaurant.id, this.restaurant.tables)
   
-        alert(JSON.stringify(this.availableTables))
       },
 
       checkAvailability() {
