@@ -32,8 +32,8 @@
         <input @click="call('adminAuth')" v-if="component == 'history' && user.admin == true" type="button"
           value="Autorizar Restaurants" />
         <AdminAuth v-if="component == 'adminAuth'"></AdminAuth>
-        <ClientHistory :id="Number(user.id)" v-if="component == 'history'">
-        </ClientHistory>
+        <ClientHistory :id="Number(user.id)" v-if="component == 'history'"></ClientHistory>
+
       </div>
     </div>
   </div>
