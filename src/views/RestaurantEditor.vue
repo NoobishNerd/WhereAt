@@ -63,21 +63,20 @@
       </div>
     </div>
     <div id="finalCrate" class="row d-flex">
-      <div @click="call('menu')" id="menu" class="col-sm-2 pt-3 mr-3 ml-3 mt-3" style="border-bottom-lg light:1px; cursor:pointer">
-        <h5 class="font-weight-bold" style="color:white">Ementa</h5>
+      <div @click="call('menu', 'menu')" id="menu" class="col-sm-2 pt-3 mr-3 ml-3 mt-3" style="border-bottom-lg light:1px; cursor:pointer">
+        <h5 class="font-weight-bold" id="menuText" style="color:#f17526">Ementa</h5>
       </div>
-      <div @click="call('album')" id="album" class="col-sm-2 pt-3 mr-3 ml-3 mt-3"
-        style="border-bottom-lg light:1px solid black; border-left-lg light:1px; cursor:pointer">
-        <h5 class="font-weight-bold" style="color:white">Categorias</h5>
+      <div @click="call('album', 'album')" id="album" class="col-sm-2 pt-3 mr-3 ml-3 mt-3">
+        <h5 class="font-weight-bold" id="albumText" style="color:#f17526">Categorias</h5>
       </div>
-      <div @click="call('comments')" id="comentary" class="col-sm-2 pt-3 ml-3 mt-3 font-weight-bold "
+      <div @click="call('comments', 'comentary')" id="comentary" class="col-sm-2 pt-3 ml-3 mt-3 font-weight-bold "
         style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
-        <h5 class="font-weight-bold" style="color:white">Comentários</h5>
+        <h5 class="font-weight-bold" id="comentaryText" style="color:#f17526">Comentários</h5>
       </div>
       <div class="col-sm-3" style="border-left-lg light:1px"></div>
-      <div @click="call('info')" id="information" class="col-sm-2 mt-3 pt-1 "
+      <div @click="call('info', 'information')" id="information" class="col-sm-2 mt-3 pt-1 "
         style="border-bottom-lg light:1px; border-left-lg light:3px; cursor:pointer">
-        <h1 class="text-center font-weight-bold" style="color:white">i</h1>
+        <h1 class="text-center font-weight-bold" id="informationText" style="color:white">i</h1>
       </div>
       <Comments v-show="component == 'comments'" v-for="comment in restaurant.comments" v-bind:comment="comment"
         v-bind:key="comment.username"></Comments>
@@ -98,7 +97,8 @@ export default {
   data: () => ({
     component: "info",
     map: "",
-    restaurant: ""
+    restaurant: "",
+    lastCallId: "information"
   }),
   mounted: function () {
     this.renderMap();
@@ -109,7 +109,13 @@ export default {
   },
 
   methods: {
-    call(newComponent) {
+    call(newComponent, id) {
+      document.getElementById(this.lastCallId).style = "background-color:white";
+      document.getElementById(this.lastCallId + "Text").style = "color:#f17526";
+
+      document.getElementById(id).style = "background-color:#f17526";
+      document.getElementById(id + "Text").style = "color:white";
+      this.lastCallId = id;
       this.component = newComponent;
     },
     renderMap() {
@@ -263,35 +269,33 @@ html * {
 }
 
 #album{
-    -webkit-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
-  box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
-  background-color:#f17526;
-  border-radius: 2px 2px 2px 2px;
-}
-
-#promotion {
   -webkit-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
-  background-color:#f17526;
+  background-color:white;
   border-radius: 2px 2px 2px 2px;
+  border: 1px solid #f17526;
+  cursor:pointer
 }
 
 #menu {
   -webkit-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
-  background-color:#f17526;
+  background-color:white;
   border-radius: 2px 2px 2px 2px;
+  border: 1px solid #f17526;
+  cursor:pointer
 }
 
 #comentary {
   -webkit-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
-  background-color:#f17526;
+  background-color:white;
   border-radius: 2px 2px 2px 2px;
+  border: 1px solid #f17526;
+  cursor:pointer
 }
 
 #information {
@@ -300,6 +304,8 @@ html * {
   box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
   background-color:#f17526;
   border-radius: 2px 2px 2px 2px;
+  border: 1px solid #f17526;
+  cursor:pointer
 }
 
 #windowEditor {
@@ -315,37 +321,39 @@ html * {
 }
 
 #manageBtn {
-  background-color: #f17526;
-  border: none;
-  color: #ffffff;
+  background-color: white;
+  border-color: #f17526;
+  border-radius: 5px;
+  color: #f17526;
   font-weight: bold;
   text-decoration: none;
   text-transform: uppercase;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s;
 }
+
+
+#manageBtn:hover{
+  color: white;
+  background-color: #f17526;
+}
+
 
 #addPhotoBtn {
-  background-color: #f17526;
-  border: none;
-  color: #ffffff;
+  background-color: white;
+  border-color: #f17526;
+  border-radius: 5px;
+  color: #f17526;
   font-weight: bold;
   text-decoration: none;
   text-transform: uppercase;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-
+  transition: all 0.2s;
 }
+
+#addPhotoBtn:hover{
+  color: white;
+  background-color: #f17526;
+}
+
 
 #removePhotoBtn {
   background-color: #f17526;
