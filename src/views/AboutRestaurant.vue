@@ -98,7 +98,7 @@
         <h5 class="font-weight-bold" id="comentaryText" style="color:#f17526">Comentários</h5>
       </div>
       <div class="col-sm-3" style="border-left-lg light:1px"></div>
-      <div @click="call('info, information')" id="information" class="col-sm-2 mt-3 pt-1 "
+      <div @click="call('info', 'information')" id="information" class="col-sm-2 mt-3 pt-1 "
         style="border-bottom-lg light:1px; border-left-lg light:3px; cursor:pointer">
         <h1 class="text-center font-weight-bold" id="informationText" style="color:white">i</h1>
       </div>
@@ -149,8 +149,8 @@ export default {
       document.getElementById(id).style = "background-color:#f17526";
       document.getElementById(id + "Text").style = "color:white";
       this.lastCallId = id;
-        this.component = newComponent;
-      },
+      this.component = newComponent;
+    },
 
       getSystemDate() {
         let today = new Date()
