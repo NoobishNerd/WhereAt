@@ -1,14 +1,21 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-3 pr-0">
                 <label class="mt-2" for="mainTagSlt">Escolher tag principal</label>
                 <select v-model="newMainTag" id="MainTagSlt" class="form-control">
                     <option v-for="tag in restaurant.tags" v-bind:key="tag.id" :value="tag.id">{{tag.tag_name}}</option>
                 </select>
             </div>
-            <div class="col-sm-2 mt-3">
+            <div class="col-sm-1 mt-3 mr-5">
                 <button @click="changeMainTag()" id="changeMainBtn" class="mt-4 px-3 py-2">Salvar</button>
+            </div>
+            <div class="col-sm-3 pr-0">
+                <label class="mt-2" for="addTagTxt">Adicionar Tag</label>
+                <input v-model="newTag" class="form-control" type="text" id="addTagTxt">
+            </div>
+            <div class="col-sm-1 mt-3">
+                <button @click="addTag()" id="addTagBtn" class="mt-4 px-3 py-2">Adicionar</button>
             </div>
         </div>        
 
@@ -27,7 +34,8 @@
 export default {
     name: "TagEditor",
     data: () => ({
-        newMainTag: ""
+        newMainTag: "",
+        newTag: ""
     }),
     props: {
         restaurant: {
@@ -42,6 +50,9 @@ export default {
                 tagId: this.newMainTag,
                 restaurantId: this.restaurant.id
             })
+        },
+        addTag(){
+            alert("work in progress")
         }
     }
 }
@@ -76,5 +87,22 @@ export default {
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
+
+#addTagBtn {
+    background-color: #f17526;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
 
 </style>
