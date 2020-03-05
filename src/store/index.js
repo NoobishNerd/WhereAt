@@ -64,7 +64,7 @@ export default new Vuex.Store({
     },
 
     getSearchResults: (state) => (searchText, filter) => {
-
+      alert(filter)
       // COMO REMOVER ACENTOS??
       if(filter == ""){
       return state.restaurants.filter(restaurant => 
@@ -74,9 +74,9 @@ export default new Vuex.Store({
 
       }else{
         return state.restaurants.filter(restaurant => 
-          restaurant.username.toLowerCase().includes(searchText.toLowerCase()) || 
+          (restaurant.username.toLowerCase().includes(searchText.toLowerCase()) || 
           restaurant.tags.find(tag => tag.tag_name.toLowerCase().includes(searchText.toLowerCase())) ||  
-          restaurant.address.toLowerCase().includes(searchText.toLowerCase())  &&
+          restaurant.address.toLowerCase().includes(searchText.toLowerCase()) ) &&
           restaurant.tags.find(tag => tag.tag_name.toLowerCase().includes(filter.toLowerCase()))) 
       }
     },

@@ -44,8 +44,8 @@
           <!--end layout-widget-wrapper -->
         </div>
         <div>
-          <select v-model="filter" id="filterSlt" class="form-control" v-on:input="getSearchResults()">
-            <option v-for="tag in filters" v-bind:key="tag" :value="tag">{{tag}}</option>
+          <select v-model="filter" id="filterSlt" class="form-control">
+            <option v-for="item in filters" v-bind:key="item" :value="item">{{item}}</option>
           </select>
         </div>
         </div>
@@ -119,6 +119,7 @@
 
     methods: {
       getSearchResults() {
+        alert(this.filter)
         this.restaurants = this.$store.getters.getSearchResults(this.searchText, this.filter)
         
         this.separateLeftAndRight()
