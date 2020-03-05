@@ -43,6 +43,11 @@
           </div>
           <!--end layout-widget-wrapper -->
         </div>
+        <div>
+          <select v-model="filter" id="filterSlt" class="form-control" v-on:input="getSearchResults()">
+            <option v-for="tag in filters" v-bind:key="tag" :value="tag">{{tag}}</option>
+          </select>
+        </div>
         </div>
         <hr class="mt-1">
         </div>
@@ -85,7 +90,8 @@
 
     data: () => ({
       searchText: "",
-      filterMaybe: "",
+      filter: "",
+      filters: [],
       leftRestaurants: [],
       rightRestaurants: [],
       restaurants: []
@@ -93,6 +99,16 @@
 
     created: function () {
       this.restaurants = this.$store.state.restaurants;
+      let distinctFilters = [""]
+      this.$store.state.restaurants.forEach(restaurant => {
+          for (const tag of restaurant.tags) {
+            if(!(distinctFilters.find(filter => filter.toLowerCase().includes(tag.tag_name.toLowerCase())))){
+              distinctFilters.push(tag.tag_name)
+            }
+          }
+          
+      });
+      this.filters = distinctFilters
       
     },
 
@@ -103,7 +119,7 @@
 
     methods: {
       getSearchResults() {
-        this.restaurants = this.$store.getters.getSearchResults(this.searchText)
+        this.restaurants = this.$store.getters.getSearchResults(this.searchText, this.filter)
         
         this.separateLeftAndRight()
       },

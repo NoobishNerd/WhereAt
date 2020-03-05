@@ -53,6 +53,13 @@ export default {
         },
         addTag(){
             alert("work in progress")
+            
+            this.$store.commit("ADD_TAG", {
+                newTag: this.newTag,
+                restaurantId: this.restaurant.id
+            })
+            
+            
         }
     }
 }

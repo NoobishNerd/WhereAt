@@ -63,8 +63,22 @@ export default new Vuex.Store({
       return state.bookingHistory.filter(reservation => reservation.id_client === id)
     },
 
-    getSearchResults: (state) => (searchText) => {
-      return state.restaurants.filter(restaurant => restaurant.username.toLowerCase().includes(searchText.toLowerCase())) /*|| restaurant.address.includes(searchText) || restaurant.local.includes(searchText))*/  //tags not implemented || restaurant.tags == searchText
+    getSearchResults: (state) => (searchText, filter) => {
+
+      // COMO REMOVER ACENTOS??
+      if(filter == ""){
+      return state.restaurants.filter(restaurant => 
+        restaurant.username.toLowerCase().includes(searchText.toLowerCase()) || 
+        restaurant.tags.find(tag => tag.tag_name.toLowerCase().includes(searchText.toLowerCase())) ||  
+        restaurant.address.toLowerCase().includes(searchText.toLowerCase()) )  
+
+      }else{
+        return state.restaurants.filter(restaurant => 
+          restaurant.username.toLowerCase().includes(searchText.toLowerCase()) || 
+          restaurant.tags.find(tag => tag.tag_name.toLowerCase().includes(searchText.toLowerCase())) ||  
+          restaurant.address.toLowerCase().includes(searchText.toLowerCase())  &&
+          restaurant.tags.find(tag => tag.tag_name.toLowerCase().includes(filter.toLowerCase()))) 
+      }
     },
 
     getLoggedUser: (state) => {
@@ -324,6 +338,25 @@ export default new Vuex.Store({
       }      
       localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
       alert("Tag principal alterada!")
+    },
+
+    ADD_TAG(state, payload){
+      for (let restaurant of state.restaurants){
+        if (restaurant.id == payload.restaurantId){
+          for (let tag of restaurant.tags){
+            if (tag.tag_name == payload.newTag){
+              alert("Categoria semelhante já adicionada!")
+              return false;
+            }
+          }
+          restaurant.tags.push(
+            {id: restaurant.tags.length, tag_name: payload.newTag, main: false}
+          )
+
+        }
+      }      
+      localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
+      return true;
     },
 
     ADD_COMMENT(state, payload){
