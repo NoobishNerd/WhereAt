@@ -24,6 +24,13 @@
         <div class="row">
         <div class="col-sm-4">
         <h4 class="text-left" id="recommendationText">Recomendações Where@</h4>
+
+
+        <div v-if="recommendation != 'undefined'" >
+          <RestaurantCard v-for="restaurant in recommendation" v-bind:key="restaurant.id + 'star'" v-bind:restaurant="restaurant"></RestaurantCard>
+        </div>
+
+
         </div>
         <div id="searchBtn" class="span3 widget-span widget-type-raw_html custom-search d-flex" style=""
           data-widget-type="raw_html" data-x="4" data-w="3">
@@ -94,7 +101,8 @@
       filters: [],
       leftRestaurants: [],
       rightRestaurants: [],
-      restaurants: []
+      restaurants: [],
+      recommendation: "undefined"
     }),
 
     created: function () {
@@ -114,7 +122,8 @@
 
     mounted: function(){
 
-      this.separateLeftAndRight() 
+      this.separateLeftAndRight()
+      this.getRecommendation()
     },
 
     methods: {
@@ -141,6 +150,47 @@
             this.rightRestaurants.push(restaurant)
           }
           restaurantCount++
+        }
+      },
+      getRecommendation(){
+        alert("recom")
+        if(this.$store.state.logged != false){
+          let preferences = this.$store.getters.getLoggedUser.preferences
+          let recommendationTemp = [];
+          
+          for (let restaurant of this.restaurants) {
+              //por agora escolhe os restaurantes mais avaliados
+              if(Math.max.apply(Math, this.restaurants.map(function(o) { return o.comments.length; }))){
+                for (let i = 0; i < restaurant.tags.length; i++) {
+                  for (let j = 0; j < preferences.length; j++) {
+                   if (preferences[j].tag_name ==  restaurant.tags[i].tag_name) {
+                     recommendationTemp.push(restaurant.id)
+                   } 
+                  }
+                }
+              }             
+          }
+          //filter unique ids
+          alert(recommendationTemp)
+          recommendationTemp = recommendationTemp.filter(function (value, index, self) { 
+              return self.indexOf(value) === index;
+          })
+          
+          alert(recommendationTemp)
+          if(recommendationTemp.length != 0){
+            this.recommendation = []
+            for (let i = 0; i < recommendationTemp.length; i++) {
+              for (let restaurant of this.restaurants) {
+                if(restaurant.id == recommendationTemp[i]){ this.recommendation.push(restaurant)}
+              }  
+            }
+          }
+          
+          
+            
+          alert(this.recommendation)
+        }else{
+          this.recommendation = "undefined"
         }
       }
     },

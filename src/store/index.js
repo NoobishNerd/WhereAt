@@ -392,6 +392,7 @@ export default new Vuex.Store({
             state.loggedUser.id = user.id;
             state.loggedUser.username = user.username;
             state.loggedUser.profilePic = user.profilePic;
+            state.loggedUser.preferences = user.preferences;
 
             localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
 
@@ -604,7 +605,8 @@ export default new Vuex.Store({
             email: "bitaites@gmail.com",
             profilePic: "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg",
             phone: "",
-            admin: false
+            admin: false,
+            preferences: []
           },
 
           {
@@ -614,7 +616,8 @@ export default new Vuex.Store({
             email: "where@mail",
             profilePic: "https://i.imgur.com/jr7av.jpg",
             phone: "",
-            admin: true
+            admin: true,
+            preferences: [{id: 0, tag_name:"Fast-Food", main: true}, {id: 1, tag_name:"Vila", main: false}, {id: 2, tag_name:"Saudável", main: false}]
           }
         ];
 
