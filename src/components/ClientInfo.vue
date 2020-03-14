@@ -29,25 +29,91 @@
         <button @click="saveChanges" id="smallerButton">Guardar Alterações</button>
       </div>
     </div>
+
+    <!-- eu não sei como querem organizar isto help-->
+    <div class="row">
+            <div class="col-sm-3 pr-0">
+                <label class="mt-2" for="addPrefSlt">Escolher Preferência:</label>
+                <select v-model="newPref" id="addPrefSlt" class="form-control">
+                    <option v-for="tag in allTags" v-bind:key="tag" :value="tag">{{tag}}</option>
+                </select>
+            </div>
+            <div class="col-sm-1 mt-3 mr-5">
+               <button @click="addPref()" id="addPrefBtn" class="mt-4 px-3 py-2">Escolher</button>
+            </div>
+            <div class="col-sm-3 pr-0">     
+            </div>
+            <div class="col-sm-1 mt-3">
+            </div>
+        </div>        
+
+        <h4 class="mt-3">Preferêcias selecionadas para recomendações</h4>
+        <hr>
+        <div class="row">
+            <div class="col-sm-2" v-for="tag in user.preferences" v-bind:key="tag.id + 1000">                        
+                <p style="color:black" class="text-center side">{{tag.tag_name}}</p>
+                <button @click="removePref(tag.id)" id="removeTagBtn" class="ml-2">X </button>
+            </div>
+        </div>
   </div>
 </template>
 <script>
-
 export default {
-  props:{
-    user:{
+  data: () => ({
+    newPref: "",
+    allTags: []
+  }),
+  props: {
+    user: {
       type: Object,
       required: true
     }
   },
 
-  methods:{
-    saveChanges(){
+  created: function () {
+      let restaurants = this.$store.state.restaurants;
+      let distinctFilters = [""]
+      restaurants.forEach(restaurant => {
+          for (const tag of restaurant.tags) {
+            if(!(distinctFilters.find(filter => filter.toLowerCase().includes(tag.tag_name.toLowerCase())))){
+              if(!(this.user.preferences.find( preference  => preference.tag_name.toLowerCase().includes(tag.tag_name.toLowerCase())))){
+                distinctFilters.push(tag.tag_name)
+              }
+            }            
+          }
+          
+      });
+      this.allTags = distinctFilters
+      alert(this.allTags)
+    },
+
+  methods: {
+    saveChanges() {
       this.$store.commit("CHANGE_USER_PROFILE", this.user)
       this.saveStorage()
     },
-    saveStorage(){
+    saveStorage() {
       localStorage.setItem("users", JSON.stringify(this.$store.state.users));
+    },
+
+
+
+    addPref() {
+      if(this.newPref != ""){
+        alert(this.newPref)
+        this.$store.commit("ADD_PREF", {
+        newTag: this.newPref,
+        userId: this.user.id
+      })
+      }
+      
+    },
+
+    removePref(id) {
+      this.$store.commit("REMOVE_PREF", {
+        id: id,
+        userId: this.user.id
+      })
     }
   }
 }

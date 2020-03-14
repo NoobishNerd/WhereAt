@@ -378,6 +378,39 @@ export default new Vuex.Store({
       }
     },
 
+    ADD_PREF(state, payload){
+      for (let user of state.users){
+        if (user.id == payload.userId){
+          
+          user.preferences.push(
+            {id: user.preferences.length, tag_name: payload.newTag, main: false}
+          )
+
+        }
+      }      
+      localStorage.setItem("users", JSON.stringify(state.users))
+      return true;
+    },
+
+    REMOVE_PREF(state, payload) {
+      let newTagId = 0 //para reescrever o id de todas as tables 
+      let newTagArray = []
+      for(let user of state.users){
+        if (user.id == payload.userId){
+          for (let tag of user.preferences){
+            if(payload.id != tag.id){
+              tag.id = newTagId
+              newTagArray.push(tag)
+              newTagId ++
+            }
+          }
+          user.preferences = newTagArray
+          localStorage.setItem("users", JSON.stringify(state.users))
+          alert("Preferência removida!")
+        }
+      }
+    },
+
     ADD_COMMENT(state, payload){
       for(let restaurant of state.restaurants){
         if (restaurant.id == payload.restaurantId){

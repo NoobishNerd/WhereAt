@@ -153,7 +153,6 @@
         }
       },
       getRecommendation(){
-        alert("recom")
         if(this.$store.state.logged != false){
           let preferences = this.$store.getters.getLoggedUser.preferences
           let recommendationTemp = [];
