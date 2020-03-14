@@ -158,7 +158,7 @@
           let recommendationTemp = [];
           
           for (let restaurant of this.restaurants) {
-              //por agora escolhe os restaurantes mais avaliados
+              //por agora escolhe o restaurante mais avaliado ao invés de tudo que tenha uma tag preferida
               if(Math.max.apply(Math, this.restaurants.map(function(o) { return o.comments.length; }))){
                 for (let i = 0; i < restaurant.tags.length; i++) {
                   for (let j = 0; j < preferences.length; j++) {
