@@ -359,6 +359,25 @@ export default new Vuex.Store({
       return true;
     },
 
+    REMOVE_TAG(state, payload) {
+      let newTagId = 0 //para reescrever o id de todas as tables 
+      let newTagArray = []
+      for(let restaurant of state.restaurants){
+        if (restaurant.id == payload.restaurantId){
+          for (let tag of restaurant.tags){
+            if(payload.id != tag.id){
+              tag.id = newTagId
+              newTagArray.push(tag)
+              newTagId ++
+            }
+          }
+          restaurant.tags = newTagArray
+          localStorage.setItem("restaurants", JSON.stringify(state.restaurants))
+          alert("Categoria removida!")
+        }
+      }
+    },
+
     ADD_COMMENT(state, payload){
       for(let restaurant of state.restaurants){
         if (restaurant.id == payload.restaurantId){

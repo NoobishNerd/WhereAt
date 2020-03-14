@@ -25,6 +25,7 @@
             <div class="col-sm-2" v-for="tag in restaurant.tags" v-bind:key="tag.id + 1000">                        
                 <p v-if="tag.main == true" class="text-center main" style="color: white;">{{tag.tag_name}}</p>
                 <p style="color:black" v-if="tag.main == false" class="text-center side">{{tag.tag_name}}</p>
+                <button @click="removeTag(tag.id)" id="removeTagBtn" class="ml-2">X </button>
             </div>
         </div>
     </div>
@@ -58,8 +59,13 @@ export default {
                 newTag: this.newTag,
                 restaurantId: this.restaurant.id
             })
-            
-            
+        },
+
+        removeTag(id){
+            this.$store.commit("REMOVE_TAG",{
+                id: id,
+                restaurantId: this.restaurant.id
+            })
         }
     }
 }
