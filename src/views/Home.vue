@@ -23,10 +23,8 @@
         <div class="col-sm-8">
         <div class="row">
         <div class="col-sm-4">
-        <h4 class="text-left" id="recommendationText">Recomendações Where@</h4>
-
-
         <div v-if="recommendation != 'undefined'" >
+          <h4 class="text-left pb-2" id="recommendationText">Recomendações para Si</h4>                  
           <RestaurantCard v-for="restaurant in recommendation" v-bind:key="restaurant.id + 'star'" v-bind:restaurant="restaurant"></RestaurantCard>
         </div>
 
@@ -66,6 +64,7 @@
 
         </div>
         <div class="col-sm-8">
+          <h4 class="text-left pb-2" id="recommendationText">Restaurantes Portugal</h4>
           <div class="row" >
             <div class="col-sm-5">
               <RestaurantCard v-for="restaurant in leftRestaurants" v-bind:key="restaurant.id" v-bind:restaurant="restaurant"></RestaurantCard>
@@ -128,7 +127,6 @@
 
     methods: {
       getSearchResults() {
-        alert(this.filter)
         this.restaurants = this.$store.getters.getSearchResults(this.searchText, this.filter)
         
         this.separateLeftAndRight()
@@ -170,12 +168,10 @@
               }             
           }
           //filter unique ids
-          alert(recommendationTemp)
           recommendationTemp = recommendationTemp.filter(function (value, index, self) { 
               return self.indexOf(value) === index;
           })
           
-          alert(recommendationTemp)
           if(recommendationTemp.length != 0){
             this.recommendation = []
             for (let i = 0; i < recommendationTemp.length; i++) {
@@ -186,8 +182,6 @@
           }
           
           
-            
-          alert(this.recommendation)
         }else{
           this.recommendation = "undefined"
         }

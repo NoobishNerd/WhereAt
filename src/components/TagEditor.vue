@@ -23,9 +23,8 @@
         <hr>
         <div class="row">
             <div class="col-sm-2" v-for="tag in restaurant.tags" v-bind:key="tag.id + 1000">                        
-                <p v-if="tag.main == true" class="text-center main" style="color: white;">{{tag.tag_name}}</p>
-                <p style="color:black" v-if="tag.main == false" class="text-center side">{{tag.tag_name}}</p>
-                <button @click="removeTag(tag.id)" id="removeTagBtn" class="ml-2">X </button>
+                <p v-if="tag.main == true" class="text-center main" style="color: white;">{{tag.tag_name}} <span class="ml-2"><button @click="removeTag(tag.id)" id="removeTagBtn">X</button></span></p>
+                <p style="color:black" v-if="tag.main == false" class="text-center side">{{tag.tag_name}} <span class="ml-2"><button @click="removeTag(tag.id)" id="removeTagBtnWhite">X</button></span></p>
             </div>
         </div>
     </div>
@@ -53,8 +52,6 @@ export default {
             })
         },
         addTag(){
-            alert("work in progress")
-            
             this.$store.commit("ADD_TAG", {
                 newTag: this.newTag,
                 restaurantId: this.restaurant.id
@@ -117,5 +114,34 @@ export default {
     transition: all 0.3s ease-in-out;
 }
 
+#removeTagBtn {
+    background-color: #f17526;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
 
+#removeTagBtnWhite {
+    background-color: white;
+    border: none;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
 </style>

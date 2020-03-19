@@ -352,7 +352,7 @@ export default new Vuex.Store({
           restaurant.tags.push(
             {id: restaurant.tags.length, tag_name: payload.newTag, main: false}
           )
-
+          alert("Categoria Adicionada!")
         }
       }      
       localStorage.setItem("restaurants", JSON.stringify(state.restaurants))

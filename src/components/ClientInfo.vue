@@ -46,13 +46,10 @@
             <div class="col-sm-1 mt-3">
             </div>
         </div>        
-
-        <h4 class="mt-3">Preferêcias selecionadas para recomendações</h4>
         <hr>
         <div class="row">
-            <div class="col-sm-2" v-for="tag in user.preferences" v-bind:key="tag.id + 1000">                        
-                <p style="color:black" class="text-center side">{{tag.tag_name}}</p>
-                <button @click="removePref(tag.id)" id="removeTagBtn" class="ml-2">X </button>
+            <div class="col-sm-3" v-for="tag in user.preferences" v-bind:key="tag.id + 1000">                        
+                <p style="color:white" class="text-center pref">{{tag.tag_name}}<span class="ml-2"><button @click="removePref(tag.id)" id="addPrefBtn">X</button></span></p>
             </div>
         </div>
   </div>
@@ -130,6 +127,15 @@ export default {
   font-style: "Raleway"
 }
 
+.pref {
+  border-style: solid;
+  border-width: 4px;
+  border-color: #f17526;
+  border-radius: 40px 40px 40px 40px;
+  background-color: #f17526;
+}
+
+
 #smallerButton {
   background-color: #F17526;
   border: none;
@@ -150,6 +156,26 @@ export default {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
+#addPrefBtn {
+  background-color: #F17526;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
 .form-control{
   width: 200px;
 }
