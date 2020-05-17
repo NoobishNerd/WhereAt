@@ -1,5 +1,8 @@
 <template>
   <div class="loginRes">
+        <div class="header">
+      <router-link to="/"><font-awesome-icon icon="chevron-circle-left" /></router-link>
+    </div>
     <div class="login d-flex align-items-center justify-content-center ">
       <div id="formContent" class="">
         <!-- Login Form -->
@@ -154,5 +157,15 @@ input[type="password"] {
 
 input[type="text"]:placeholder {
   color: #cccccc;
+}
+.loginRes.header {
+  padding: 15px 0px;
+}
+
+.loginRes .header a {
+  color: white;
+  font-size: 2rem;
+  margin-left: 15px;
+  text-decoration: none;
 }
 </style>

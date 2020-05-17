@@ -1,5 +1,10 @@
 <template>
   <div class="registerRes">
+    <div class="header">
+      <router-link to="/"
+        ><font-awesome-icon icon="chevron-circle-left"
+      /></router-link>
+    </div>
     <div
       class="login d-flex align-items-center justify-content-center position-relative"
     >
@@ -85,7 +90,6 @@
                   >Já possui conta?</router-link
                 >
               </small>
-
             </form>
           </div>
         </div>
@@ -172,10 +176,10 @@ export default {
   font-size: 20px;
   display: flex;
   flex-direction: column;
-  margin-top:50px;
+  margin-top: 50px;
 }
 a {
-  color: #e3b814;
+  color: #af2831;
   text-decoration: none;
   font-weight: 400;
 }
@@ -236,6 +240,16 @@ small {
   text-align: center;
   display: inline-block;
   margin-top: 15px;
-  font-size:12px;
+  font-size: 12px;
+}
+.registerRes.header {
+  padding: 15px 0px;
+}
+
+.registerRes .header a {
+  color: white;
+  font-size: 2rem;
+  margin-left: 15px;
+  text-decoration: none;
 }
 </style>

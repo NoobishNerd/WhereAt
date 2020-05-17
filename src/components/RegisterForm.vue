@@ -1,5 +1,10 @@
 <template>
   <div class="registerCli">
+    <div class="header">
+      <router-link to="/"
+        ><font-awesome-icon icon="chevron-circle-left"
+      /></router-link>
+    </div>
     <div
       class="login d-flex align-items-center justify-content-center position-relative"
     >
@@ -134,7 +139,7 @@ export default {
   margin-top: 50px;
 }
 a {
-  color: #af2831;
+  color: #e3b814;
   text-decoration: none;
   font-weight: 400;
 }
@@ -195,5 +200,15 @@ small {
   text-align: center;
   display: inline-block;
   margin-top: 15px;
+}
+.registerCli .header {
+  padding: 15px 0px;
+}
+
+.registerCli .header a {
+  color: white;
+  font-size: 2rem;
+  margin-left: 15px;
+  text-decoration: none;
 }
 </style>

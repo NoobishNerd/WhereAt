@@ -1,5 +1,8 @@
 <template>
   <div class="loginCli">
+    <div class="header">
+      <router-link to="/"><font-awesome-icon icon="chevron-circle-left" /></router-link>
+    </div>
     <div class="login d-flex align-items-center justify-content-center ">
       <div id="formContent" class="">
         <!-- Login Form -->
@@ -153,5 +156,15 @@ input[type="email"] {
 
 input[type="text"]:placeholder {
   color: #cccccc;
+}
+.loginCli.header {
+  padding: 15px 0px;
+}
+
+.loginCli .header a {
+  color: white;
+  font-size: 2rem;
+  margin-left: 15px;
+  text-decoration: none;
 }
 </style>
