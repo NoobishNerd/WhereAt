@@ -28,10 +28,7 @@
                   >Não está registado?</router-link
                 >
               </span>
-              <link
-                href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap"
-                rel="stylesheet"
-              />
+
             </form>
           </div>
         </div>
@@ -83,9 +80,6 @@ a {
 
 /* STRUCTURE */
 
-.wrapper {
-  font-family: "Raleway", bold;
-}
 
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
