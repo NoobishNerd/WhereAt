@@ -1,21 +1,38 @@
 <template>
-  <div class="login d-flex align-items-center justify-content-center position-relative">
-    <div id="formContent" class="container d-flex justify-content-center position-absolute">
-      <!-- Login Form -->
-      <div class="row">
-        <div class="col-12">
-          <form v-on:submit.prevent="login()">
-            <input v-model="emailLogin" type="email" id="login" class="fadeIn second" name="login"
-              placeholder="Endereço de email" />
-            <input v-model="passwordLogin" type="password" id="password" class="fadeIn third" name="login"
-              placeholder="Password" />
-            <input type="submit" class="fadeIn fourth" value="Login" />
-            <span class="psw">
-              <router-link to="/register">Não está registado?</router-link>
-            </span>
-            
-            <link href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap" rel="stylesheet" />
-          </form>
+  <div class="loginCli">
+    <div class="login d-flex align-items-center justify-content-center ">
+      <div id="formContent" class="">
+        <!-- Login Form -->
+        <div class="row">
+          <div class="col-12">
+            <form v-on:submit.prevent="login()">
+              <input
+                v-model="emailLogin"
+                type="email"
+                id="login"
+                class="fadeIn second"
+                name="login"
+                placeholder="Endereço de email"
+              />
+              <input
+                v-model="passwordLogin"
+                type="password"
+                id="password"
+                class="fadeIn third"
+                name="login"
+                placeholder="Password"
+              />
+              <input type="submit" class="fadeIn fourth" value="Login" />
+              <span class="psw">
+                <router-link to="/register">Não está registado?</router-link>
+              </span>
+
+              <link
+                href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap"
+                rel="stylesheet"
+              />
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -27,29 +44,33 @@ export default {
   name: "Login",
   data: () => ({
     emailLogin: "",
-    passwordLogin: ""
+    passwordLogin: "",
   }),
-
-
-
 
   methods: {
     login() {
       this.$store.commit("LOGIN", {
         email: this.emailLogin,
         password: this.passwordLogin,
-        type: "client"
+        type: "client",
       });
-        this.$router.replace("/")
-      
-    }
-  }
+      this.$router.replace("/");
+    },
+  },
 };
 </script>
 
 <style scoped>
-body {
-  overflow-y: hidden;
+.loginCli {
+  background-image: url("../assets/home.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  left: 0%;
+  top: 0%;
+  width: 100vw;
+  position: absolute;
 }
 
 a {
@@ -59,17 +80,7 @@ a {
   font-weight: 400;
 }
 
-.login {
-  width: 100%;
-  height: 100vh;
-  padding-bottom: 200px;
-}
-
 /* STRUCTURE */
-
-.wrapper {
-  font-family: "Raleway", bold;
-}
 
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
@@ -83,6 +94,7 @@ a {
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   text-align: center;
   font-size: 20px;
+  margin-top: 150px;
 }
 
 /* FORM TYPOGRAPHY*/
