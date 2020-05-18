@@ -1,15 +1,26 @@
 <template>
-  <div class="card-group" style="width: 30rem; cursor:pointer">
+  <div class="card-group" style="cursor:pointer">
     <div class="container-fluid">
-      <div class="card img-thumbnail">
-        <img class="card-img-top img-fluid" style="height: 20vw; object-fit: cover" :src="restaurant.profilePic" alt="Card image cap" @click="getAboutRestaurant" />
+      <div class="card">
+        <img
+          class="card-img-top"
+          :src="restaurant.profilePic"
+          alt="Card image cap"
+          @click="getAboutRestaurant"
+        />
         <div class="card-body">
-          <h6 class="card-title text-left">{{restaurant.local}}</h6>
-          <h4 class="card-title text-left font-weight-bold" id="restaurantCardName">{{restaurant.username}}</h4>
+          <h6 class="card-title text-left">{{ restaurant.local }}</h6>
+          <h4 class="card-title text-left " id="restaurantCardName">
+            {{ restaurant.username }}
+          </h4>
           <div v-for="tag of restaurant.tags" :key="tag.id">
-          <p v-if="tag.main == true" class="card-text text-left">{{tag.tag_name}}</p>
+            <p v-if="tag.main == true" class="card-text text-left">
+              {{ tag.tag_name }}
+            </p>
           </div>
-          <p class="card-text text-left">{{rate}} | {{num_comments}} avaliações</p>
+          <p class="card-text text-left">
+            {{ rate }} | {{ num_comments }} avaliações
+          </p>
         </div>
       </div>
     </div>
@@ -28,13 +39,13 @@ export default {
   props: {
     restaurant: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-  
+
   mounted: function() {
-    if (this.restaurant.comments.length != 0){
-      this.getAverageAndNumber()
+    if (this.restaurant.comments.length != 0) {
+      this.getAverageAndNumber();
     }
   },
 
@@ -42,20 +53,19 @@ export default {
     getAboutRestaurant() {
       this.$router.push({
         name: "aboutRestaurant",
-        params: { id: this.restaurant.id }
+        params: { id: this.restaurant.id },
       });
     },
 
-    getAverageAndNumber(){
-      for (let comment of this.restaurant.comments){
-        this.num_comments ++
-        this.rate += comment.rate
+    getAverageAndNumber() {
+      for (let comment of this.restaurant.comments) {
+        this.num_comments++;
+        this.rate += comment.rate;
       }
       //average de ratings
-      this.rate = (this.rate/this.num_comments).toFixed(1)
-    }
-
-  }
+      this.rate = (this.rate / this.num_comments).toFixed(1);
+    },
+  },
 };
 </script>
 
@@ -89,7 +99,20 @@ h6 {
 h4 {
   margin: 0px;
 }
-#restaurantCardName{
+#restaurantCardName {
   color: #f17526;
+}
+/* img {
+  max-width: 100%;
+} */
+.card {
+  width: 100%;
+  overflow: hidden;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit: cover;
 }
 </style>
