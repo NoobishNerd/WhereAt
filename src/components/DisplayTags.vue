@@ -1,9 +1,8 @@
 <template>
     <div class="container">
         <h4 class="mt-3" style="color:#f17526">Categorias do restaurante</h4>
-        <hr>
         <div class="row">
-            <div class="col-sm-2" v-for="tag in restaurant.tags" v-bind:key="tag.id">                        
+            <div class="col-sm-2 pt-3" v-for="tag in restaurant.tags" v-bind:key="tag.id">                        
                 <p v-if="tag.main == true" class="text-center main" style="color: white;">{{tag.tag_name}}</p>
                 <p v-if="tag.main == false" class="text-center side">{{tag.tag_name}}</p>
             </div>
@@ -29,16 +28,16 @@ export default {
 <style scoped>
 .main {
   border-style: solid;
-  border-width: 4px;
+  border-width: 2px;
   border-color: #f17526;
-  border-radius: 40px 40px 40px 40px;
+
   background-color: #f17526;
 }
 .side {
   border-style: solid;
-  border-width: 4px;
+  border-width: 2px;
   border-color: #f17526;    
-  border-radius: 40px 40px 40px 40px;  
+
 }
 
 </style>

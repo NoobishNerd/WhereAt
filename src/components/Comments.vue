@@ -5,8 +5,8 @@
             <img :src="comment.profilePic" class="mt-2 ml-1" style="object-fit: cover" width="60" height="60" />
         </div>
         <div class="col-sm-9 pl-0">
-          <h6 class="pt-1 mb-1" id="brownBoldText" style="color:#f17526"><strong>{{comment.username}}</strong></h6>
-          <h5 id="commentText" style="color: black">{{comment.text}}</h5>
+          <h6 class="pt-1 mb-1" id="brownBoldText" style="color:#f17526">{{comment.username}}</h6>
+          <p id="commentText" style="color: black">{{comment.text}}</p>
 
         </div>
         <!--<div class="col-sm-6">
