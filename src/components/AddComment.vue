@@ -153,7 +153,7 @@
         text-align: center;
         text-decoration: none;
         font-size: 14px;
-        font-weight: bold;
+
         -webkit-border-radius: 3px 3px 3px 3px;
         border-radius: 3px 3px 3px 3px;
         -webkit-transition: all 0.3s ease-in-out;
@@ -168,7 +168,6 @@
         text-align: center;
         text-decoration: none;
         font-size: 14px;
-        font-weight: bold;
         -webkit-border-radius: 3px 3px 3px 3px;
         border-radius: 3px 3px 3px 3px;
         -webkit-transition: all 0.3s ease-in-out;

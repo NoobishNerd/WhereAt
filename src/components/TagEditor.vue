@@ -86,7 +86,7 @@ export default {
     background-color: #f17526;
     border: none;
     color: #ffffff;
-    font-weight: bold;
+
     text-decoration: none;
     text-transform: uppercase;
     -webkit-border-radius: 5px 5px 5px 5px;
@@ -102,7 +102,7 @@ export default {
     background-color: #f17526;
     border: none;
     color: #ffffff;
-    font-weight: bold;
+
     text-decoration: none;
     text-transform: uppercase;
     -webkit-border-radius: 5px 5px 5px 5px;
@@ -118,7 +118,7 @@ export default {
     background-color: #f17526;
     border: none;
     color: #ffffff;
-    font-weight: bold;
+
     text-decoration: none;
     text-transform: uppercase;
     -webkit-border-radius: 5px 5px 5px 5px;
@@ -133,7 +133,7 @@ export default {
 #removeTagBtnWhite {
     background-color: white;
     border: none;
-    font-weight: bold;
+
     text-decoration: none;
     text-transform: uppercase;
     -webkit-border-radius: 5px 5px 5px 5px;

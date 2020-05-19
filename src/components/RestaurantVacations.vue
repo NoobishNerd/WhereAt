@@ -51,7 +51,7 @@ export default {
 <style scoped>
 #boldText{
   font-style: "Raleway";
-  font-weight: bold;
+
 }
 
 .rale{
@@ -68,7 +68,7 @@ export default {
   display: inline-block;
   text-transform: uppercase;
   font-size: 15px;
-  font-weight: bold;
+
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   margin: 0px 20px 20px 20px;

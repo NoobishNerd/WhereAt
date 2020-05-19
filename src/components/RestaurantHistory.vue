@@ -239,7 +239,7 @@ export default {
 #brownBoldText {
   color: #f17526;
   font-family: "Raleway";
-  font-weight: bold;
+
 }
 
 #brownText {
@@ -250,7 +250,7 @@ export default {
 #whiteText {
   color: white;
   font-family: "Raleway";
-  font-weight: bold;
+
   cursor: pointer;
 }
 </style>

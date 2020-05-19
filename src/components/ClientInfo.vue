@@ -46,7 +46,6 @@
             <div class="col-sm-1 mt-3">
             </div>
         </div>        
-        <hr>
         <div class="row">
             <div class="col-sm-3" v-for="tag in user.preferences" v-bind:key="tag.id + 1000">                        
                 <p style="color:white" class="text-center pref">{{tag.tag_name}}<span class="ml-2"><button @click="removePref(tag.id)" id="addPrefBtn">X</button></span></p>
@@ -119,7 +118,6 @@ export default {
 <style scoped>
 #boldText{
   font-style: "Raleway";
-  font-weight: bold;
   
 }
 
@@ -146,7 +144,6 @@ export default {
   display: inline-block;
   text-transform: uppercase;
   font-size: 15px;
-  font-weight: bold;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   margin: 0px 20px 20px 20px;
@@ -166,7 +163,6 @@ export default {
   display: inline-block;
   text-transform: uppercase;
   font-size: 15px;
-  font-weight: bold;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   -webkit-transition: all 0.3s ease-in-out;
@@ -174,6 +170,7 @@ export default {
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+  margin-bottom: 20px;
 }
 
 .form-control{

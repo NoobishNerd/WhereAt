@@ -83,7 +83,7 @@ export default {
   text-decoration: none;
   text-transform: uppercase;
   font-size: 15px;
-  font-weight: bold;
+
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   margin: 100px 0px 40px 0px;
@@ -103,7 +103,7 @@ export default {
   display: inline-block;
   text-transform: uppercase;
   font-size: 15px;
-  font-weight: bold;
+
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   margin: 70px 0px 40px 0px;

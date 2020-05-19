@@ -60,7 +60,6 @@ export default {
         text-decoration: none;
         text-transform: uppercase;
         font-size: 15px;
-        font-weight: bold;
         -webkit-border-radius: 5px 5px 5px 5px;
         border-radius: 5px 5px 5px 5px;
         -webkit-transition: all 0.3s ease-in-out;

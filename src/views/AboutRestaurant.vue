@@ -2,13 +2,13 @@
   <div class="container">
     <div class="row">
       <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
-        <h5 class="pt-2 font-weight-bold" style="color:#f17526">{{restaurant.username}}</h5>
+        <h5 class="pt-2 " style="color:#f17526">{{restaurant.username}}</h5>
         <img id="fotoRestaurante" :src="restaurant.profilePic" class="pb-3 img-fluid" style="height: 17vw; object-fit: cover"/>
       </div>
       <div class="col-sm-1"></div>
       <div v-if="restaurant.album.length != 0" id="windowCarrousel"
         class="col-sm-6 text-center img-thumbnail img-fluid">
-        <h5 class="font-weight-bold pt-1" style="color:#f17526">Álbum do Restaurante</h5>
+        <h5 class=" pt-1" style="color:#f17526">Álbum do Restaurante</h5>
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
           <ol class="carousel-indicators">
@@ -87,20 +87,20 @@
 
     <div id="finalCrate" class="row d-flex">
       <div @click="call('menu', 'menu')" id="menu" class="col-sm-2 pt-3 mr-3 ml-3 mt-3" style="border-bottom-lg light:1px; cursor:pointer">
-        <h5 class="font-weight-bold" id="menuText" style="color:#f17526">Ementa</h5>
+        <h5 class="" id="menuText" style="color:#f17526">Ementa</h5>
       </div>
       <div @click="call('promos', 'promotion')" id="promotion" class="col-sm-2 mr-3 mt-3 pt-3"
         style="border-bottom-lg light:1px solid black; border-left-lg light:1px; cursor:pointer">
-        <h5 class="font-weight-bold" id="promotionText" style="color:#f17526">Categorias</h5>
+        <h5 class="" id="promotionText" style="color:#f17526">Categorias</h5>
       </div>
       <div @click="call('comments', 'comentary')" id="comentary" class="col-sm-2 mt-3 pt-3 mr-4 font-weight-bold "
         style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
-        <h5 class="font-weight-bold" id="comentaryText" style="color:#f17526">Comentários</h5>
+        <h5 class="" id="comentaryText" style="color:#f17526">Comentários</h5>
       </div>
       <div class="col-sm-3" style="border-left-lg light:1px"></div>
       <div @click="call('info', 'information')" id="information" class="col-sm-2 mt-3 pt-1 "
         style="border-bottom-lg light:1px; border-left-lg light:3px; cursor:pointer">
-        <h1 class="text-center font-weight-bold" id="informationText" style="color:white">i</h1>
+        <h1 class="text-center " id="informationText" style="color:white">i</h1>
       </div>
       <AddComment :restaurant="restaurant" v-show="component == 'comments'"> </AddComment>
       <Comments v-show="component == 'comments'" v-for="comment in restaurant.comments" v-bind:comment="comment"
@@ -277,7 +277,6 @@ img {
   display: inline-block;
   text-transform: uppercase;
   font-size: 15px;
-  font-weight: bold;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   margin: 10px 20px 40px 20px;
@@ -378,7 +377,6 @@ img {
   display: inline-block;
   text-transform: uppercase;
   font-size: 15px;
-  font-weight: bold;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   margin: 10px 20px 40px 20px;
