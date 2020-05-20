@@ -10,64 +10,43 @@
 
       <br />
 
-      <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8">
-          <div class="row">
-            <div class="col-sm-4">
-              <div v-if="recommendation != 'undefined'">
-                <h4 class="text-left pb-2" id="recommendationText">
-                  Recomendações para Si
-                </h4>
-
-                <RestaurantCard
-                  v-for="restaurant in recommendation"
-                  v-bind:key="restaurant.id + 'star'"
-                  v-bind:restaurant="restaurant"
-                ></RestaurantCard>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="restaurants">
         <div class="filterPos">
           <span class="" id="recommendationText">
             Restaurantes Portugal
           </span>
-            <div id="searchBtn" class="">
-              <span
-                id="hs_cos_wrapper_module_14308928327274411"
+          <div id="searchBtn" class="">
+            <span
+              id="hs_cos_wrapper_module_14308928327274411"
+              class=""
+              style=""
+              data-hs-cos-general-type="widget"
+              data-hs-cos-type="raw_html"
+            >
+              <form
+                v-on:submit.prevent="getSearchResults()"
+                method="GET"
+                action="https://www.shopwithscrip.com/Search?"
+                role="search"
                 class=""
-                style=""
-                data-hs-cos-general-type="widget"
-                data-hs-cos-type="raw_html"
+                id="express-form"
+                novalidate=""
               >
-                <form
-                  v-on:submit.prevent="getSearchResults()"
-                  method="GET"
-                  action="https://www.shopwithscrip.com/Search?"
-                  role="search"
+                <input
+                  v-model="searchText"
+                  required=""
+                  name="q"
+                  id="express-form-typeahead"
+                  placeholder="Search"
                   class=""
-                  id="express-form"
-                  novalidate=""
-                >
-                  <input
-                    v-model="searchText"
-                    required=""
-                    name="q"
-                    id="express-form-typeahead"
-                    placeholder="Search"
-                    class=""
-                    autocomplete="off"
-                    spellcheck="false"
-                    dir="auto"
-                    type="text"
-                  />
-                </form>
-              </span>
-            </div>
+                  autocomplete="off"
+                  spellcheck="false"
+                  dir="auto"
+                  type="text"
+                />
+              </form>
+            </span>
+          </div>
           <select v-model="filter" id="filterSlt">
             <option v-for="item in filters" v-bind:key="item" :value="item">{{
               item
@@ -81,6 +60,25 @@
               <RestaurantCard :restaurant="restaurant"></RestaurantCard>
             </li>
           </ul>
+        </div>
+      </div>
+
+      <div class="restaurantsRec">
+        <div v-if="recommendation != 'undefined'">
+          <span class="text-left pb-2" id="recommendationText">
+            Recomendações para Si
+          </span>
+          <div class="separator"></div>
+          <div class="cardsRec">
+            <ul>
+              <li
+                v-for="restaurant in recommendation"
+                v-bind:key="restaurant.id + 'star'"
+              >
+                <RestaurantCard v-bind:restaurant="restaurant"></RestaurantCard>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -249,7 +247,6 @@ export default {
   border-radius: 15px;
 }
 
-
 .home .separator {
   background-color: silver;
   height: 1px;
@@ -279,26 +276,37 @@ export default {
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 15px;
 }
+.cardsRec ul {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 15px;
+}
 .restaurants {
   margin: 15px 15%;
 }
-#express-form-typeahead{
+.restaurantsRec {
+  margin: 15px 15%;
+}
+#express-form-typeahead {
   outline: none;
-  border:none;
-  display:flex;
+  border: none;
+  display: flex;
   margin-left: 2px;
   margin-bottom: 3px;
-   justify-content: space-between;
+  justify-content: space-between;
   align-items: center;
   margin-left: 450px;
 }
-#express-form-typeahead:focus{
-  border:1px solid #ccc;
+#express-form-typeahead:focus {
+  border: 1px solid #ccc;
 }
-#express-form-typeahead:hover{
-  border:none;
+#express-form-typeahead:hover {
+  border: none;
 }
-#express-form-typeahead:not(:hover){
-  border:none;
+#express-form-typeahead:not(:hover) {
+  border: none;
 }
 </style>
