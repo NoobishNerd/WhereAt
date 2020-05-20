@@ -46,6 +46,7 @@
             <div class="col-sm-1 mt-3">
             </div>
         </div>        
+        <br>
         <div class="row">
             <div class="col-sm-3" v-for="tag in user.preferences" v-bind:key="tag.id + 1000">                        
                 <p style="color:white" class="text-center pref">{{tag.tag_name}}<span class="ml-2"><button @click="removePref(tag.id)" id="addPrefBtn">X</button></span></p>
@@ -129,7 +130,7 @@ export default {
   border-style: solid;
   border-width: 4px;
   border-color: #f17526;
-  border-radius: 40px 40px 40px 40px;
+
   background-color: #f17526;
 }
 
@@ -144,8 +145,6 @@ export default {
   display: inline-block;
   text-transform: uppercase;
   font-size: 15px;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
   margin: 0px 20px 20px 20px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -163,17 +162,21 @@ export default {
   display: inline-block;
   text-transform: uppercase;
   font-size: 15px;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-  margin-bottom: 20px;
+
 }
 
 .form-control{
   width: 200px;
+}
+input{
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0px;
 }
 </style>

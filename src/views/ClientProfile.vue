@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-      <div class="row d-flex justify-content-sm-center flex-wrap pt-3">
+      <div id="#profileCol" class="row d-flex pt-3">
         <div class="col-sm-3" id="colPrl">
           <div class="text-center">
             <img
@@ -85,8 +85,8 @@ export default {
       profilePic: "",
       email: "",
       phone: "",
-      admin: ""
-    }
+      admin: "",
+    },
   }),
 
   created: function() {
@@ -113,23 +113,22 @@ export default {
         this.user.profilePic = newUserImg;
         this.$store.commit("CHANGE_USER_IMG", {
           id: this.user.id,
-          profilePic: this.user.profilePic
+          profilePic: this.user.profilePic,
         });
       } else {
         alert("Coloque o link da imagem!");
       }
-    }
+    },
   },
   components: {
     ClientInfo,
     ClientHistory,
-    AdminAuth
-  }
+    AdminAuth,
+  },
 };
 </script>
 
 <style scoped>
-
 .text {
   margin-right: 15px;
   vertical-align: middle;
@@ -141,9 +140,8 @@ export default {
 }
 
 #brownBoldText {
-  color: #f17526;
+  color: black;
   font-family: "Raleway";
-
 }
 
 #brownText {
@@ -161,9 +159,6 @@ export default {
   display: inline-block;
   text-transform: uppercase;
   font-size: 15px;
-
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
@@ -171,9 +166,6 @@ export default {
   transition: all 0.3s ease-in-out;
 }
 #containerPrfl {
-  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
   border: none;
   border-radius: 10px 10px 10px 10px;
 }
@@ -195,4 +187,9 @@ export default {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
+#colPrl {
+  margin-top: 50px;
+}
+
 </style>
