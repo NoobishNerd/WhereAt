@@ -22,9 +22,6 @@
             <div class="row">
                 <div class="col-sm-6">
                     <button @click="manageRestaurantApproval(restaurant.id, restaurant.approval, true)" :class="{ btnEnabled: restaurant.approval==false , btnDisabled: restaurant.approval==true}">Aprovar</button>
-                    
-                </div>
-                <div class="col-sm-6">
                     <button @click="manageRestaurantApproval(restaurant.id, restaurant.approval, false)"  :class="{ btnEnabled: restaurant.approval==true, btnDisabled: restaurant.approval==false }" >Suspender</button>
                 </div>
             </div>
@@ -59,12 +56,16 @@ export default {
 </script>
 <style >
     .btnEnabled{
-        background-color: green;
+        background-color: red;
         color: black;
     }
 
     .btnDisabled{
-        background-color: red;
+        background-color: green;
         color: black;
+    }
+    .adminAuth{
+        align-items: center;
+        margin: auto;
     }
 </style>
