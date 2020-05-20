@@ -115,9 +115,6 @@ export default {
 
 <style>
 #containerRest{
-  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.2);
   border: none;
   border-radius: 10px 10px 10px 10px;
 
