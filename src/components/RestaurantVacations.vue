@@ -68,9 +68,6 @@ export default {
   display: inline-block;
   text-transform: uppercase;
   font-size: 15px;
-
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
   margin: 0px 20px 20px 20px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;

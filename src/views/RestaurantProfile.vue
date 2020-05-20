@@ -140,7 +140,6 @@ justify-content:center;
 #brownBoldText {
   color: #f17526;
   font-family: "Raleway";
-  font-weight: bold;
 }
 
 #brownText {
@@ -158,9 +157,6 @@ justify-content:center;
   display: inline-block;
   text-transform: uppercase;
   font-size: 15px;
-  font-weight: bold;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
   margin: 10px 20px 40px 20px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
