@@ -71,6 +71,8 @@
 </template>
 
 <script>
+import users from '../users.js'
+
 export default {
   name: "RegisterForm",
   data: () => ({
@@ -82,24 +84,21 @@ export default {
   }),
 
   methods: {
-    getLastId() {
-      return this.$store.getters.getLastUserId;
-    },
     addUser() {
       //check se a password foi confirmada
       if (this.password != this.confPassword) {
         alert("PASSWORDS DIFERENTES");
       } else {
-        this.$store.commit("ADD_USER", {
-          id: this.getLastId() + 1,
+
+        users.registerUser({
           email: this.email,
-          username: this.username,
+          user_name: this.username,
           password: this.password,
         });
 
         this.saveStorage();
 
-        this.$router.replace("/");
+      //  this.$router.replace("/");   VER SE FUNCIONA NO users.js
       }
     },
     saveStorage() {
