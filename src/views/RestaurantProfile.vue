@@ -138,7 +138,7 @@ justify-content:center;
 }
 
 #brownBoldText {
-  color: #f17526;
+  color: black;
   font-family: "Raleway";
 }
 
