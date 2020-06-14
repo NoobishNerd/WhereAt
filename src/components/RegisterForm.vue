@@ -70,7 +70,7 @@
   </div>
 </template>
 <script >
-  import users from '../api/users.js';
+  
 
   export default {
 
@@ -84,12 +84,22 @@
     }),
 
     methods: {
-      addUser() {
+      async addUser() {
+
+        
         //check se a password foi confirmada
         if (this.password != this.confPassword) {
           alert("PASSWORDS DIFERENTES");
         } else {
           //registar
+          await this.$store.dispatch("register",{
+            user_name: this.username,
+            email: this.email,
+            password: this.password
+          });
+
+
+
           users.registerUser({
             user_name: this.username,
             email: this.email,

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import users from '../api/users.js';
+import usersService from '../api/users.js';
 
 Vue.use(Vuex);
 
@@ -26,8 +26,9 @@ export default new Vuex.Store({
       admin: false
     },
 
-    //variável para respostas do server
-    responseData
+    //variáveis para respostas do server
+    request: null,
+    status: null
   },
 
   getters: {
@@ -128,6 +129,15 @@ export default new Vuex.Store({
   },
 
   mutations: {
+
+    SET_REQUEST(state, payload){
+      state.request = payload;
+    },
+
+    SET_STATUS(state, payload) {
+      state.status = payload;
+    },
+
     ADD_USER(state, payload) {
       //check se email já está registado
       if (!state.users.some(user => user.email == payload.email)) {
@@ -402,7 +412,7 @@ export default new Vuex.Store({
           restaurant.comments.push({
             id: payload.commentId, 
             username: payload.username, 
-            profilePic: payload.profilePic, 
+            profilePic: payload.profilePic,
             rate: payload.rate, 
             text: payload.text, 
             userId: payload.userId,
@@ -419,11 +429,11 @@ export default new Vuex.Store({
       if (payload.type == "client") {
 
           state.loggedUser.type = "client";
-          state.loggedUser.admin = payload.admin;
-          state.loggedUser.id = payload.id;
-          state.loggedUser.username = payload.username;
-          state.loggedUser.profilePic = payload.profilePic;
-          state.loggedUser.preferences = payload.preferences;
+          state.loggedUser.admin = payload.administrador;
+          state.loggedUser.id = payload.id_utilizador;
+          state.loggedUser.username = payload.user_name;
+          state.loggedUser.profilePic = payload.foto;
+          state.loggedUser.preferences = "";
   
           localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
 
@@ -434,9 +444,9 @@ export default new Vuex.Store({
     
             state.loggedUser.type = "restaurant"
             state.loggedUser.admin = false;
-            state.loggedUser.id = payload.id;
-            state.loggedUser.username = payload.username;
-            state.loggedUser.profilePic = payload.profilePic;
+            state.loggedUser.id = payload.id_restaurante;
+            state.loggedUser.username = payload.nome;
+            state.loggedUser.profilePic = payload.foto_perfil;
 
             localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
 
@@ -739,7 +749,32 @@ export default new Vuex.Store({
     }
   },
 
-  //maybe someday, when we have ACTUAL time...
-  actions: {},
+  //idk what i'm doing, life is ultimately meaningless anyway...
+  actions: {
+
+    async registerRestaurant({commit}){
+      commit("SET_STATUS", 
+        await usersService.registerRestaurant({
+        nome: this.state.request.username,
+        password: this.state.request.password,
+        morada: this.state.request.address,
+        cod_postal: this.state.request.postalCode,
+        localidade: this.state.request.local,
+        email: this.state.request.email
+      }))
+    },
+
+    async fetchRestaurant({commit}){
+      commit("SET_STATUS", 
+        await usersService.getRestaurant({
+        email: this.state.request.email,
+        password: this.state.request.password,
+      }))
+    }
+
+
+
+
+  },
   modules: {}
 });

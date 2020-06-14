@@ -1,6 +1,6 @@
 import API_URL from "./config.js";
 
-const users = {
+const usersService = {
   async getUser(data) {
     const response = await fetch(`${API_URL}utilizadores`, {
       method: "GET",
@@ -118,4 +118,4 @@ const users = {
   },
 };
 
-export default users;
+export default usersService;

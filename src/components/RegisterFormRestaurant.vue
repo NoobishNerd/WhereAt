@@ -120,7 +120,9 @@ export default {
       if (this.password != this.confPassword) {
         alert("PASSWORDS DIFERENTES");
       } else {
-        users.registerRestaurant({
+
+        //register request
+        this.$store.commit("SET_REQUEST", {
           nome: this.username,
           password: this.password,
           morada: this.address,
@@ -128,55 +130,40 @@ export default {
           localidade: this.local,
           email: this.email
         });
+        //getting response
+        await this.$store.dispatch("register");
+        const registerResponse = this.$store.status;
 
-        const registerResponse = await users.registerRestaurant({
-          nome: this.username,
-          password: this.password,
-          morada: this.address,
-          cod_postal: this.postalCode,
-          localidade: this.local,
-          email: this.email
-        });
+        //if register is successful, login
+        if (registerResponse == "Conta criada com sucesso") {
+          //login request
+          this.$store.commit("SET_REQUEST", {
+            email: this.email,
+            password: this.password
+          });
+          //getting response
+          await this.$store.dispatch("fetchRestaurant");
+          const loginResponse = this.$store.status;
 
-         if (registerResponse == "Conta criada com sucesso") {
-            //login
-            users.getRestaurant({
-              email: this.email,
-              password: this.password
-            });
-
-            const loginResponse = await users.getRestaurant({
-              email: this.email,
-              password: this.password
-            });
-
-            if(loginResponse instanceof String ){
-              alert(loginResponse);
-            }else{
-              this.$store.commit("LOGIN", {
-                id: loginResponse.id,
-                username: loginResponse.user_name,
-                profilePic: loginResponse.foto,
-                type: "restaurant"
-              });
-            }
+          if (loginResponse instanceof String) {
+            alert(loginResponse);
+          } else {
+            this.$store.commit("LOGIN",{
+              type: "restaurant",
+              serverResponse: loginResponse
+            })
 
             this.$router.replace("/");
-
-            this.saveStorage();
           }
+        }
 
       }
     },
-    saveStorage() {
-      localStorage.setItem(
-        "restaurants",
-        JSON.stringify(this.$store.state.restaurants)
-      );
-    },
 
     goToLoginRestaurant() {
-      this.$router.push({ path: "/loginRestaurant" });
+      this.$router.push({
+        path: "/loginRestaurant"
+      });
     },
   },
 };
