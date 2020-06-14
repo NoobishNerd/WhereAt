@@ -99,7 +99,6 @@
 </template>
 
 <script>
-import users from "../api/users";
 
 export default {
   name: "RegisterFormRestaurant",
@@ -115,12 +114,11 @@ export default {
   }),
 
   methods: {
-    addUser() {
+    async addUser() {
       //check se a password foi confirmada
       if (this.password != this.confPassword) {
         alert("PASSWORDS DIFERENTES");
       } else {
-
         //register request
         this.$store.commit("SET_REQUEST", {
           nome: this.username,
@@ -128,10 +126,10 @@ export default {
           morada: this.address,
           cod_postal: this.postalCode,
           localidade: this.local,
-          email: this.email
+          email: this.email,
         });
         //getting response
-        await this.$store.dispatch("register");
+        await this.$store.dispatch("registerRestaurant");
         const registerResponse = this.$store.status;
 
         //if register is successful, login
@@ -139,7 +137,7 @@ export default {
           //login request
           this.$store.commit("SET_REQUEST", {
             email: this.email,
-            password: this.password
+            password: this.password,
           });
           //getting response
           await this.$store.dispatch("fetchRestaurant");
@@ -148,21 +146,20 @@ export default {
           if (loginResponse instanceof String) {
             alert(loginResponse);
           } else {
-            this.$store.commit("LOGIN",{
+            this.$store.commit("LOGIN", {
               type: "restaurant",
-              serverResponse: loginResponse
-            })
+              serverResponse: loginResponse,
+            });
 
             this.$router.replace("/");
           }
         }
-
       }
     },
 
     goToLoginRestaurant() {
       this.$router.push({
-        path: "/loginRestaurant"
+        path: "/loginRestaurant",
       });
     },
   },

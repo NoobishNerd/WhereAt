@@ -13,7 +13,7 @@ const usersService = {
     if (response.ok) {
       const responseData = await response.json();
       alert(responseData);
-      return responseData.json();
+      return responseData;
     } else {
       throw Error(response);
     }
@@ -30,7 +30,7 @@ const usersService = {
     if (response.ok) {
       const responseData = await response.json();
       alert(responseData);
-      return responseData.json();
+      return responseData;
     } else {
       throw Error(response);
     }
@@ -71,7 +71,7 @@ const usersService = {
     if (response.ok) {
       const responseData = await response.json();
       alert(responseData);
-      return responseData.json();
+      return responseData;
     } else {
       throw Error(response);
     }
@@ -88,7 +88,7 @@ const usersService = {
     if (response.ok) {
       const responseData = await response.json();
       alert(responseData);
-      return responseData.json();
+      return responseData;
     } else {
       throw Error(response);
     }
