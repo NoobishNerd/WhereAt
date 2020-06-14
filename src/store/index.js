@@ -431,20 +431,7 @@ export default new Vuex.Store({
       }
 
       if (payload.type == "restaurant") {
-        
-        users.getRestaurant({
-          email: payload.email,
-          password: payload.password
-        });
-
-        responseData = await users.getRestaurant({
-          email: payload.email,
-          password: payload.password
-        });
-
-        if(responseData instanceof String ){
-          alert(responseData);
-        }else{
+    
             state.loggedUser.type = "restaurant"
             state.loggedUser.admin = false;
             state.loggedUser.id = payload.id;
@@ -454,7 +441,7 @@ export default new Vuex.Store({
             localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
 
             state.logged = true;
-        }
+
   
       }
     },
