@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import users from '../users.js'
+import users from "../api/users";
 
 export default {
   name: "RegisterFormRestaurant",
@@ -115,21 +115,20 @@ export default {
   }),
 
   methods: {
-
     addUser() {
       //check se a password foi confirmada
       if (this.password != this.confPassword) {
         alert("PASSWORDS DIFERENTES");
       } else {
-
         users.registerRestaurant({
-          email: this.email,
           nome: this.username,
           password: this.password,
           morada: this.address,
           cod_postal: this.postalCode,
-          localidade: this.local
+          localidade: this.local,
+          email: this.email
         });
+        this.$router.replace("/");
 
         this.saveStorage();
 

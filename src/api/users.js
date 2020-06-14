@@ -15,19 +15,23 @@ const users = {
         }
     },
     async registerUser(data) {
+        let user_name = data.user_name;
+        let email =data.email;
+        let password =data.password;
+        alert(JSON.stringify({user_name,email,password}))
         const response = await fetch(`${API_URL}utilizadores`, {
             method: "POST",
-            body: JSON.stringify(data)
+            body: JSON.stringify({user_name,email,password})
         })
 
         if (response.ok) {
-            this.$router.replace("/");
+            
             return response.json()
         } else {
             throw Error(response)
         }
     },
-    async registerUser(data, id) {
+    async updateUser(data, id) {
         const response = await fetch(`${API_URL}utilizadores/${id}`, {
             method: "PUT",
             body: JSON.stringify(data)
@@ -39,7 +43,7 @@ const users = {
             throw Error(response)
         }
     },
-    async registerUser(id) {
+    async deleteUser(id) {
         const response = await fetch(`${API_URL}utilizadores/${id}`, {
             method: "DELETE"
         })
@@ -78,7 +82,7 @@ const users = {
             throw Error(response)
         }
     },
-    async registerUser(data, id) {
+    async updateRestaurant(data, id) {
         const response = await fetch(`${API_URL}restaurantes/${id}`, {
             method: "PUT",
             body: JSON.stringify(data)
@@ -90,7 +94,7 @@ const users = {
             throw Error(response)
         }
     },
-    async registerUser(id) {
+    async deleteRestaurant(id) {
         const response = await fetch(`${API_URL}restaurantes/${id}`, {
             method: "DELETE"
         })
