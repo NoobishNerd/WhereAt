@@ -128,11 +128,30 @@ export default {
           localidade: this.local,
           email: this.email
         });
-        this.$router.replace("/");
 
-        this.saveStorage();
+        const registerResponse = await users.registerRestaurant({
+          nome: this.username,
+          password: this.password,
+          morada: this.address,
+          cod_postal: this.postalCode,
+          localidade: this.local,
+          email: this.email
+        });
 
-        //this.$router.replace("/");
+        if (registerResponse == "Conta criada com sucesso") {
+          //login
+          this.$store.commit("LOGIN", {
+            email: this.email,
+            password: this.password,
+            type: "restaurant"
+          });
+
+          
+          this.$router.replace("/");
+
+          this.saveStorage();
+        }
+
       }
     },
     saveStorage() {

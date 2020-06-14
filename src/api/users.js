@@ -5,10 +5,15 @@ const users = {
     const response = await fetch(`${API_URL}utilizadores`, {
       method: "GET",
       body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      }
     });
 
     if (response.ok) {
-      return response.json();
+      const responseData = await response.json();
+      alert(responseData);
+      return responseData.json();
     } else {
       throw Error(response);
     }
@@ -19,13 +24,13 @@ const users = {
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
-      },
+      }
     });
 
     if (response.ok) {
       const responseData = await response.json();
       alert(responseData);
-      return response.json();
+      return responseData.json();
     } else {
       throw Error(response);
     }
@@ -58,10 +63,15 @@ const users = {
     const response = await fetch(`${API_URL}restaurantes`, {
       method: "GET",
       body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      }
     });
 
     if (response.ok) {
-      return response.json();
+      const responseData = await response.json();
+      alert(responseData);
+      return responseData.json();
     } else {
       throw Error(response);
     }
@@ -78,7 +88,7 @@ const users = {
     if (response.ok) {
       const responseData = await response.json();
       alert(responseData);
-      return response.json();
+      return responseData.json();
     } else {
       throw Error(response);
     }

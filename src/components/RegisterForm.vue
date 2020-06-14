@@ -69,12 +69,11 @@
     </div>
   </div>
 </template>
-
-<script>
-import users from '../api/users.js';
+<script >
+  import users from '../api/users.js';
 
 export default {
-  
+
   name: "RegisterForm",
   data: () => ({
     id: 0,
@@ -90,23 +89,39 @@ export default {
       if (this.password != this.confPassword) {
         alert("PASSWORDS DIFERENTES");
       } else {
+        //registar
         users.registerUser({
           user_name: this.username,
           email: this.email,
           password: this.password
         });
-        this.$router.replace("/");
 
-        this.saveStorage();
+        const registerResponse = await users.registerUser({
+          user_name: this.username,
+          email: this.email,
+          password: this.password
+        });
 
-      //  this.$router.replace("/");   VER SE FUNCIONA NO users.js
+        if (registerResponse == "Conta criada com sucesso") {
+          //login
+          this.$store.commit("LOGIN", {
+            email: this.email,
+            password: this.password,
+            type: "client"
+          });
+
+
+          this.$router.replace("/");
+
+          this.saveStorage();
+        }
       }
     },
     saveStorage() {
       localStorage.setItem("users", JSON.stringify(this.$store.state.users));
     },
   },
-};
+}; 
 </script>
 
 <style scoped>

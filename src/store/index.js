@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import users from '../api/users.js';
 
 Vue.use(Vuex);
 
@@ -25,8 +26,8 @@ export default new Vuex.Store({
       admin: false
     },
 
-    //variável para a função login
-    existUser: false
+    //variável para respostas do server
+    responseData
   },
 
   getters: {
@@ -416,41 +417,48 @@ export default new Vuex.Store({
 
     LOGIN(state, payload) {
       if (payload.type == "client") {
-        //check se conta existe
-        //substituir alerts por returns de strings?
-        for (const user of state.users) {
-          if (
-            user.email == payload.email &&
-            user.password == payload.password
-          ) {
-            state.loggedUser.type = "client"
-            state.loggedUser.admin = user.admin;
-            state.loggedUser.id = user.id;
-            state.loggedUser.username = user.username;
-            state.loggedUser.profilePic = user.profilePic;
-            state.loggedUser.preferences = user.preferences;
 
-            localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
+        users.getUser({
+          email: payload.email,
+          password: payload.password
+        });
 
-            alert("LOGIN");
+        responseData = await users.getUser({
+          email: payload.email,
+          password: payload.password
+        });
 
-            state.existUser = true;
-          }
-        }
-        if (state.existUser == false) {
-          alert("Credenciais Inválidas");
-        } else {
-          state.existUser = false;
+        if(responseData instanceof String ){
+          alert(responseData);
+        }else{
+          state.loggedUser.type = "client";
+          state.loggedUser.admin = user.admin;
+          state.loggedUser.id = user.id;
+          state.loggedUser.username = user.username;
+          state.loggedUser.profilePic = user.profilePic;
+          state.loggedUser.preferences = user.preferences;
+  
+          localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
+
           state.logged = true;
         }
       }
 
       if (payload.type == "restaurant") {
-        for (const restaurant of state.restaurants) {
-          if (
-            restaurant.email == payload.email &&
-            restaurant.password == payload.password
-          ) {
+        
+        users.getRestaurant({
+          email: payload.email,
+          password: payload.password
+        });
+
+        responseData = await users.getRestaurant({
+          email: payload.email,
+          password: payload.password
+        });
+
+        if(responseData instanceof String ){
+          alert(responseData);
+        }else{
             state.loggedUser.type = "restaurant"
             state.loggedUser.admin = false;
             state.loggedUser.id = restaurant.id;
@@ -459,16 +467,9 @@ export default new Vuex.Store({
 
             localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
 
-            alert("LOGIN");
-            state.existUser = true;
-          }
+            state.logged = true;
         }
-        if (state.existUser == false) {
-          alert("Credenciais Inválidas");
-        } else {
-          state.existUser = false;
-          state.logged = true;
-        }
+  
       }
     },
 
