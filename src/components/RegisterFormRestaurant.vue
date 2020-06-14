@@ -99,6 +99,8 @@
 </template>
 
 <script>
+import users from '../users.js'
+
 export default {
   name: "RegisterFormRestaurant",
   data: () => ({
@@ -113,27 +115,25 @@ export default {
   }),
 
   methods: {
-    getLastId() {
-      return this.$store.getters.getLastRestaurantId;
-    },
+
     addUser() {
       //check se a password foi confirmada
       if (this.password != this.confPassword) {
         alert("PASSWORDS DIFERENTES");
       } else {
-        this.$store.commit("ADD_RESTAURANT", {
-          id: this.getLastId() + 1,
+
+        users.registerRestaurant({
           email: this.email,
-          username: this.username,
+          nome: this.username,
           password: this.password,
-          address: this.address,
-          postalCode: this.postalCode,
-          local: this.local,
+          morada: this.address,
+          cod_postal: this.postalCode,
+          localidade: this.local
         });
 
         this.saveStorage();
 
-        this.$router.replace("/");
+        //this.$router.replace("/");
       }
     },
     saveStorage() {

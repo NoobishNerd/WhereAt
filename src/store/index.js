@@ -30,23 +30,7 @@ export default new Vuex.Store({
   },
 
   getters: {
-    //get last user Id in array
-    getLastUserId(state) {
-      if (state.users.length != 0 ) {
-        return state.users[state.users.length - 1].id;
-      } else {
-        return 0;
-      }
-    },
-
-    getLastRestaurantId(state) {
-      if (state.restaurants.length != 0 ) {
-        return state.restaurants[state.restaurants.length - 1].id;
-      } else {
-        return 0;
-      }
-    },
-
+  
     getRestaurantById: (state) => (id) => {
       return state.restaurants.find(restaurant => restaurant.id == id)
     },

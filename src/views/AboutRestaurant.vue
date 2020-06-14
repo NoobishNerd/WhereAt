@@ -308,17 +308,26 @@ export default {
     },
 
     updateAvailableTables() {
-      this.availableTables = this.$store.getters.getAvailableTables(
-        this.hour,
-        this.date,
-        this.restaurant.id,
-        this.restaurant.tables
-      );
+      //reset
+      this.availableTables = this.restaurant.tables;
+      //obter mesas ocupadas para data escolhida
+      let busyTables = this.$store.getters.getNonAvailableTables()
+
+      //capacidade das ocupadas passa a 0
+      for (const table in this.availableTables) {
+        for (const busyTable in busyTables) {
+          if(table.id == busyTable.id){
+            table.capacity = 0
+          }
+        }
+      } 
     },
 
     checkAvailability() {
       this.updateAvailableTables();
+
       this.updateObjectTable();
+
       if (this.selectedTableReady.capacity == 0) {
         alert("A mesa selecionada não está disponivel");
         return false;
@@ -328,6 +337,7 @@ export default {
     },
 
     updateObjectTable() {
+      //traduzir a mesa de string para objeto
       let start = this.selectedTable.indexOf(" ") + 1;
       let end = this.selectedTable.indexOf("|") - 1;
       let selectedId = parseInt(this.selectedTable.slice(start, end)) - 1;
@@ -335,7 +345,8 @@ export default {
       for (const table of this.availableTables) {
         if (table.id == selectedId) {
           this.selectedTableReady = {
-            id: selectedId,
+            id_table: selectedId,
+            id_restaurant: this.restaurant.id,
             capacity: table.capacity,
           };
         }
