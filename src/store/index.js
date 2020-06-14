@@ -418,30 +418,16 @@ export default new Vuex.Store({
     LOGIN(state, payload) {
       if (payload.type == "client") {
 
-        users.getUser({
-          email: payload.email,
-          password: payload.password
-        });
-
-        responseData = await users.getUser({
-          email: payload.email,
-          password: payload.password
-        });
-
-        if(responseData instanceof String ){
-          alert(responseData);
-        }else{
           state.loggedUser.type = "client";
-          state.loggedUser.admin = user.admin;
-          state.loggedUser.id = user.id;
-          state.loggedUser.username = user.username;
-          state.loggedUser.profilePic = user.profilePic;
-          state.loggedUser.preferences = user.preferences;
+          state.loggedUser.admin = payload.admin;
+          state.loggedUser.id = payload.id;
+          state.loggedUser.username = payload.username;
+          state.loggedUser.profilePic = payload.profilePic;
+          state.loggedUser.preferences = payload.preferences;
   
           localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
 
-          state.logged = true;
-        }
+          state.logged = true;        
       }
 
       if (payload.type == "restaurant") {
@@ -461,9 +447,9 @@ export default new Vuex.Store({
         }else{
             state.loggedUser.type = "restaurant"
             state.loggedUser.admin = false;
-            state.loggedUser.id = restaurant.id;
-            state.loggedUser.username = restaurant.username;
-            state.loggedUser.profilePic = restaurant.profilePic;
+            state.loggedUser.id = payload.id;
+            state.loggedUser.username = payload.username;
+            state.loggedUser.profilePic = payload.profilePic;
 
             localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
 

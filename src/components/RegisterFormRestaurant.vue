@@ -138,19 +138,33 @@ export default {
           email: this.email
         });
 
-        if (registerResponse == "Conta criada com sucesso") {
-          //login
-          this.$store.commit("LOGIN", {
-            email: this.email,
-            password: this.password,
-            type: "restaurant"
-          });
+         if (registerResponse == "Conta criada com sucesso") {
+            //login
+            users.getRestaurant({
+              email: this.email,
+              password: this.password
+            });
 
-          
-          this.$router.replace("/");
+            const loginResponse = await users.getRestaurant({
+              email: this.email,
+              password: this.password
+            });
 
-          this.saveStorage();
-        }
+            if(loginResponse instanceof String ){
+              alert(loginResponse);
+            }else{
+              this.$store.commit("LOGIN", {
+                id: loginResponse.id,
+                username: loginResponse.user_name,
+                profilePic: loginResponse.foto,
+                type: "restaurant"
+              });
+            }
+
+            this.$router.replace("/");
+
+            this.saveStorage();
+          }
 
       }
     },
