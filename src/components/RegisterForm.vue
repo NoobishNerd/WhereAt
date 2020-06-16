@@ -70,84 +70,74 @@
   </div>
 </template>
 <script >
-  
+import usersService from '../api/users.js';
 
-  export default {
+export default {
 
-    name: "RegisterForm",
-    data: () => ({
-      id: 0,
-      username: "",
-      email: "",
-      password: "",
-      confPassword: "",
-    }),
+  name: "RegisterForm",
+  data: () => ({
+    id: 0,
+    username: "",
+    email: "",
+    password: "",
+    confPassword: "",
+  }),
 
-    methods: {
-      async addUser() {
+  methods: {
+    async addUser() {
 
-        
-        //check se a password foi confirmada
-        if (this.password != this.confPassword) {
-          alert("PASSWORDS DIFERENTES");
-        } else {
-          //registar
-          await this.$store.dispatch("register",{
-            user_name: this.username,
+
+      //check se a password foi confirmada
+      if (this.password != this.confPassword) {
+        alert("PASSWORDS DIFERENTES");
+      } else {
+
+        usersService.registerUser({
+          user_name: this.username,
+          email: this.email,
+          password: this.password
+        });
+
+        const registerResponse = await usersService.registerUser({
+          user_name: this.username,
+          email: this.email,
+          password: this.password
+        });
+
+        if (registerResponse == "Conta criada com sucesso") {
+          //login
+          usersService.getUser({
             email: this.email,
             password: this.password
           });
 
-
-
-          users.registerUser({
-            user_name: this.username,
+          const loginResponse = await usersService.getUser({
             email: this.email,
             password: this.password
           });
 
-          const registerResponse = await users.registerUser({
-            user_name: this.username,
-            email: this.email,
-            password: this.password
-          });
-
-          if (registerResponse == "Conta criada com sucesso") {
-            //login
-            users.getUser({
-              email: this.email,
-              password: this.password
+          if (loginResponse instanceof String) {
+            alert(loginResponse);
+          } else {
+            this.$store.commit("LOGIN", {
+              id: loginResponse.id,
+              admin: loginResponse.admin,
+              username: loginResponse.user_name,
+              profilePic: loginResponse.foto,
+              preferences: loginResponse.tags,
+              type: "client"
             });
 
-            const loginResponse = await users.getUser({
-              email: this.email,
-              password: this.password
-            });
-
-            if(loginResponse instanceof String ){
-              alert(loginResponse);
-            }else{
-              this.$store.commit("LOGIN", {
-                id: loginResponse.id,
-                admin: loginResponse.admin,
-                username: loginResponse.user_name,
-                profilePic: loginResponse.foto,
-                preferences: loginResponse.tags,
-                type: "client"
-              });
-            }
 
             this.$router.replace("/");
 
-            this.saveStorage();
           }
+
         }
-      },
-      saveStorage() {
-        localStorage.setItem("users", JSON.stringify(this.$store.state.users));
-      },
-    },
-  };
+      }
+    }
+  },
+};
 </script>
 
 <style scoped>

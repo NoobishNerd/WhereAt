@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import usersService from '../api/users.js';
+
 export default {
   name: "Login",
   data: () => ({
@@ -49,12 +51,33 @@ export default {
 
   methods: {
     login() {
-      this.$store.commit("LOGIN", {
-        email: this.emailLogin,
-        password: this.passwordLogin,
-        type: "client",
+      //login
+      usersService.getUser({
+        email: this.email,
+        password: this.password
       });
-      this.$router.replace("/");
+
+      const loginResponse = await usersService.getUser({
+        email: this.email,
+        password: this.password
+      });
+
+      if (loginResponse instanceof String) {
+        alert(loginResponse);
+      } else {
+        this.$store.commit("LOGIN", {
+          id: loginResponse.id,
+          admin: loginResponse.admin,
+          username: loginResponse.user_name,
+          profilePic: loginResponse.foto,
+          preferences: loginResponse.tags,
+          type: "client"
+        });
+
+
+        this.$router.replace("/");
+
+      }
     },
   },
 };

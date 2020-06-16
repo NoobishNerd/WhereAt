@@ -119,42 +119,57 @@ export default {
       if (this.password != this.confPassword) {
         alert("PASSWORDS DIFERENTES");
       } else {
-        //register request
-        this.$store.commit("SET_REQUEST", {
-          nome: this.username,
-          password: this.password,
-          morada: this.address,
-          cod_postal: this.postalCode,
-          localidade: this.local,
-          email: this.email,
-        });
-        //getting response
-        await this.$store.dispatch("registerRestaurant");
-        const registerResponse = this.$store.status;
 
-        //if register is successful, login
+        usersService.registerRestaurant({
+        nome: this.username,
+        password: this.password,
+        morada: this.address,
+        cod_postal: this.postalCode,
+        localidade: this.local,
+        email: this.email
+      })
+
+        const registerResponse = await usersService.registerRestaurant({
+        nome: this.username,
+        password: this.password,
+        morada: this.address,
+        cod_postal: this.postalCode,
+        localidade: this.local,
+        email: this.email
+      })
+
         if (registerResponse == "Conta criada com sucesso") {
-          //login request
-          this.$store.commit("SET_REQUEST", {
-            email: this.email,
-            password: this.password,
-          });
-          //getting response
-          await this.$store.dispatch("fetchRestaurant");
-          const loginResponse = this.$store.status;
+          //login
+          usersService.getRestaurant({
+        email: this.email,
+        password: this.password,
+      })
+
+          const loginResponse = await usersService.getRestaurant({
+        email: this.email,
+        password: this.password,
+      })
 
           if (loginResponse instanceof String) {
             alert(loginResponse);
           } else {
             this.$store.commit("LOGIN", {
-              type: "restaurant",
-              serverResponse: loginResponse,
+              id: loginResponse.id,
+              admin: loginResponse.admin,
+              username: loginResponse.user_name,
+              profilePic: loginResponse.foto,
+              preferences: loginResponse.tags,
+              type: "client"
             });
 
+
             this.$router.replace("/");
+
           }
+
         }
       }
+
     },
 
     goToLoginRestaurant() {
