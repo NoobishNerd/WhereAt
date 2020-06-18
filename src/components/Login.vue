@@ -64,9 +64,10 @@ export default {
         password: this.password
       });
 
-      if (loginResponse instanceof String) {
+      if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
         alert(loginResponse);
       } else {
+        alert("caralho")
         this.$store.commit("LOGIN", {
           id: loginResponse.id_utilizador,
           admin: loginResponse.admin,
@@ -74,7 +75,7 @@ export default {
           profilePic: loginResponse.foto,
           preferences: loginResponse.tags,
           type: "client",
-           
+          
         });
         
         this.$router.replace("/");
