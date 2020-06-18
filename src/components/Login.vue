@@ -71,10 +71,11 @@ export default {
           username: loginResponse.user_name,
           profilePic: loginResponse.foto,
           preferences: loginResponse.tags,
-          type: "client"
+          type: "client",
+           
         });
 
-
+        alert(JSON.stringify(loginResponse));
         this.$router.replace("/");
 
       }

@@ -121,7 +121,7 @@ export default {
           } else {
             this.$store.commit("LOGIN", {
               id: loginResponse.id_utilizador,
-              admin: loginResponse.admin,
+              admin: loginResponse.administrador,
               username: loginResponse.user_name,
               profilePic: loginResponse.foto,
               preferences: loginResponse.tags,
