@@ -10,7 +10,7 @@
           <div class="col-12">
             <form v-on:submit.prevent="login()">
               <input
-                v-model="emailLogin"
+                v-model="email"
                 type="email"
                 id="login"
                 class="fadeIn second"
@@ -18,7 +18,7 @@
                 placeholder="Endereço de email"
               />
               <input
-                v-model="passwordLogin"
+                v-model="password"
                 type="password"
                 id="password"
                 class="fadeIn third"
@@ -45,13 +45,15 @@ import usersService from '../api/users.js';
 export default {
   name: "Login",
   data: () => ({
-    emailLogin: "",
-    passwordLogin: "",
+    email: "",
+    password: "",
   }),
 
   methods: {
     async login() {
       //login
+      alert(this.email)
+      alert(this.password)
       usersService.getUser({
         email: this.email,
         password: this.password
@@ -74,8 +76,7 @@ export default {
           type: "client",
            
         });
-
-        alert(JSON.stringify(loginResponse));
+        
         this.$router.replace("/");
 
       }

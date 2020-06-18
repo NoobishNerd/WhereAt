@@ -47,7 +47,6 @@ export default {
   },
   updated: function(){
     this.loggedUser = this.$store.getters.getLoggedUser
-    alert(JSON.stringify(this.loggedUser))
   },
   methods: {
     logout() {

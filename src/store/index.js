@@ -437,8 +437,7 @@ export default new Vuex.Store({
   
           localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
 
-          state.logged = true;  
-          alert(JSON.stringify(payload))      
+          state.logged = true;        
       }
 
       if (payload.type == "restaurant") {
