@@ -3,7 +3,7 @@ import API_URL from "./config.js";
 const usersService = {
   async getUser(data) {
     const response = await fetch(`${API_URL}utilizadores`, {
-      method: "GET",
+      method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
@@ -19,7 +19,7 @@ const usersService = {
     }
   },
   async registerUser(data) {
-    const response = await fetch(`${API_URL}utilizadores`, {
+    const response = await fetch(`${API_URL}criarutilizadores`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -61,7 +61,7 @@ const usersService = {
 
   async getRestaurant(data) {
     const response = await fetch(`${API_URL}restaurantes`, {
-      method: "GET",
+      method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ const usersService = {
     }
   },
   async registerRestaurant(data) {
-    const response = await fetch(`${API_URL}restaurantes`, {
+    const response = await fetch(`${API_URL}criarrestaurantes`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
