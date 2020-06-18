@@ -116,8 +116,8 @@ export default {
             password: this.password
           });
 
-          if (loginResponse instanceof String) {
-            alert(loginResponse);
+          if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
+            
           } else {
             this.$store.commit("LOGIN", {
               id: loginResponse.id_utilizador,

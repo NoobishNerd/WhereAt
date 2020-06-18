@@ -52,8 +52,6 @@ export default {
   methods: {
     async login() {
       //login
-      alert(this.email)
-      alert(this.password)
       usersService.getUser({
         email: this.email,
         password: this.password
@@ -65,9 +63,8 @@ export default {
       });
 
       if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
-        alert(loginResponse);
+        
       } else {
-        alert("caralho")
         this.$store.commit("LOGIN", {
           id: loginResponse.id_utilizador,
           admin: loginResponse.admin,

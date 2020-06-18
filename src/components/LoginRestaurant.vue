@@ -10,7 +10,7 @@
           <div class="col-12">
             <form v-on:submit.prevent="login()">
               <input
-                v-model="emailLogin"
+                v-model="email"
                 type="text"
                 id="login"
                 class="fadeIn second"
@@ -18,7 +18,7 @@
                 placeholder="Endereço de email"
               />
               <input
-                v-model="passwordLogin"
+                v-model="password"
                 type="password"
                 id="password"
                 class="fadeIn third"
@@ -41,22 +41,44 @@
 </template>
 
 <script>
+
 export default {
   name: "LoginRestaurant",
   data: () => ({
-    emailLogin: "",
-    passwordLogin: "",
+    email: "",
+    password: "",
   }),
 
   methods: {
     async login() {
-      this.$store.commit("LOGIN", {
-        email: this.emailLogin,
-        password: this.passwordLogin,
-        type: "restaurant",
+      //login
+      usersService.getRestaurant({
+        email: this.email,
+        password: this.password
       });
-      this.$router.replace("/");
-    },
+
+      const loginResponse = await usersService.getRestaurant({
+        email: this.email,
+        password: this.password
+      });
+
+      if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
+        
+      } else {
+        this.$store.commit("LOGIN", {
+          id: loginResponse.id_utilizador,
+          admin: loginResponse.admin,
+          username: loginResponse.user_name,
+          profilePic: loginResponse.foto,
+          preferences: loginResponse.tags,
+          type: "restaurant",
+          
+        });
+        
+        this.$router.replace("/");
+
+      }
+    }
   },
 };
 </script>
