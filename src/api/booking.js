@@ -3,7 +3,7 @@ import API_URL from "./config.js";
 const bookingService = {
     async getNonAvailabeTablesIds (data, id) {
         const response = await fetch(`${API_URL}reservas/nonAvailableTablesIds/${id}`, {
-          method: "GET",
+          method: "POST",
           body: JSON.stringify(data),
           headers: {
             "Content-Type": "application/json",
@@ -37,7 +37,7 @@ const bookingService = {
         }
     },
 
-    async getUserReservations (data, id) {
+    async getUserReservations (id) {
         const response = await fetch(`${API_URL}reservas/allUtilizadorReservas/${id}`, {
           method: "GET",
           body: JSON.stringify(data),
@@ -54,7 +54,7 @@ const bookingService = {
           throw Error(response);
         }
     },
-    async getRestaurantReservations (data, id) {
+    async getRestaurantReservations (id) {
         const response = await fetch(`${API_URL}reservas/allRestauranteReservas/${id}`, {
           method: "GET",
           body: JSON.stringify(data),
