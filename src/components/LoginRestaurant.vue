@@ -49,7 +49,7 @@ export default {
   }),
 
   methods: {
-    login() {
+    async login() {
       this.$store.commit("LOGIN", {
         email: this.emailLogin,
         password: this.passwordLogin,

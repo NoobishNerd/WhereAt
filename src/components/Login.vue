@@ -50,7 +50,7 @@ export default {
   }),
 
   methods: {
-    login() {
+    async login() {
       //login
       usersService.getUser({
         email: this.email,
