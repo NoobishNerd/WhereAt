@@ -99,6 +99,7 @@
 </template>
 
 <script>
+import usersService from "../api/users.js";
 
 export default {
   name: "RegisterFormRestaurant",
@@ -119,57 +120,52 @@ export default {
       if (this.password != this.confPassword) {
         alert("PASSWORDS DIFERENTES");
       } else {
-
         usersService.registerRestaurant({
-        nome: this.username,
-        password: this.password,
-        morada: this.address,
-        cod_postal: this.postalCode,
-        localidade: this.local,
-        email: this.email
-      })
+          nome: this.username,
+          password: this.password,
+          morada: this.address,
+          cod_postal: this.postalCode,
+          localidade: this.local,
+          email: this.email,
+        });
 
         const registerResponse = await usersService.registerRestaurant({
-        nome: this.username,
-        password: this.password,
-        morada: this.address,
-        cod_postal: this.postalCode,
-        localidade: this.local,
-        email: this.email
-      })
+          nome: this.username,
+          password: this.password,
+          morada: this.address,
+          cod_postal: this.postalCode,
+          localidade: this.local,
+          email: this.email,
+        });
 
         if (registerResponse == "Conta criada com sucesso") {
           //login
           usersService.getRestaurant({
-        email: this.email,
-        password: this.password,
-      })
+            email: this.email,
+            password: this.password,
+          });
 
           const loginResponse = await usersService.getRestaurant({
-        email: this.email,
-        password: this.password,
-      })
+            email: this.email,
+            password: this.password,
+          });
 
           if (loginResponse instanceof String) {
             alert(loginResponse);
           } else {
             this.$store.commit("LOGIN", {
-              id: loginResponse.id,
+              id: loginResponse.id_restaurante,
               admin: loginResponse.admin,
               username: loginResponse.user_name,
               profilePic: loginResponse.foto,
               preferences: loginResponse.tags,
-              type: "client"
+              type: "client",
             });
 
-
             this.$router.replace("/");
-
           }
-
         }
       }
-
     },
 
     goToLoginRestaurant() {

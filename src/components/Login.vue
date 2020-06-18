@@ -66,7 +66,7 @@ export default {
         alert(loginResponse);
       } else {
         this.$store.commit("LOGIN", {
-          id: loginResponse.id,
+          id: loginResponse.id_utilizador,
           admin: loginResponse.admin,
           username: loginResponse.user_name,
           profilePic: loginResponse.foto,

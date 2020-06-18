@@ -430,7 +430,7 @@ export default new Vuex.Store({
 
           state.loggedUser.type = "client";
           state.loggedUser.admin = payload.administrador;
-          state.loggedUser.id = payload.id_utilizador;
+          state.loggedUser.id = payload.id;
           state.loggedUser.username = payload.user_name;
           state.loggedUser.profilePic = payload.foto;
           state.loggedUser.preferences = "";
@@ -444,7 +444,7 @@ export default new Vuex.Store({
     
             state.loggedUser.type = "restaurant"
             state.loggedUser.admin = false;
-            state.loggedUser.id = payload.id_restaurante;
+            state.loggedUser.id = payload.id;
             state.loggedUser.username = payload.nome;
             state.loggedUser.profilePic = payload.foto_perfil;
 
