@@ -764,7 +764,7 @@ export default new Vuex.Store({
       }))
     },
 
-    async fetchRestaurant({commit}){
+    async getRestaurant({commit}){
       commit("SET_STATUS", 
         await usersService.getRestaurant({
         email: this.state.request.email,
