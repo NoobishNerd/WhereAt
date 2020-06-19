@@ -244,13 +244,25 @@ export default {
   created: async function() {
     this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
     this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
-    this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
+
   },
 
   methods: {
-    call(newComponent, id) {
+    async call(newComponent, id) {
       this.lastCallId = id;
       this.component = newComponent;
+      switch(newComponent){
+        case "coments":
+          this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
+          alert(this.comments)
+          break;
+        case "promos":
+          break;
+        case "info":
+          break;
+        case "menu":
+          break;
+          }
     },
 
     getSystemDate() {

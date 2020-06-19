@@ -90,7 +90,7 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
-      alert(responseData);
+      alert(JSON.stringify(responseData));
       return responseData;
     } else {
       throw Error(response);
