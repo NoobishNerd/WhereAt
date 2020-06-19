@@ -115,7 +115,7 @@
       </AddComment>
       <Comments
         v-show="component == 'comments'"
-        v-for="comment in restaurant.comments"
+        v-for="comment in comments"
         v-bind:comment="comment"
         v-bind:key="comment.username"
       ></Comments>
@@ -219,11 +219,16 @@ import DisplayMenu from "@/components/DisplayMenu.vue";
 import DisplayInfo from "@/components/DisplayInfo.vue";
 import AddComment from "@/components/AddComment.vue";
 
+import usersService from '../api/users.js';
+import restaurantService from '../api/restaurant.js';
+import bookingService from '../api/booking.js';
+
 export default {
   data: () => ({
     component: "info",
     map: "",
     restaurant: {},
+    comments: [],
     hour: "",
     date: "",
     availableTables: [],
@@ -236,11 +241,10 @@ export default {
     this.renderMap();
   },
 
-  created: function() {
-    this.restaurant = this.$store.getters.getRestaurantById(
-      this.$route.params.id
-    );
-    this.availableTables = this.restaurant.tables;
+  created: async function() {
+    this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
+    this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
+    this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
   },
 
   methods: {
@@ -288,39 +292,22 @@ export default {
       });
     },
 
-    reservation() {
+    async reservation() {
       //fazer check se está logged in ou fazer v-if para n haver opção de reserva caso n esteja autenticado ou seja um restaurante
       if (this.checkAvailability() && this.selectedTable != "") {
-        this.$store.commit("ADD_RESERVATION", {
-          id_restaurant: this.restaurant.id,
-          id_client: JSON.parse(localStorage.getItem("loggedUser")).id,
-          hour: this.hour,
-          date: this.date,
-          dateOfRes: this.getSystemDate(), //buscar data atual
-          sltdTable: this.selectedTableReady,
-          presence: false,
-          confirmation: "p",
+        
+        bookingService.createReservation({
+          data_hora_reservada: this.date + "-" + this.hour, 
+          id_utilizador: this.$store.loggedUser.id, 
+          id_restaurante: this.$route.params.id, 
+          id_mesa: this.selectedTableReady.id
         });
+
+
         this.updateAvailableTables();
       } else if (this.selectedTable == "") {
         alert("Por favor selecione uma mesa");
       }
-    },
-
-    updateAvailableTables() {
-      //reset
-      this.availableTables = this.restaurant.tables;
-      //obter mesas ocupadas para data escolhida
-      let busyTables = this.$store.getters.getNonAvailableTables()
-
-      //capacidade das ocupadas passa a 0
-      for (const table in this.availableTables) {
-        for (const busyTable in busyTables) {
-          if(table.id == busyTable.id){
-            table.capacity = 0
-          }
-        }
-      } 
     },
 
     checkAvailability() {
@@ -335,6 +322,28 @@ export default {
         return true;
       }
     },
+
+    async updateAvailableTables() {
+      //reset
+      this.availableTables = this.restaurant.tables;
+      //obter mesas ocupadas para data escolhida
+      let busyTablesId = await bookingService.getNonAvailabeTablesIds({data_hora_reservada:this.date + "-" + this.hour},this.$route.params.id)
+
+      //reset
+      this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
+      //capacidade das ocupadas passa a 0
+      for (const table in this.availableTables) {
+        for (let i = 0; i < busyTable.length; i++) {
+          if(table.id == busyTable[i]){
+            table.capacity = 0
+          }
+          
+        }
+       
+      } 
+    },
+
+
 
     updateObjectTable() {
       //traduzir a mesa de string para objeto

@@ -1,6 +1,22 @@
 import API_URL from "./config.js";
 
 const usersService = {
+
+
+  async getUserById(id) {
+    const response = await fetch(`${API_URL}utilizadores/${id}`, {
+      method: "GET"
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      alert(responseData);
+      return responseData;
+    } else {
+      throw Error(response);
+    }
+  },
+
   async getUser(data) {
     const response = await fetch(`${API_URL}utilizadores`, {
       method: "POST",
@@ -19,7 +35,7 @@ const usersService = {
     }
   },
   async registerUser(data) {
-    const response = await fetch(`${API_URL}criarutilizadores`, {
+    const response = await fetch(`${API_URL}criarUtilizadores`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -59,6 +75,28 @@ const usersService = {
     }
   },
 
+
+
+
+
+
+
+
+
+  async getRestaurantById(id) {
+    const response = await fetch(`${API_URL}restaurantes/${id}`, {
+      method: "GET"
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      alert(responseData);
+      return responseData;
+    } else {
+      throw Error(response);
+    }
+  },
+
   async getRestaurant(data) {
     const response = await fetch(`${API_URL}restaurantes`, {
       method: "POST",
@@ -77,7 +115,7 @@ const usersService = {
     }
   },
   async registerRestaurant(data) {
-    const response = await fetch(`${API_URL}criarrestaurantes`, {
+    const response = await fetch(`${API_URL}criarRestaurantes`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
