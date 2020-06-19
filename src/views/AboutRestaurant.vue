@@ -3,7 +3,7 @@
     <br />
     <br />
     <div class="row">
-      <div class="col-7">
+      <!-- <div class="col-7">
         <div
           v-if="restaurant.album.length != 0"
           id="windowCarrousel"
@@ -67,7 +67,7 @@
         <div v-else>
           <h5>O restaurante ainda não adicionou fotos</h5>
         </div>
-      </div>
+      </div> -->
       <div class="col-5">
         <h5 class="" style="color:#f17526">{{ restaurant.username }}</h5>
         <h6 class="" v-if="restaurant.info == ''">
@@ -220,7 +220,7 @@ import DisplayInfo from "@/components/DisplayInfo.vue";
 import AddComment from "@/components/AddComment.vue";
 
 import usersService from '../api/users.js';
-import restaurantService from '../api/restaurant.js';
+import restaurantService from '../api/restaurants.js';
 import bookingService from '../api/booking.js';
 
 export default {
@@ -310,7 +310,7 @@ export default {
       }
     },
 
-    checkAvailability() {
+    async checkAvailability() {
       this.updateAvailableTables();
 
       this.updateObjectTable();
@@ -333,8 +333,8 @@ export default {
       this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
       //capacidade das ocupadas passa a 0
       for (const table in this.availableTables) {
-        for (let i = 0; i < busyTable.length; i++) {
-          if(table.id == busyTable[i]){
+        for (let i = 0; i < busyTablesId.length; i++) {
+          if(table.id == busyTablesId[i]){
             table.capacity = 0
           }
           
@@ -345,7 +345,7 @@ export default {
 
 
 
-    updateObjectTable() {
+    async updateObjectTable() {
       //traduzir a mesa de string para objeto
       let start = this.selectedTable.indexOf(" ") + 1;
       let end = this.selectedTable.indexOf("|") - 1;
