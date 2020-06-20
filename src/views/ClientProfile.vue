@@ -89,11 +89,11 @@ export default {
     },
   }),
 
-  created: function() {
-    this.user = this.$store.getters.getUserById(this.$route.params.id);
+  created: async function() {
+    this.user = await usersService.getUserById(this.$route.params.id);
   },
-  updated: function() {
-    this.user = this.$store.getters.getUserById(this.$route.params.id);
+  updated: async function() {
+    this.user = await usersService.getUserById(this.$route.params.id);
   },
 
   methods: {

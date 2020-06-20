@@ -5,7 +5,7 @@
     <div class="row">
       <!-- <div class="col-7">
         <div
-          v-if="restaurant.album.length != 0"
+          v-if="album.length != 0"
           id="windowCarrousel"
           class="text-center img-fluid"
         >
@@ -17,24 +17,24 @@
           >
             <ol class="carousel-indicators">
               <li
-                v-for="photo in restaurant.album"
-                v-bind:key="photo.id"
+                v-for="photo in album"
+                v-bind:key="photo.id_foto"
                 data-target="#carouselExampleIndicators"
-                :data-slide-to="photo.id"
-                :class="{ active: photo.id == 0 }"
+                :data-slide-to="photo.id_foto"
+                :class="{ active: photo.id_foto == 1 }"
               ></li>
             </ol>
             <div class="carousel-inner">
               <div
                 class="carousel-item"
-                v-for="photo in restaurant.album"
-                v-bind:key="photo.id + photo.url"
-                :class="{ active: photo.id == 0 }"
+                v-for="photo in album"
+                v-bind:key="photo.id_foto + photo.link_foto"
+                :class="{ active: photo.id_foto == 0 }"
               >
                 <img
-                  :src="photo.url"
+                  :src="photo.link_foto"
                   class="d-block w-100 img-fluid"
-                  :alt="'slide ' + photo.id"
+                  :alt="'slide ' + photo.id_foto"
                 />
               </div>
             </div>
@@ -69,12 +69,12 @@
         </div>
       </div> -->
       <div class="col-5">
-        <h5 class="" style="color:#f17526">{{ restaurant.username }}</h5>
-        <h6 class="" v-if="restaurant.info == ''">
+        <h5 class="" style="color:#f17526">{{ restaurant.nome }}</h5>
+        <h6 class="" v-if="restaurant.informacao == ''">
           Este restaurante ainda não adicionou informações adicionais
         </h6>
         <p v-else class="">
-          {{ restaurant.info }}
+          {{ restaurant.informacao }}
         </p>
         <div class="row">
           <div class="col-12">
@@ -140,7 +140,7 @@
             <div class="form-group">
               <select
                 size="17"
-                v-if="availableTables.length && restaurant.available"
+                v-if="availableTables.length && restaurant.disponibilidade"
                 class="form-control"
                 id="sltTables"
                 v-model="selectedTable"
@@ -229,6 +229,7 @@ export default {
     map: "",
     restaurant: {},
     comments: [],
+    album: [],
     hour: "",
     date: "",
     availableTables: [],
@@ -244,6 +245,7 @@ export default {
   created: async function() {
     this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
     this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
+    this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
 
   },
 
@@ -285,11 +287,11 @@ export default {
 
     geocodeAddress(geocoder, resultsMap) {
       const address =
-        this.restaurant.address +
+        this.restaurant.morada +
         ", " +
-        this.restaurant.postalCode +
+        this.restaurant.cod_postal +
         " " +
-        this.restaurant.local;
+        this.restaurant.localidade;
       geocoder.geocode({ address: address }, (results, status) => {
         if (status === "OK") {
           resultsMap.setCenter(results[0].geometry.location);
@@ -337,7 +339,7 @@ export default {
 
     async updateAvailableTables() {
       //reset
-      this.availableTables = this.restaurant.tables;
+      this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
       //obter mesas ocupadas para data escolhida
       let busyTablesId = await bookingService.getNonAvailabeTablesIds({data_hora_reservada:this.date + "-" + this.hour},this.$route.params.id)
 
@@ -367,7 +369,7 @@ export default {
         if (table.id == selectedId) {
           this.selectedTableReady = {
             id_table: selectedId,
-            id_restaurant: this.restaurant.id,
+            id_restaurant: this.$route.params.id,
             capacity: table.capacity,
           };
         }

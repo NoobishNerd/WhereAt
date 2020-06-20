@@ -90,7 +90,7 @@
         },
 
         methods: {
-            
+
             ratingStar(rating) {
                 this.newRating = rating
             },
@@ -101,26 +101,23 @@
             },
 
             addComment() {
-                if (this.newRating == ""){
+                if (this.newRating == "") {
                     alert("Por favor avalie o restaurante!")
-                }
-                else if (this.loggedUser.type == "restaurant"){
-                    alert("Contas restaurante não podem comentar")                    
-                }
-                else{
-                    if(this.$store.getters.getCommentAuth(this.loggedUser.id, this.restaurant.id) == true){
+                } else if (this.loggedUser.type == "restaurant") {
+                    alert("Contas restaurante não podem comentar")
+                } else {
+                    if (this.$store.getters.getCommentAuth(this.loggedUser.id, this.restaurant.id) == true) {
                         this.$store.commit("ADD_COMMENT", {
-                        commentId: this.getLastCommentId(),
-                        text: this.newComment,
-                        rate: this.newRating,
-                        userId: this.loggedUser.id,
-                        username: this.loggedUser.username,
-                        profilePic: this.loggedUser.profilePic,
-                        restaurantId: this.restaurant.id,
-                        date: this.getSystemDate()
-                    })
-                    }
-                    else {
+                            commentId: this.getLastCommentId(),
+                            text: this.newComment,
+                            rate: this.newRating,
+                            userId: this.loggedUser.id,
+                            username: this.loggedUser.username,
+                            profilePic: this.loggedUser.profilePic,
+                            restaurantId: this.restaurant.id,
+                            date: this.getSystemDate()
+                        })
+                    } else {
                         alert("Não tem permissão para comentar, precisa de visitar o restaurante!")
                     }
                 }
@@ -135,11 +132,11 @@
 
 
             getLastCommentId() {
-                if (this.restaurant.comments.length != 0){
+                if (this.restaurant.comments.length != 0) {
                     return this.restaurant.comments[this.restaurant.comments.length - 1].id + 1;
                 } else {
                     return 0;
-                }     
+                }
             }
         }
     }

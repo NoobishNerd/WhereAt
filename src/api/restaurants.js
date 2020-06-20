@@ -145,6 +145,52 @@ const restaurantService = {
         } else {
             throw Error(response);
         }
+    },
+
+    //---------------------------------PHOTO OPERATIONS----------------------------------------
+
+    async getRestaurantAlbum(id) {
+        const response = await fetch(`${API_URL}restaurantes/${id}/fotos`, {
+            method: "GET"
+        });
+
+        if (response.ok) {
+            const responseData = await response.json();
+            alert(responseData);
+            return responseData;
+        } else {
+            throw Error(response);
+        }
+    },
+
+    async addPhoto(data, id) {
+        const response = await fetch(`${API_URL}restaurantes/${id}/fotos`, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+
+        if (response.ok) {
+            const responseData = await response.json();
+            alert(responseData);
+            return responseData;
+        } else {
+            throw Error(response);
+        }
+    },
+
+    async deletePhoto(id) {
+        const response = await fetch(`${API_URL}restaurantes/fotos/${id}`, {
+            method: "DELETE",
+        });
+
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw Error(response);
+        }
     }
 
 
