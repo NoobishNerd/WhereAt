@@ -3,7 +3,7 @@
     <br />
     <br />
     <div class="row">
-      <!-- <div class="col-7">
+      <div class="col-7">
         <div
           v-if="album.length != 0"
           id="windowCarrousel"
@@ -67,7 +67,7 @@
         <div v-else>
           <h5>O restaurante ainda não adicionou fotos</h5>
         </div>
-      </div> -->
+      </div>
       <div class="col-5">
         <h5 class="" style="color:#f17526">{{ restaurant.nome }}</h5>
         <h6 class="" v-if="restaurant.informacao == ''">
@@ -246,7 +246,12 @@ export default {
     this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
     this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
     this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
-
+    // eslint-disable-next-line no-console
+    console.log(this.restaurant);
+    // eslint-disable-next-line no-console
+    console.log(this.availableTables);
+    // eslint-disable-next-line no-console
+    console.log(this.album);
   },
 
   methods: {

@@ -74,6 +74,7 @@
 import ClientInfo from "@/components/ClientInfo.vue";
 import ClientHistory from "@/components/ClientHistory.vue";
 import AdminAuth from "@/components/AdminAuth.vue";
+import usersService from '../api/users.js';
 
 export default {
   name: "profileClient",
