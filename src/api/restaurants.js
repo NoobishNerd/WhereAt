@@ -11,7 +11,6 @@ const restaurantService = {
         if (response.ok) {
             const responseData = await response.json();
             // eslint-disable-next-line no-console
-            console.log(responseData);
             return responseData;
         } else {
             throw Error(response);

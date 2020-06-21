@@ -124,7 +124,7 @@
         v-show="component == 'promos'"
       ></DisplayTags>
       <DisplayMenu
-        :restaurant="restaurant"
+        :restaurantId="this.$route.params.id"
         v-show="component == 'menu'"
       ></DisplayMenu>
       <DisplayInfo
@@ -237,12 +237,12 @@ export default {
     lastCallId: "information",
     selected: "info",
   }),
-  mounted: function() {
+  mounted: async function() {
+    this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
     this.renderMap();
   },
 
   created: async function() {
-    this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
     this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
     this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
   },
@@ -308,14 +308,14 @@ export default {
       //fazer check se está logged in ou fazer v-if para n haver opção de reserva caso n esteja autenticado ou seja um restaurante
       if (this.checkAvailability() && this.selectedTable != "") {
         
-        bookingService.createReservation({
+       await bookingService.createReservation({
           data_hora_reservada: this.date + "-" + this.hour, 
           id_utilizador: this.$store.getters.getLoggedUser.id, 
           id_restaurante: this.$route.params.id, 
           id_mesa: this.selectedTableReady.id_mesa,
-          data_hora: this.getSystemDate()
-        
+          data_hora: this.getSystemDate()         
         });
+
         this.updateAvailableTables();
       } else if (this.selectedTable == "") {
         alert("Por favor selecione uma mesa");
@@ -520,5 +520,28 @@ img {
 }
 
 #sltTables {
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  outline: black;
+  background-size: 100%, 100%;
+  border-radius: 50%;
+  border: 1px solid black;
+  background-image: none;
+}
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: red;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: red;
 }
 </style>
