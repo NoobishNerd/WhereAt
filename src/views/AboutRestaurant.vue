@@ -267,8 +267,8 @@ export default {
 
     getSystemDate() {
       let today = new Date();
-      return `${today.getHours()}:${today.getMinutes()}  ${today.getDate()}/${today.getMonth() +
-        1}/${today.getFullYear()}`;
+      return `${today.getDate()}/${today.getMonth() +
+        1}/${today.getFullYear()}-${today.getHours()}:${today.getMinutes()}`;
     },
     renderMap() {
       this.map = new google.maps.Map(document.querySelector("#myMap"), {
