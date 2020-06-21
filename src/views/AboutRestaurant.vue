@@ -21,7 +21,7 @@
                 v-bind:key="photo.id_foto"
                 data-target="#carouselExampleIndicators"
                 :data-slide-to="photo.id_foto"
-                :class="{ active: photo.id_foto == 1 }"
+                :class="{ active: photo.id_foto == album[0].id_foto }"
               ></li>
             </ol>
             <div class="carousel-inner">
@@ -29,7 +29,7 @@
                 class="carousel-item"
                 v-for="photo in album"
                 v-bind:key="photo.id_foto + photo.link_foto"
-                :class="{ active: photo.id_foto == 0 }"
+                :class="{ active: photo.id_foto == album[0].id_foto }"
               >
                 <img
                   :src="photo.link_foto"
@@ -146,19 +146,18 @@
                 v-model="selectedTable"
               >
               
-                <option v-for="table in availableTables" v-bind:key="table.id">
-                  <p v-if="table.capacity != 0">
-                    Mesa {{ table.id + 1 }} | {{ table.capacity }} pessoas
+                <option v-for="table in availableTables" v-bind:key="table.id_mesa">
+                  <p v-if="table.n_cadeiras != 0">
+                    Mesa {{ table.id_mesa }} | {{ table.n_cadeiras }} pessoas
                   </p>
-                  <p v-if="table.capacity == 0">
-                    Mesa {{ table.id + 1 }} | [X] Ocupada
+                  <p v-if="table.n_cadeiras == 0">
+                    Mesa {{ table.id_mesa }} | [X] Ocupada
                   </p></option
                 >
               </select>
               <div v-else>
                 <h5>
-                  De momento o restaurante não está disponivel para reservas...
-                  :(
+                  De momento o restaurante não está disponivel para reservas...                 
                 </h5>
               </div>
             </div>
@@ -246,12 +245,6 @@ export default {
     this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
     this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
     this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
-    // eslint-disable-next-line no-console
-    console.log(this.restaurant);
-    // eslint-disable-next-line no-console
-    console.log(this.availableTables);
-    // eslint-disable-next-line no-console
-    console.log(this.album);
   },
 
   methods: {
@@ -310,19 +303,19 @@ export default {
         }
       });
     },
-
+  
     async reservation() {
       //fazer check se está logged in ou fazer v-if para n haver opção de reserva caso n esteja autenticado ou seja um restaurante
       if (this.checkAvailability() && this.selectedTable != "") {
         
         bookingService.createReservation({
           data_hora_reservada: this.date + "-" + this.hour, 
-          id_utilizador: this.$store.loggedUser.id, 
+          id_utilizador: this.$store.getters.getLoggedUser.id, 
           id_restaurante: this.$route.params.id, 
-          id_mesa: this.selectedTableReady.id
+          id_mesa: this.selectedTableReady.id_mesa,
+          data_hora: this.getSystemDate()
+        
         });
-
-
         this.updateAvailableTables();
       } else if (this.selectedTable == "") {
         alert("Por favor selecione uma mesa");
@@ -334,7 +327,7 @@ export default {
 
       this.updateObjectTable();
 
-      if (this.selectedTableReady.capacity == 0) {
+      if (this.selectedTableReady.n_cadeiras == 0) {
         alert("A mesa selecionada não está disponivel");
         return false;
       } else {
@@ -347,14 +340,11 @@ export default {
       this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
       //obter mesas ocupadas para data escolhida
       let busyTablesId = await bookingService.getNonAvailabeTablesIds({data_hora_reservada:this.date + "-" + this.hour},this.$route.params.id)
-
-      //reset
-      this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
       //capacidade das ocupadas passa a 0
       for (const table in this.availableTables) {
         for (let i = 0; i < busyTablesId.length; i++) {
           if(table.id == busyTablesId[i]){
-            table.capacity = 0
+            table.n_cadeiras = 0
           }
           
         }
@@ -368,14 +358,13 @@ export default {
       //traduzir a mesa de string para objeto
       let start = this.selectedTable.indexOf(" ") + 1;
       let end = this.selectedTable.indexOf("|") - 1;
-      let selectedId = parseInt(this.selectedTable.slice(start, end)) - 1;
-
+      let selectedId = parseInt(this.selectedTable.slice(start, end));
       for (const table of this.availableTables) {
-        if (table.id == selectedId) {
+        if (table.id_mesa == selectedId) {
           this.selectedTableReady = {
-            id_table: selectedId,
-            id_restaurant: this.$route.params.id,
-            capacity: table.capacity,
+            id_mesa: selectedId,
+            id_restaurante: this.$route.params.id,
+            n_cadeiras: table.n_cadeiras
           };
         }
       }
@@ -391,7 +380,7 @@ export default {
   },
 };
 </script>
-class="google-map img-fluid" id="myMap"
+
 <style scoped>
 p {
   font-size: 12px;

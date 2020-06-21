@@ -15,8 +15,7 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <h6 style="color:black"><strong>Endereço:</strong> {{restaurant.address}}, {{restaurant.postalCode}} {{restaurant.local}}</h6>
-                <h6 style="color:black"><strong>Telefone:</strong> {{restaurant.phone}}</h6>
+                <h6 style="color:black"><strong>Endereço:</strong> {{restaurant.morada}}, {{restaurant.cod_postal}} {{restaurant.localidade}}</h6>          
                 <h6 style="color:black" class="mt-4" v-if="restaurant.info == ''">Ainda não adicionou informações adicionais</h6>
                 <h6 v-else class="mt-4" style="white-space: pre-wrap; color:black">{{restaurant.info}}</h6>
 

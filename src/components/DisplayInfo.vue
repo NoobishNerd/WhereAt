@@ -4,11 +4,10 @@
       <div class="row">
         <div class="mt-3 col-sm-12">
           <h6>
-            <strong>Endereço:</strong> {{ restaurant.address }},
-            {{ restaurant.postalCode }} {{ restaurant.local }}
+            <strong>Endereço:</strong> {{ restaurant.morada }},
+            {{ restaurant.cod_postal }} {{ restaurant.localidade }}
           </h6>
-          <h6><strong>Telefone:</strong> {{ restaurant.phone }}</h6>
-
+          <!-- <h6><strong>Telefone:</strong> {{ restaurant.phone }}</h6> -->
           <br />
         </div>
       </div>
