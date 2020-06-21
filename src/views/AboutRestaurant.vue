@@ -117,7 +117,7 @@
         v-show="component == 'comments'"
         v-for="comment in comments"
         v-bind:comment="comment"
-        v-bind:key="comment.username"
+        v-bind:key="comment.id_utilizador"
       ></Comments>
       <DisplayTags
         :restaurant="restaurant"
@@ -243,6 +243,7 @@ export default {
   },
 
   created: async function() {
+    this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
     this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
     this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
   },

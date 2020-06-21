@@ -63,11 +63,12 @@ export default {
       });
 
       if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
-        
+        // eslint-disable-next-line no-console
+        console.log(loginResponse)
       } else {
         this.$store.commit("LOGIN", {
           id: loginResponse.id_utilizador,
-          admin: loginResponse.admin,
+          admin: loginResponse.administrador,
           username: loginResponse.user_name,
           profilePic: loginResponse.foto,
           preferences: loginResponse.tags,

@@ -71,75 +71,64 @@
     </div>
 </template>
 <script>
-    export default {
-        name: "AddComment",
-        data: () => ({
-            loggedUser: {},
-            newComment: "",
-            newRating: "",
-        }),
-        props: {
-            restaurant: {
-                type: Object,
-                required: true
-            }
-        },
+import restaurantService from '../api/restaurants.js';
 
-        created: function () {
-            this.loggedUser = this.$store.getters.getLoggedUser
-        },
-
-        methods: {
-
-            ratingStar(rating) {
-                this.newRating = rating
-            },
-
-            cancelComment() {
-                this.newRating = ""
-                this.newComment = ""
-            },
-
-            addComment() {
-                if (this.newRating == "") {
-                    alert("Por favor avalie o restaurante!")
-                } else if (this.loggedUser.type == "restaurant") {
-                    alert("Contas restaurante não podem comentar")
-                } else {
-                    if (this.$store.getters.getCommentAuth(this.loggedUser.id, this.restaurant.id) == true) {
-                        this.$store.commit("ADD_COMMENT", {
-                            commentId: this.getLastCommentId(),
-                            text: this.newComment,
-                            rate: this.newRating,
-                            userId: this.loggedUser.id,
-                            username: this.loggedUser.username,
-                            profilePic: this.loggedUser.profilePic,
-                            restaurantId: this.restaurant.id,
-                            date: this.getSystemDate()
-                        })
-                    } else {
-                        alert("Não tem permissão para comentar, precisa de visitar o restaurante!")
-                    }
-                }
-                this.newComment = "";
-                this.newRating = "";
-            },
-
-            getSystemDate() {
-                let today = new Date()
-                return `${today.getHours()}:${today.getMinutes()}  ${today.getDate()}/${today.getMonth()+ 1}/${today.getFullYear()}`
-            },
-
-
-            getLastCommentId() {
-                if (this.restaurant.comments.length != 0) {
-                    return this.restaurant.comments[this.restaurant.comments.length - 1].id + 1;
-                } else {
-                    return 0;
-                }
-            }
+export default {
+    name: "AddComment",
+    data: () => ({
+        loggedUser: {},
+        newComment: "",
+        newRating: "",
+    }),
+    props: {
+        restaurant: {
+            type: Object,
+            required: true
         }
+    },
+
+    created: function () {
+        this.loggedUser = this.$store.getters.getLoggedUser
+    },
+
+    methods: {
+
+        ratingStar(rating) {
+            this.newRating = rating
+        },
+
+        cancelComment() {
+            this.newRating = ""
+            this.newComment = ""
+        },
+
+        async addComment() {
+            if (this.newRating == "") {
+                alert("Por favor avalie o restaurante!")
+            } else if (this.loggedUser.type == "restaurant") {
+                alert("Contas restaurante não podem comentar")
+            } else {
+                // eslint-disable-next-line no-console
+                console.log(this.loggedUser.id)
+                await restaurantService.addComment({
+                        id_utilizador: this.loggedUser.id,
+                        txt_comentario: this.newComment,
+                        rating: this.newRating,
+                        data: this.getSystemDate()
+                    },
+                        this.$route.params.id,
+                )
+            }
+            this.newComment = "";
+            this.newRating = "";
+        },
+
+        getSystemDate() {
+            let today = new Date()
+            return `${today.getDate()}/${today.getMonth()+ 1}/${today.getFullYear()}-${today.getHours()}:${today.getMinutes()}`
+        },
     }
+}
 </script>
 
 <style scoped>
