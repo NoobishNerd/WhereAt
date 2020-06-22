@@ -237,6 +237,7 @@ export default {
     lastCallId: "information",
     selected: "info",
   }),
+
   mounted: async function() {
     this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
     this.renderMap();
@@ -245,6 +246,11 @@ export default {
   created: async function() {
     this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
     this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
+    this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
+  },
+
+  updated: async function() {
+    this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
     this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
   },
 
