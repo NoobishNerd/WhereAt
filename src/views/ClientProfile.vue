@@ -112,6 +112,7 @@ export default {
         },
             this.$route.params.id,
         )
+            this.user.foto = newUserImg;
       } else {
         alert("Coloque o link da imagem!");
       }
