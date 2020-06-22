@@ -91,13 +91,6 @@ export default {
       if (this.password != this.confPassword) {
         alert("PASSWORDS DIFERENTES");
       } else {
-
-        usersService.registerUser({
-          user_name: this.username,
-          email: this.email,
-          password: this.password
-        });
-
         const registerResponse = await usersService.registerUser({
           user_name: this.username,
           email: this.email,
@@ -117,7 +110,8 @@ export default {
           });
 
           if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
-            
+            // eslint-disable-next-line no-console
+            console.log(loginResponse)
           } else {
             this.$store.commit("LOGIN", {
               id: loginResponse.id_utilizador,

@@ -120,15 +120,6 @@ export default {
       if (this.password != this.confPassword) {
         alert("PASSWORDS DIFERENTES");
       } else {
-        usersService.registerRestaurant({
-          nome: this.username,
-          password: this.password,
-          morada: this.address,
-          cod_postal: this.postalCode,
-          localidade: this.local,
-          email: this.email,
-        });
-
         const registerResponse = await usersService.registerRestaurant({
           nome: this.username,
           password: this.password,
@@ -151,7 +142,8 @@ export default {
           });
 
           if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
-            
+            // eslint-disable-next-line no-console
+            console.log(loginResponse)
           } else {
             this.$store.commit("LOGIN", {
               id: loginResponse.id_restaurante,
