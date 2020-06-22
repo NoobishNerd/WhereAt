@@ -5,14 +5,14 @@
     <div class="row">
       <div class="col-sm-12" >
         <h5 id="boldText">Nome de Utilizador</h5>
-        <input v-model="user.username" class="form-control" type="text"/>
+        <input v-model="user.user_name" class="form-control" type="text"/>
       </div>
     </div>
     <br />
     <div class="row">
       <div class="col-sm-12">
         <h5 id="boldText">Telemóvel</h5>
-        <input v-model="user.phone" class="form-control" type="text" />
+        <input v-model="user.telefone" class="form-control" type="text" />
       </div>
     </div>
     <br />

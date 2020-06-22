@@ -242,6 +242,8 @@ export default {
     this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
     this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
     this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
+    // eslint-disable-next-line no-console
+    console.log(this.comments)
   },
 
 

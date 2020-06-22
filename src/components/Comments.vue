@@ -180,8 +180,15 @@ export default {
             rating: this.newRating,
             data: this.getSystemDate()
           },
-          this.$route.params.id,
+          this.$route.params.id
         )
+        this.comments.push({
+          foto: this.loggedUser.profilePic,
+          user_name:this.loggedUser.username,
+          id_utilizador: this.loggedUser.id,
+          txt_comentario: this.newComment,
+          rating: this.newRating,
+          data: this.getSystemDate()})
       }
       this.newComment = "";
       this.newRating = "";
@@ -199,4 +206,32 @@ export default {
 #commentText{
   color: aliceblue
 }
+    #commentBtn {
+        background-color: #f17526;
+        border: none;
+        color: #ffffff;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        -webkit-border-radius: 3px 3px 3px 3px;
+        border-radius: 3px 3px 3px 3px;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
+    #cancelBtn {
+        border-width: 1px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 14px;
+        -webkit-border-radius: 3px 3px 3px 3px;
+        border-radius: 3px 3px 3px 3px;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
 </style>
