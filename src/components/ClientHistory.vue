@@ -4,12 +4,12 @@
     <div v-if="bookingHistory.length != 0">
       <div v-for="reservation in bookingHistory" v-bind:key="reservation.id">
 
-        <div v-if="reservation.confirmation == 'p'" id="historyRow" class="row mb-3 mr-1 mt-2">
+        <div v-if="reservation.confirmacao == 'p'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8" >
-            <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
-            <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
-            <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurant)}}</p>
-            <p class="text-left mb-0">Horas: {{reservation.hour}}</p>
+            <p class="text-left pt-3 mb-0 mt-1">Data de pedido{{reservation.data}}</p>
+            <p class="text-left mb-0">Número de pessoas: {{reservation.n_cadeiras}}</p>
+            <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurante)}}</p>
+            <p class="text-left mb-0">Data e Hora Reservada: {{reservation.data_hora_reservada}}</p>
 
             <br>
           </div>
@@ -35,12 +35,12 @@
 
 
 
-        <div v-if="reservation.confirmation == 'c'" id="historyRow" class="row mb-3 mr-1 mt-2">
+        <div v-if="reservation.confirmacao == 'c'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8" >
-            <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
-            <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
-            <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurant)}}</p>
-            <p class="text-left mb-0">Horas: {{reservation.hour}}</p>
+            <p class="text-left pt-3 mb-0 mt-1">Data de pedido{{reservation.data}}</p>
+            <p class="text-left mb-0">Número de pessoas: {{reservation.n_cadeiras}}</p>
+            <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurante)}}</p>
+            <p class="text-left mb-0">Data e Hora Reservada: {{reservation.data_hora_reservada}}</p>
 
             <br>
           </div>
@@ -69,12 +69,12 @@
 
 
 
-        <div v-if="reservation.confirmation == 'd'" id="historyRow" class="row mb-3 mr-1 mt-2">
+        <div v-if="reservation.confirmacao == 'd'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8" >
-            <p class="text-left pt-3 mb-0 mt-1">{{reservation.date}}</p>
-            <p class="text-left mb-0">Número de pessoas: {{reservation.sltdTable.capacity}}</p>
-            <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurant)}}</p>
-            <p class="text-left mb-0">Horas: {{reservation.hour}}</p>
+            <p class="text-left pt-3 mb-0 mt-1">Data de pedido{{reservation.data}}</p>
+            <p class="text-left mb-0">Número de pessoas: {{reservation.n_cadeiras}}</p>
+            <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurante)}}</p>
+            <p class="text-left mb-0">Data e Hora Reservada: {{reservation.data_hora_reservada}}</p>
 
             <br>
           </div>
@@ -105,6 +105,9 @@
 
 
 <script>
+import bookingService from '../api/booking';
+import usersService from '../api/users';
+
 export default {
   data: () => ({
       bookingHistory: [],
@@ -113,14 +116,12 @@ export default {
     id: {type: Number,
     required: true}
   },
-  created: function(){
-    
-    this.bookingHistory = this.$store.getters.getReservsByClntId(this.id)
-    
+  created: async function(){
+    this.bookingHistory = await bookingService.getUserReservations(this.id);
   },
   methods:{
-    getUsername(id_restaurant){
-       return this.$store.getters.getRestaurantById(id_restaurant).username
+    async getUsername(id){
+       return usersService.getRestaurantById(id).nome;
     }
   }
 };

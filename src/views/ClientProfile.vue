@@ -33,13 +33,13 @@
         <div class="col-sm-3" id="colPrl">
           <div class="text-center">
             <img
-              :src="user.profilePic"
+              :src="user.foto"
               class="rounded-circle"
               width="95px"
               height="95px"
             />
             <br />
-            <h5 class="pt-2" id="brownBoldText">{{ user.username }}</h5>
+            <h5 class="pt-2" id="brownBoldText">{{ user.user_name }}</h5>
             <button
               @click="changeUserImg"
               id="smallerButton"
@@ -53,7 +53,7 @@
           <ClientInfo :user="user" v-if="component == 'info'"> </ClientInfo>
           <input
             @click="call('adminAuth')"
-            v-if="component == 'history' && user.admin == true"
+            v-if="component == 'history' && user.administrador == true"
             type="button"
             value="Autorizar Restaurants"
             id="autorizeBtn"
@@ -61,7 +61,7 @@
           />
           <AdminAuth v-if="component == 'adminAuth'"></AdminAuth>
           <ClientHistory
-            :id="Number(user.id)"
+            :id="Number(user.id_utilizador)"
             v-if="component == 'history'"
           ></ClientHistory>
         </div>
@@ -74,26 +74,20 @@
 import ClientInfo from "@/components/ClientInfo.vue";
 import ClientHistory from "@/components/ClientHistory.vue";
 import AdminAuth from "@/components/AdminAuth.vue";
+
 import usersService from '../api/users.js';
 
 export default {
   name: "profileClient",
   data: () => ({
     component: "info",
-    user: {
-      id: "",
-      username: "",
-      profilePic: "",
-      email: "",
-      phone: "",
-      admin: "",
-    },
+    user: {}
   }),
 
-  created: async function() {
+  created: async function () {
     this.user = await usersService.getUserById(this.$route.params.id);
   },
-  updated: async function() {
+  updated: async function () {
     this.user = await usersService.getUserById(this.$route.params.id);
   },
 
@@ -108,14 +102,17 @@ export default {
       this.$router.replace("/");
     },
 
-    changeUserImg() {
+    async changeUserImg() {
       let newUserImg = prompt("Link da imagem:");
       if (newUserImg != "") {
-        this.user.profilePic = newUserImg;
-        this.$store.commit("CHANGE_USER_IMG", {
-          id: this.user.id,
-          profilePic: this.user.profilePic,
-        });
+        usersService.updateUser({
+          user_name: this.user.user_name,
+          email: this.user.email,
+          password: this.user.password,
+          administrador: this.user.administrador,
+          foto: newUserImg,
+          numero_tel: this.user.numero_tel
+        })
       } else {
         alert("Coloque o link da imagem!");
       }
