@@ -111,13 +111,9 @@
         </li>
       </ul>
       <div class="separator"></div>
-      <AddComment :restaurant="restaurant" v-show="component == 'comments'">
-      </AddComment> 
-      <Comments
-        v-show="component == 'comments'"
-        v-for="comment in comments"
-        v-bind:comment="comment"
-        v-bind:key="comment.id_utilizador"
+      <Comments v-show="component == 'comments'"
+        v-bind:restaurant="restaurant"
+        v-bind:comments="comments"
       ></Comments>
       <DisplayTags
         :restaurant="restaurant"
@@ -216,7 +212,6 @@ import Comments from "@/components/Comments.vue";
 import DisplayTags from "@/components/DisplayTags.vue";
 import DisplayMenu from "@/components/DisplayMenu.vue";
 import DisplayInfo from "@/components/DisplayInfo.vue";
-import AddComment from "@/components/AddComment.vue";
 
 import usersService from '../api/users.js';
 import restaurantService from '../api/restaurants.js';
@@ -249,10 +244,6 @@ export default {
     this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
   },
 
-  // updated: async function() {
-  //   this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
-  //   this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
-  // },
 
   methods: {
     async call(newComponent, id) {
@@ -383,7 +374,6 @@ export default {
     DisplayTags,
     DisplayMenu,
     DisplayInfo,
-    AddComment,
   },
 };
 </script>

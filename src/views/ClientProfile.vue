@@ -87,9 +87,6 @@ export default {
   created: async function () {
     this.user = await usersService.getUserById(this.$route.params.id);
   },
-  // updated: async function () {
-  //   this.user = await usersService.getUserById(this.$route.params.id);
-  // },
 
   methods: {
     call(newComponent) {
