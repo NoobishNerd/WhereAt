@@ -52,9 +52,14 @@ const usersService = {
     }
   },
   async updateUser(data, id) {
+    // eslint-disable-next-line no-console
+    console.log(data)
     const response = await fetch(`${API_URL}utilizadores/${id}`, {
       method: "PUT",
       body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      }
     });
 
     if (response.ok) {
@@ -75,14 +80,7 @@ const usersService = {
     }
   },
 
-
-
-
-
-
-
-
-
+ //---------------------------------Restaurant OPERATIONS----------------------------------------
   async getRestaurantById(id) {
     const response = await fetch(`${API_URL}restaurantes/${id}`, {
       method: "GET"

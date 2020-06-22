@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col-sm-12">
         <h5 id="boldText">Telemóvel</h5>
-        <input v-model="user.telefone" class="form-control" type="text" />
+        <input v-model="user.numero_tel" class="form-control" type="text" />
       </div>
     </div>
     <br />

@@ -102,14 +102,16 @@ export default {
     async changeUserImg() {
       let newUserImg = prompt("Link da imagem:");
       if (newUserImg != "") {
-        usersService.updateUser({
+       await usersService.updateUser({
           user_name: this.user.user_name,
           email: this.user.email,
           password: this.user.password,
           administrador: this.user.administrador,
           foto: newUserImg,
           numero_tel: this.user.numero_tel
-        })
+        },
+            this.$route.params.id,
+        )
       } else {
         alert("Coloque o link da imagem!");
       }
