@@ -112,7 +112,7 @@
       </ul>
       <div class="separator"></div>
       <AddComment :restaurant="restaurant" v-show="component == 'comments'">
-      </AddComment>
+      </AddComment> 
       <Comments
         v-show="component == 'comments'"
         v-for="comment in comments"
@@ -249,10 +249,10 @@ export default {
     this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
   },
 
-  updated: async function() {
-    this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
-    this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
-  },
+  // updated: async function() {
+  //   this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
+  //   this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
+  // },
 
   methods: {
     async call(newComponent, id) {

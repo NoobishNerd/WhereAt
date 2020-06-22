@@ -59,8 +59,7 @@ const restaurantService = {
         });
 
         if (response.ok) {
-            const responseData = await response.json();
-            alert(responseData);
+            const responseData = await response.json();          ;
             return responseData;
         } else {
             throw Error(response);
@@ -78,7 +77,6 @@ const restaurantService = {
 
         if (response.ok) {
             const responseData = await response.json();
-            alert(responseData);
             return responseData;
         } else {
             throw Error(response);
