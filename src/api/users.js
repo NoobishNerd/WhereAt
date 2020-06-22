@@ -133,6 +133,9 @@ const usersService = {
     const response = await fetch(`${API_URL}restaurantes/${id}`, {
       method: "PUT",
       body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      }
     });
 
     if (response.ok) {

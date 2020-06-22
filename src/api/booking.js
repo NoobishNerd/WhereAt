@@ -40,10 +40,6 @@ const bookingService = {
     async getUserReservations (id) {
         const response = await fetch(`${API_URL}reservas/allUtilizadorReservas/${id}`, {
           method: "GET",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          }
         });
     
         if (response.ok) {
@@ -57,10 +53,6 @@ const bookingService = {
     async getRestaurantReservations (id) {
         const response = await fetch(`${API_URL}reservas/allRestauranteReservas/${id}`, {
           method: "GET",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          }
         });
     
         if (response.ok) {
@@ -76,6 +68,9 @@ const bookingService = {
         const response = await fetch(`${API_URL}reservas/restaurantes/${id_res}/utilizadores/${id_user}/mesas/${id_table}`, {
           method: "PUT",
           body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          }
         });
     
         if (response.ok) {
