@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import usersService from '../api/users.js';
 
 export default {
   name: "LoginRestaurant",
