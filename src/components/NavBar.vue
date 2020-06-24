@@ -42,36 +42,36 @@ export default {
 
   }),
 
-  created: function(){
+  created: function () {
     this.loggedUser = this.$store.getters.getLoggedUser
   },
-  updated: function(){
+  updated: function () {
     this.loggedUser = this.$store.getters.getLoggedUser
   },
   methods: {
-    logout() {
-      this.$store.commit("LOGOUT");
-      localStorage.setItem("loggedUser", "");
-    },
 
-    showOpts(){ //show options or nah?
+    showOpts() { //show options or nah?
       this.show = this.show ? false : true;
     },
 
     goToProfile() {
-      if(this.loggedUser.type == "client"){
+      if (this.loggedUser.type == "client") {
         this.$router.push({
           name: "clientProfile",
-          params: { id: this.loggedUser.id }
-        });
-      } 
-      if(this.loggedUser.type == "restaurant"){
-        this.$router.push({
-          name: "restaurantEditor",
-          params: { id: this.loggedUser.id }
+          params: {
+            id: this.loggedUser.id
+          }
         });
       }
-      
+      if (this.loggedUser.type == "restaurant") {
+        this.$router.push({
+          name: "restaurantEditor",
+          params: {
+            id: this.loggedUser.id
+          }
+        });
+      }
+
     }
   }
 };

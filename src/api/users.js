@@ -80,7 +80,61 @@ const usersService = {
     }
   },
 
- //---------------------------------Restaurant OPERATIONS----------------------------------------
+  //--------------------------------------------------user tags------------------------------------------------
+
+  async getUserTags(id) {
+    const response = await fetch(`${API_URL}/utilizadores/${id}/tags`, {
+      method: "GET"
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      alert(responseData);
+      return responseData;
+    } else {
+      throw Error(response);
+    }
+  },
+
+  async addUserTag(id_user, id_tag) {
+    const response = await fetch(`${API_URL}utilizadores/${id_user}/tags/${id_tag}`, {
+      method: "POST"
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      alert(responseData);
+      return responseData;
+    } else {
+      throw Error(response);
+    }
+  },
+
+  async deletePhoto(id_user, id_tag) {
+    const response = await fetch(`${API_URL}utilizadores/${id_user}/tags/${id_tag}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw Error(response);
+    }
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //---------------------------------Restaurant OPERATIONS----------------------------------------
   async getRestaurantById(id) {
     const response = await fetch(`${API_URL}restaurantes/${id}`, {
       method: "GET"

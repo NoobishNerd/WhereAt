@@ -116,7 +116,7 @@
         v-bind:comments="comments"
       ></Comments>
       <DisplayTags
-        :restaurant="restaurant"
+        :restaurantId="restaurant.id_restaurante"
         v-show="component == 'promos'"
       ></DisplayTags>
       <DisplayMenu
@@ -233,12 +233,12 @@ export default {
     selected: "info",
   }),
 
-  mounted: async function() {
+  mounted: async function () {
     this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
     this.renderMap();
   },
 
-  created: async function() {
+  created: async function () {
     this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
     this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
     this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
@@ -251,7 +251,7 @@ export default {
     async call(newComponent, id) {
       this.lastCallId = id;
       this.component = newComponent;
-      switch(newComponent){
+      switch (newComponent) {
         case "coments":
           this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
           alert(this.comments)
@@ -262,7 +262,7 @@ export default {
           break;
         case "menu":
           break;
-          }
+      }
     },
 
     getSystemDate() {
@@ -290,7 +290,9 @@ export default {
         this.restaurant.cod_postal +
         " " +
         this.restaurant.localidade;
-      geocoder.geocode({ address: address }, (results, status) => {
+      geocoder.geocode({
+        address: address
+      }, (results, status) => {
         if (status === "OK") {
           resultsMap.setCenter(results[0].geometry.location);
           new google.maps.Marker({
@@ -303,17 +305,17 @@ export default {
         }
       });
     },
-  
+
     async reservation() {
       //fazer check se está logged in ou fazer v-if para n haver opção de reserva caso n esteja autenticado ou seja um restaurante
       if (this.checkAvailability() && this.selectedTable != "") {
-        
-       await bookingService.createReservation({
-          data_hora_reservada: this.date + "-" + this.hour, 
-          id_utilizador: this.$store.getters.getLoggedUser.id, 
-          id_restaurante: this.$route.params.id, 
+
+        await bookingService.createReservation({
+          data_hora_reservada: this.date + "-" + this.hour,
+          id_utilizador: this.$store.getters.getLoggedUser.id,
+          id_restaurante: this.$route.params.id,
           id_mesa: this.selectedTableReady.id_mesa,
-          data_hora: this.getSystemDate()         
+          data_hora: this.getSystemDate()
         });
 
         this.updateAvailableTables();
@@ -339,17 +341,19 @@ export default {
       //reset
       this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
       //obter mesas ocupadas para data escolhida
-      let busyTablesId = await bookingService.getNonAvailabeTablesIds({data_hora_reservada:this.date + "-" + this.hour},this.$route.params.id)
+      let busyTablesId = await bookingService.getNonAvailabeTablesIds({
+        data_hora_reservada: this.date + "-" + this.hour
+      }, this.$route.params.id)
       //capacidade das ocupadas passa a 0
       for (const table in this.availableTables) {
         for (let i = 0; i < busyTablesId.length; i++) {
-          if(table.id == busyTablesId[i]){
+          if (table.id == busyTablesId[i]) {
             table.n_cadeiras = 0
           }
-          
+
         }
-       
-      } 
+
+      }
     },
 
 

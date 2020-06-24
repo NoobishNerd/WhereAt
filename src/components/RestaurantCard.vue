@@ -4,18 +4,18 @@
       <div class="card">
         <img
           class="card-img-top"
-          :src="restaurant.profilePic"
+          :src="restaurant.foto_perfil"
           alt="Card image cap"
           @click="getAboutRestaurant"
         />
         <div class="card-body">
-          <h6 class="card-title text-left">{{ restaurant.local }}</h6>
+          <h6 class="card-title text-left">{{ restaurant.localidade }}</h6>
           <h4 class="card-title text-left " id="restaurantCardName">
-            {{ restaurant.username }}
+            {{ restaurant.nome }}
           </h4>
-          <div v-for="tag of restaurant.tags" :key="tag.id">
-            <p v-if="tag.main == true" class="card-text text-left">
-              {{ tag.tag_name }}
+          <div v-for="tag of tags" :key="tag.id_tag">
+            <p v-if="tag.tag_principal == true" class="card-text text-left">
+              {{ tag.desc_tag }}
             </p>
           </div>
           <p class="card-text text-left">
@@ -28,12 +28,14 @@
 </template>
 
 <script>
+import restaurantService from '../api/restaurants';
 export default {
   name: "RestaurantCard",
 
   data: () => ({
     rate: 0,
     num_comments: 0,
+    comments: []
   }),
 
   props: {
@@ -43,8 +45,10 @@ export default {
     },
   },
 
-  mounted: function() {
-    if (this.restaurant.comments.length != 0) {
+  mounted: async function() {
+    this.comments = await restaurantService.getRestaurantComments(this.restaurant.id_restaurante);
+
+    if (this.comments.length != 0) {
       this.getAverageAndNumber();
     }
   },
@@ -53,14 +57,14 @@ export default {
     getAboutRestaurant() {
       this.$router.push({
         name: "aboutRestaurant",
-        params: { id: this.restaurant.id },
+        params: { id: this.restaurant.id_restaurante },
       });
     },
 
     getAverageAndNumber() {
-      for (let comment of this.restaurant.comments) {
+      for (let comment of this.comments) {
         this.num_comments++;
-        this.rate += comment.rate;
+        this.rate += comment.rating;
       }
       //average de ratings
       this.rate = (this.rate / this.num_comments).toFixed(1);

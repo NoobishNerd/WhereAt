@@ -21,8 +21,8 @@
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    <button @click="manageRestaurantApproval(restaurant.id_restaurante, restaurant.aprovacao, true)" :class="{ btnEnabled: restaurant.approval==false , btnDisabled: restaurant.approval==true}">Aprovar</button>
-                    <button @click="manageRestaurantApproval(restaurant.id_restaurante, restaurant.aprovacao, false)"  :class="{ btnEnabled: restaurant.approval==true, btnDisabled: restaurant.approval==false }" >Suspender</button>
+                    <button @click="manageRestaurantApproval(restaurant.id_restaurante, restaurant.aprovacao, true)" :class="{ btnEnabled: restaurant.aprovacao==false , btnDisabled: restaurant.aprovacao==true}">Aprovar</button>
+                    <button @click="manageRestaurantApproval(restaurant.id_restaurante, restaurant.aprovacao, false)"  :class="{ btnEnabled: restaurant.aprovacao==true, btnDisabled: restaurant.aprovacao==false }" >Suspender</button>
                 </div>
             </div>
 
@@ -36,23 +36,30 @@ import restaurantService from '../api/restaurants.js';
 
 export default {
     data: () => ({
-      
-      restaurants: []
+        restaurants: []
     }),
     created: async function () {
-      this.restaurant = await restaurantService.getAllRestaurants();
+        this.restaurants = await restaurantService.getAllRestaurants();
     },
 
-    updated: async function () {
-      this.restaurant = await restaurantService.getAllRestaurants();
-    },
-    methods:{
-        manageRestaurantApproval(restaurantId, currentValue, newValue){
-            if(currentValue != newValue){
-                this.$store.commit("CHANGE_APPROVAL", {
-                    id: restaurantId,
-                    value: newValue
-                })
+    methods: {
+        async manageRestaurantApproval(restaurantId, currentValue, newValue) {
+            if (currentValue != newValue) {
+                let restaurant = this.restaurants.find(restaurant => restaurant.id_restaurante == restaurantId);
+                restaurant.aprovacao = newValue;
+
+                await usersService.updateRestaurant({
+                    id_restaurante: restaurantId,
+                    nome: restaurant.nome,
+                    password: restaurant.password,
+                    foto_perfil: restaurant.foto_perfil,
+                    informacao: restaurant.informacao,
+                    morada: restaurant.morada,
+                    aprovacao: newValue,
+                    cod_postal: restaurant.cod_postal,
+                    disponibilidade: restaurant.disponibilidade,
+                    email: restaurant.email
+                }, restaurantId);
             }
         }
     }

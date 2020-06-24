@@ -2,22 +2,18 @@
   <div class="history container" v-if="reservations.length != 0">
     <br />
     <div v-if="reservations.length != 0">
-      <div v-for="reservation in reservations" v-bind:key="reservation.id">
-        <div
-          v-if="reservation.confirmation == 'p'"
-          id="historyRow"
-          class="row mb-3 mr-1 mt-2"
-        >
+      <div v-for="reservation in reservations" v-bind:key="reservation.id_utilizador + reservation.id_mesa">
+        <div v-if="reservation.confirmacao == 'p'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8">
             <div class="ml-5">
-              <p class="text-left pt-3 mb-0 mt-1">{{ reservation.date }}</p>
+              <p class="text-left pt-3 mb-0 mt-1">{{ reservation.data_hora }}</p>
               <p class="text-left mb-0">
-                Número de pessoas: {{ reservation.sltdTable.capacity }}
+                Número de pessoas: {{ reservation.n_cadeiras }}
               </p>
               <p class="text-left mb-0">
-                Utilizador: {{ getUsername(reservation.id_client) }}
+                Utilizador: {{ getUsername(reservation.id_utilizador) }}
               </p>
-              <p class="text-left mb-0">Horas: {{ reservation.hour }}</p>
+              <p class="text-left mb-0">Horas: {{ reservation.data_hora_reservada }}</p>
 
               <br />
             </div>
@@ -26,57 +22,43 @@
             <div class="row">
               <div class="col-sm-2"></div>
               <div class="col-sm-4 pt-4 mt-3">
-                <img
-                  @click="
+                <img @click="
                     accept(
-                      reservation.date,
-                      reservation.hour,
-                      reservation.id_client,
-                      reservation.id_restaurant,
-                      reservation.sltdTable.id,
-                      reservation.dateOfRes
+                      reservation.id_utilizador,
+                      reservation.id_restaurante,
+                      reservation.id_mesa,
+                      reservation.data_hora_reservada,
+                      reservation.data_hora
                     )
-                  "
-                  src="../assets/Yes Icon Border.png"
-                  width="51px"
-                />
+                  " src="../assets/Yes Icon Border.png" width="51px" />
               </div>
               <div class="col-sm-4 pt-4 mt-3">
-                <img
-                  @click="
+                <img @click="
                     deny(
-                      reservation.date,
-                      reservation.hour,
-                      reservation.id_client,
-                      reservation.id_restaurant,
-                      reservation.sltdTable.id,
-                      reservation.dateOfRes
+                      reservation.id_utilizador,
+                      reservation.id_restaurante,
+                      reservation.id_mesa,
+                      reservation.data_hora_reservada,
+                      reservation.data_hora
                     )
-                  "
-                  src="../assets/No Icon Border.png"
-                  width="46px"
-                />
+                  " src="../assets/No Icon Border.png" width="46px" />
               </div>
               <div class="col-sm-2"></div>
             </div>
           </div>
         </div>
 
-        <div
-          v-if="reservation.confirmation == 'c'"
-          id="historyRow"
-          class="row mb-3 mr-1 mt-2"
-        >
+        <div v-if="reservation.confirmacao == 'c'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8">
             <div class="ml-5">
-              <p class="text-left pt-3 mb-0 mt-1">{{ reservation.date }}</p>
+              <p class="text-left pt-3 mb-0 mt-1">{{ reservation.data_hora }}</p>
               <p class="text-left mb-0">
-                Número de pessoas: {{ reservation.sltdTable.capacity }}
+                Número de pessoas: {{ reservation.n_cadeiras }}
               </p>
               <p class="text-left mb-0">
-                Utilizador: {{ getUsername(reservation.id_client) }}
+                Utilizador: {{ getUsername(reservation.id_utilizador) }}
               </p>
-              <p class="text-left mb-0">Horas: {{ reservation.hour }}</p>
+              <p class="text-left mb-0">Horas: {{ reservation.data_hora_reservada }}</p>
 
               <br />
             </div>
@@ -94,25 +76,16 @@
               <div class="col-sm-9 mt-2">
                 <div class="custom-control custom-checkbox mr-sm-2">
                   <div v-if="reservation.presence == false">
-                    <input
-                      @click="
+                    <input @click="
                         checkPresence(
-                          reservation.date,
-                          reservation.hour,
-                          reservation.id_client,
-                          reservation.id_restaurant,
-                          reservation.sltdTable.id
+                      reservation.id_utilizador,
+                      reservation.id_restaurante,
+                      reservation.id_mesa,
+                      reservation.data_hora_reservada,
+                      reservation.data_hora
                         )
-                      "
-                      type="checkbox"
-                      class="custom-control-input"
-                      id="customControlAutosizing"
-                    />
-                    <label
-                      class="custom-control-label"
-                      for="customControlAutosizing"
-                      >Presença</label
-                    >
+                      " type="checkbox" class="custom-control-input" id="customControlAutosizing" />
+                    <label class="custom-control-label" for="customControlAutosizing">Presença</label>
                   </div>
                   <div v-if="reservation.presence == true">
                     <!-- meter um simbolo -->
@@ -124,21 +97,17 @@
           </div>
         </div>
 
-        <div
-          v-if="reservation.confirmation == 'd'"
-          id="historyRow"
-          class="row mb-3 mr-1 mt-2"
-        >
+        <div v-if="reservation.confirmation == 'd'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8">
             <div class="ml-5">
-              <p class="text-left pt-3 mb-0 mt-1">{{ reservation.date }}</p>
+              <p class="text-left pt-3 mb-0 mt-1">{{ reservation.data_hora }}</p>
               <p class="text-left mb-0">
-                Número de pessoas: {{ reservation.sltdTable.capacity }}
+                Número de pessoas: {{ reservation.n_cadeiras }}
               </p>
               <p class="text-left mb-0">
-                Utilizador: {{ getUsername(reservation.id_client) }}
+                Utilizador: {{ getUsername(reservation.id_utilizador) }}
               </p>
-              <p class="text-left mb-0">Horas: {{ reservation.hour }}</p>
+              <p class="text-left mb-0">Horas: {{ reservation.data_hora_reservada }}</p>
 
               <br />
             </div>
@@ -164,54 +133,63 @@
 </template>
 
 <script>
+import bookingService from '../api/booking';
+import usersService from '../api/users';
 export default {
+
+  //granada incendiária num contetor de lixo indiferenciado
   data: () => ({
     reservations: []
   }),
   props: {
-    id: { type: Number, required: true }
+    id: {
+      type: Number,
+      required: true
+    }
   },
-  created: function() {
-    this.reservations = this.$store.getters.getReservsByRestId(this.id);
-    
+  created: async function () {
+    this.reservations = await bookingService.getRestaurantReservations(this.id);
   },
+
   methods: {
-    getUsername(id) {
-      return this.$store.getters.getUserById(id).username;
+    async getUsername(id) {
+      return await usersService.getUserById(id).user_name;
     },
 
-    accept(date, hour, id_client, id_restaurant, tableId, dateOfRes) {
-      this.$store.commit("MANAGE_RESERVATION", {
-        date: date,
-        hour: hour,
-        id_client: id_client,
-        id_restaurant: id_restaurant,
-        tableId: tableId,
-        dateOfRes: dateOfRes,
-        action: "c" //C === CONFIRM;  ZÉ! N MUDES!!!1111!
-      });
+    async accept(id_u, id_rest, id_m, data_hora_reservada, data_hora) {
+      //clusterfuck a tentar confirmar isto localmente no componente
+      this.reservations.find(reservation => reservation.id_utilizador == id_u && reservation.id_restaurante == id_rest && reservation.id_mesa == id_m).confirmacao = 'c';
+
+      await bookingService.updateReservation({
+        data_hora_reservada: data_hora_reservada,
+        data_hora: data_hora,
+        newConfirmacao: "c",
+        newPresenca: 0
+      }, id_u, id_rest, id_m)
     },
 
-    deny(date, hour, id_client, id_restaurant, tableId, dateOfRes) {
-      this.$store.commit("MANAGE_RESERVATION", {
-        date: date,
-        hour: hour,
-        id_client: id_client,
-        id_restaurant: id_restaurant,
-        tableId: tableId,
-        dateOfRes: dateOfRes,
-        action: "d" //D === DENIED
-      });
+    async deny(id_u, id_rest, id_m, data_hora_reservada, data_hora) {
+      //clusterfuck a tentar confirmar isto localmente no componente
+      this.reservations.find(reservation => reservation.id_utilizador == id_u && reservation.id_restaurante == id_rest && reservation.id_mesa == id_m).confirmacao = 'd';
+
+      await bookingService.updateReservation({
+        data_hora_reservada: data_hora_reservada,
+        data_hora: data_hora,
+        newConfirmacao: "d",
+        newPresenca: 0
+      }, id_u, id_rest, id_m)
     },
 
-    checkPresence(date, hour, id_client, id_restaurant, tableId) {
-      this.$store.commit("AUTHORIZE_COMMENT", {
-        date: date,
-        hour: hour,
-        id_client: id_client,
-        id_restaurant: id_restaurant,
-        tableId: tableId
-      });
+    checkPresence(id_u, id_rest, id_m, data_hora_reservada, data_hora) {
+      //clusterfuck a tentar confirmar isto localmente no componente
+      this.reservations.find(reservation => reservation.id_utilizador == id_u && reservation.id_restaurante == id_rest && reservation.id_mesa == id_m).presenca = 1;
+
+      await bookingService.updateReservation({
+        data_hora_reservada: data_hora_reservada,
+        data_hora: data_hora,
+        newConfirmacao: "c",
+        newPresenca: 1
+      }, id_u, id_rest, id_m)
     }
   }
 };
