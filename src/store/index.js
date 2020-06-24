@@ -476,6 +476,7 @@ export default new Vuex.Store({
 
     CHANGE_USER_IMG(state, payload) {
       state.loggedUser.profilePic = payload.profilePic;
+      localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
     },
 
     CHANGE_RESTAURANT_IMG(state, payload) {

@@ -73,7 +73,7 @@ export default {
       phone: ""
     }
   }),
-  created: function() {
+  created: async function() {
      this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
   },
   
