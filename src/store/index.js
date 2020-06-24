@@ -475,14 +475,7 @@ export default new Vuex.Store({
     },
 
     CHANGE_USER_IMG(state, payload) {
-      for (let user of state.users){
-        if (user.id == payload.id){
-          user.profilePic = payload.profilePic
-          alert("Imagem de Perfil Mudada!")
-          state.loggedUser.profilePic = payload.profilePic
-        }
-      }
-      localStorage.setItem("users", JSON.stringify(state.users))
+      state.loggedUser.profilePic = payload.profilePic;
     },
 
     CHANGE_RESTAURANT_IMG(state, payload) {

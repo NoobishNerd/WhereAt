@@ -30,19 +30,19 @@
       <div class="row d-flex justify-content-sm-center flex-wrap pt-3">
         <div class="col-sm-3" id="colRest">
           <img
-            :src="restaurant.profilePic"
+            :src="restaurant.foto_perfil"
             class="rounded-circle"
             width="95px"
             height="95px"
           />
-          <h5 class="pt-2 text-center" id="brownBoldText">{{ restaurant.username }}</h5>
+          <h5 class="pt-2 text-center" id="brownBoldText">{{ restaurant.nome }}</h5>
           <button @click="changeRestaurantImg" id="smallerButton" class="mt-2">
             Alterar Foto de Perfil
           </button>
         </div>
         <div class="col-sm-9">
           <RestaurantHistory
-            :id="Number(restaurant.id)"
+            :id="Number(restaurant.id_restaurante)"
             v-if="component == 'history'"
           >
           </RestaurantHistory>
@@ -59,6 +59,8 @@
 <script>
 import RestaurantHistory from "@/components/RestaurantHistory.vue";
 import RestaurantVacations from "@/components/RestaurantVacations.vue";
+
+import usersService from '../api/users.js';
 export default {
   name: "profileRestaurant",
   data: () => ({
@@ -72,15 +74,9 @@ export default {
     }
   }),
   created: function() {
-    this.restaurant = this.$store.getters.getRestaurantById(
-      this.$route.params.id
-    );
+     this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
   },
-  updated: function() {
-    this.restaurant = this.$store.getters.getRestaurantById(
-      this.$route.params.id
-    );
-  },
+  
 
   methods: {
     call(newComponent) {
@@ -96,7 +92,7 @@ export default {
     changeRestaurantImg() {
       let newRestaurantImg = prompt("Link da imagem:");
       if (newRestaurantImg != "") {
-        this.restaurant.profilePic = newRestaurantImg;
+        this.restaurant.foto_perfil = newRestaurantImg;
         this.$store.commit("CHANGE_RESTAURANT_IMG", {
           id: this.restaurant.id,
           profilePic: this.restaurant.profilePic

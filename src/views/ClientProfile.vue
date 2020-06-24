@@ -113,6 +113,7 @@ export default {
             this.$route.params.id,
         )
             this.user.foto = newUserImg;
+            this.$store.commit("CHANGE_USER_IMG", {profilePic: newUserImg});
       } else {
         alert("Coloque o link da imagem!");
       }

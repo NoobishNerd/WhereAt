@@ -3,26 +3,26 @@
   <div class="container">
     <div class="row">
       <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
-        <h5 class="pt-2 ">{{restaurant.username}}</h5>
-        <img @click="replaceRouteProfile" id="fotoRestaurante" :src="restaurant.profilePic" class="pb-3 img-fluid" style="height: 17vw; object-fit: cover"/>
+        <h5 class="pt-2 ">{{restaurant.nome}}</h5>
+        <img @click="replaceRouteProfile" id="fotoRestaurante" :src="restaurant.foto_perfil" class="pb-3 img-fluid" style="height: 17vw; object-fit: cover"/>
       </div>
       <div class="col-sm-1"></div>
-      <div v-if="restaurant.album.length != 0" id="windowCarrousel"
+      <div v-if="album.length != 0" id="windowCarrousel"
         class="col-sm-6 text-center img-thumbnail img-fluid">
         <h5 class=" pt-1 mb-0">Álbum do Restaurante</h5>
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
           <ol class="carousel-indicators">
-            <li v-for="photo in restaurant.album" v-bind:key="photo.id" data-target="#carouselExampleIndicators"
-              :data-slide-to="photo.id" :class="{ active: photo.id==0 }"></li>
+            <li v-for="photo in album" v-bind:key="photo.id_foto" data-target="#carouselExampleIndicators"
+              :data-slide-to="photo.id_foto" :class="{ active: photo.id_foto==1 }"></li>
           </ol>
           <div class="carousel-inner">
 
-            <div class="carousel-item" v-for="photo in restaurant.album" v-bind:key="photo.id + photo.url"
-              :class="{ active: photo.id==0 }">
+            <div class="carousel-item" v-for="photo in album" v-bind:key="photo.id_photo + photo.link_foto"
+              :class="{ active: photo.id_photo==1 }">
 
-              <button @click="removePhoto(photo.id)" id="removePhotoBtn" class="px-5 mb-2 mt-2">Remover foto</button>
-              <img :src="photo.url" class="d-block w-100 img-fluid" :alt="'slide ' + photo.id">
+              <button @click="removePhoto(photo.id_foto)" id="removePhotoBtn" class="px-5 mb-2 mt-2">Remover foto</button>
+              <img :src="photo.link_foto" class="d-block w-100 img-fluid" :alt="'slide ' + photo.id_photo">
 
             </div>
 
@@ -78,7 +78,7 @@
         style="border-bottom-lg light:1px; border-left-lg light:3px; cursor:pointer">
         <h1 class="text-center " id="informationText" style="color:white">i</h1>
       </div>
-      <Comments v-show="component == 'comments'" v-for="comment in restaurant.comments" v-bind:comment="comment"
+      <Comments v-show="component == 'comments'" v-for="comment in comments" v-bind:comment="comment"
         v-bind:key="comment.username"></Comments>
       <TagEditor :restaurant="restaurant" v-show="component == 'album'"></TagEditor>
       <MenuEditor :restaurant="restaurant" v-show="component == 'menu'"></MenuEditor>
@@ -93,19 +93,27 @@ import TagEditor from "@/components/TagEditor.vue"
 import MenuEditor from "@/components/MenuEditor.vue"
 import InfoEditor from "@/components/InfoEditor.vue"
 
+import usersService from '../api/users.js';
+import restaurantService from '../api/restaurants.js';
+
 export default {
   data: () => ({
     component: "info",
     map: "",
-    restaurant: "",
-    lastCallId: "information"
+    restaurant: {},
+    lastCallId: "information",
+    album: [],
+    comments: []
+
   }),
-  mounted: function () {
+  mounted: async function () {
+    this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
     this.renderMap();
   },
 
-  created: function () {
-    this.restaurant = this.$store.getters.getRestaurantById(this.$route.params.id)
+  created: async function () {
+    this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
+    this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
   },
 
   methods: {
@@ -152,30 +160,24 @@ export default {
       this.$router.replace({
         name: "restaurantProfile",
         params: {
-          id: this.restaurant.id
+          id: this.restaurant.id_restaurante
         }
       });
     },
 
 
-    addPhoto() {
+    async addPhoto() {
       let newPhoto = prompt("Link da imagem:")
       if (newPhoto != "") {
-        this.$store.commit("ADD_PHOTO", {
-          id: this.$route.params.id,
-          url: newPhoto
-        })
+        await restaurantService.addPhoto({link_foto: newPhoto} ,this.$route.params.id)
       } else {
         alert("Coloque o link da imagem!")
       }
     },
 
 
-    removePhoto(id) {
-      this.$store.commit("REMOVE_PHOTO", {
-        removeId: id,
-        restaurantId: this.restaurant.id
-      })
+    async removePhoto(id) {
+      await restaurantService.deletePhoto(id);
     }
   },
 
