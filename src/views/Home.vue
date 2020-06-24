@@ -56,7 +56,7 @@
         <div class="separator"></div>
         <div class="cards">
           <ul>
-            <li v-for="restaurant in restaurants" v-bind:key="restaurant.id">
+            <li v-for="restaurant in restaurants" v-bind:key="restaurant.id_restaurante">
               <RestaurantCard :restaurant="restaurant"></RestaurantCard>
             </li>
           </ul>
@@ -88,106 +88,66 @@
 <script>
 // @ is an alias to /src
 import RestaurantCard from "@/components/RestaurantCard.vue";
+import restaurantService from '../api/restaurants';
+import bookingService from '../api/booking';
+import usersService from '../api/users';
 
 export default {
   name: "home",
 
   data: () => ({
     searchText: "",
+    preferences: [],
     filter: "",
     filters: [],
+    restaurantsStored: [],
     restaurants: [],
     recommendation: "undefined",
   }),
 
-  // computed: {
-  //   restaurants() {
-  //     return this.$store.state.restaurants;
-  //   },
-  // },
 
-  created: function() {
-    this.restaurants = this.$store.state.restaurants;
-    let distinctFilters = [""];
-    this.$store.state.restaurants.forEach((restaurant) => {
-      for (const tag of restaurant.tags) {
-        if (
-          !distinctFilters.find((filter) =>
-            filter.toLowerCase().includes(tag.tag_name.toLowerCase())
-          )
-        ) {
-          distinctFilters.push(tag.tag_name);
-        }
-      }
-    });
-    this.filters = distinctFilters;
+  created: async function() {
+    this.restaurantsStored = await restaurantService.getRestaurantCards();
+    this.restaurants = this.restaurantsStored;
+    
+        this.preferences = await usersService.getUserTags(this.$store.state.loggedUser.id);
+
+    this.filters = await bookingService.getAllTags();
   },
 
-  mounted: function() {
-    this.separateLeftAndRight();
-    this.getRecommendation();
+  mounted: async function() {
+    await this.getRecommendation();
   },
 
   methods: {
     getSearchResults() {
-      this.restaurants = this.$store.getters.getSearchResults(
-        this.searchText,
-        this.filter
-      );
+      this.restaurants = search(this.searchText, this.filter);
+    },
 
-      this.separateLeftAndRight();
+    search: (searchText, filter) => {
+      // COMO REMOVER ACENTOS??
+      if(filter == ""){
+      return this.restaurantsStored.filter(restaurant => 
+        restaurant.nome.toLowerCase().includes(searchText.toLowerCase()) || 
+        restaurant.desc_tag.toLowerCase().includes(searchText.toLowerCase()) ||  
+        restaurant.localidade.toLowerCase().includes(searchText.toLowerCase()) )  
+
+      }else{
+        return state.restaurants.filter(restaurant => 
+          (restaurant.nome.toLowerCase().includes(searchText.toLowerCase()) || 
+          restaurant.desc_tag.toLowerCase().includes(searchText.toLowerCase()) ||  
+          restaurant.localidade.toLowerCase().includes(searchText.toLowerCase()) ) &&
+          restaurant.desc_tag.toLowerCase().includes(filter.toLowerCase())) 
+      }
     },
-    filterApproved() {
-      return this.restaurants.filter(
-        (restaurant) => restaurant.approval === true
-      );
-    },
-    separateLeftAndRight() {
-      this.restaurants = this.filterApproved();
-    },
-    getRecommendation() {
+
+    async getRecommendation() {
       if (this.$store.state.logged != false) {
-        let preferences = this.$store.getters.getLoggedUser.preferences;
-        let recommendationTemp = [];
-
-        for (let restaurant of this.restaurants) {
-          //por agora escolhe o restaurante mais avaliado ao invés de tudo que tenha uma tag preferida
-          if (
-            Math.max.apply(
-              Math,
-              this.restaurants.map(function(o) {
-                return o.comments.length;
-              })
-            )
-          ) {
-            for (let i = 0; i < restaurant.tags.length; i++) {
-              for (let j = 0; j < preferences.length; j++) {
-                if (preferences[j].tag_name == restaurant.tags[i].tag_name) {
-                  recommendationTemp.push(restaurant.id);
-                }
-              }
-            }
-          }
-        }
-        //filter unique ids
-        recommendationTemp = recommendationTemp.filter(function(
-          value,
-          index,
-          self
-        ) {
-          return self.indexOf(value) === index;
-        });
-
-        if (recommendationTemp.length != 0) {
-          this.recommendation = [];
-          for (let i = 0; i < recommendationTemp.length; i++) {
-            for (let restaurant of this.restaurants) {
-              if (restaurant.id == recommendationTemp[i]) {
-                this.recommendation.push(restaurant);
-              }
-            }
-          }
-        }
+        //for each pref filter the array restaurant with the ones that have a pref as main tag
+        let recommendationTemp = preferences.forEach(pref => {
+            this.restaurants.filter(restaurant, pref =>
+              restaurant.desc_tag == pref ); 
+          });
       } else {
         this.recommendation = "undefined";
       }

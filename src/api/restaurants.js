@@ -252,6 +252,23 @@ const restaurantService = {
     },
 
 
+
+    //-----------------------------------------HOMEBREW OPERATION-----------------------------------------
+
+    async getRestaurantCards() {
+        const response = await fetch(`${API_URL}cartasRestaurantes`, {
+            method: "GET"
+        });
+
+        if (response.ok) {
+            const responseData = await response.json();
+            alert(responseData);
+            return responseData;
+        } else {
+            throw Error(response);
+        }
+    },
+
 }
 
 export default restaurantService;

@@ -13,9 +13,14 @@
           <h4 class="card-title text-left " id="restaurantCardName">
             {{ restaurant.nome }}
           </h4>
-          <div v-for="tag of tags" :key="tag.id_tag">
-            <p v-if="tag.tag_principal == true" class="card-text text-left">
-              {{ tag.desc_tag }}
+          <div v-if="restaurant.desc_tag != ''">
+            <p  class="card-text text-left">
+              {{ restaurant.desc_tag }}
+            </p>
+          </div>
+          <div v-else>
+            <p  class="card-text text-left">
+              ~~~~~~~~~~~~
             </p>
           </div>
           <p class="card-text text-left">
