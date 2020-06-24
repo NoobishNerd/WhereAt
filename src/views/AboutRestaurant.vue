@@ -116,11 +116,11 @@
         v-bind:comments="comments"
       ></Comments>
       <DisplayTags
-        :restaurantId="restaurant.id_restaurante"
+        :restaurantId="Number(this.$route.params.id)"
         v-show="component == 'promos'"
       ></DisplayTags>
       <DisplayMenu
-        :restaurantId="this.$route.params.id"
+        :restaurantId="Number(this.$route.params.id)"
         v-show="component == 'menu'"
       ></DisplayMenu>
       <DisplayInfo

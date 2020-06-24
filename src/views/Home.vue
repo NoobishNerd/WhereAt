@@ -121,7 +121,7 @@ export default {
 
   methods: {
     getSearchResults() {
-      this.restaurants = search(this.searchText, this.filter);
+      this.restaurants = this.search(this.searchText, this.filter);
     },
 
     search: (searchText, filter) => {
@@ -133,7 +133,7 @@ export default {
         restaurant.localidade.toLowerCase().includes(searchText.toLowerCase()) )  
 
       }else{
-        return state.restaurants.filter(restaurant => 
+        return this.restaurantsStored.filter(restaurant => 
           (restaurant.nome.toLowerCase().includes(searchText.toLowerCase()) || 
           restaurant.desc_tag.toLowerCase().includes(searchText.toLowerCase()) ||  
           restaurant.localidade.toLowerCase().includes(searchText.toLowerCase()) ) &&
@@ -144,9 +144,10 @@ export default {
     async getRecommendation() {
       if (this.$store.state.logged != false) {
         //for each pref filter the array restaurant with the ones that have a pref as main tag
-        let recommendationTemp = preferences.forEach(pref => {
-            this.restaurants.filter(restaurant, pref =>
-              restaurant.desc_tag == pref ); 
+          this.recommendation = this.preferences.forEach(pref => {
+            this.restaurants.filter(restaurant =>{
+              pref == restaurant.desc_tag                 
+          });
           });
       } else {
         this.recommendation = "undefined";
