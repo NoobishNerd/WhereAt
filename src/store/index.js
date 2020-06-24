@@ -433,7 +433,6 @@ export default new Vuex.Store({
           state.loggedUser.id = payload.id;
           state.loggedUser.username = payload.username;
           state.loggedUser.profilePic = payload.profilePic;
-          state.loggedUser.preferences = "";
   
           localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser));
 

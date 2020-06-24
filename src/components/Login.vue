@@ -62,7 +62,7 @@ export default {
         password: this.password
       });
 
-      if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
+      if (loginResponse == "Credenciais Inválidas" || loginResponse == "Password Errada") {
         // eslint-disable-next-line no-console
         console.log(loginResponse)
       } else {
@@ -71,11 +71,11 @@ export default {
           admin: loginResponse.administrador,
           username: loginResponse.user_name,
           profilePic: loginResponse.foto,
-          preferences: loginResponse.tags,
           type: "client",
           
         });
-        
+        // eslint-disable-next-line no-console
+        console.log(loginResponse)
         this.$router.replace("/");
 
       }

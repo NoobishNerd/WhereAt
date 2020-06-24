@@ -180,7 +180,7 @@ export default {
       }, id_u, id_rest, id_m)
     },
 
-    checkPresence(id_u, id_rest, id_m, data_hora_reservada, data_hora) {
+   async checkPresence(id_u, id_rest, id_m, data_hora_reservada, data_hora) {
       //clusterfuck a tentar confirmar isto localmente no componente
       this.reservations.find(reservation => reservation.id_utilizador == id_u && reservation.id_restaurante == id_rest && reservation.id_mesa == id_m).presenca = 1;
 
