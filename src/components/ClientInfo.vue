@@ -35,7 +35,7 @@
             <div class="col-sm-3 pr-0">
                 <label class="mt-2" for="addPrefSlt">Escolher Preferência:</label>
                 <select v-model="newPref" id="addPrefSlt" class="form-control">
-                    <option v-for="tag in allTags" v-bind:key="tag" :value="tag">{{tag}}</option>
+                    <option v-for="tag in allTags" v-bind:key="tag.id_tag" :value="tag.id_tag">{{tag}}</option>
                 </select>
             </div>
             <div class="col-sm-1 mt-3 mr-5">
@@ -48,17 +48,22 @@
         </div>        
         <br>
         <div class="row">
-            <div class="col-sm-3" v-for="tag in user.preferences" v-bind:key="tag.id + 1000">                        
-                <p style="color:white" class="text-center pref">{{tag.tag_name}}<span class="ml-2"><button @click="removePref(tag.id)" id="addPrefBtn">X</button></span></p>
+            <div class="col-sm-3" v-for="tag in preferences" v-bind:key="tag.id_tag + 1000">                        
+                <p style="color:white" class="text-center pref">{{tag.desc_tag}}<span class="ml-2"><button @click="removePref(tag.id_tag)" id="addPrefBtn">X</button></span></p>
             </div>
         </div>
   </div>
 </template>
 <script>
+import bookingService from '../api/booking'
+import usersService from '../api/users';
+
+
 export default {
   data: () => ({
     newPref: "",
-    allTags: []
+    allTags: [],
+    preferences: []
   }),
   props: {
     user: {
@@ -67,50 +72,44 @@ export default {
     }
   },
 
-  created: function () {
-      let restaurants = this.$store.state.restaurants;
-      let distinctFilters = [""]
-      restaurants.forEach(restaurant => {
-          for (const tag of restaurant.tags) {
-            if(!(distinctFilters.find(filter => filter.toLowerCase().includes(tag.tag_name.toLowerCase())))){
-              if(!(this.user.preferences.find( preference  => preference.tag_name.toLowerCase().includes(tag.tag_name.toLowerCase())))){
-                distinctFilters.push(tag.tag_name)
-              }
-            }            
-          }
-          
-      });
-      this.allTags = distinctFilters
-      alert(this.allTags)
-    },
+
+
+  created: async function () {
+
+    this.allTags = await bookingService.getAllTags();
+
+    this.preferences = await usersService.getUserTags(user.id_utilizador);
+  },
+
 
   methods: {
-    saveChanges() {
-      this.$store.commit("CHANGE_USER_PROFILE", this.user)
-      this.saveStorage()
+
+    async saveChanges() {
+      await usersService.updateUser(
+        {
+          user_name: this.user.user_name,
+          email: this.user.email,
+          password: this.user.password,
+          administrador: this.user.administrador,
+          foto: this.user.foto,
+          numero_tel: this.user.numero_tel
+        }
+        ,
+        this.user.id_utilizador
+      )
     },
-    saveStorage() {
-      localStorage.setItem("users", JSON.stringify(this.$store.state.users));
-    },
 
 
 
-    addPref() {
-      if(this.newPref != ""){
-        alert(this.newPref)
-        this.$store.commit("ADD_PREF", {
-        newTag: this.newPref,
-        userId: this.user.id
-      })
+    async addPref() {
+      if (this.newPref != "") {
+        await usersService.addUserTag(this.user.id_utilizador, this.newPref);
       }
-      
+
     },
 
-    removePref(id) {
-      this.$store.commit("REMOVE_PREF", {
-        id: id,
-        userId: this.user.id
-      })
+    async removePref(id) {
+      await usersService.deleteUserTag(this.user.id_utilizador, id);
     }
   }
 }

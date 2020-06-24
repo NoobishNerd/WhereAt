@@ -110,18 +110,20 @@ import usersService from '../api/users';
 
 export default {
   data: () => ({
-      bookingHistory: [],
+    bookingHistory: [],
   }),
-  props:{
-    id: {type: Number,
-    required: true}
+  props: {
+    id: {
+      type: Number,
+      required: true
+    }
   },
-  created: async function(){
+  created: async function () {
     this.bookingHistory = await bookingService.getUserReservations(this.id);
   },
-  methods:{
-    async getUsername(id){
-       return usersService.getRestaurantById(id).nome;
+  methods: {
+    async getUsername(id) {
+      return usersService.getRestaurantById(id).nome;
     }
   }
 };
@@ -134,7 +136,7 @@ export default {
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.20);
 }
 
-#brownBoldText{
+#brownBoldText{ 
   color: #F17526;
   font-family: "Raleway";
   font-weight: bold;
