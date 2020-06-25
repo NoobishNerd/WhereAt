@@ -67,6 +67,8 @@ const restaurantService = {
     },
 
     async addComment(data, id) {
+        // eslint-disable-next-line no-console
+        console.log(data,id)
         const response = await fetch(`${API_URL}restaurantes/${id}/comentarios`, {
             method: "POST",
             body: JSON.stringify(data),

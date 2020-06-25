@@ -174,7 +174,7 @@ export default {
       } else {
         // eslint-disable-next-line no-console
         console.log(this.loggedUser.id)
-        await restaurantService.addComment({
+        let commentResponse = await restaurantService.addComment({
             id_utilizador: this.loggedUser.id,
             txt_comentario: this.newComment,
             rating: this.newRating,
@@ -182,13 +182,17 @@ export default {
           },
           this.$route.params.id
         )
-        this.comments.push({
+        if(commentResponse != "Não tem Permissão para Comentar neste Restaurante"){
+          this.comments.push({
           foto: this.loggedUser.profilePic,
           user_name:this.loggedUser.username,
           id_utilizador: this.loggedUser.id,
           txt_comentario: this.newComment,
           rating: this.newRating,
           data: this.getSystemDate()})
+        }else{
+          alert(commentResponse)
+        }
       }
       this.newComment = "";
       this.newRating = "";
