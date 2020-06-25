@@ -26,7 +26,7 @@ export default {
     },
 
     created: async function () {
-        this.tags = await restaurantService.getRestaurantTags(restaurantId);
+        this.tags = await restaurantService.getRestaurantTags(this.restaurantId);
     }
 
 
