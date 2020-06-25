@@ -113,8 +113,6 @@ export default {
 
     created: async function () {
         this.menu = await restaurantService.getRestaurantMenu(this.restaurantId);
-        // eslint-disable-next-line no-console
-        console.log(this.restaurantId)
     },
 
     methods: {
@@ -129,12 +127,15 @@ export default {
                     },
                     this.restaurantId
                 );
+                
+                this.menu = await restaurantService.getRestaurantMenu(this.restaurantId);
             }
         },
 
 
         async removeItem(id) {
             await restaurantService.deleteDish(id);
+            this.menu = await restaurantService.getRestaurantMenu(this.restaurantId);
         }
     }
 }

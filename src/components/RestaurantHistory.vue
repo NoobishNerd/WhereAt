@@ -164,7 +164,9 @@ export default {
         data_hora: data_hora,
         newConfirmacao: "c",
         newPresenca: 0
-      }, id_u, id_rest, id_m)
+      }, id_u, id_rest, id_m);
+      
+      this.reservations = await bookingService.getRestaurantReservations(this.id);
     },
 
     async deny(id_u, id_rest, id_m, data_hora_reservada, data_hora) {
@@ -176,7 +178,9 @@ export default {
         data_hora: data_hora,
         newConfirmacao: "d",
         newPresenca: 0
-      }, id_u, id_rest, id_m)
+      }, id_u, id_rest, id_m);
+      
+      this.reservations = await bookingService.getRestaurantReservations(this.id);
     },
 
    async checkPresence(id_u, id_rest, id_m, data_hora_reservada, data_hora) {
@@ -188,7 +192,9 @@ export default {
         data_hora: data_hora,
         newConfirmacao: "c",
         newPresenca: 1
-      }, id_u, id_rest, id_m)
+      }, id_u, id_rest, id_m);
+
+      this.reservations = await bookingService.getRestaurantReservations(this.id);
     }
   }
 };

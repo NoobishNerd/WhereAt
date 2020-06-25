@@ -50,6 +50,7 @@ export default {
           },
           this.restaurantId
         );
+        this.tables = await restaurantService.getRestaurantTables(this.restaurantId);
       }
     },
 
@@ -61,6 +62,7 @@ export default {
       let removeId = parseInt(this.selectedTable.slice(start, end))
 
       await restaurantService.deleteTable(removeId);
+      this.tables = await restaurantService.getRestaurantTables(this.restaurantId);
     },
   }
 }

@@ -31,14 +31,11 @@ export default {
     this.id = this.$route.params.id;
     this.restaurant = await usersService.getRestaurantById(this.id);
     this.available = this.restaurant.disponibilidade;
-    
   },
   
 
   methods: {
     async goOnVacation(newStatus){
-
-
       await usersService.updateRestaurant({
                     id_restaurante: this.restaurant.id_restaurante,
                     nome: this.restaurant.nome,
@@ -51,7 +48,6 @@ export default {
                     disponibilidade: newStatus,
                     email: this.restaurant.email
       }, this.id);
-      
       this.restaurant = await usersService.getRestaurantById(this.id);
       this.available = this.restaurant.disponibilidade;
     }

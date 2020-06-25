@@ -58,23 +58,18 @@
 <script>
 import restaurantService from '../api/restaurants.js';
 
-    export default {
-        name: "MenuEditor",
-        data: () => ({
-            menu: []
-        }),
-        created: async function() {
-            this.menu = await restaurantService.getRestaurantMenu(this.restaurantId);
-            // eslint-disable-next-line no-console
-            console.log(this.menu)
-            // eslint-disable-next-line no-console
-            console.log(this.restaurantId)
-  },
-        props: {
-            restaurantId: {
-                required: true
-            }
-        },
-    }
-    
+export default {
+    name: "MenuEditor",
+    data: () => ({
+        menu: []
+    }),
+    created: async function () {
+        this.menu = await restaurantService.getRestaurantMenu(this.restaurantId);
+    },
+    props: {
+        restaurantId: {
+            required: true
+        }
+    },
+}
 </script>

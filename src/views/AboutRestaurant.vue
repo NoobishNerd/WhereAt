@@ -250,7 +250,7 @@ export default {
 
       this.updateObjectTable();
 
-      if (this.selectedTableReady.n_cadeiras == 0) {
+      if (this.selectedTableReady.n_cadeiras == 0 || isNaN(this.selectedTableReady.n_cadeiras)) {
         alert("A mesa selecionada não está disponivel");
         return false;
       } else {
@@ -276,8 +276,6 @@ export default {
 
       }
     },
-
-
 
     async updateObjectTable() {
       //traduzir a mesa de string para objeto

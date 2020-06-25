@@ -104,12 +104,16 @@ export default {
     async addPref() {
       if (this.newPref != "") {
         await usersService.addUserTag(this.user.id_utilizador, this.newPref);
+        
+        this.preferences = await usersService.getUserTags(user.id_utilizador);
       }
 
     },
 
     async removePref(id) {
       await usersService.deleteUserTag(this.user.id_utilizador, id);
+      
+      this.preferences = await usersService.getUserTags(user.id_utilizador);
     }
   }
 }

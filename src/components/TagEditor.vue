@@ -53,14 +53,17 @@ export default {
     methods: {
         async changeMainTag() {
             await restaurantService.updateRestaurantTag(this.restaurantId, this.newMainTag);
+            this.tags = await restaurantService.getRestaurantTags(this.restaurantId);
         },
         async addTag() {
             await restaurantService.addRestaurantTag({
                 desc_tag: this.newTag
-            }, this.restaurantId)
+            }, this.restaurantId);
+            this.tags = await restaurantService.getRestaurantTags(this.restaurantId);
         },
         async removeTag(id) {
             await restaurantService.deleteRestaurantTag(this.restaurantId, id);
+            this.tags = await restaurantService.getRestaurantTags(this.restaurantId);
         }
     }
 }

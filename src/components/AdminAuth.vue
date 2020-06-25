@@ -45,9 +45,6 @@ export default {
     methods: {
         async manageRestaurantApproval(restaurantId, currentValue, newValue) {
             if (currentValue != newValue) {
-                let restaurant = this.restaurants.find(restaurant => restaurant.id_restaurante == restaurantId);
-                restaurant.aprovacao = newValue;
-
                 await usersService.updateRestaurant({
                     id_restaurante: restaurantId,
                     nome: restaurant.nome,
@@ -60,6 +57,8 @@ export default {
                     disponibilidade: restaurant.disponibilidade,
                     email: restaurant.email
                 }, restaurantId);
+
+                this.restaurants = await restaurantService.getAllRestaurants();
             }
         }
     }
