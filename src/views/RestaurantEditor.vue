@@ -1,90 +1,88 @@
 <template>
+<div class="container">
+  <div class="row">
+    <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
+      <h5 class="pt-2 ">{{restaurant.nome}}</h5>
+      <img @click="replaceRouteProfile" id="fotoRestaurante" :src="restaurant.foto_perfil" class="pb-3 img-fluid"
+        style="height: 17vw; object-fit: cover" />
+    </div>
+    <div class="col-sm-1"></div>
 
-  <div class="container">
-    <div class="row">
-      <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
-        <h5 class="pt-2 ">{{restaurant.nome}}</h5>
-        <img @click="replaceRouteProfile" id="fotoRestaurante" :src="restaurant.foto_perfil" class="pb-3 img-fluid" style="height: 17vw; object-fit: cover"/>
-      </div>
-      <div class="col-sm-1"></div>
-      <div v-if="album.length != 0" id="windowCarrousel"
-        class="col-sm-6 text-center img-thumbnail img-fluid">
-        <h5 class=" pt-1 mb-0">Álbum do Restaurante</h5>
 
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
-          <ol class="carousel-indicators">
-            <li v-for="photo in album" v-bind:key="photo.id_foto" data-target="#carouselExampleIndicators"
-              :data-slide-to="photo.id_foto" :class="{ active: photo.id_foto==1 }"></li>
-          </ol>
-          <div class="carousel-inner">
-
-            <div class="carousel-item" v-for="photo in album" v-bind:key="photo.id_photo + photo.link_foto"
-              :class="{ active: photo.id_photo==1 }">
-
-              <button @click="removePhoto(photo.id_foto)" id="removePhotoBtn" class="px-5 mb-2 mt-2">Remover foto</button>
-              <img :src="photo.link_foto" class="d-block w-100 img-fluid" :alt="'slide ' + photo.id_photo">
-
+<div v-if="album.length != 0" id="windowCarrousel" class="text-center img-fluid">
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
+            <ol class="carousel-indicators">
+              <li v-for="photo in album" v-bind:key="photo.id_foto" data-target="#carouselExampleIndicators"
+                :data-slide-to="photo.id_foto" :class="{ active: photo.id_foto == album[0].id_foto }"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item" v-for="photo in album" v-bind:key="photo.id_foto + photo.link_foto"
+                :class="{ active: photo.id_foto == album[0].id_foto }">
+                <button @click="removePhoto(photo.id_foto)" id="removePhotoBtn" class="px-5 mb-2 mt-2">Remover foto</button>
+                <img :src="photo.link_foto" class="d-block w-100 img-fluid" :alt="'slide ' + photo.id_foto" />
+              </div>
             </div>
-
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
           </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
         </div>
+        <div v-else>
+      <h5>Nenhuma foto foi carregada</h5>
+    </div>
 
-      </div>
-      <div v-else>
-        <h5>Nenhuma foto foi carregada</h5>
-      </div>
+
+  </div>
+  <div class="row">
+    <div class="col-sm-5 px-2">
+      <button @click="replaceRouteProfile()" id="manageBtn" type="button" class="btn btn-block py-3">Gerir
+        Reservas</button>
     </div>
-    <div class="row">
-      <div class="col-sm-5 px-2">
-        <button @click="replaceRouteProfile()" id="manageBtn" type="button" class="btn btn-block py-3">Gerir Reservas</button>
-      </div>
-      <div class="col-sm-1">
-      </div>
-      <div class="col-sm-6">
-        <button @click="addPhoto()" id="addPhotoBtn" type="button" class="btn btn-block py-3">Adicionar Foto</button>
-      </div>
+    <div class="col-sm-1">
     </div>
-    <div class="row ">
-      <div id="windowEditor" class="col-sm-6 img-thumbnail">
-        <TableEditor :restaurantId="this.$route.params.id"></TableEditor>
-      </div>
-      <div class="col-sm-6 ">
-        <div>
-          <div class="google-map img-fluid" id="myMap"></div>
-        </div>
-      </div>
-    </div>
-    <div id="finalCrate" class="row d-flex">
-      <div @click="call('menu', 'menu')" id="menu" class="col-sm-2 pt-3 mr-3 ml-3 mt-3" style="border-bottom-lg light:1px; cursor:pointer">
-        <h5 class="" id="menuText" style="color:#f17526">Ementa</h5>
-      </div>
-      <div @click="call('album', 'album')" id="album" class="col-sm-2 pt-3 mr-3 ml-3 mt-3">
-        <h5 class="" id="albumText" style="color:#f17526">Categorias</h5>
-      </div>
-      <div @click="call('comments', 'comentary')" id="comentary" class="col-sm-2 pt-3 ml-3 mt-3 "
-        style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
-        <h5 class="" id="comentaryText" style="color:#f17526">Comentários</h5>
-      </div>
-      <div class="col-sm-3" style="border-left-lg light:1px"></div>
-      <div @click="call('info', 'information')" id="information" class="col-sm-2 mt-3 pt-1 "
-        style="border-bottom-lg light:1px; border-left-lg light:3px; cursor:pointer">
-        <h1 class="text-center " id="informationText" style="color:white">i</h1>
-      </div>
-      <Comments v-show="component == 'comments'" v-bind:restaurant="restaurant" v-bind:comments="comments">
-      </Comments>
-      <TagEditor :restaurantId="this.$route.params.id" v-show="component == 'album'"></TagEditor>
-      <MenuEditor :restaurantId="this.$route.params.id" v-show="component == 'menu'"></MenuEditor>
-      <InfoEditor :restaurant="restaurant" v-show="component == 'info'"></InfoEditor>
+    <div class="col-sm-6">
+      <button @click="addPhoto()" id="addPhotoBtn" type="button" class="btn btn-block py-3">Adicionar Foto</button>
     </div>
   </div>
+  <div class="row ">
+    <div id="windowEditor" class="col-sm-6 img-thumbnail">
+      <TableEditor :restaurantId="this.$route.params.id"></TableEditor>
+    </div>
+    <div class="col-sm-6 ">
+      <div>
+        <div class="google-map img-fluid" id="myMap"></div>
+      </div>
+    </div>
+  </div>
+  <div id="finalCrate" class="row d-flex">
+    <div @click="call('menu', 'menu')" id="menu" class="col-sm-2 pt-3 mr-3 ml-3 mt-3"
+      style="border-bottom-lg light:1px; cursor:pointer">
+      <h5 class="" id="menuText" style="color:#f17526">Ementa</h5>
+    </div>
+    <div @click="call('album', 'album')" id="album" class="col-sm-2 pt-3 mr-3 ml-3 mt-3">
+      <h5 class="" id="albumText" style="color:#f17526">Categorias</h5>
+    </div>
+    <div @click="call('comments', 'comentary')" id="comentary" class="col-sm-2 pt-3 ml-3 mt-3 "
+      style="border-bottom-lg light:1px; border-left-lg light:1px; cursor:pointer">
+      <h5 class="" id="comentaryText" style="color:#f17526">Comentários</h5>
+    </div>
+    <div class="col-sm-3" style="border-left-lg light:1px"></div>
+    <div @click="call('info', 'information')" id="information" class="col-sm-2 mt-3 pt-1 "
+      style="border-bottom-lg light:1px; border-left-lg light:3px; cursor:pointer">
+      <h1 class="text-center " id="informationText" style="color:white">i</h1>
+    </div>
+    <Comments v-show="component == 'comments'" v-bind:restaurant="restaurant" v-bind:comments="comments">
+    </Comments>
+    <TagEditor :restaurantId="this.$route.params.id" v-show="component == 'album'"></TagEditor>
+    <MenuEditor :restaurantId="this.$route.params.id" v-show="component == 'menu'"></MenuEditor>
+    <InfoEditor :restaurant="restaurant" v-show="component == 'info'"></InfoEditor>
+  </div>
+</div>
 </template>
 <script>
 import TableEditor from "../components/TableEditor.vue";

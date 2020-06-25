@@ -4,62 +4,27 @@
     <br />
     <div class="row">
       <div class="col-7">
-        <div
-          v-if="album.length != 0"
-          id="windowCarrousel"
-          class="text-center img-fluid"
-        >
-          <div
-            id="carouselExampleIndicators"
-            class="carousel slide"
-            data-ride="carousel"
-            data-interval="4000"
-          >
+
+
+
+        <div v-if="album.length != 0" id="windowCarrousel" class="text-center img-fluid">
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
             <ol class="carousel-indicators">
-              <li
-                v-for="photo in album"
-                v-bind:key="photo.id_foto"
-                data-target="#carouselExampleIndicators"
-                :data-slide-to="photo.id_foto"
-                :class="{ active: photo.id_foto == album[0].id_foto }"
-              ></li>
+              <li v-for="photo in album" v-bind:key="photo.id_foto" data-target="#carouselExampleIndicators"
+                :data-slide-to="photo.id_foto" :class="{ active: photo.id_foto == album[0].id_foto }"></li>
             </ol>
             <div class="carousel-inner">
-              <div
-                class="carousel-item"
-                v-for="photo in album"
-                v-bind:key="photo.id_foto + photo.link_foto"
-                :class="{ active: photo.id_foto == album[0].id_foto }"
-              >
-                <img
-                  :src="photo.link_foto"
-                  class="d-block w-100 img-fluid"
-                  :alt="'slide ' + photo.id_foto"
-                />
+              <div class="carousel-item" v-for="photo in album" v-bind:key="photo.id_foto + photo.link_foto"
+                :class="{ active: photo.id_foto == album[0].id_foto }">
+                <img :src="photo.link_foto" class="d-block w-100 img-fluid" :alt="'slide ' + photo.id_foto" />
               </div>
             </div>
-            <a
-              class="carousel-control-prev"
-              href="#carouselExampleIndicators"
-              role="button"
-              data-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="sr-only">Previous</span>
             </a>
-            <a
-              class="carousel-control-next"
-              href="#carouselExampleIndicators"
-              role="button"
-              data-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="sr-only">Next</span>
             </a>
           </div>
@@ -67,6 +32,8 @@
         <div v-else>
           <h5>O restaurante ainda não adicionou fotos</h5>
         </div>
+
+        
       </div>
       <div class="col-5">
         <h5 class="" style="color:#f17526">{{ restaurant.nome }}</h5>
@@ -85,48 +52,24 @@
     </div>
     <div id="finalCrate" class="row d-flex">
       <ul class="tabs">
-        <li
-          :class="{ active: selected == 'info' }"
-          @click="(selected = 'info'), call('info', 'information')"
-        >
+        <li :class="{ active: selected == 'info' }" @click="(selected = 'info'), call('info', 'information')">
           Informação
         </li>
-        <li
-          :class="{ active: selected == 'menu' }"
-          @click="(selected = 'menu'), call('menu', 'menu')"
-        >
+        <li :class="{ active: selected == 'menu' }" @click="(selected = 'menu'), call('menu', 'menu')">
           Ementa
         </li>
-        <li
-          :class="{ active: selected == 'promos' }"
-          @click="(selected = 'promos'), call('promos', 'promotion')"
-        >
+        <li :class="{ active: selected == 'promos' }" @click="(selected = 'promos'), call('promos', 'promotion')">
           Categorias
         </li>
-        <li
-          :class="{ active: selected == 'comments' }"
-          @click="(selected = 'comments'), call('comments', 'comentary')"
-        >
+        <li :class="{ active: selected == 'comments' }" @click="(selected = 'comments'), call('comments', 'comentary')">
           Comentários
         </li>
       </ul>
       <div class="separator"></div>
-      <Comments v-show="component == 'comments'"
-        v-bind:restaurant="restaurant"
-        v-bind:comments="comments"
-      ></Comments>
-      <DisplayTags
-        :restaurantId="Number(this.$route.params.id)"
-        v-show="component == 'promos'"
-      ></DisplayTags>
-      <DisplayMenu
-        :restaurantId="Number(this.$route.params.id)"
-        v-show="component == 'menu'"
-      ></DisplayMenu>
-      <DisplayInfo
-        :restaurant="restaurant"
-        v-show="component == 'info'"
-      ></DisplayInfo>
+      <Comments v-show="component == 'comments'" v-bind:restaurant="restaurant" v-bind:comments="comments"></Comments>
+      <DisplayTags :restaurantId="Number(this.$route.params.id)" v-show="component == 'promos'"></DisplayTags>
+      <DisplayMenu :restaurantId="Number(this.$route.params.id)" v-show="component == 'menu'"></DisplayMenu>
+      <DisplayInfo :restaurant="restaurant" v-show="component == 'info'"></DisplayInfo>
     </div>
     <div class="row" id>
       <div id="windowReservation" class="col-sm-12 pt-0">
@@ -134,26 +77,21 @@
           <div class="col-sm-8 pb-4">
             <h4 style="color:#f17526">Mesas:</h4>
             <div class="form-group">
-              <select
-                size="17"
-                v-if="availableTables.length && restaurant.disponibilidade"
-                class="form-control"
-                id="sltTables"
-                v-model="selectedTable"
-              >
-              
+              <select size="17" v-if="availableTables.length && restaurant.disponibilidade" class="form-control"
+                id="sltTables" v-model="selectedTable">
+
                 <option v-for="table in availableTables" v-bind:key="table.id_mesa">
                   <p v-if="table.n_cadeiras != 0">
                     Mesa {{ table.id_mesa }} | {{ table.n_cadeiras }} pessoas
                   </p>
                   <p v-if="table.n_cadeiras == 0">
                     Mesa {{ table.id_mesa }} | [X] Ocupada
-                  </p></option
-                >
+                  </p>
+                </option>
               </select>
               <div v-else>
                 <h5>
-                  De momento o restaurante não está disponivel para reservas...                 
+                  De momento o restaurante não está disponivel para reservas...
                 </h5>
               </div>
             </div>
@@ -163,33 +101,16 @@
               <h4 style="color:#f17526">Hora:</h4>
               <input class=" mb-3" v-model="hour" required type="time" />
               <br>
-              <input
-                class="mb-3"
-                required
-                v-model="date"
-                type="date"
-                id="start"
-                name="start"
-              />
+              <input class="mb-3" required v-model="date" type="date" id="start" name="start" />
               <br>
-              <input
-                class="mt-2 mb-5 py-2 px-2 ml-0"
-                @click="updateAvailableTables"
-                type="button"
-                value="Ver mesas disponiveis"
-                id="reservationBtn"
-              />
+              <input class="mt-2 mb-5 py-2 px-2 ml-0" @click="updateAvailableTables" type="button"
+                value="Ver mesas disponiveis" id="reservationBtn" />
               <br />
-             
-              <button
-                type="submit"
-                class="py-2 px-5 pl-0 ml-0 mt-5"
-                v-if="
+
+              <button type="submit" class="py-2 px-5 pl-0 ml-0 mt-5" v-if="
                   this.$store.state.logged == true &&
                     this.$store.state.loggedUser.type == 'client'
-                "
-                id="smallerButton"
-              >
+                " id="smallerButton">
                 Reservar
               </button>
               <h5 v-if="this.$store.state.logged == false">
