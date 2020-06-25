@@ -78,7 +78,7 @@ export default {
 
     this.allTags = await bookingService.getAllTags();
 
-    this.preferences = await usersService.getUserTags(user.id_utilizador);
+    this.preferences = await usersService.getUserTags(this.user.id_utilizador);
   },
 
 
@@ -105,7 +105,7 @@ export default {
       if (this.newPref != "") {
         await usersService.addUserTag(this.user.id_utilizador, this.newPref);
         
-        this.preferences = await usersService.getUserTags(user.id_utilizador);
+        this.preferences = await usersService.getUserTags(this.user.id_utilizador);
       }
 
     },
@@ -113,10 +113,10 @@ export default {
     async removePref(id) {
       await usersService.deleteUserTag(this.user.id_utilizador, id);
       
-      this.preferences = await usersService.getUserTags(user.id_utilizador);
+      this.preferences = await usersService.getUserTags(this.user.id_utilizador);
     }
   }
-}
+} 
 </script>
 
 <style scoped>
