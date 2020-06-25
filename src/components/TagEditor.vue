@@ -4,7 +4,7 @@
             <div class="col-sm-3 pr-0">
                 <label class="mt-2" for="mainTagSlt">Escolher tag principal</label>
                 <select v-model="newMainTag" id="MainTagSlt" class="form-control">
-                    <option v-for="tag in restaurant.tags" v-bind:key="tag.id" :value="tag.id">{{tag.tag_name}}</option>
+                    <option v-for="tag in tags" v-bind:key="tag.id_tag" :value="tag.id_tag">{{tag.desc_tag}}</option>
                 </select>
             </div>
             <div class="col-sm-1 mt-3 mr-5">
@@ -22,47 +22,45 @@
         <h4 class="mt-3">Categorias do restaurante</h4>
         <hr>
         <div class="row">
-            <div class="col-sm-2" v-for="tag in restaurant.tags" v-bind:key="tag.id + 1000">                        
-                <p v-if="tag.main == true" class="text-center main" style="color: white;">{{tag.tag_name}} <span class="ml-2"><button @click="removeTag(tag.id)" id="removeTagBtn">X</button></span></p>
-                <p style="color:black" v-if="tag.main == false" class="text-center side">{{tag.tag_name}} <span class="ml-2"><button @click="removeTag(tag.id)" id="removeTagBtnWhite">X</button></span></p>
+            <div class="col-sm-2" v-for="tag in tags" v-bind:key="tag.id_tag + 1000">                        
+                <p v-if="tag.tag_principal == true" class="text-center main" style="color: white;">{{tag.desc_tag}} <span class="ml-2"><button @click="removeTag(tag.id_tag)" id="removeTagBtn">X</button></span></p>
+                <p style="color:black" v-if="tag.tag_principal == false" class="text-center side">{{tag.desc_tag}} <span class="ml-2"><button @click="removeTag(tag.id_tag)" id="removeTagBtnWhite">X</button></span></p>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import restaurantService from '../api/restaurants'
 export default {
     name: "TagEditor",
     data: () => ({
         newMainTag: "",
-        newTag: ""
+        newTag: "",
+        tags: []
     }),
     props: {
-        restaurant: {
-            type: Object,
+        restaurantId: {
+            type: Number,
             required: true
         }
     },
 
-    methods: {
-        changeMainTag(){
-            this.$store.commit("CHANGE_MAIN_TAG", {
-                tagId: this.newMainTag,
-                restaurantId: this.restaurant.id
-            })
-        },
-        addTag(){
-            this.$store.commit("ADD_TAG", {
-                newTag: this.newTag,
-                restaurantId: this.restaurant.id
-            })
-        },
+    created: async function(){
+        this.tags = await restaurantService.getRestaurantTags(this.restaurantId);
+    },
 
-        removeTag(id){
-            this.$store.commit("REMOVE_TAG",{
-                id: id,
-                restaurantId: this.restaurant.id
-            })
+    methods: {
+        async changeMainTag(){
+            await restaurantService.updateRestaurantTag(this.restaurantId, this.newMainTag);
+        },
+        async addTag(){
+            await restaurantService.addRestaurantTag({
+                desc_tag: this.newTag
+            }, this.restaurantId)
+        },
+        async removeTag(id){
+            await restaurantService.deleteRestaurantTag(this.restaurantId, id);
         }
     }
 }
