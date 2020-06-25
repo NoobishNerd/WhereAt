@@ -78,8 +78,8 @@
         style="border-bottom-lg light:1px; border-left-lg light:3px; cursor:pointer">
         <h1 class="text-center " id="informationText" style="color:white">i</h1>
       </div>
-      <Comments v-show="component == 'comments'" v-for="comment in comments" v-bind:comment="comment"
-        v-bind:key="comment.username"></Comments>
+      <Comments v-show="component == 'comments'" v-bind:restaurant="restaurant" v-bind:comments="comments">
+      </Comments>
       <TagEditor :restaurant="restaurant" v-show="component == 'album'"></TagEditor>
       <MenuEditor :restaurant="restaurant" v-show="component == 'menu'"></MenuEditor>
       <InfoEditor :restaurant="restaurant" v-show="component == 'info'"></InfoEditor>
@@ -140,7 +140,7 @@ export default {
     },
 
     geocodeAddress(geocoder, resultsMap){
-      const address = this.restaurant.address + ", " + this.restaurant.postalCode + " " + this.restaurant.local;
+      const address = this.restaurant.morada + ", " + this.restaurant.cod_postal + " " + this.restaurant.localidade;
       geocoder.geocode({ 'address': address},
       (results, status) => {
         if (status === 'OK') {
