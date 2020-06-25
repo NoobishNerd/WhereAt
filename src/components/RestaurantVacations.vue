@@ -12,37 +12,47 @@
     <div class="row pt-4 mt-4">
       <div class="col-sm-9"></div>
       <div class="col-sm-3">
-        <button v-if="available == true" @click="goOnVacation" id="smallerButton">Ir de Férias</button>
-        <button v-if="available == false" @click="goOnVacation" id="smallerButton">Reabrir Reservas</button>
+        <button v-if="available == true" @click="goOnVacation(1)" id="smallerButton">Ir de Férias</button>
+        <button v-if="available == false" @click="goOnVacation(0)" id="smallerButton">Reabrir Reservas</button>
       </div>
     </div>
   </div>
 </template>
 <script>
+import usersService from '../api/users'
 
 export default {
   data: () => ({
     id: "",
     available: ""
   }),
-  created: function(){
-    this.id = this.$route.params.id
-    this.available = this.$store.getters.getRestaurantById(this.id).available
+  created: async function(){
+    this.id = this.$route.params.id;
+    this.restaurant = await usersService.getRestaurantById(this.id);
+    this.available = restaurant.disponibilidade;
     
   },
   
 
   methods: {
-    goOnVacation(){
-      //commit retorna available atual
-      this.$store.commit("VACATION", {id: this.id})
-      if (this.available == true){
-        this.available = false
-      }
-      else if (this.available == false){
-        this.available = true
-      }
+    async goOnVacation(newStatus){
+
+
+      await usersService.updateRestaurant({
+                    id_restaurante: this.restaurant.id_restaurante,
+                    nome: this.restaurant.nome,
+                    password: this.restaurant.password,
+                    foto_perfil: this.restaurant.foto_perfil,
+                    informacao: this.restaurant.informacao,
+                    morada: this.restaurant.morada,
+                    aprovacao: this.restaurant.aprovacao,
+                    cod_postal: this.restaurant.cod_postal,
+                    disponibilidade: newStatus,
+                    email: this.restaurant.email
+      }, this.id);
       
+      this.restaurant = await usersService.getRestaurantById(this.id);
+      this.available = restaurant.disponibilidade;
     }
   }
 }

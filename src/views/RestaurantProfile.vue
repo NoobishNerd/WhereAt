@@ -47,7 +47,6 @@
           >
           </RestaurantHistory>
           <RestaurantVacations
-            :restaurant="restaurant"
             v-if="component == 'vacations'"
           >
           </RestaurantVacations>
@@ -73,10 +72,10 @@ export default {
       phone: ""
     }
   }),
-  created: async function() {
-     this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
+  created: async function () {
+    this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
   },
-  
+
 
   methods: {
     call(newComponent) {
@@ -92,10 +91,23 @@ export default {
     changeRestaurantImg() {
       let newRestaurantImg = prompt("Link da imagem:");
       if (newRestaurantImg != "") {
+        await usersService.updateRestaurant({
+            id_restaurante: this.restaurant.id_restaurante,
+            nome: this.restaurant.nome,
+            password: this.restaurant.password,
+            foto_perfil: newRestaurantImg,
+            informacao: this.restaurant.informacao,
+            morada: this.restaurant.morada,
+            aprovacao: this.restaurant.aprovacao,
+            cod_postal: this.restaurant.cod_postal,
+            disponibilidade: this.restaurant.disponibilidade,
+            email: this.restaurant.email
+          },
+          this.$route.params.id,
+        )
         this.restaurant.foto_perfil = newRestaurantImg;
-        this.$store.commit("CHANGE_RESTAURANT_IMG", {
-          id: this.restaurant.id,
-          profilePic: this.restaurant.profilePic
+        this.$store.commit("CHANGE_USER_IMG", {
+          profilePic: newRestaurantImg
         });
       } else {
         alert("Coloque o link da imagem!");
