@@ -2,7 +2,7 @@
   <div class="history container" v-if="reservations.length != 0">
     <br />
     <div v-if="reservations.length != 0">
-      <div v-for="reservation in reservations" v-bind:key="reservation.id_utilizador + reservation.id_mesa">
+      <div v-for="reservation in reservations" v-bind:key="`${reservation.id_utilizador} ${reservation.id_mesa} ${reservation.data_hora}`">
         <div v-if="reservation.confirmacao == 'p'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8">
             <div class="ml-5">
@@ -11,7 +11,7 @@
                 Número de pessoas: {{ reservation.n_cadeiras }}
               </p>
               <p class="text-left mb-0">
-                Utilizador: {{ usernames[Number(reservation.id_utilizador) -1] }}
+                Utilizador: {{reservation.user_name}}
               </p>
               <p class="text-left mb-0">Horas: {{ reservation.data_hora_reservada }}</p>
 
@@ -56,7 +56,7 @@
                 Número de pessoas: {{ reservation.n_cadeiras }}
               </p>
               <p class="text-left mb-0">
-                Utilizador: {{ usernames[Number(reservation.id_utilizador) -1] }}
+                Utilizador: {{reservation.user_name}}
               </p>
               <p class="text-left mb-0">Horas: {{ reservation.data_hora_reservada }}</p>
 
@@ -105,7 +105,7 @@
                 Número de pessoas: {{ reservation.n_cadeiras }}
               </p>
               <p class="text-left mb-0">
-                Utilizador: {{ usernames[Number(reservation.id_utilizador) -1] }}
+                Utilizador: {{reservation.user_name}}
               </p>
               <p class="text-left mb-0">Horas: {{ reservation.data_hora_reservada }}</p>
 
@@ -139,8 +139,7 @@ export default {
 
   //granada incendiária num contetor de lixo indiferenciado
   data: () => ({
-    reservations: [],
-    usernames: []
+    reservations: []
   }),
   props: {
     id: {
@@ -149,9 +148,6 @@ export default {
   },
   created: async function () {
     this.reservations = await bookingService.getRestaurantReservations(this.id);
-    for(reservation in reservations){
-      this.usernames.push(await usersService.getUserById(reservation.id_utilizador).user_name);
-    }
   },
 
   methods: {
@@ -160,43 +156,36 @@ export default {
     },
 
     async accept(id_u, id_rest, id_m, data_hora_reservada, data_hora) {
-      //clusterfuck a tentar confirmar isto localmente no componente
-      this.reservations.find(reservation => reservation.id_utilizador == id_u && reservation.id_restaurante == id_rest && reservation.id_mesa == id_m).confirmacao = 'c';
-
       await bookingService.updateReservation({
         data_hora_reservada: data_hora_reservada,
         data_hora: data_hora,
         newConfirmacao: "c",
         newPresenca: 0
-      }, id_u, id_rest, id_m);
+      }, id_rest, id_u, id_m);
       
       this.reservations = await bookingService.getRestaurantReservations(this.id);
     },
 
     async deny(id_u, id_rest, id_m, data_hora_reservada, data_hora) {
-      //clusterfuck a tentar confirmar isto localmente no componente
-      this.reservations.find(reservation => reservation.id_utilizador == id_u && reservation.id_restaurante == id_rest && reservation.id_mesa == id_m).confirmacao = 'd';
-
+      
       await bookingService.updateReservation({
         data_hora_reservada: data_hora_reservada,
         data_hora: data_hora,
         newConfirmacao: "d",
         newPresenca: 0
-      }, id_u, id_rest, id_m);
+      }, id_rest, id_u, id_m);
       
       this.reservations = await bookingService.getRestaurantReservations(this.id);
     },
 
    async checkPresence(id_u, id_rest, id_m, data_hora_reservada, data_hora) {
-      //clusterfuck a tentar confirmar isto localmente no componente
-      this.reservations.find(reservation => reservation.id_utilizador == id_u && reservation.id_restaurante == id_rest && reservation.id_mesa == id_m).presenca = 1;
-
+      
       await bookingService.updateReservation({
         data_hora_reservada: data_hora_reservada,
         data_hora: data_hora,
         newConfirmacao: "c",
         newPresenca: 1
-      }, id_u, id_rest, id_m);
+      }, id_rest, id_u, id_m);
 
       this.reservations = await bookingService.getRestaurantReservations(this.id);
     }
