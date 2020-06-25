@@ -102,55 +102,47 @@ export default {
     filters: [],
     restaurantsStored: [],
     restaurants: [],
-    recommendation: "undefined",
+    recommendation: "undefined"
   }),
 
 
-  created: async function() {
+  mounted: async function () {
     this.restaurantsStored = await restaurantService.getRestaurantCards();
-    this.restaurants = this.restaurantsStored;
-    
-        this.preferences = await usersService.getUserTags(this.$store.state.loggedUser.id);
-
+    this.restaurants = await restaurantService.getRestaurantCards();
+    this.preferences = await usersService.getUserTags(this.$store.state.loggedUser.id);
     this.filters = await bookingService.getAllTags();
-    // eslint-disable-next-line no-console
-    console.log(this.filters)
-  },
-
-  mounted: async function() {
     await this.getRecommendation();
   },
 
   methods: {
     getSearchResults() {
-      this.restaurants = this.search(this.searchText, this.filter);
+      this.restaurants = this.search();
     },
 
-    search: (searchText, filter) => {
-      // COMO REMOVER ACENTOS??
-      if(filter == ""){
-      return this.restaurantsStored.filter(restaurant => 
-        restaurant.nome.toLowerCase().includes(searchText.toLowerCase()) || 
-        restaurant.desc_tag.toLowerCase().includes(searchText.toLowerCase()) ||  
-        restaurant.localidade.toLowerCase().includes(searchText.toLowerCase()) )  
-
-      }else{
-        return this.restaurantsStored.filter(restaurant => 
-          (restaurant.nome.toLowerCase().includes(searchText.toLowerCase()) || 
-          restaurant.desc_tag.toLowerCase().includes(searchText.toLowerCase()) ||  
-          restaurant.localidade.toLowerCase().includes(searchText.toLowerCase()) ) &&
-          restaurant.desc_tag.toLowerCase().includes(filter.toLowerCase())) 
-      }
-    },
+    search() {
+        // COMO REMOVER ACENTOS??
+        if (this.filter == "") {
+          return this.restaurantsStored.filter(restaurant =>
+            restaurant.nome.toLowerCase().includes(this.searchText.toLowerCase()) ||
+            restaurant.desc_tag.toLowerCase().includes(this.searchText.toLowerCase()) ||
+            restaurant.localidade.toLowerCase().includes(this.searchText.toLowerCase()))           
+        } else {
+          return this.restaurantsStored.filter(restaurant =>
+            (restaurant.nome.toLowerCase().includes(this.searchText.toLowerCase()) ||
+              restaurant.desc_tag.toLowerCase().includes(this.searchText.toLowerCase()) ||
+              restaurant.localidade.toLowerCase().includes(this.searchText.toLowerCase())) &&
+            restaurant.desc_tag.toLowerCase().includes(this.filter.toLowerCase()))
+        }
+      },
 
     async getRecommendation() {
       if (this.$store.state.logged != false) {
         //for each pref filter the array restaurant with the ones that have a pref as main tag
-          this.recommendation = this.preferences.forEach(pref => {
-            this.restaurants.filter(restaurant =>{
-              pref == restaurant.desc_tag                 
+        this.recommendation = this.preferences.forEach(pref => {
+          this.restaurants.filter(restaurant => {
+            pref == restaurant.desc_tag
           });
-          });
+        });
       } else {
         this.recommendation = "undefined";
       }
