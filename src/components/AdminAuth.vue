@@ -33,6 +33,7 @@
 </template>
 <script>
 import restaurantService from '../api/restaurants.js';
+import usersService from '../api/users';
 
 export default {
     data: () => ({
@@ -45,6 +46,8 @@ export default {
     methods: {
         async manageRestaurantApproval(restaurantId, currentValue, newValue) {
             if (currentValue != newValue) {
+                let restaurant = await usersService.getRestaurantById(restaurantId);
+                
                 await usersService.updateRestaurant({
                     id_restaurante: restaurantId,
                     nome: restaurant.nome,
