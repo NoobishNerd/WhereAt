@@ -30,7 +30,7 @@
                       reservation.data_hora_reservada,
                       reservation.data_hora
                     )
-                  " src="../assets/Yes Icon Border.png" width="51px" />
+                  " src="../assets/Yes Icon Border.png" width="51px" style="cursor:pointer;" />
               </div>
               <div class="col-sm-4 pt-4 mt-3">
                 <img @click="
@@ -41,7 +41,7 @@
                       reservation.data_hora_reservada,
                       reservation.data_hora
                     )
-                  " src="../assets/No Icon Border.png" width="46px" />
+                  " src="../assets/No Icon Border.png" width="46px" style="cursor:pointer;" />
               </div>
               <div class="col-sm-2"></div>
             </div>

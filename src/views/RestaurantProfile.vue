@@ -18,7 +18,7 @@
           />
           <div class="text" id="brownText">Encerramento</div>
         </div>
-        <div @click="logout()" style="cursor: pointer;">
+        <div @click="logout()" style="cursor:pointer;">
           <img
             src="../assets/Logout Icon.png"
             height="20px"

@@ -254,7 +254,7 @@ export default {
   margin-bottom: 3px;
   justify-content: space-between;
   align-items: center;
-  margin-left: 450px;
+  margin-left: 420px;
 }
 #express-form-typeahead:focus {
   border: 1px solid #ccc;
