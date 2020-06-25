@@ -1,6 +1,8 @@
 <template>
   <div class="container-fluid">
 
+    <div v-if="this.$store.state.loggedUser.type != 'restaurant'">
+
     <div v-if="this.$store.state.logged == true">
       <div class="row mt-3">
         <div class="col-sm-1">
@@ -71,6 +73,7 @@
     </div>
     <hr>
 
+  </div>
 
 
 
@@ -182,15 +185,16 @@ export default {
           },
           this.$route.params.id
         )
-        if(commentResponse != "Não tem Permissão para Comentar neste Restaurante"){
+        if (commentResponse != "Não tem Permissão para Comentar neste Restaurante") {
           this.comments.push({
-          foto: this.loggedUser.profilePic,
-          user_name:this.loggedUser.username,
-          id_utilizador: this.loggedUser.id,
-          txt_comentario: this.newComment,
-          rating: this.newRating,
-          data: this.getSystemDate()})
-        }else{
+            foto: this.loggedUser.profilePic,
+            user_name: this.loggedUser.username,
+            id_utilizador: this.loggedUser.id,
+            txt_comentario: this.newComment,
+            rating: this.newRating,
+            data: this.getSystemDate()
+          })
+        } else {
           alert(commentResponse)
         }
       }

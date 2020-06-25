@@ -8,12 +8,12 @@
             <div class="col-sm-3">
                 <label for="itemTypeSlt">Tipo do Item</label>
                 <select v-model="itemType" id="itemTypeSlt" class="form-control">
-                    <option value="Entradas">Entradas</option>
-                    <option value="Bebidas">Bebidas</option>
-                    <option value="Carne">Pratos de Carne</option>
-                    <option value="Peixe">Pratos de Peixe</option>
-                    <option value="Vegetariano">Pratos Vegetarianos</option>
-                    <option value="Sobremesas">Sobremesas</option>
+                    <option value="1">Entradas</option>
+                    <option value="2">Bebidas</option>
+                    <option value="3">Pratos de Carne</option>
+                    <option value="4">Pratos de Peixe</option>
+                    <option value="5">Pratos Vegetarianos</option>
+                    <option value="6">Sobremesas</option>
                 </select>
             </div>
             <div class="col-sm-3">
@@ -33,9 +33,9 @@
             <div class="col-sm-12">
                 <h4>Entradas</h4>
                 <hr>
-                <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 0"> <!-- Eu não queria nada usar esta resolução, mas é a unica forma de usar v-for várias vezes no mesmo array e na mesma página-->
-                    <h6 style="color:black" v-if="menuItem.itemType == 'Entradas'">{{menuItem.item}} - {{menuItem.price}}€
-                        <button @click="removeItem(menuItem.id)" id="removeItemBtn" class="ml-2">X</button>
+                <div v-for="menuItem in menu" v-bind:key="menuItem.id_prato + 0"> <!-- Eu não queria nada usar esta resolução, mas é a unica forma de usar v-for várias vezes no mesmo array e na mesma página-->
+                    <h6 style="color:black" v-if="menuItem.desc_categoria == 'Entradas'">{{menuItem.desc_prato}} - {{menuItem.preco}}€
+                        <button @click="removeItem(menuItem.id_prato)" id="removeItemBtn" class="ml-2">X</button>
                     </h6>
                 </div>
 
@@ -43,9 +43,9 @@
 
                 <h4>Bebidas</h4>
                 <hr>
-                <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 1000">
-                    <h6 style="color:black"  v-if="menuItem.itemType == 'Bebidas'">{{menuItem.item}} - {{menuItem.price}}€
-                        <button @click="removeItem(menuItem.id)" id="removeItemBtn" class="ml-2">X</button>
+                <div v-for="menuItem in menu" v-bind:key="menuItem.id_prato + 1000">
+                    <h6 style="color:black"  v-if="menuItem.desc_categoria == 'Bebidas'">{{menuItem.desc_prato}} - {{menuItem.preco}}€
+                        <button @click="removeItem(menuItem.id_prato)" id="removeItemBtn" class="ml-2">X</button>
                     </h6>
                 </div>
 
@@ -53,9 +53,9 @@
 
                 <h4>Pratos de Carne</h4>
                 <hr>
-                <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 2000">
-                    <h6 style="color:black"  v-if="menuItem.itemType == 'Carne'">{{menuItem.item}} - {{menuItem.price}}€
-                        <button @click="removeItem(menuItem.id)" id="removeItemBtn" class="ml-2">X</button>
+                <div v-for="menuItem in menu" v-bind:key="menuItem.id_prato + 2000">
+                    <h6 style="color:black"  v-if="menuItem.desc_categoria == 'Carne'">{{menuItem.desc_prato}} - {{menuItem.preco}}€
+                        <button @click="removeItem(menuItem.id_prato)" id="removeItemBtn" class="ml-2">X</button>
                     </h6>
                 </div>
 
@@ -63,9 +63,9 @@
 
                 <h4>Pratos de Peixe</h4>
                 <hr>
-                <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 3000">
-                    <h6  style="color:black" v-if="menuItem.itemType == 'Peixe'">{{menuItem.item}} - {{menuItem.price}}€
-                        <button @click="removeItem(menuItem.id)" id="removeItemBtn" class="ml-2">X</button>
+                <div v-for="menuItem in menu" v-bind:key="menuItem.id_prato + 3000">
+                    <h6  style="color:black" v-if="menuItem.desc_categoria == 'Peixe'">{{menuItem.desc_prato}} - {{menuItem.preco}}€
+                        <button @click="removeItem(menuItem.id_prato)" id="removeItemBtn" class="ml-2">X</button>
                     </h6>
                 </div>
 
@@ -73,9 +73,9 @@
 
                 <h4>Pratos Vegetarianos</h4>
                 <hr>
-                <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 4000">
-                    <h6 style="color:black"  v-if="menuItem.itemType == 'Vegetariano'">{{menuItem.item}} - {{menuItem.price}}€
-                        <button @click="removeItem(menuItem.id)" id="removeItemBtn" class="ml-2">X</button>
+                <div v-for="menuItem in menu" v-bind:key="menuItem.id_prato + 4000">
+                    <h6 style="color:black"  v-if="menuItem.desc_categoria == 'Vegetariano'">{{menuItem.desc_prato}} - {{menuItem.preco}}€
+                        <button @click="removeItem(menuItem.id_prato)" id="removeItemBtn" class="ml-2">X</button>
                     </h6>
                 </div>
 
@@ -83,9 +83,9 @@
 
                 <h4>Sobremesas</h4>
                 <hr>
-                <div v-for="menuItem in restaurant.menu" v-bind:key="menuItem.id + 5000">
-                    <h6 style="color:black"  v-if="menuItem.itemType == 'Sobremesas'">{{menuItem.item}} - {{menuItem.price}}€ 
-                        <button @click="removeItem(menuItem.id)" id="removeItemBtn" class="ml-2">X</button> 
+                <div v-for="menuItem in menu" v-bind:key="menuItem.id_prato + 5000">
+                    <h6 style="color:black"  v-if="menuItem.desc_categoria == 'Sobremesas'">{{menuItem.desc_prato}} - {{menuItem.preco}}€ 
+                        <button @click="removeItem(menuItem.id_prato)" id="removeItemBtn" class="ml-2">X</button> 
                     </h6>
                 </div>
 
@@ -96,52 +96,47 @@
 </template>
 
 <script>
-    export default {
-        name: "MenuEditor",
-        data: () => ({
-            menu: [],
-            item: "",
-            itemType: "",
-            price: "",
-        }),
-        props: {
-            restaurant: {
-                type: Object,
-                required: true
+import restaurantService from '../api/restaurants'
+export default {
+    name: "MenuEditor",
+    data: () => ({
+        menu: [],
+        item: "",
+        itemType: "",
+        price: "",
+    }),
+    props: {
+        restaurant: {
+            type: Object,
+            required: true
+        }
+    },
+
+    created: async function () {
+        this.menu = await restaurantService.getRestaurantMenu(this.restaurantId);
+    },
+
+    methods: {
+        async addItem() {
+            if (this.item == "" || this.itemType == "" || this.price == "") {
+                alert("Preencha todos os campos")
+            } else {
+                await restaurantService.addDish({
+                        preco: this.price,
+                        desc_prato: this.item,
+                        id_categoria: Number(this.itemType)
+                    },
+                    this.restaurantId
+                );
             }
         },
 
-        methods: {
-            addItem() {
-                if (this.item == "" || this.itemType == "" || this.price == "") {
-                    alert("Preencha todos os campos")
-                } else {
-                    this.$store.commit("ADD_ITEM", {
-                        id: this.getLastItemId(),
-                        item: this.item,
-                        itemType: this.itemType,
-                        price: this.price,
-                        restaurantId: this.restaurant.id
-                    })
-                }
-            },
 
-            getLastItemId() {
-                if (this.restaurant.menu.length != 0) {
-                    return this.restaurant.menu[this.restaurant.menu.length - 1].id + 1;
-                } else {
-                    return 0;
-                }
-            },
-
-            removeItem(id){
-                this.$store.commit("REMOVE_ITEM",{
-                    id: id,
-                    restaurantId: this.restaurant.id
-                })
-            }
+        async removeItem(id) {
+            await restaurantService.deleteDish(id);
         }
     }
+}
 </script>
 
 <style scoped>

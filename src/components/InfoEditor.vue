@@ -25,38 +25,39 @@
 </div>
 </template>
 
-< script >
+<script>
     import usersService from '../api/users'
-export default {
-    name: "InfoEditor",
-    data: () => ({
 
-    }),
-    props: {
-        restaurant: {
-            type: Object,
-            required: true
-        }
-    },
+    export default {
+        name: "InfoEditor",
+        data: () => ({
 
-    methods: {
-        async saveChanges() {
-            await usersService.updateRestaurant({
-                id_restaurante: this.restaurant.id_restaurante,
-                nome: this.restaurant.nome,
-                password: this.restaurant.password,
-                foto_perfil: this.restaurant.foto_perfil,
-                informacao: this.restaurant.informacao,
-                morada: this.restaurant.morada,
-                aprovacao: this.restaurant.aprovacao,
-                cod_postal: this.restaurant.cod_postal,
-                disponibilidade: this.restaurant.disponibilidade,
-                email: this.restaurant.email
-            }, id);
+        }),
+        props: {
+            restaurant: {
+                type: Object,
+                required: true
+            }
+        },
+
+        methods: {
+            async saveChanges() {
+                await usersService.updateRestaurant({
+                    id_restaurante: this.restaurant.id_restaurante,
+                    nome: this.restaurant.nome,
+                    password: this.restaurant.password,
+                    foto_perfil: this.restaurant.foto_perfil,
+                    informacao: this.restaurant.informacao,
+                    morada: this.restaurant.morada,
+                    aprovacao: this.restaurant.aprovacao,
+                    cod_postal: this.restaurant.cod_postal,
+                    disponibilidade: this.restaurant.disponibilidade,
+                    email: this.restaurant.email
+                }, this.restaurant.id_restaurante);
+            }
         }
+
     }
-
-}
 </script>
 
 <style scoped>

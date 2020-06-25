@@ -46,20 +46,20 @@ export default {
         }
     },
 
-    created: async function(){
+    created: async function () {
         this.tags = await restaurantService.getRestaurantTags(this.restaurantId);
     },
 
     methods: {
-        async changeMainTag(){
+        async changeMainTag() {
             await restaurantService.updateRestaurantTag(this.restaurantId, this.newMainTag);
         },
-        async addTag(){
+        async addTag() {
             await restaurantService.addRestaurantTag({
                 desc_tag: this.newTag
             }, this.restaurantId)
         },
-        async removeTag(id){
+        async removeTag(id) {
             await restaurantService.deleteRestaurantTag(this.restaurantId, id);
         }
     }

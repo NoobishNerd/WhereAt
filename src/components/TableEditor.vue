@@ -3,7 +3,7 @@
     <div class="col-sm-6">
       <div class="form-group">
         <select size="200" v-model="selectedTable" class="form-control" id="sltTables">
-          <option v-for="table in restaurant.tables" v-bind:key="table.id">Mesa {{table.id + 1}} | {{table.capacity}} pessoas</option>
+          <option v-for="table in tables" v-bind:key="table.id_mesa">Mesa {{table.id_mesa}} | {{table.n_cadeiras}} pessoas</option>
         </select>
       </div>
     </div>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import restaurantService from '../api/restaurants'
 export default {
   name: "TableEditor",
   data: () => ({
@@ -28,45 +29,41 @@ export default {
     newTableCapacity: "",
     selectedTable: ""
   }),
-  props:{
-    restaurant:{
-      type: Object,
+  props: {
+    restaurantId: {
+      type: Number,
       required: true
     }
   },
+
+  created: async function () {
+    this.tables = await restaurantService.getRestaurantTables(this.restaurantId);
+  },
+
+
   methods: {
-    addTable() {
-      if (this.newTableCapacity == ""){
+    async addTable() {
+      if (this.newTableCapacity == "") {
         alert("Escolha a capacidade da mesa")
-      }
-      else{
-        this.$store.commit("ADD_TABLE", {
-          id: this.getLastTableId(),
-          capacity: this.newTableCapacity,
-          restaurantId:this.restaurant.id
-        })
-      }
-    },
-
-    getLastTableId(){
-        if (this.restaurant.tables.length != 0) {
-        return this.restaurant.tables[this.restaurant.tables.length - 1].id + 1;
       } else {
-        return 0;
+        await restaurantService.addTable({
+            n_cadeiras: this.newTableCapacity,
+          },
+          this.restaurantId
+        );
       }
     },
 
-    removeTable(){
+
+    removeTable() {
       //vou ter de manipular bué o string
       let start = this.selectedTable.indexOf(" ") + 1
       let end = this.selectedTable.indexOf("|") - 1
       let removeId = parseInt(this.selectedTable.slice(start, end)) - 1
-      this.$store.commit("REMOVE_TABLE", {
-        removeId: removeId,
-        restaurantId: this.restaurant.id
-      })
-  },
-}
+
+      await restaurantService.removeTable(removeId);
+    },
+  }
 }
 </script>
 <style scoped>
