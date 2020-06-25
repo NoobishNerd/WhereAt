@@ -169,7 +169,7 @@ export default {
       if (newPhoto != "") {
         await restaurantService.addPhoto({link_foto: newPhoto} ,this.$route.params.id)
       } else {
-        alert("Coloque o link da imagem!")
+        alert("Coloque o link da imagem!");
       }
       this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
     },
