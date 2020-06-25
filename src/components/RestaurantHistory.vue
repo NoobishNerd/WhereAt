@@ -11,7 +11,7 @@
                 Número de pessoas: {{ reservation.n_cadeiras }}
               </p>
               <p class="text-left mb-0">
-                Utilizador: {{ getUsername(reservation.id_utilizador) }}
+                Utilizador: {{ usernames[Number(reservation.id_utilizador) -1] }}
               </p>
               <p class="text-left mb-0">Horas: {{ reservation.data_hora_reservada }}</p>
 
@@ -56,7 +56,7 @@
                 Número de pessoas: {{ reservation.n_cadeiras }}
               </p>
               <p class="text-left mb-0">
-                Utilizador: {{ getUsername(reservation.id_utilizador) }}
+                Utilizador: {{ usernames[Number(reservation.id_utilizador) -1] }}
               </p>
               <p class="text-left mb-0">Horas: {{ reservation.data_hora_reservada }}</p>
 
@@ -105,7 +105,7 @@
                 Número de pessoas: {{ reservation.n_cadeiras }}
               </p>
               <p class="text-left mb-0">
-                Utilizador: {{ getUsername(reservation.id_utilizador) }}
+                Utilizador: {{ usernames[Number(reservation.id_utilizador) -1] }}
               </p>
               <p class="text-left mb-0">Horas: {{ reservation.data_hora_reservada }}</p>
 
@@ -139,7 +139,8 @@ export default {
 
   //granada incendiária num contetor de lixo indiferenciado
   data: () => ({
-    reservations: []
+    reservations: [],
+    usernames: []
   }),
   props: {
     id: {
@@ -148,6 +149,9 @@ export default {
   },
   created: async function () {
     this.reservations = await bookingService.getRestaurantReservations(this.id);
+    for(reservation in reservations){
+      this.usernames.push(await usersService.getUserById(reservation.id_utilizador).user_name);
+    }
   },
 
   methods: {
