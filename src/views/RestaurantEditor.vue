@@ -19,7 +19,7 @@
               <div class="carousel-item" v-for="photo in album" v-bind:key="photo.id_foto + photo.link_foto"
                 :class="{ active: photo.id_foto == album[0].id_foto }">
                 <button @click="removePhoto(photo.id_foto)" id="removePhotoBtn" class="px-5 mb-2 mt-2">Remover foto</button>
-                <img :src="photo.link_foto" class="d-block w-100 img-fluid" :alt="'slide ' + photo.id_foto" />
+                <img :src="photo.link_foto" class="d-block img-fluid" :alt="'slide ' + photo.id_foto" />
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -192,7 +192,7 @@ export default {
 <style scoped>
 img {
   height: 300px;
-  width: auto;
+  width: 562px;
 }
 
 .row {
