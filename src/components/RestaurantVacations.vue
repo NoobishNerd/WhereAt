@@ -12,8 +12,8 @@
     <div class="row pt-4 mt-4">
       <div class="col-sm-9"></div>
       <div class="col-sm-3">
-        <button v-if="available == true" @click="goOnVacation(1)" id="smallerButton">Ir de Férias</button>
-        <button v-if="available == false" @click="goOnVacation(0)" id="smallerButton">Reabrir Reservas</button>
+        <button v-if="available == true" @click="goOnVacation(0)" id="smallerButton">Ir de Férias</button>
+        <button v-if="available == false" @click="goOnVacation(1)" id="smallerButton">Reabrir Reservas</button>
       </div>
     </div>
   </div>
@@ -24,12 +24,13 @@ import usersService from '../api/users'
 export default {
   data: () => ({
     id: "",
-    available: ""
+    available: "",
+    restaurant: {}
   }),
   created: async function(){
     this.id = this.$route.params.id;
     this.restaurant = await usersService.getRestaurantById(this.id);
-    this.available = restaurant.disponibilidade;
+    this.available = this.restaurant.disponibilidade;
     
   },
   
@@ -52,7 +53,7 @@ export default {
       }, this.id);
       
       this.restaurant = await usersService.getRestaurantById(this.id);
-      this.available = restaurant.disponibilidade;
+      this.available = this.restaurant.disponibilidade;
     }
   }
 }

@@ -54,7 +54,7 @@
                 <h4>Pratos de Carne</h4>
                 <hr>
                 <div v-for="menuItem in menu" v-bind:key="menuItem.id_prato + 2000">
-                    <h6 style="color:black"  v-if="menuItem.desc_categoria == 'Carne'">{{menuItem.desc_prato}} - {{menuItem.preco}}€
+                    <h6 style="color:black"  v-if="menuItem.desc_categoria == 'Pratos de Carne'">{{menuItem.desc_prato}} - {{menuItem.preco}}€
                         <button @click="removeItem(menuItem.id_prato)" id="removeItemBtn" class="ml-2">X</button>
                     </h6>
                 </div>
@@ -64,7 +64,7 @@
                 <h4>Pratos de Peixe</h4>
                 <hr>
                 <div v-for="menuItem in menu" v-bind:key="menuItem.id_prato + 3000">
-                    <h6  style="color:black" v-if="menuItem.desc_categoria == 'Peixe'">{{menuItem.desc_prato}} - {{menuItem.preco}}€
+                    <h6  style="color:black" v-if="menuItem.desc_categoria == 'Pratos de Peixe'">{{menuItem.desc_prato}} - {{menuItem.preco}}€
                         <button @click="removeItem(menuItem.id_prato)" id="removeItemBtn" class="ml-2">X</button>
                     </h6>
                 </div>
@@ -74,7 +74,7 @@
                 <h4>Pratos Vegetarianos</h4>
                 <hr>
                 <div v-for="menuItem in menu" v-bind:key="menuItem.id_prato + 4000">
-                    <h6 style="color:black"  v-if="menuItem.desc_categoria == 'Vegetariano'">{{menuItem.desc_prato}} - {{menuItem.preco}}€
+                    <h6 style="color:black"  v-if="menuItem.desc_categoria == 'Pratos Vegetarianos'">{{menuItem.desc_prato}} - {{menuItem.preco}}€
                         <button @click="removeItem(menuItem.id_prato)" id="removeItemBtn" class="ml-2">X</button>
                     </h6>
                 </div>
@@ -106,14 +106,15 @@ export default {
         price: "",
     }),
     props: {
-        restaurant: {
-            type: Object,
+        restaurantId: {
             required: true
         }
     },
 
     created: async function () {
         this.menu = await restaurantService.getRestaurantMenu(this.restaurantId);
+        // eslint-disable-next-line no-console
+        console.log(this.restaurantId)
     },
 
     methods: {

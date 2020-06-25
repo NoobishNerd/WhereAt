@@ -42,7 +42,7 @@
         </div>
         <div class="col-sm-9">
           <RestaurantHistory
-            :id="Number(restaurant.id_restaurante)"
+            :id="this.$route.params.id"
             v-if="component == 'history'"
           >
           </RestaurantHistory>
@@ -88,7 +88,7 @@ export default {
       this.$router.replace("/");
     },
 
-    changeRestaurantImg() {
+    async changeRestaurantImg() {
       let newRestaurantImg = prompt("Link da imagem:");
       if (newRestaurantImg != "") {
         await usersService.updateRestaurant({

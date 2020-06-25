@@ -31,7 +31,6 @@ export default {
   }),
   props: {
     restaurantId: {
-      type: Number,
       required: true
     }
   },
@@ -55,13 +54,13 @@ export default {
     },
 
 
-    removeTable() {
+    async removeTable() {
       //vou ter de manipular bué o string
       let start = this.selectedTable.indexOf(" ") + 1
       let end = this.selectedTable.indexOf("|") - 1
-      let removeId = parseInt(this.selectedTable.slice(start, end)) - 1
+      let removeId = parseInt(this.selectedTable.slice(start, end))
 
-      await restaurantService.removeTable(removeId);
+      await restaurantService.deleteTable(removeId);
     },
   }
 }

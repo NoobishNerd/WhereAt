@@ -107,10 +107,11 @@ const restaurantService = {
         const response = await fetch(`${API_URL}restaurantes/${id}/pratos`, {
             method: "GET"
         });
-
+            
         if (response.ok) {
             const responseData = await response.json();
-            alert(responseData);
+            // eslint-disable-next-line no-console
+            console.log(responseData);
             return responseData;
         } else {
             throw Error(response);
@@ -230,7 +231,7 @@ const restaurantService = {
     },
 
     async updateRestaurantTag(id_res, id_tag) {
-        const response = await fetch(`${API_URL}/restaurantes/${id_res}/tags/${id_tag}`, {
+        const response = await fetch(`${API_URL}restaurantes/${id_res}/tags/${id_tag}`, {
             method: "PUT"
         });
 

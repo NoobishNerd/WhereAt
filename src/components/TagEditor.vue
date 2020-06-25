@@ -41,7 +41,7 @@ export default {
     }),
     props: {
         restaurantId: {
-            type: Number,
+
             required: true
         }
     },

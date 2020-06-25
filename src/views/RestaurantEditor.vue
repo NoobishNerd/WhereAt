@@ -54,7 +54,7 @@
     </div>
     <div class="row ">
       <div id="windowEditor" class="col-sm-6 img-thumbnail">
-        <TableEditor :restaurantId="Number(restaurant.id_restaurante)"></TableEditor>
+        <TableEditor :restaurantId="this.$route.params.id"></TableEditor>
       </div>
       <div class="col-sm-6 ">
         <div>
@@ -80,8 +80,8 @@
       </div>
       <Comments v-show="component == 'comments'" v-bind:restaurant="restaurant" v-bind:comments="comments">
       </Comments>
-      <TagEditor :restaurantId="Number(restaurant.id_restaurante)" v-show="component == 'album'"></TagEditor>
-      <MenuEditor :restaurant="restaurant" v-show="component == 'menu'"></MenuEditor>
+      <TagEditor :restaurantId="this.$route.params.id" v-show="component == 'album'"></TagEditor>
+      <MenuEditor :restaurantId="this.$route.params.id" v-show="component == 'menu'"></MenuEditor>
       <InfoEditor :restaurant="restaurant" v-show="component == 'info'"></InfoEditor>
     </div>
   </div>
