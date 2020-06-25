@@ -83,7 +83,7 @@ const usersService = {
   //--------------------------------------------------user tags------------------------------------------------
 
   async getUserTags(id) {
-    const response = await fetch(`${API_URL}/utilizadores/${id}/tags`, {
+    const response = await fetch(`${API_URL}utilizadores/${id}/tags`, {
       method: "GET"
     });
 

@@ -48,8 +48,8 @@
             </span>
           </div>
           <select v-model="filter" id="filterSlt">
-            <option v-for="item in filters" v-bind:key="item" :value="item">{{
-              item
+            <option v-for="item in filters" v-bind:key="item.id_tag" :value="item.desc_tag">{{
+              item.desc_tag
             }}</option>
           </select>
         </div>
@@ -113,6 +113,8 @@ export default {
         this.preferences = await usersService.getUserTags(this.$store.state.loggedUser.id);
 
     this.filters = await bookingService.getAllTags();
+    // eslint-disable-next-line no-console
+    console.log(this.filters)
   },
 
   mounted: async function() {
@@ -166,6 +168,7 @@ export default {
   font-family: "Raleway";
   color: #966227;
   margin-bottom: 5px;
+  white-space:nowrap;
 }
 
 .img-wrapper {

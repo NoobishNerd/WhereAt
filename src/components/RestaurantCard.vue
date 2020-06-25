@@ -10,9 +10,9 @@
         />
         <div class="card-body">
           <h6 class="card-title text-left">{{ restaurant.localidade }}</h6>
-          <h4 class="card-title text-left " id="restaurantCardName">
+          <h5 class="card-title text-left " id="restaurantCardName">
             {{ restaurant.nome }}
-          </h4>
+          </h5>
           <div v-if="restaurant.desc_tag != ''">
             <p  class="card-text text-left">
               {{ restaurant.desc_tag }}
@@ -110,6 +110,7 @@ h4 {
 }
 #restaurantCardName {
   color: #f17526;
+  margin-bottom: 0;
 }
 /* img {
   max-width: 100%;
