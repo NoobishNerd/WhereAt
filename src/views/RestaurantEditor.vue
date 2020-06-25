@@ -4,7 +4,7 @@
     <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
       <h5 class="pt-2 ">{{restaurant.nome}}</h5>
       <img @click="replaceRouteProfile" id="fotoRestaurante" :src="restaurant.foto_perfil" class="pb-3 img-fluid"
-        style="height: 17vw; object-fit: cover" />
+        style="object-fit: cover" />
     </div>
     <div class="col-sm-1"></div>
 
@@ -171,12 +171,14 @@ export default {
       } else {
         alert("Coloque o link da imagem!")
       }
+      this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
     },
 
 
     async removePhoto(id) {
       await restaurantService.deletePhoto(id);
-    }
+      this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
+    } 
   },
 
   components: {
@@ -225,7 +227,6 @@ html * {
 
 #fotoRestaurante {
   width: 400px;
-  border-color: white;
   height: 300px;
 }
 
@@ -233,6 +234,8 @@ html * {
   -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+    height:auto;
+    object-fit: cover;
 }
 
 #windowCarrousel {
