@@ -8,7 +8,7 @@
           <div class="col-sm-8" >
             <p class="text-left pt-3 mb-0 mt-1">Data de pedido{{reservation.data}}</p>
             <p class="text-left mb-0">Número de pessoas: {{reservation.n_cadeiras}}</p>
-            <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurante)}}</p>
+            <p class="text-left mb-0">Restaurante: {{reservation.nome}}</p>
             <p class="text-left mb-0">Data e Hora Reservada: {{reservation.data_hora_reservada}}</p>
 
             <br>
@@ -39,7 +39,7 @@
           <div class="col-sm-8" >
             <p class="text-left pt-3 mb-0 mt-1">Data de pedido{{reservation.data}}</p>
             <p class="text-left mb-0">Número de pessoas: {{reservation.n_cadeiras}}</p>
-            <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurante)}}</p>
+            <p class="text-left mb-0">Restaurante: {{reservation.nome}}</p>
             <p class="text-left mb-0">Data e Hora Reservada: {{reservation.data_hora_reservada}}</p>
 
             <br>
@@ -73,7 +73,7 @@
           <div class="col-sm-8" >
             <p class="text-left pt-3 mb-0 mt-1">Data de pedido{{reservation.data}}</p>
             <p class="text-left mb-0">Número de pessoas: {{reservation.n_cadeiras}}</p>
-            <p class="text-left mb-0">Restaurant: {{getUsername(reservation.id_restaurante)}}</p>
+            <p class="text-left mb-0">Restaurante: {{reservation.nome}}</p>
             <p class="text-left mb-0">Data e Hora Reservada: {{reservation.data_hora_reservada}}</p>
 
             <br>
@@ -120,11 +120,6 @@ export default {
   },
   created: async function () {
     this.bookingHistory = await bookingService.getUserReservations(this.id);
-  },
-  methods: {
-    async getUsername(id) {
-      return usersService.getRestaurantById(id).nome;
-    }
   }
 };
 </script>
