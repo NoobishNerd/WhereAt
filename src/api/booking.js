@@ -16,7 +16,8 @@ const bookingService = {
 
     if (response.ok) {
       const responseData = await response.json();
-      alert(responseData);
+      // eslint-disable-next-line no-console
+      console.log(responseData);
       return responseData;
     } else {
       throw Error(response);
@@ -43,7 +44,8 @@ const bookingService = {
 
     if (response.ok) {
       const responseData = await response.json();
-      alert(responseData);
+      // eslint-disable-next-line no-console
+      console.log(responseData);
       return responseData;
     } else {
       throw Error(response);
@@ -72,8 +74,8 @@ const bookingService = {
           capacity: reservation.n_cadeiras
         })
       });
-
-      alert(translated);
+      // eslint-disable-next-line no-console
+      console.log(translated);
       return translated;
     } else {
       throw Error(response);
@@ -101,8 +103,8 @@ const bookingService = {
           capacity: reservation.n_cadeiras
         })
       });
-
-      alert(translated);
+      // eslint-disable-next-line no-console
+      console.log(translated);
       return translated;
     } else {
       throw Error(response);
@@ -153,8 +155,8 @@ const bookingService = {
 
 
   async getAllTags() {
-    const response = await fetch(`${API_URL}tags`, {
-      method: "GET",
+    const response = await fetch(`http://localhost:3000/tags`, {
+      method: "GET"
     });
 
     if (response.ok) {
@@ -167,8 +169,8 @@ const bookingService = {
           tag_name: tag.desc_tag
         })
       });
-
-      alert(translated);
+      // eslint-disable-next-line no-console
+      console.log(translated);
       return translated;
     } else {
       throw Error(response);

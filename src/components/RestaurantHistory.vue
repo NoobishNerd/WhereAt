@@ -135,7 +135,6 @@
 
 <script>
 import bookingService from '../api/booking';
-import usersService from '../api/users';
 export default {
 
   //granada incendiária num contetor de lixo indiferenciado
@@ -152,16 +151,12 @@ export default {
   },
 
   methods: {
-    async getUsername(id) {
-      return await usersService.getUserById(id).username;
-    },
-
     async accept(id_u, id_rest, id_m, date_booked, date) {
       await bookingService.updateReservation({
         date_booked: date_booked,
         date: date,
-        newconfirmation: "c",
-        newpresence: 0
+        confirmation: "c",
+        presence: 0
       }, id_rest, id_u, id_m);
       
       this.reservations = await bookingService.getRestaurantReservations(this.id);
@@ -172,8 +167,8 @@ export default {
       await bookingService.updateReservation({
         date_booked: date_booked,
         date: date,
-        newconfirmation: "d",
-        newpresence: 0
+        confirmation: "d",
+        presence: 0
       }, id_rest, id_u, id_m);
       
       this.reservations = await bookingService.getRestaurantReservations(this.id);
@@ -184,8 +179,8 @@ export default {
       await bookingService.updateReservation({
         date_booked: date_booked,
         date: date,
-        newconfirmation: "c",
-        newpresence: 1
+        confirmation: "c",
+        presence: 1
       }, id_rest, id_u, id_m);
 
       this.reservations = await bookingService.getRestaurantReservations(this.id);

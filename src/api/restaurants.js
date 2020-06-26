@@ -20,7 +20,8 @@ const restaurantService = {
                 })
             });
 
-            alert(translated);
+            // eslint-disable-next-line no-console
+            console.log(translated);
             return translated;
         } else {
             throw Error(response);
@@ -42,7 +43,8 @@ const restaurantService = {
 
         if (response.ok) {
             const responseData = await response.json();
-            alert(responseData);
+            // eslint-disable-next-line no-console
+            console.log(responseData);
             return responseData;
         } else {
             throw Error(response);
@@ -85,8 +87,8 @@ const restaurantService = {
                     profilePic: comment.foto
                 })
             });
-
-            alert(translated);
+            // eslint-disable-next-line no-console
+            console.log(translated);
             return translated;
         } else {
             throw Error(response);
@@ -152,8 +154,8 @@ const restaurantService = {
                     category: dish.desc_categoria
                 })
             });
-
-            alert(translated);
+            // eslint-disable-next-line no-console
+            console.log(translated);
             return translated;
         } else {
             throw Error(response);
@@ -178,7 +180,8 @@ const restaurantService = {
 
         if (response.ok) {
             const responseData = await response.json();
-            alert(responseData);
+            // eslint-disable-next-line no-console
+            console.log(responseData);
             return responseData;
         } else {
             throw Error(response);
@@ -215,8 +218,8 @@ const restaurantService = {
                     srcLink: photo.link_foto,
                 })
             });
-
-            alert(translated);
+            // eslint-disable-next-line no-console
+            console.log(translated);
             return translated;
         } else {
             throw Error(response);
@@ -238,7 +241,8 @@ const restaurantService = {
 
         if (response.ok) {
             const responseData = await response.json();
-            alert(responseData);
+            // eslint-disable-next-line no-console
+            console.log(responseData);
             return responseData;
         } else {
             throw Error(response);
@@ -277,8 +281,8 @@ const restaurantService = {
                     tag_main: tag.tag_principal
                 })
             });
-
-            alert(translated);
+            // eslint-disable-next-line no-console
+            console.log(translated);
             return translated;
         } else {
             throw Error(response);
@@ -300,7 +304,8 @@ const restaurantService = {
 
         if (response.ok) {
             const responseData = await response.json();
-            alert(responseData);
+            // eslint-disable-next-line no-console
+            console.log(responseData);
             return responseData;
         } else {
             throw Error(response);
@@ -353,8 +358,8 @@ const restaurantService = {
                     local: card.localidade
                 })
             });
-
-            alert(translated);
+            // eslint-disable-next-line no-console
+            console.log(translated);
             return translated;
         } else {
             throw Error(response);

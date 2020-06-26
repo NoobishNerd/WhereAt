@@ -86,6 +86,8 @@ export default {
 
   created: async function () {
     this.user = await usersService.getUserById(this.$route.params.id);
+    // eslint-disable-next-line no-console
+    console.log(this.user)
   },
 
   methods: {
