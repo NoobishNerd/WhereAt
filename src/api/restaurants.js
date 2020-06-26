@@ -361,6 +361,37 @@ const restaurantService = {
         }
     },
 
+    async getAllRestaurants() {
+        const response = await fetch(`${API_URL}allRestaurantes`, {
+            method: "GET"
+        });
+
+        if (response.ok) {
+            const responseData = await response.json();
+            let translated = []
+
+            responseData.forEach(restaurant => {
+                translated.push({
+                    id_restaurant: restaurant.id_restaurante,
+                    name: restaurant.nome,
+                    email: restaurant.email,
+                    password: restaurant.password,
+                    info: restaurant.informacao,
+                    profilePic: restaurant.foto_perfil,
+                    address: restaurant.morada,
+                    approval: restaurant.aprovacao,
+                    postalCode: restaurant.cod_postal,
+                    availability: restaurant.disponibilidade
+                })
+            });
+
+            alert(translated);
+            return translated;
+        } else {
+            throw Error(response);
+        }
+    }
+
 }
 
 export default restaurantService;
