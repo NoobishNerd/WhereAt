@@ -17,9 +17,12 @@ const usersService = {
         password: responseData.password,
         admin: responseData.administrador,
         profilePic: responseData.foto,
-        phone: responseData.numero_tel
+        phone: responseData.numero_tel       
       }
-      alert(translated);
+      // eslint-disable-next-line no-console
+      console.log("getUserById")
+      // eslint-disable-next-line no-console
+      console.log(translated);
       return translated;
     } else {
       throw Error(response);
@@ -38,8 +41,20 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
-      alert(JSON.stringify(responseData));
-      return responseData;
+      let translated = {
+        id_user: responseData.id_utilizador,
+        username: responseData.user_name,
+        email: responseData.email,
+        password: responseData.password,
+        admin: responseData.administrador,
+        profilePic: responseData.foto,
+        phone: responseData.numero_tel
+      }
+      // eslint-disable-next-line no-console
+      console.log("getUser")
+      // eslint-disable-next-line no-console
+      console.log(JSON.stringify(translated));
+      return translated;
     } else {
       throw Error(response);
     }
@@ -62,7 +77,10 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
-      alert(responseData);
+            // eslint-disable-next-line no-console
+            console.log("registerUser")
+      // eslint-disable-next-line no-console
+      console.log(responseData);
       return responseData;
     } else {
       throw Error(response);
@@ -122,8 +140,10 @@ const usersService = {
           tag_name: tag.desc_tag,
         })
       });
-
-      alert(translated);
+            // eslint-disable-next-line no-console
+            console.log("getUserTags")
+      // eslint-disable-next-line no-console
+      console.log(translated);
       return translated;
     } else {
       throw Error(response);
@@ -137,7 +157,10 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
-      alert(responseData);
+            // eslint-disable-next-line no-console
+            console.log("addUserTag")
+      // eslint-disable-next-line no-console
+      console.log(responseData);
       return responseData;
     } else {
       throw Error(response);
@@ -188,7 +211,10 @@ const usersService = {
         postalCode: responseData.cod_postal,
         availability: responseData.disponibilidade
       }
-      alert(translated);
+            // eslint-disable-next-line no-console
+            console.log("getRestaurantById")
+      // eslint-disable-next-line no-console
+      console.log(translated);
       return translated;
     } else {
       throw Error(response);
@@ -208,8 +234,23 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
-      alert(responseData);
-      return responseData;
+      let translated = {
+        id_restaurant: responseData.id_restaurante,
+        name: responseData.nome,
+        email: responseData.email,
+        password: responseData.password,
+        info: responseData.informacao,
+        profilePic: responseData.foto_perfil,
+        address: responseData.morada,
+        approval: responseData.aprovacao,
+        postalCode: responseData.cod_postal,
+        availability: responseData.disponibilidade
+      }
+       // eslint-disable-next-line no-console
+      console.log("getRestaurant")
+      // eslint-disable-next-line no-console
+      console.log(translated);
+      return translated;
     } else {
       throw Error(response);
     }
@@ -235,7 +276,10 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
-      alert(responseData);
+            // eslint-disable-next-line no-console
+            console.log("registerRestaurant")
+      // eslint-disable-next-line no-console
+      console.log(responseData);
       return responseData;
     } else {
       throw Error(response);

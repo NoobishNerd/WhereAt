@@ -109,7 +109,9 @@ export default {
   mounted: async function () {
     this.restaurantsStored = await restaurantService.getRestaurantCards();
     this.restaurants = await restaurantService.getRestaurantCards();
-    this.preferences = await usersService.getUserTags(this.$store.state.loggedUser.id);
+      if(this.$store.state.loggedUser.id != ""){
+        this.preferences = await usersService.getUserTags(this.$store.state.loggedUser.id);
+      }
     this.filters = await bookingService.getAllTags();
     await this.getRecommendation();
   },
