@@ -2,14 +2,14 @@
   <div class="history container" v-if="bookingHistory.length != 0">
     <br>
     <div v-if="bookingHistory.length != 0">
-      <div v-for="reservation in bookingHistory" v-bind:key="reservation.id">
+      <div v-for="reservation in bookingHistory" v-bind:key="`${reservation.id_user} ${reservation.id_restaurant} ${reservation.id_table}`">
 
-        <div v-if="reservation.confirmacao == 'p'" id="historyRow" class="row mb-3 mr-1 mt-2">
+        <div v-if="reservation.confirmation == 'p'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8" >
-            <p class="text-left pt-3 mb-0 mt-1">Data de pedido{{reservation.data}}</p>
-            <p class="text-left mb-0">Número de pessoas: {{reservation.n_cadeiras}}</p>
-            <p class="text-left mb-0">Restaurante: {{reservation.nome}}</p>
-            <p class="text-left mb-0">Data e Hora Reservada: {{reservation.data_hora_reservada}}</p>
+            <p class="text-left pt-3 mb-0 mt-1">Data de pedido{{reservation.date}}</p>
+            <p class="text-left mb-0">Número de pessoas: {{reservation.capacity}}</p>
+            <p class="text-left mb-0">Restaurante: {{reservation.name}}</p>
+            <p class="text-left mb-0">Data e Hora Reservada: {{reservation.date_booked}}</p>
 
             <br>
           </div>
@@ -35,12 +35,12 @@
 
 
 
-        <div v-if="reservation.confirmacao == 'c'" id="historyRow" class="row mb-3 mr-1 mt-2">
+        <div v-if="reservation.confirmation == 'c'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8" >
-            <p class="text-left pt-3 mb-0 mt-1">Data de pedido{{reservation.data}}</p>
-            <p class="text-left mb-0">Número de pessoas: {{reservation.n_cadeiras}}</p>
-            <p class="text-left mb-0">Restaurante: {{reservation.nome}}</p>
-            <p class="text-left mb-0">Data e Hora Reservada: {{reservation.data_hora_reservada}}</p>
+            <p class="text-left pt-3 mb-0 mt-1">Data de pedido{{reservation.date}}</p>
+            <p class="text-left mb-0">Número de pessoas: {{reservation.capacity}}</p>
+            <p class="text-left mb-0">Restaurante: {{reservation.name}}</p>
+            <p class="text-left mb-0">Data e Hora Reservada: {{reservation.date_booked}}</p>
 
             <br>
           </div>
@@ -69,12 +69,12 @@
 
 
 
-        <div v-if="reservation.confirmacao == 'd'" id="historyRow" class="row mb-3 mr-1 mt-2">
+        <div v-if="reservation.confirmation == 'd'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8" >
-            <p class="text-left pt-3 mb-0 mt-1">Data de pedido{{reservation.data}}</p>
-            <p class="text-left mb-0">Número de pessoas: {{reservation.n_cadeiras}}</p>
-            <p class="text-left mb-0">Restaurante: {{reservation.nome}}</p>
-            <p class="text-left mb-0">Data e Hora Reservada: {{reservation.data_hora_reservada}}</p>
+            <p class="text-left pt-3 mb-0 mt-1">Data de pedido{{reservation.date}}</p>
+            <p class="text-left mb-0">Número de pessoas: {{reservation.capacity}}</p>
+            <p class="text-left mb-0">Restaurante: {{reservation.name}}</p>
+            <p class="text-left mb-0">Data e Hora Reservada: {{reservation.date_booked}}</p>
 
             <br>
           </div>

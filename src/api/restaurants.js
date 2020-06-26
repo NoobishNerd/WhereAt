@@ -10,17 +10,31 @@ const restaurantService = {
 
         if (response.ok) {
             const responseData = await response.json();
-            // eslint-disable-next-line no-console
-            return responseData;
+            let translated = []
+
+            responseData.forEach(table => {
+                translated.push({
+                    id_table: table.id_mesa,
+                    id_restaurant: table.id_restaurante,
+                    capacity: table.n_cadeiras
+                })
+            });
+
+            alert(translated);
+            return translated;
         } else {
             throw Error(response);
         }
     },
 
     async addTable(data, id) {
+        let translated = {
+            n_cadeiras: data.capacity
+        }
+
         const response = await fetch(`${API_URL}restaurantes/${id}/mesas`, {
             method: "POST",
-            body: JSON.stringify(data),
+            body: JSON.stringify(translated),
             headers: {
                 "Content-Type": "application/json",
             }
@@ -60,18 +74,36 @@ const restaurantService = {
 
         if (response.ok) {
             const responseData = await response.json();;
-            return responseData;
+            let translated = []
+
+            responseData.forEach(comment => {
+                translated.push({
+                    comment: comment.txt_comentario,
+                    rating: comment.rating,
+                    date: comment.data,
+                    username: comment.user_name,
+                    profilePic: comment.foto
+                })
+            });
+
+            alert(translated);
+            return translated;
         } else {
             throw Error(response);
         }
     },
 
     async addComment(data, id) {
-        // eslint-disable-next-line no-console
-        console.log(data,id)
+        let translated = {
+            id_utilizador: data.id_user,
+            txt_comentario: data.comment,
+            rating: data.rating,
+            data: data.date
+        }
+
         const response = await fetch(`${API_URL}restaurantes/${id}/comentarios`, {
             method: "POST",
-            body: JSON.stringify(data),
+            body: JSON.stringify(translated),
             headers: {
                 "Content-Type": "application/json",
             }
@@ -107,21 +139,38 @@ const restaurantService = {
         const response = await fetch(`${API_URL}restaurantes/${id}/pratos`, {
             method: "GET"
         });
-            
+
         if (response.ok) {
             const responseData = await response.json();
-            // eslint-disable-next-line no-console
-            console.log(responseData);
-            return responseData;
+            let translated = []
+
+            responseData.forEach(dish => {
+                translated.push({
+                    id_dish: dish.id_prato,
+                    dish_name: dish.desc_prato,
+                    price: dish.preco,
+                    category: dish.desc_categoria
+                })
+            });
+
+            alert(translated);
+            return translated;
         } else {
             throw Error(response);
         }
     },
 
     async addDish(data, id) {
+        let translated = {
+            preco: data.price,
+            desc_prato: data.dish_name,
+            id_categoria: data.id_category
+
+        };
+
         const response = await fetch(`${API_URL}restaurantes/${id}/pratos`, {
             method: "POST",
-            body: JSON.stringify(data),
+            body: JSON.stringify(translated),
             headers: {
                 "Content-Type": "application/json",
             }
@@ -157,17 +206,31 @@ const restaurantService = {
 
         if (response.ok) {
             const responseData = await response.json();
-            alert(responseData);
-            return responseData;
+            let translated = []
+
+            responseData.forEach(photo => {
+                translated.push({
+                    id_photo: photo.id_foto,
+                    id_restaurant: photo.id_restaurante,
+                    srcLink: photo.link_foto,
+                })
+            });
+
+            alert(translated);
+            return translated;
         } else {
             throw Error(response);
         }
     },
 
     async addPhoto(data, id) {
+        let translated = {
+            link_foto: data.srcLink
+        }
+
         const response = await fetch(`${API_URL}restaurantes/${id}/fotos`, {
             method: "POST",
-            body: JSON.stringify(data),
+            body: JSON.stringify(translated),
             headers: {
                 "Content-Type": "application/json",
             }
@@ -205,17 +268,31 @@ const restaurantService = {
 
         if (response.ok) {
             const responseData = await response.json();
-            alert(responseData);
-            return responseData;
+            let translated = []
+
+            responseData.forEach(tag => {
+                translated.push({
+                    id_tag: tag.id_tag,
+                    tag_name: tag.desc_tag,
+                    tag_main: tag.tag_principal
+                })
+            });
+
+            alert(translated);
+            return translated;
         } else {
             throw Error(response);
         }
     },
 
     async addRestaurantTag(data, id) {
+        let translated = {
+            desc_tag: data.tag_name
+        }
+
         const response = await fetch(`${API_URL}restaurantes/${id}/tags`, {
             method: "POST",
-            body: JSON.stringify(data),
+            body: JSON.stringify(translated),
             headers: {
                 "Content-Type": "application/json",
             }
@@ -265,8 +342,20 @@ const restaurantService = {
 
         if (response.ok) {
             const responseData = await response.json();
-            alert(responseData);
-            return responseData;
+            let translated = []
+
+            responseData.forEach(card => {
+                translated.push({
+                    name: card.nome,
+                    profilePic: card.foto_perfil,
+                    id_restaurant: card.id_restaurante,
+                    tag_name: card.desc_tag,
+                    local: card.localidade
+                })
+            });
+
+            alert(translated);
+            return translated;
         } else {
             throw Error(response);
         }

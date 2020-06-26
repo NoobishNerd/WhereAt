@@ -17,7 +17,7 @@
                   type="text"
                   class="form-control"
                   id="registerName"
-                  placeholder="Nome do Restaurante"
+                  placeholder="name do Restaurante"
                   required
                   v-model="username"
                 />
@@ -59,7 +59,7 @@
                   type="text"
                   class="form-control"
                   id="address"
-                  placeholder="Morada"
+                  placeholder="address"
                   required
                   v-model="address"
                 />
@@ -77,7 +77,7 @@
                   type="text"
                   class="form-control"
                   id="local"
-                  placeholder="Localidade"
+                  placeholder="local"
                   required
                   v-model="local"
                 />
@@ -121,11 +121,11 @@ export default {
         alert("PASSWORDS DIFERENTES");
       } else {
         const registerResponse = await usersService.registerRestaurant({
-          nome: this.username,
+          name: this.username,
           password: this.password,
-          morada: this.address,
-          cod_postal: this.postalCode,
-          localidade: this.local,
+          address: this.address,
+          postalCode: this.postalCode,
+          local: this.local,
           email: this.email,
         });
 
@@ -146,12 +146,11 @@ export default {
             console.log(loginResponse)
           } else {
             this.$store.commit("LOGIN", {
-              id: loginResponse.id_restaurante,
+              id: loginResponse.id_restaurant,
               admin: loginResponse.admin,
-              username: loginResponse.user_name,
-              profilePic: loginResponse.foto,
-              preferences: loginResponse.tags,
-              type: "client",
+              username: loginResponse.name,
+              profilePic: loginResponse.profilePic,
+              type: "restaurant",
             });
 
             this.$router.replace("/");

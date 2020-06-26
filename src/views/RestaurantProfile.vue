@@ -30,12 +30,12 @@
       <div class="row d-flex justify-content-sm-center flex-wrap pt-3">
         <div class="col-sm-3" id="colRest">
           <img
-            :src="restaurant.foto_perfil"
+            :src="restaurant.profilePic"
             class="rounded-circle"
             width="95px"
             height="95px"
           />
-          <h5 class="pt-2 text-center" id="brownBoldText">{{ restaurant.nome }}</h5>
+          <h5 class="pt-2 text-center" id="brownBoldText">{{ restaurant.name }}</h5>
           <button @click="changeRestaurantImg" id="smallerButton" class="mt-2">
             Alterar Foto de Perfil
           </button>
@@ -92,20 +92,20 @@ export default {
       let newRestaurantImg = prompt("Link da imagem:");
       if (newRestaurantImg != "") {
         await usersService.updateRestaurant({
-            id_restaurante: this.restaurant.id_restaurante,
-            nome: this.restaurant.nome,
+            id_restaurant: this.restaurant.id_restaurant,
+            name: this.restaurant.name,
             password: this.restaurant.password,
-            foto_perfil: newRestaurantImg,
-            informacao: this.restaurant.informacao,
-            morada: this.restaurant.morada,
-            aprovacao: this.restaurant.aprovacao,
-            cod_postal: this.restaurant.cod_postal,
-            disponibilidade: this.restaurant.disponibilidade,
+            profilePic: newRestaurantImg,
+            info: this.restaurant.info,
+            address: this.restaurant.address,
+            approval: this.restaurant.approval,
+            postalCode: this.restaurant.postalCode,
+            availability: this.restaurant.availability,
             email: this.restaurant.email
           },
           this.$route.params.id,
         )
-        this.restaurant.foto_perfil = newRestaurantImg;
+        this.restaurant.profilePic = newRestaurantImg;
         this.$store.commit("CHANGE_USER_IMG", {
           profilePic: newRestaurantImg
         });

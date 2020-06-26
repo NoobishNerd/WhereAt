@@ -3,7 +3,7 @@
     <div class="col-sm-6">
       <div class="form-group">
         <select size="200" v-model="selectedTable" class="form-control" id="sltTables">
-          <option v-for="table in tables" v-bind:key="table.id_mesa">Mesa {{table.id_mesa}} | {{table.n_cadeiras}} pessoas</option>
+          <option v-for="table in tables" v-bind:key="table.id_table">Mesa {{table.id_table}} | {{table.capacity}} pessoas</option>
         </select>
       </div>
     </div>
@@ -46,7 +46,7 @@ export default {
         alert("Escolha a capacidade da mesa")
       } else {
         await restaurantService.addTable({
-            n_cadeiras: this.newTableCapacity,
+            capacity: this.newTableCapacity,
           },
           this.restaurantId
         );

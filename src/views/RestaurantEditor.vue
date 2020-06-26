@@ -2,8 +2,8 @@
 <div class="container">
   <div class="row">
     <div id="windowPhoto" class="col-sm-5 text-center img-thumbnail">
-      <h5 class="pt-2 ">{{restaurant.nome}}</h5>
-      <img @click="replaceRouteProfile" id="fotoRestaurante" :src="restaurant.foto_perfil" class="pb-3 img-fluid"
+      <h5 class="pt-2 ">{{restaurant.name}}</h5>
+      <img @click="replaceRouteProfile" id="fotoRestaurante" :src="restaurant.profilePic" class="pb-3 img-fluid"
         style="object-fit: cover" />
     </div>
     <div class="col-sm-1"></div>
@@ -12,14 +12,14 @@
 <div v-if="album.length != 0" id="windowCarrousel" class="text-center img-fluid">
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
             <ol class="carousel-indicators">
-              <li v-for="photo in album" v-bind:key="photo.id_foto" data-target="#carouselExampleIndicators"
-                :data-slide-to="photo.id_foto" :class="{ active: photo.id_foto == album[0].id_foto }"></li>
+              <li v-for="photo in album" v-bind:key="photo.id_photo" data-target="#carouselExampleIndicators"
+                :data-slide-to="photo.id_photo" :class="{ active: photo.id_photo == album[0].id_photo }"></li>
             </ol>
             <div class="carousel-inner">
-              <div class="carousel-item" v-for="photo in album" v-bind:key="photo.id_foto + photo.link_foto"
-                :class="{ active: photo.id_foto == album[0].id_foto }">
-                <button @click="removePhoto(photo.id_foto)" id="removePhotoBtn" class="px-5 mb-2 mt-2">Remover foto</button>
-                <img :src="photo.link_foto" class="d-block img-fluid" :alt="'slide ' + photo.id_foto" />
+              <div class="carousel-item" v-for="photo in album" v-bind:key="photo.id_photo + photo.srcLink"
+                :class="{ active: photo.id_photo == album[0].id_photo }">
+                <button @click="removePhoto(photo.id_photo)" id="removePhotoBtn" class="px-5 mb-2 mt-2">Remover foto</button>
+                <img :src="photo.srcLink" class="d-block img-fluid" :alt="'slide ' + photo.id_photo" />
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -138,7 +138,7 @@ export default {
     },
 
     geocodeAddress(geocoder, resultsMap){
-      const address = this.restaurant.morada + ", " + this.restaurant.cod_postal + " " + this.restaurant.localidade;
+      const address = this.restaurant.address + ", " + this.restaurant.postalCode + " " + this.restaurant.local;
       geocoder.geocode({ 'address': address},
       (results, status) => {
         if (status === 'OK') {
@@ -158,7 +158,7 @@ export default {
       this.$router.replace({
         name: "restaurantProfile",
         params: {
-          id: this.restaurant.id_restaurante
+          id: this.restaurant.id_restaurant
         }
       });
     },
@@ -167,7 +167,7 @@ export default {
     async addPhoto() {
       let newPhoto = prompt("Link da imagem:")
       if (newPhoto != "") {
-        await restaurantService.addPhoto({link_foto: newPhoto} ,this.$route.params.id)
+        await restaurantService.addPhoto({srcLink: newPhoto} ,this.$route.params.id)
       } else {
         alert("Coloque o link da imagem!");
       }

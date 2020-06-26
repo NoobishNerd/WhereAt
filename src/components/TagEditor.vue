@@ -4,7 +4,7 @@
             <div class="col-sm-3 pr-0">
                 <label class="mt-2" for="mainTagSlt">Escolher tag principal</label>
                 <select v-model="newMainTag" id="MainTagSlt" class="form-control">
-                    <option v-for="tag in tags" v-bind:key="tag.id_tag" :value="tag.id_tag">{{tag.desc_tag}}</option>
+                    <option v-for="tag in tags" v-bind:key="tag.id_tag" :value="tag.id_tag">{{tag.tag_name}}</option>
                 </select>
             </div>
             <div class="col-sm-1 mt-3 mr-5">
@@ -23,8 +23,8 @@
         <hr>
         <div class="row">
             <div class="col-sm-2" v-for="tag in tags" v-bind:key="tag.id_tag + 1000">                        
-                <p v-if="tag.tag_principal == true" class="text-center main" style="color: white;">{{tag.desc_tag}} <span class="ml-2"><button @click="removeTag(tag.id_tag)" id="removeTagBtn">X</button></span></p>
-                <p style="color:black" v-if="tag.tag_principal == false" class="text-center side">{{tag.desc_tag}} <span class="ml-2"><button @click="removeTag(tag.id_tag)" id="removeTagBtnWhite">X</button></span></p>
+                <p v-if="tag.tag_main == true" class="text-center main" style="color: white;">{{tag.tag_name}} <span class="ml-2"><button @click="removeTag(tag.id_tag)" id="removeTagBtn">X</button></span></p>
+                <p style="color:black" v-if="tag.tag_main == false" class="text-center side">{{tag.tag_name}} <span class="ml-2"><button @click="removeTag(tag.id_tag)" id="removeTagBtnWhite">X</button></span></p>
             </div>
         </div>
     </div>
@@ -41,7 +41,6 @@ export default {
     }),
     props: {
         restaurantId: {
-
             required: true
         }
     },
@@ -57,7 +56,7 @@ export default {
         },
         async addTag() {
             await restaurantService.addRestaurantTag({
-                desc_tag: this.newTag
+                tag_name: this.newTag
             }, this.restaurantId);
             this.tags = await restaurantService.getRestaurantTags(this.restaurantId);
         },

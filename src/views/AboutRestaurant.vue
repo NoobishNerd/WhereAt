@@ -10,13 +10,13 @@
         <div v-if="album.length != 0" id="windowCarrousel" class="text-center img-fluid">
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
             <ol class="carousel-indicators">
-              <li v-for="photo in album" v-bind:key="photo.id_foto" data-target="#carouselExampleIndicators"
-                :data-slide-to="photo.id_foto" :class="{ active: photo.id_foto == album[0].id_foto }"></li>
+              <li v-for="photo in album" v-bind:key="photo.id_photo" data-target="#carouselExampleIndicators"
+                :data-slide-to="photo.id_photo" :class="{ active: photo.id_photo == album[0].id_photo }"></li>
             </ol>
             <div class="carousel-inner">
-              <div class="carousel-item" v-for="photo in album" v-bind:key="photo.id_foto + photo.link_foto"
-                :class="{ active: photo.id_foto == album[0].id_foto }">
-                <img :src="photo.link_foto" class="d-block w-100 img-fluid" :alt="'slide ' + photo.id_foto" />
+              <div class="carousel-item" v-for="photo in album" v-bind:key="photo.id_photo + photo.srcLink"
+                :class="{ active: photo.id_photo == album[0].id_photo }">
+                <img :src="photo.srcLink" class="d-block w-100 img-fluid" :alt="'slide ' + photo.id_photo" />
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -36,12 +36,12 @@
         
       </div>
       <div class="col-5">
-        <h5 class="" style="color:#f17526">{{ restaurant.nome }}</h5>
-        <h6 class="" v-if="restaurant.informacao == ''">
+        <h5 class="" style="color:#f17526">{{ restaurant.name }}</h5>
+        <h6 class="" v-if="restaurant.info == ''">
           Este restaurante ainda não adicionou informações adicionais
         </h6>
         <p v-else class="">
-          {{ restaurant.informacao }}
+          {{ restaurant.info }}
         </p>
         <div class="row">
           <div class="col-12">
@@ -77,15 +77,15 @@
           <div class="col-sm-8 pb-4">
             <h4 style="color:#f17526">Mesas:</h4>
             <div class="form-group">
-              <select size="17" v-if="availableTables.length && restaurant.disponibilidade" class="form-control"
+              <select size="17" v-if="availableTables.length && restaurant.availability" class="form-control"
                 id="sltTables" v-model="selectedTable">
 
-                <option v-for="table in availableTables" v-bind:key="table.id_mesa">
-                  <p v-if="table.n_cadeiras != 0">
-                    Mesa {{ table.id_mesa }} | {{ table.n_cadeiras }} pessoas
+                <option v-for="table in availableTables" v-bind:key="table.id_table">
+                  <p v-if="table.capacity != 0">
+                    Mesa {{ table.id_table }} | {{ table.capacity }} pessoas
                   </p>
-                  <p v-if="table.n_cadeiras == 0">
-                    Mesa {{ table.id_mesa }} | [X] Ocupada
+                  <p v-if="table.capacity == 0">
+                    Mesa {{ table.id_table }} | [X] Ocupada
                   </p>
                 </option>
               </select>
@@ -163,8 +163,7 @@ export default {
     this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
     this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
     this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
-    // eslint-disable-next-line no-console
-    console.log(this.comments)
+  
   },
 
 
@@ -206,11 +205,11 @@ export default {
 
     geocodeAddress(geocoder, resultsMap) {
       const address =
-        this.restaurant.morada +
+        this.restaurant.address +
         ", " +
-        this.restaurant.cod_postal +
+        this.restaurant.postalCode +
         " " +
-        this.restaurant.localidade;
+        this.restaurant.local;
       geocoder.geocode({
         address: address
       }, (results, status) => {
@@ -232,11 +231,11 @@ export default {
       if (this.checkAvailability() && this.selectedTable != "") {
 
         await bookingService.createReservation({
-          data_hora_reservada: this.date + "-" + this.hour,
-          id_utilizador: this.$store.getters.getLoggedUser.id,
-          id_restaurante: this.$route.params.id,
-          id_mesa: this.selectedTableReady.id_mesa,
-          data_hora: this.getSystemDate()
+          date_booked: this.date + "-" + this.hour,
+          id_user: this.$store.getters.getLoggedUser.id,
+          id_restaurant: this.$route.params.id,
+          id_table: this.selectedTableReady.id_table,
+          date: this.getSystemDate()
         });
 
         this.updateAvailableTables();
@@ -250,7 +249,7 @@ export default {
 
       this.updateObjectTable();
 
-      if (this.selectedTableReady.n_cadeiras == 0 || isNaN(this.selectedTableReady.n_cadeiras)) {
+      if (this.selectedTableReady.capacity == 0 || isNaN(this.selectedTableReady.capacity)) {
         alert("A mesa selecionada não está disponivel");
         return false;
       } else {
@@ -263,13 +262,13 @@ export default {
       this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
       //obter mesas ocupadas para data escolhida
       let busyTablesId = await bookingService.getNonAvailabeTablesIds({
-        data_hora_reservada: this.date + "-" + this.hour
+        date_booked: this.date + "-" + this.hour
       }, this.$route.params.id)
       //capacidade das ocupadas passa a 0
       for (const table in this.availableTables) {
         for (let i = 0; i < busyTablesId.length; i++) {
           if (table.id == busyTablesId[i]) {
-            table.n_cadeiras = 0
+            table.capacity = 0
           }
 
         }
@@ -283,11 +282,11 @@ export default {
       let end = this.selectedTable.indexOf("|") - 1;
       let selectedId = parseInt(this.selectedTable.slice(start, end));
       for (const table of this.availableTables) {
-        if (table.id_mesa == selectedId) {
+        if (table.id_table == selectedId) {
           this.selectedTableReady = {
-            id_mesa: selectedId,
-            id_restaurante: this.$route.params.id,
-            n_cadeiras: table.n_cadeiras
+            id_table: selectedId,
+            id_restaurant: this.$route.params.id,
+            capacity: table.capacity
           };
         }
       }

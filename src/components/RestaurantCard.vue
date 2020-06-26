@@ -4,18 +4,18 @@
       <div class="card">
         <img
           class="card-img-top"
-          :src="restaurant.foto_perfil"
+          :src="restaurant.profilePic"
           alt="Card image cap"
           @click="getAboutRestaurant"
         />
         <div class="card-body">
-          <h6 class="card-title text-left">{{ restaurant.localidade }}</h6>
+          <h6 class="card-title text-left">{{ restaurant.local }}</h6>
           <h5 class="card-title text-left " id="restaurantCardName">
-            {{ restaurant.nome }}
+            {{ restaurant.name }}
           </h5>
-          <div v-if="restaurant.desc_tag != ''">
+          <div v-if="restaurant.tag_name != ''">
             <p  class="card-text text-left">
-              {{ restaurant.desc_tag }}
+              {{ restaurant.tag_name }}
             </p>
           </div>
           <div v-else>
@@ -51,7 +51,7 @@ export default {
   },
 
   mounted: async function() {
-    this.comments = await restaurantService.getRestaurantComments(this.restaurant.id_restaurante);
+    this.comments = await restaurantService.getRestaurantComments(this.restaurant.id_restaurant);
 
     if (this.comments.length != 0) {
       this.getAverageAndNumber();
@@ -62,7 +62,7 @@ export default {
     getAboutRestaurant() {
       this.$router.push({
         name: "aboutRestaurant",
-        params: { id: this.restaurant.id_restaurante },
+        params: { id: this.restaurant.id_restaurant },
       });
     },
 

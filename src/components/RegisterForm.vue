@@ -92,7 +92,7 @@ export default {
         alert("PASSWORDS DIFERENTES");
       } else {
         const registerResponse = await usersService.registerUser({
-          user_name: this.username,
+          username: this.username,
           email: this.email,
           password: this.password
         });
@@ -114,11 +114,10 @@ export default {
             console.log(loginResponse)
           } else {
             this.$store.commit("LOGIN", {
-              id: loginResponse.id_utilizador,
-              admin: loginResponse.administrador,
-              username: loginResponse.user_name,
-              profilePic: loginResponse.foto,
-              preferences: loginResponse.tags,
+              id: loginResponse.id_user,
+              admin: loginResponse.admin,
+              username: loginResponse.username,
+              profilePic: loginResponse.profilePic,
               type: "client"
             });
 

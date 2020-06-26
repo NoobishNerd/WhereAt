@@ -48,15 +48,15 @@
             </span>
           </div>
           <select v-model="filter" id="filterSlt">
-            <option v-for="item in filters" v-bind:key="item.id_tag" :value="item.desc_tag">{{
-              item.desc_tag
+            <option v-for="item in filters" v-bind:key="item.id_tag" :value="item.tag_name">{{
+              item.tag_name
             }}</option>
           </select>
         </div>
         <div class="separator"></div>
         <div class="cards">
           <ul>
-            <li v-for="restaurant in restaurants" v-bind:key="restaurant.id_restaurante">
+            <li v-for="restaurant in restaurants" v-bind:key="restaurant.id_restaurant">
               <RestaurantCard :restaurant="restaurant"></RestaurantCard>
             </li>
           </ul>
@@ -73,7 +73,7 @@
             <ul>
               <li
                 v-for="restaurant in recommendation"
-                v-bind:key="restaurant.id + 'star'"
+                v-bind:key="restaurant.id_restaurant + 'star'"
               >
                 <RestaurantCard v-bind:restaurant="restaurant"></RestaurantCard>
               </li>
@@ -124,14 +124,14 @@ export default {
         if (this.filter == "") {
           return this.restaurantsStored.filter(restaurant =>
             restaurant.nome.toLowerCase().includes(this.searchText.toLowerCase()) ||
-            restaurant.desc_tag.toLowerCase().includes(this.searchText.toLowerCase()) ||
+            restaurant.tag_name.toLowerCase().includes(this.searchText.toLowerCase()) ||
             restaurant.localidade.toLowerCase().includes(this.searchText.toLowerCase()))           
         } else {
           return this.restaurantsStored.filter(restaurant =>
             (restaurant.nome.toLowerCase().includes(this.searchText.toLowerCase()) ||
-              restaurant.desc_tag.toLowerCase().includes(this.searchText.toLowerCase()) ||
+              restaurant.tag_name.toLowerCase().includes(this.searchText.toLowerCase()) ||
               restaurant.localidade.toLowerCase().includes(this.searchText.toLowerCase())) &&
-            restaurant.desc_tag.toLowerCase().includes(this.filter.toLowerCase()))
+            restaurant.tag_name.toLowerCase().includes(this.filter.toLowerCase()))
         }
       },
 
@@ -140,7 +140,7 @@ export default {
         //for each pref filter the array restaurant with the ones that have a pref as main tag
         this.recommendation = this.preferences.forEach(pref => {
           this.restaurants.filter(restaurant => {
-            pref == restaurant.desc_tag
+            pref == restaurant.tag_name
           });
         });
       } else {

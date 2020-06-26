@@ -10,13 +10,23 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
-      alert(responseData);
-      return responseData;
+      let translated = {
+        id_user: responseData.id_utilizador,
+        username: responseData.user_name,
+        email: responseData.email,
+        password: responseData.password,
+        admin: responseData.administrador,
+        profilePic: responseData.foto,
+        phone: responseData.numero_tel
+      }
+      alert(translated);
+      return translated;
     } else {
       throw Error(response);
     }
   },
 
+  //neste não é necesséio traduzir pk password e email são ambas palavras inglesas
   async getUser(data) {
     const response = await fetch(`${API_URL}utilizadores`, {
       method: "POST",
@@ -34,10 +44,17 @@ const usersService = {
       throw Error(response);
     }
   },
+
   async registerUser(data) {
+    let translated = {
+      user_name: data.username,
+      email: data.email,
+      password: data.password
+    }
+
     const response = await fetch(`${API_URL}criarUtilizadores`, {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify(translated),
       headers: {
         "Content-Type": "application/json",
       }
@@ -51,12 +68,20 @@ const usersService = {
       throw Error(response);
     }
   },
+
   async updateUser(data, id) {
-    // eslint-disable-next-line no-console
-    console.log(data)
+    let translated = {
+      user_name: data.username,
+      email: data.email,
+      password: data.password,
+      administrador: data.admin,
+      foto: data.profilePic,
+      numero_tel: data.phone
+    }
+
     const response = await fetch(`${API_URL}utilizadores/${id}`, {
       method: "PUT",
-      body: JSON.stringify(data),
+      body: JSON.stringify(translated),
       headers: {
         "Content-Type": "application/json",
       }
@@ -89,8 +114,17 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
-      alert(responseData);
-      return responseData;
+      let translated = []
+
+      responseData.forEach(tag => {
+        translated.push({
+          id_tag: tag.id_tag,
+          tag_name: tag.desc_tag,
+        })
+      });
+
+      alert(translated);
+      return translated;
     } else {
       throw Error(response);
     }
@@ -110,7 +144,7 @@ const usersService = {
     }
   },
 
-  async deletePhoto(id_user, id_tag) {
+  async deleteUserTag(id_user, id_tag) {
     const response = await fetch(`${API_URL}utilizadores/${id_user}/tags/${id_tag}`, {
       method: "DELETE",
     });
@@ -142,13 +176,27 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
-      alert(JSON.stringify(responseData));
-      return responseData;
+      let translated = {
+        id_restaurant: responseData.id_restaurante,
+        name: responseData.nome,
+        email: responseData.email,
+        password: responseData.password,
+        info: responseData.informacao,
+        profilePic: responseData.foto_perfil,
+        address: responseData.morada,
+        approval: responseData.aprovacao,
+        postalCode: responseData.cod_postal,
+        availability: responseData.disponibilidade
+      }
+      alert(translated);
+      return translated;
     } else {
       throw Error(response);
     }
   },
 
+
+  //neste não é necesséio traduzir pk password e email são ambas palavras inglesas
   async getRestaurant(data) {
     const response = await fetch(`${API_URL}restaurantes`, {
       method: "POST",
@@ -166,10 +214,20 @@ const usersService = {
       throw Error(response);
     }
   },
+
   async registerRestaurant(data) {
+    let translated = {
+      nome: data.name,
+      password: data.password,
+      morada: data.address,
+      cod_postal: data.postalCode,
+      localidade: data.local,
+      email: data.email
+    }
+
     const response = await fetch(`${API_URL}criarRestaurantes`, {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify(translated),
       headers: {
         "Content-Type": "application/json",
       },
@@ -183,10 +241,18 @@ const usersService = {
       throw Error(response);
     }
   },
+
   async updateRestaurant(data, id) {
+    let translated = {
+      foto_perfil: data.profilePic,
+      informacao: data.info,
+      aprovacao: data.approval,
+      disponibilidade: data.availability
+    }
+
     const response = await fetch(`${API_URL}restaurantes/${id}`, {
       method: "PUT",
-      body: JSON.stringify(data),
+      body: JSON.stringify(translated),
       headers: {
         "Content-Type": "application/json",
       }

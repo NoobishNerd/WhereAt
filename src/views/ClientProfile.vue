@@ -33,19 +33,19 @@
         <div class="col-sm-3" id="colPrl">
           <div class="text-center">
             <img
-              :src="user.foto"
+              :src="user.profilePic"
               class="rounded-circle"
               width="95px"
               height="95px"
             />
             <br />
-            <h5 class="pt-2" id="brownBoldText">{{ user.user_name }}</h5>
+            <h5 class="pt-2" id="brownBoldText">{{ user.username }}</h5>
             <button
               @click="changeUserImg"
               id="smallerButton"
               class="mt-2 py-2 px-3"
             >
-              Alterar Foto de Perfil
+              Alterar foto de Perfil
             </button>
           </div>
         </div>
@@ -53,7 +53,7 @@
           <ClientInfo :user="user" v-if="component == 'info'"> </ClientInfo>
           <input
             @click="call('adminAuth')"
-            v-if="component == 'history' && user.administrador == true"
+            v-if="component == 'history' && user.admin == true"
             type="button"
             value="Autorizar Restaurants"
             id="autorizeBtn"
@@ -61,7 +61,7 @@
           />
           <AdminAuth v-if="component == 'adminAuth'"></AdminAuth>
           <ClientHistory
-            :id="Number(user.id_utilizador)"
+            :id="Number(user.id_user)"
             v-if="component == 'history'"
           ></ClientHistory>
         </div>
@@ -103,16 +103,16 @@ export default {
       let newUserImg = prompt("Link da imagem:");
       if (newUserImg != "") {
        await usersService.updateUser({
-          user_name: this.user.user_name,
+          username: this.user.username,
           email: this.user.email,
           password: this.user.password,
-          administrador: this.user.administrador,
-          foto: newUserImg,
-          numero_tel: this.user.numero_tel
+          admin: this.user.admin,
+          profilePic: newUserImg,
+          phone: this.user.phone
         },
             this.$route.params.id,
         )
-            this.user.foto = newUserImg;
+            this.user.profilePic = newUserImg;
             this.$store.commit("CHANGE_USER_IMG", {profilePic: newUserImg});
       } else {
         alert("Coloque o link da imagem!");

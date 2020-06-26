@@ -3,8 +3,8 @@
         <h4 class="mt-3" style="color:#f17526">Categorias do restaurante</h4>
         <div class="row">
             <div class="col-sm-2 pt-3" v-for="tag in tags" v-bind:key="tag.id_tag">                        
-                <p v-if="tag.tag_principal == true" class="text-center main" style="color: white;">{{tag.desc_tag}}</p>
-                <p v-if="tag.tag_principal == false" class="text-center side">{{tag.desc_tag}}</p>
+                <p v-if="tag.tag_main == true" class="text-center main" style="color: white;">{{tag.tag_name}}</p>
+                <p v-if="tag.tag_main == false" class="text-center side">{{tag.tag_name}}</p>
             </div>
         </div>
     </div>

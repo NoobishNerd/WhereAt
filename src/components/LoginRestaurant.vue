@@ -68,10 +68,10 @@ export default {
         console.log(loginResponse)
       } else {
         this.$store.commit("LOGIN", {
-          id: loginResponse.id_restaurante,
+          id: loginResponse.id_restaurant,
           admin: 0,
-          username: loginResponse.nome,
-          profilePic: loginResponse.foto_perfil,
+          username: loginResponse.name,
+          profilePic: loginResponse.profilePic,
           type: "restaurant",
           
         });

@@ -5,14 +5,14 @@
     <div class="row">
       <div class="col-sm-12" >
         <h5 id="boldText">Nome de Utilizador</h5>
-        <input v-model="user.user_name" class="form-control" type="text"/>
+        <input v-model="user.username" class="form-control" type="text"/>
       </div>
     </div>
     <br />
     <div class="row">
       <div class="col-sm-12">
         <h5 id="boldText">Telemóvel</h5>
-        <input v-model="user.numero_tel" class="form-control" type="text" />
+        <input v-model="user.phone" class="form-control" type="text" />
       </div>
     </div>
     <br />
@@ -35,7 +35,7 @@
             <div class="col-sm-3 pr-0">
                 <label class="mt-2" for="addPrefSlt">Escolher Preferência:</label>
                 <select v-model="newPref" id="addPrefSlt" class="form-control">
-                    <option v-for="tag in allTags" v-bind:key="tag.id_tag" :value="tag.id_tag">{{tag}}</option>
+                    <option v-for="tag in allTags" v-bind:key="tag.id_tag" :value="tag.id_tag">{{tag.tag_name}}</option>
                 </select>
             </div>
             <div class="col-sm-1 mt-3 mr-5">
@@ -49,7 +49,7 @@
         <br>
         <div class="row">
             <div class="col-sm-3" v-for="tag in preferences" v-bind:key="tag.id_tag + 1000">                        
-                <p style="color:white" class="text-center pref">{{tag.desc_tag}}<span class="ml-2"><button @click="removePref(tag.id_tag)" id="addPrefBtn">X</button></span></p>
+                <p style="color:white" class="text-center pref">{{tag.tag_name}}<span class="ml-2"><button @click="removePref(tag.id_tag)" id="addPrefBtn">X</button></span></p>
             </div>
         </div>
   </div>
@@ -78,7 +78,7 @@ export default {
 
     this.allTags = await bookingService.getAllTags();
 
-    this.preferences = await usersService.getUserTags(this.user.id_utilizador);
+    this.preferences = await usersService.getUserTags(this.user.id_user);
   },
 
 
@@ -87,15 +87,15 @@ export default {
     async saveChanges() {
       await usersService.updateUser(
         {
-          user_name: this.user.user_name,
+          username: this.user.username,
           email: this.user.email,
           password: this.user.password,
-          administrador: this.user.administrador,
-          foto: this.user.foto,
-          numero_tel: this.user.numero_tel
+          admin: this.user.admin,
+          profilePic: this.user.profilePic,
+          phone: this.user.phone
         }
         ,
-        this.user.id_utilizador
+        this.user.id_user
       )
     },
 
@@ -103,17 +103,17 @@ export default {
 
     async addPref() {
       if (this.newPref != "") {
-        await usersService.addUserTag(this.user.id_utilizador, this.newPref);
+        await usersService.addUserTag(this.user.id_user, this.newPref);
         
-        this.preferences = await usersService.getUserTags(this.user.id_utilizador);
+        this.preferences = await usersService.getUserTags(this.user.id_user);
       }
 
     },
 
     async removePref(id) {
-      await usersService.deleteUserTag(this.user.id_utilizador, id);
+      await usersService.deleteUserTag(this.user.id_user, id);
       
-      this.preferences = await usersService.getUserTags(this.user.id_utilizador);
+      this.preferences = await usersService.getUserTags(this.user.id_user);
     }
   }
 } 

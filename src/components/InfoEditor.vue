@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-sm-10">
                 <label class="mt-2" for="exampleFormControlTextarea1">Editar Informação</label>
-                <textarea v-model="restaurant.informacao" class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+                <textarea v-model="restaurant.info" class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
             </div>
             <div class="col-sm-2 align-self-center">
                 <button @click="saveChanges" id="saveChangesBtn" class="py-4 px-2 mt-5 mr-3">Salvar Mudanças</button>
@@ -15,9 +15,9 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <h6 style="color:black"><strong>Endereço:</strong> {{restaurant.morada}}, {{restaurant.cod_postal}} {{restaurant.localidade}}</h6>          
-                <h6 style="color:black" class="mt-4" v-if="restaurant.informacao == ''">Ainda não adicionou informações adicionais</h6>
-                <h6 v-else class="mt-4" style="white-space: pre-wrap; color:black">{{restaurant.informacao}}</h6>
+                <h6 style="color:black"><strong>Endereço:</strong> {{restaurant.address}}, {{restaurant.postalCode}} {{restaurant.local}}</h6>          
+                <h6 style="color:black" class="mt-4" v-if="restaurant.info == ''">Ainda não adicionou informações adicionais</h6>
+                <h6 v-else class="mt-4" style="white-space: pre-wrap; color:black">{{restaurant.info}}</h6>
 
             </div>
         </div>
@@ -43,17 +43,17 @@
         methods: {
             async saveChanges() {
                 await usersService.updateRestaurant({
-                    id_restaurante: this.restaurant.id_restaurante,
-                    nome: this.restaurant.nome,
+                    id_restaurant: this.restaurant.id_restaurant,
+                    name: this.restaurant.name,
                     password: this.restaurant.password,
-                    foto_perfil: this.restaurant.foto_perfil,
-                    informacao: this.restaurant.informacao,
-                    morada: this.restaurant.morada,
-                    aprovacao: this.restaurant.aprovacao,
-                    cod_postal: this.restaurant.cod_postal,
-                    disponibilidade: this.restaurant.disponibilidade,
+                    profilePic: this.restaurant.profilePic,
+                    info: this.restaurant.info,
+                    address: this.restaurant.address,
+                    approval: this.restaurant.approval,
+                    postalCode: this.restaurant.postalCode,
+                    availability: this.restaurant.availability,
                     email: this.restaurant.email
-                }, this.restaurant.id_restaurante);
+                }, this.restaurant.id_restaurant);
             }
         }
 

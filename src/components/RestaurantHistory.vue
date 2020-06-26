@@ -2,18 +2,18 @@
   <div class="history container" v-if="reservations.length != 0">
     <br />
     <div v-if="reservations.length != 0">
-      <div v-for="reservation in reservations" v-bind:key="`${reservation.id_utilizador} ${reservation.id_mesa} ${reservation.data_hora}`">
-        <div v-if="reservation.confirmacao == 'p'" id="historyRow" class="row mb-3 mr-1 mt-2">
+      <div v-for="reservation in reservations" v-bind:key="`${reservation.id_user} ${reservation.id_table} ${reservation.date}`">
+        <div v-if="reservation.confirmation == 'p'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8">
             <div class="ml-5">
-              <p class="text-left pt-3 mb-0 mt-1">{{ reservation.data_hora }}</p>
+              <p class="text-left pt-3 mb-0 mt-1">{{ reservation.date }}</p>
               <p class="text-left mb-0">
-                Número de pessoas: {{ reservation.n_cadeiras }}
+                Número de pessoas: {{ reservation.capacity }}
               </p>
               <p class="text-left mb-0">
-                Utilizador: {{reservation.user_name}}
+                Utilizador: {{reservation.username}}
               </p>
-              <p class="text-left mb-0">Horas: {{ reservation.data_hora_reservada }}</p>
+              <p class="text-left mb-0">Horas: {{ reservation.date_booked }}</p>
 
               <br />
             </div>
@@ -24,22 +24,22 @@
               <div class="col-sm-4 pt-4 mt-3">
                 <img @click="
                     accept(
-                      reservation.id_utilizador,
-                      reservation.id_restaurante,
-                      reservation.id_mesa,
-                      reservation.data_hora_reservada,
-                      reservation.data_hora
+                      reservation.id_user,
+                      reservation.id_restaurant,
+                      reservation.id_table,
+                      reservation.date_booked,
+                      reservation.date
                     )
                   " src="../assets/Yes Icon Border.png" width="51px" style="cursor:pointer;" />
               </div>
               <div class="col-sm-4 pt-4 mt-3">
                 <img @click="
                     deny(
-                      reservation.id_utilizador,
-                      reservation.id_restaurante,
-                      reservation.id_mesa,
-                      reservation.data_hora_reservada,
-                      reservation.data_hora
+                      reservation.id_user,
+                      reservation.id_restaurant,
+                      reservation.id_table,
+                      reservation.date_booked,
+                      reservation.date
                     )
                   " src="../assets/No Icon Border.png" width="46px" style="cursor:pointer;" />
               </div>
@@ -48,17 +48,17 @@
           </div>
         </div>
 
-        <div v-if="reservation.confirmacao == 'c'" id="historyRow" class="row mb-3 mr-1 mt-2">
+        <div v-if="reservation.confirmation == 'c'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8">
             <div class="ml-5">
-              <p class="text-left pt-3 mb-0 mt-1">{{ reservation.data_hora }}</p>
+              <p class="text-left pt-3 mb-0 mt-1">{{ reservation.date }}</p>
               <p class="text-left mb-0">
-                Número de pessoas: {{ reservation.n_cadeiras }}
+                Número de pessoas: {{ reservation.capacity }}
               </p>
               <p class="text-left mb-0">
-                Utilizador: {{reservation.user_name}}
+                Utilizador: {{reservation.username}}
               </p>
-              <p class="text-left mb-0">Horas: {{ reservation.data_hora_reservada }}</p>
+              <p class="text-left mb-0">Horas: {{ reservation.date_booked }}</p>
 
               <br />
             </div>
@@ -76,19 +76,19 @@
               <div class="col-sm-3"></div>
               <div class="col-sm-9 mt-2">
                 <div class="custom-control custom-checkbox mr-sm-2">
-                  <div v-if="reservation.presenca == false">
+                  <div v-if="reservation.presence == false">
                     <input @click="
                         checkPresence(
-                      reservation.id_utilizador,
-                      reservation.id_restaurante,
-                      reservation.id_mesa,
-                      reservation.data_hora_reservada,
-                      reservation.data_hora
+                      reservation.id_user,
+                      reservation.id_restaurant,
+                      reservation.id_table,
+                      reservation.date_booked,
+                      reservation.date
                         )
                       " type="checkbox" class="custom-control-input" id="customControlAutosizing" />
                     <label class="custom-control-label" for="customControlAutosizing">Presença</label>
                   </div>
-                  <div v-if="reservation.presenca == true">
+                  <div v-if="reservation.presence == true">
                     <!-- meter um simbolo -->
                     <span style="color:white">Presente</span>
                   </div>
@@ -101,14 +101,14 @@
         <div v-if="reservation.confirmation == 'd'" id="historyRow" class="row mb-3 mr-1 mt-2">
           <div class="col-sm-8">
             <div class="ml-5">
-              <p class="text-left pt-3 mb-0 mt-1">{{ reservation.data_hora }}</p>
+              <p class="text-left pt-3 mb-0 mt-1">{{ reservation.date }}</p>
               <p class="text-left mb-0">
-                Número de pessoas: {{ reservation.n_cadeiras }}
+                Número de pessoas: {{ reservation.capacity }}
               </p>
               <p class="text-left mb-0">
-                Utilizador: {{reservation.user_name}}
+                Utilizador: {{reservation.username}}
               </p>
-              <p class="text-left mb-0">Horas: {{ reservation.data_hora_reservada }}</p>
+              <p class="text-left mb-0">Horas: {{ reservation.date_booked }}</p>
 
               <br />
             </div>
@@ -153,39 +153,39 @@ export default {
 
   methods: {
     async getUsername(id) {
-      return await usersService.getUserById(id).user_name;
+      return await usersService.getUserById(id).username;
     },
 
-    async accept(id_u, id_rest, id_m, data_hora_reservada, data_hora) {
+    async accept(id_u, id_rest, id_m, date_booked, date) {
       await bookingService.updateReservation({
-        data_hora_reservada: data_hora_reservada,
-        data_hora: data_hora,
-        newConfirmacao: "c",
-        newPresenca: 0
+        date_booked: date_booked,
+        date: date,
+        newconfirmation: "c",
+        newpresence: 0
       }, id_rest, id_u, id_m);
       
       this.reservations = await bookingService.getRestaurantReservations(this.id);
     },
 
-    async deny(id_u, id_rest, id_m, data_hora_reservada, data_hora) {
+    async deny(id_u, id_rest, id_m, date_booked, date) {
       
       await bookingService.updateReservation({
-        data_hora_reservada: data_hora_reservada,
-        data_hora: data_hora,
-        newConfirmacao: "d",
-        newPresenca: 0
+        date_booked: date_booked,
+        date: date,
+        newconfirmation: "d",
+        newpresence: 0
       }, id_rest, id_u, id_m);
       
       this.reservations = await bookingService.getRestaurantReservations(this.id);
     },
 
-   async checkPresence(id_u, id_rest, id_m, data_hora_reservada, data_hora) {
+   async checkPresence(id_u, id_rest, id_m, date_booked, date) {
       
       await bookingService.updateReservation({
-        data_hora_reservada: data_hora_reservada,
-        data_hora: data_hora,
-        newConfirmacao: "c",
-        newPresenca: 1
+        date_booked: date_booked,
+        date: date,
+        newconfirmation: "c",
+        newpresence: 1
       }, id_rest, id_u, id_m);
 
       this.reservations = await bookingService.getRestaurantReservations(this.id);

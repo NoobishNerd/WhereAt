@@ -67,10 +67,10 @@ export default {
         console.log(loginResponse)
       } else {
         this.$store.commit("LOGIN", {
-          id: loginResponse.id_utilizador,
-          admin: loginResponse.administrador,
-          username: loginResponse.user_name,
-          profilePic: loginResponse.foto,
+          id: loginResponse.id_user,
+          admin: loginResponse.admin,
+          username: loginResponse.username,
+          profilePic: loginResponse.profilePic,
           type: "client",
           
         });

@@ -27,29 +27,29 @@ export default {
     available: "",
     restaurant: {}
   }),
-  created: async function(){
+  created: async function () {
     this.id = this.$route.params.id;
     this.restaurant = await usersService.getRestaurantById(this.id);
-    this.available = this.restaurant.disponibilidade;
+    this.available = this.restaurant.availability;
   },
-  
+
 
   methods: {
-    async goOnVacation(newStatus){
+    async goOnVacation(newStatus) {
       await usersService.updateRestaurant({
-                    id_restaurante: this.restaurant.id_restaurante,
-                    nome: this.restaurant.nome,
-                    password: this.restaurant.password,
-                    foto_perfil: this.restaurant.foto_perfil,
-                    informacao: this.restaurant.informacao,
-                    morada: this.restaurant.morada,
-                    aprovacao: this.restaurant.aprovacao,
-                    cod_postal: this.restaurant.cod_postal,
-                    disponibilidade: newStatus,
-                    email: this.restaurant.email
+        id_restaurant: this.restaurant.id_restaurant,
+        name: this.restaurant.name,
+        password: this.restaurant.password,
+        profilePic: this.restaurant.profilePic,
+        info: this.restaurant.info,
+        address: this.restaurant.address,
+        approval: this.restaurant.approval,
+        postalCode: this.restaurant.postalCode,
+        availability: newStatus,
+        email: this.restaurant.email
       }, this.id);
       this.restaurant = await usersService.getRestaurantById(this.id);
-      this.available = this.restaurant.disponibilidade;
+      this.available = this.restaurant.availability;
     }
   }
 }
