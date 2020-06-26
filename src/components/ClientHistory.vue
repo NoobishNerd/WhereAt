@@ -106,7 +106,6 @@
 
 <script>
 import bookingService from '../api/booking';
-import usersService from '../api/users';
 
 export default {
   data: () => ({

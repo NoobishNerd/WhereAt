@@ -65,8 +65,9 @@
           </div>
           <div class="col-sm-4" id="orangeRow" style="background-color:#F17526">
             <div class="row">
-              <div class="col-sm-4"></div>
-              <div class="col-sm-6 pt-4 mt-3 ml-1">
+              <div class="col-sm-4">              
+              </div>
+              <div class="col-sm-6 pt-4 mt-3 ml-2">
                 <img src="../assets/Yes Icon Border.png" width="51px" />
               </div>
               <div class="col-sm-2"></div>
@@ -75,7 +76,7 @@
               <div class="col-sm-3"></div>
               <div class="col-sm-9 mt-2">
                 <div class="custom-control custom-checkbox mr-sm-2">
-                  <div v-if="reservation.presence == false">
+                  <div v-if="reservation.presenca == false">
                     <input @click="
                         checkPresence(
                       reservation.id_utilizador,
@@ -87,9 +88,9 @@
                       " type="checkbox" class="custom-control-input" id="customControlAutosizing" />
                     <label class="custom-control-label" for="customControlAutosizing">Presença</label>
                   </div>
-                  <div v-if="reservation.presence == true">
+                  <div v-if="reservation.presenca == true">
                     <!-- meter um simbolo -->
-                    <tiny>Presente</tiny>
+                    <span style="color:white">Presente</span>
                   </div>
                 </div>
               </div>
@@ -228,5 +229,8 @@ export default {
   font-family: "Raleway";
 
   cursor: pointer;
+}
+#customControlAutosizing{
+  border: none;
 }
 </style>
