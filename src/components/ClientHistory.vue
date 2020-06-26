@@ -15,12 +15,12 @@
           </div>
           <div class="col-sm-4" id="orangeRow" style="background-color:#F17526">
             <div class="row">
+              <div class="col-sm-4">
+              </div>
+              <div class="col-sm-6 pt-4 mt-3 ">
+               <img src="../assets/help.png" width="63px">
+              </div>
               <div class="col-sm-2">
-              </div>
-              <div class="col-sm-4 pt-4 mt-3">
-               
-              </div>
-              <div class="col-sm-4 pt-4 mt-3">
                 
               </div>
               <div class="col-sm-2">
