@@ -112,7 +112,7 @@ export default {
     confPassword: "",
     address: "",
     postalCode: "",
-    local: "",
+    local: ""
   }),
 
   methods: {
@@ -127,18 +127,24 @@ export default {
           address: this.address,
           postalCode: this.postalCode,
           local: this.local,
-          email: this.email,
+          email: this.email
         });
 
-        if (registerResponse == "Conta criada com Sucesso | Código Postal criado com Sucesso") {
+        if (
+          registerResponse ==
+          "Conta criada com Sucesso | Código Postal criado com Sucesso"
+        ) {
           swal.fire("Registo", registerResponse, "success");
           //login
           const loginResponse = await usersService.getRestaurant({
             email: this.email,
-            password: this.password,
+            password: this.password
           });
 
-          if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
+          if (
+            loginResponse == "Credenciais Inválidos" ||
+            loginResponse == "Password Errada"
+          ) {
             swal.fire("Erro", loginResponse, "error");
           } else {
             this.$store.commit("LOGIN", {
@@ -146,20 +152,25 @@ export default {
               admin: 0,
               username: loginResponse.name,
               profilePic: loginResponse.profilePic,
-              type: "restaurant",
-
+              type: "restaurant"
             });
             swal.fire("Login", `Bem-vindo ${loginResponse.name}`, "success");
             this.$router.replace("/");
           }
-        } else if (registerResponse == "Conta criada com Sucesso | Código Postal já Existente") {
-          //login         
+        } else if (
+          registerResponse ==
+          "Conta criada com Sucesso | Código Postal já Existente"
+        ) {
+          //login
           const loginResponse = await usersService.getRestaurant({
             email: this.email,
-            password: this.password,
+            password: this.password
           });
 
-          if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
+          if (
+            loginResponse == "Credenciais Inválidos" ||
+            loginResponse == "Password Errada"
+          ) {
             swal.fire("Erro", loginResponse, "error");
           } else {
             this.$store.commit("LOGIN", {
@@ -167,13 +178,11 @@ export default {
               admin: 0,
               username: loginResponse.name,
               profilePic: loginResponse.profilePic,
-              type: "restaurant",
-
+              type: "restaurant"
             });
             swal.fire("Login", `Bem-vindo ${loginResponse.name}`, "success");
             this.$router.replace("/");
           }
-
         } else {
           swal.fire("Erro", registerResponse, "error");
         }
@@ -182,10 +191,10 @@ export default {
 
     goToLoginRestaurant() {
       this.$router.push({
-        path: "/loginRestaurant",
+        path: "/loginRestaurant"
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

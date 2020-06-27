@@ -3,7 +3,6 @@
     <navbar></navbar>
     <router-view />
   </div>
-
 </template>
 
 <script>
@@ -11,7 +10,7 @@ import NavBar from "@/components/NavBar.vue";
 
 export default {
   components: {
-    navbar: NavBar,
+    navbar: NavBar
   },
 
   created: function() {
@@ -24,5 +23,4 @@ export default {
 html * {
   font-family: "Raleway";
 }
-
 </style>

@@ -76,7 +76,7 @@ import ClientHistory from "@/components/ClientHistory.vue";
 import AdminAuth from "@/components/AdminAuth.vue";
 import swal from "sweetalert2";
 
-import usersService from '../api/users.js';
+import usersService from "../api/users.js";
 
 export default {
   name: "profileClient",
@@ -85,7 +85,7 @@ export default {
     user: {}
   }),
 
-  created: async function () {
+  created: async function() {
     this.user = await usersService.getUserById(this.$route.params.id);
   },
 
@@ -101,14 +101,13 @@ export default {
     },
 
     async changeUserImg() {
-      const {
-        value: url
-      } = await swal.fire({
-        input: 'url',
-        inputPlaceholder: 'Enter the URL'
-      })
+      const { value: url } = await swal.fire({
+        input: "url",
+        inputPlaceholder: "Enter the URL"
+      });
       if (url) {
-        await usersService.updateUser({
+        await usersService.updateUser(
+          {
             username: this.user.username,
             email: this.user.email,
             password: this.user.password,
@@ -116,8 +115,8 @@ export default {
             profilePic: url,
             phone: this.user.phone
           },
-          this.$route.params.id,
-        )
+          this.$route.params.id
+        );
         this.user.profilePic = url;
         this.$store.commit("CHANGE_USER_IMG", {
           profilePic: url
@@ -128,8 +127,8 @@ export default {
   components: {
     ClientInfo,
     ClientHistory,
-    AdminAuth,
-  },
+    AdminAuth
+  }
 };
 </script>
 
@@ -163,7 +162,7 @@ export default {
   text-decoration: none;
   display: inline-block;
   font-size: 15px;
-    -webkit-border-radius: 2px 2px 2px 2px;
+  -webkit-border-radius: 2px 2px 2px 2px;
   border-radius: 2px 2px 2px 2px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -195,5 +194,4 @@ export default {
 #colPrl {
   margin-top: 50px;
 }
-
 </style>

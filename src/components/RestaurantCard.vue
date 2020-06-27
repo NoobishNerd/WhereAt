@@ -14,12 +14,12 @@
             {{ restaurant.name }}
           </h5>
           <div v-if="restaurant.tag_name != ''">
-            <p  class="card-text text-left">
+            <p class="card-text text-left">
               {{ restaurant.tag_name }}
             </p>
           </div>
           <div v-else>
-            <p  class="card-text text-left">
+            <p class="card-text text-left">
               ~~~~~~~~~~~~
             </p>
           </div>
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import restaurantService from '../api/restaurants';
+import restaurantService from "../api/restaurants";
 export default {
   name: "RestaurantCard",
 
@@ -46,12 +46,14 @@ export default {
   props: {
     restaurant: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
 
   mounted: async function() {
-    this.comments = await restaurantService.getRestaurantComments(this.restaurant.id_restaurant);
+    this.comments = await restaurantService.getRestaurantComments(
+      this.restaurant.id_restaurant
+    );
 
     if (this.comments.length != 0) {
       this.getAverageAndNumber();
@@ -62,7 +64,7 @@ export default {
     getAboutRestaurant() {
       this.$router.push({
         name: "aboutRestaurant",
-        params: { id: this.restaurant.id_restaurant },
+        params: { id: this.restaurant.id_restaurant }
       });
     },
 
@@ -73,8 +75,8 @@ export default {
       }
       //average de ratings
       this.rate = (this.rate / this.num_comments).toFixed(1);
-    },
-  },
+    }
+  }
 };
 </script>
 

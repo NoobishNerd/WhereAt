@@ -35,7 +35,9 @@
             width="95px"
             height="95px"
           />
-          <h5 class="pt-2 text-center" id="brownBoldText">{{ restaurant.name }}</h5>
+          <h5 class="pt-2 text-center" id="brownBoldText">
+            {{ restaurant.name }}
+          </h5>
           <button @click="changeRestaurantImg" id="smallerButton" class="mt-2">
             Alterar Foto de Perfil
           </button>
@@ -46,9 +48,7 @@
             v-if="component == 'history'"
           >
           </RestaurantHistory>
-          <RestaurantVacations
-            v-if="component == 'vacations'"
-          >
+          <RestaurantVacations v-if="component == 'vacations'">
           </RestaurantVacations>
         </div>
       </div>
@@ -60,7 +60,7 @@ import RestaurantHistory from "@/components/RestaurantHistory.vue";
 import RestaurantVacations from "@/components/RestaurantVacations.vue";
 import swal from "sweetalert2";
 
-import usersService from '../api/users.js';
+import usersService from "../api/users.js";
 export default {
   name: "profileRestaurant",
   data: () => ({
@@ -73,10 +73,11 @@ export default {
       phone: ""
     }
   }),
-  created: async function () {
-    this.restaurant = await usersService.getRestaurantById(this.$route.params.id);
+  created: async function() {
+    this.restaurant = await usersService.getRestaurantById(
+      this.$route.params.id
+    );
   },
-
 
   methods: {
     call(newComponent) {
@@ -90,14 +91,13 @@ export default {
     },
 
     async changeRestaurantImg() {
-       const {
-        value: url
-      } = await swal.fire({
-        input: 'url',
-        inputPlaceholder: 'Enter the URL'
-      })
+      const { value: url } = await swal.fire({
+        input: "url",
+        inputPlaceholder: "Enter the URL"
+      });
       if (url) {
-        await usersService.updateRestaurant({
+        await usersService.updateRestaurant(
+          {
             id_restaurant: this.restaurant.id_restaurant,
             name: this.restaurant.name,
             password: this.restaurant.password,
@@ -109,8 +109,8 @@ export default {
             availability: this.restaurant.availability,
             email: this.restaurant.email
           },
-          this.$route.params.id,
-        )
+          this.$route.params.id
+        );
         this.restaurant.profilePic = url;
         this.$store.commit("CHANGE_USER_IMG", {
           profilePic: url
@@ -126,17 +126,16 @@ export default {
 </script>
 
 <style>
-#containerRest{
+#containerRest {
   border: none;
   border-radius: 10px 10px 10px 10px;
-
 }
 
-#colRest{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
+#colRest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .text {
@@ -174,7 +173,7 @@ justify-content:center;
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
-    -webkit-border-radius: 2px 2px 2px 2px;
+  -webkit-border-radius: 2px 2px 2px 2px;
   border-radius: 2px 2px 2px 2px;
 }
 </style>

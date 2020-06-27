@@ -28,7 +28,9 @@ const routes = [
     path: "/loginRestaurant",
     name: "loginRestaurant",
     component: () =>
-      import(/* webpackChunkName: "loginRes" */ "../components/LoginRestaurant.vue")
+      import(
+        /* webpackChunkName: "loginRes" */ "../components/LoginRestaurant.vue"
+      )
   },
   {
     //register cliente e restaurante

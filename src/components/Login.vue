@@ -1,7 +1,9 @@
 <template>
   <div class="loginCli">
     <div class="header">
-      <router-link to="/"><font-awesome-icon icon="chevron-circle-left" /></router-link>
+      <router-link to="/"
+        ><font-awesome-icon icon="chevron-circle-left"
+      /></router-link>
     </div>
     <div class="login d-flex align-items-center justify-content-center ">
       <div id="formContent" class="">
@@ -29,8 +31,6 @@
               <span class="psw">
                 <router-link to="/register">Não está registado?</router-link>
               </span>
-
-
             </form>
           </div>
         </div>
@@ -40,14 +40,14 @@
 </template>
 
 <script>
-import usersService from '../api/users.js';
+import usersService from "../api/users.js";
 import swal from "sweetalert2";
 
 export default {
   name: "Login",
   data: () => ({
     email: "",
-    password: "",
+    password: ""
   }),
 
   methods: {
@@ -58,7 +58,10 @@ export default {
         password: this.password
       });
 
-      if (loginResponse == "Credenciais Inválidas" || loginResponse == "Password Errada") {
+      if (
+        loginResponse == "Credenciais Inválidas" ||
+        loginResponse == "Password Errada"
+      ) {
         // eslint-disable-next-line no-console
         swal.fire("Erro", loginResponse, "error");
       } else {
@@ -184,7 +187,7 @@ input[type="text"]:placeholder {
   margin-left: 15px;
   text-decoration: none;
 }
-footer[data-v-40ab164b]{
+footer[data-v-40ab164b] {
   display: none;
 }
 </style>

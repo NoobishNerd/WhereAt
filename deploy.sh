@@ -8,5 +8,5 @@ cd dist
 git init
 git add -A
 git commit -m 'deploy'
-git push -f ttps://github.com/ZeBitzz/whereat_page.git master
+git push -f https://github.com/ZeBitzz/whereat_page.git master
 cd - 

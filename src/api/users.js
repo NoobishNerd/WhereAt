@@ -1,8 +1,6 @@
 import API_URL from "./config.js";
 
 const usersService = {
-
-
   async getUserById(id) {
     const response = await fetch(`${API_URL}utilizadores/${id}`, {
       method: "GET"
@@ -17,8 +15,8 @@ const usersService = {
         password: responseData.password,
         admin: responseData.administrador,
         profilePic: responseData.foto,
-        phone: responseData.numero_tel       
-      }
+        phone: responseData.numero_tel
+      };
       return translated;
     } else {
       throw Error(response);
@@ -31,26 +29,29 @@ const usersService = {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       }
     });
 
     if (response.ok) {
       const responseData = await response.json();
-      if(responseData == "Credenciais Inválidas" || responseData == "Password Errada"){
-        return responseData
-      }else{
-      let translated = {
-        id_user: responseData.id_utilizador,
-        username: responseData.user_name,
-        email: responseData.email,
-        password: responseData.password,
-        admin: responseData.administrador,
-        profilePic: responseData.foto,
-        phone: responseData.numero_tel
+      if (
+        responseData == "Credenciais Inválidas" ||
+        responseData == "Password Errada"
+      ) {
+        return responseData;
+      } else {
+        let translated = {
+          id_user: responseData.id_utilizador,
+          username: responseData.user_name,
+          email: responseData.email,
+          password: responseData.password,
+          admin: responseData.administrador,
+          profilePic: responseData.foto,
+          phone: responseData.numero_tel
+        };
+        return translated;
       }
-      return translated;
-    }
     } else {
       throw Error(response);
     }
@@ -61,13 +62,13 @@ const usersService = {
       user_name: data.username,
       email: data.email,
       password: data.password
-    }
+    };
 
     const response = await fetch(`${API_URL}criarUtilizadores`, {
       method: "POST",
       body: JSON.stringify(translated),
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       }
     });
 
@@ -87,13 +88,13 @@ const usersService = {
       administrador: data.admin,
       foto: data.profilePic,
       numero_tel: data.phone
-    }
+    };
 
     const response = await fetch(`${API_URL}utilizadores/${id}`, {
       method: "PUT",
       body: JSON.stringify(translated),
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       }
     });
 
@@ -105,7 +106,7 @@ const usersService = {
   },
   async deleteUser(id) {
     const response = await fetch(`${API_URL}utilizadores/${id}`, {
-      method: "DELETE",
+      method: "DELETE"
     });
 
     if (response.ok) {
@@ -124,13 +125,13 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
-      let translated = []
+      let translated = [];
 
       responseData.forEach(tag => {
         translated.push({
           id_tag: tag.id_tag,
-          tag_name: tag.desc_tag,
-        })
+          tag_name: tag.desc_tag
+        });
       });
       return translated;
     } else {
@@ -139,9 +140,12 @@ const usersService = {
   },
 
   async addUserTag(id_user, id_tag) {
-    const response = await fetch(`${API_URL}utilizadores/${id_user}/tags/${id_tag}`, {
-      method: "POST"
-    });
+    const response = await fetch(
+      `${API_URL}utilizadores/${id_user}/tags/${id_tag}`,
+      {
+        method: "POST"
+      }
+    );
 
     if (response.ok) {
       const responseData = await response.json();
@@ -152,9 +156,12 @@ const usersService = {
   },
 
   async deleteUserTag(id_user, id_tag) {
-    const response = await fetch(`${API_URL}utilizadores/${id_user}/tags/${id_tag}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `${API_URL}utilizadores/${id_user}/tags/${id_tag}`,
+      {
+        method: "DELETE"
+      }
+    );
 
     if (response.ok) {
       return response.json();
@@ -162,18 +169,6 @@ const usersService = {
       throw Error(response);
     }
   },
-
-
-
-
-
-
-
-
-
-
-
-
 
   //---------------------------------Restaurant OPERATIONS----------------------------------------
   async getRestaurantById(id) {
@@ -195,13 +190,12 @@ const usersService = {
         postalCode: responseData.cod_postal,
         availability: responseData.disponibilidade,
         local: responseData.localidade
-      }
+      };
       return translated;
     } else {
       throw Error(response);
     }
   },
-
 
   //neste não é necesséio traduzir pk password e email são ambas palavras inglesas
   async getRestaurant(data) {
@@ -209,29 +203,32 @@ const usersService = {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       }
     });
 
     if (response.ok) {
       const responseData = await response.json();
-      if(responseData == "Credenciais Inválidos" || responseData == "Password Errada"){
-        return responseData
-      }else{
-      let translated = {
-        id_restaurant: responseData.id_restaurante,
-        name: responseData.nome,
-        email: responseData.email,
-        password: responseData.password,
-        info: responseData.informacao,
-        profilePic: responseData.foto_perfil,
-        address: responseData.morada,
-        approval: responseData.aprovacao,
-        postalCode: responseData.cod_postal,
-        availability: responseData.disponibilidade
+      if (
+        responseData == "Credenciais Inválidos" ||
+        responseData == "Password Errada"
+      ) {
+        return responseData;
+      } else {
+        let translated = {
+          id_restaurant: responseData.id_restaurante,
+          name: responseData.nome,
+          email: responseData.email,
+          password: responseData.password,
+          info: responseData.informacao,
+          profilePic: responseData.foto_perfil,
+          address: responseData.morada,
+          approval: responseData.aprovacao,
+          postalCode: responseData.cod_postal,
+          availability: responseData.disponibilidade
+        };
+        return translated;
       }
-      return translated;
-    }
     } else {
       throw Error(response);
     }
@@ -245,14 +242,14 @@ const usersService = {
       cod_postal: data.postalCode,
       localidade: data.local,
       email: data.email
-    }
+    };
 
     const response = await fetch(`${API_URL}criarRestaurantes`, {
       method: "POST",
       body: JSON.stringify(translated),
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     });
 
     if (response.ok) {
@@ -269,13 +266,13 @@ const usersService = {
       informacao: data.info,
       aprovacao: data.approval,
       disponibilidade: data.availability
-    }
+    };
 
     const response = await fetch(`${API_URL}restaurantes/${id}`, {
       method: "PUT",
       body: JSON.stringify(translated),
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       }
     });
 
@@ -287,7 +284,7 @@ const usersService = {
   },
   async deleteRestaurant(id) {
     const response = await fetch(`${API_URL}restaurantes/${id}`, {
-      method: "DELETE",
+      method: "DELETE"
     });
 
     if (response.ok) {
@@ -295,7 +292,7 @@ const usersService = {
     } else {
       throw Error(response);
     }
-  },
+  }
 };
 
 export default usersService;

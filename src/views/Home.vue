@@ -48,15 +48,21 @@
             </span>
           </div>
           <select v-model="filter" id="filterSlt">
-            <option v-for="item in filters" v-bind:key="item.id_tag" :value="item.tag_name">{{
-              item.tag_name
-            }}</option>
+            <option
+              v-for="item in filters"
+              v-bind:key="item.id_tag"
+              :value="item.tag_name"
+              >{{ item.tag_name }}</option
+            >
           </select>
         </div>
         <div class="separator"></div>
         <div class="cards">
           <ul>
-            <li v-for="restaurant in restaurants" v-bind:key="restaurant.id_restaurant">
+            <li
+              v-for="restaurant in restaurants"
+              v-bind:key="restaurant.id_restaurant"
+            >
               <RestaurantCard :restaurant="restaurant"></RestaurantCard>
             </li>
           </ul>
@@ -82,7 +88,7 @@
         </div>
       </div>
     </div>
-          <div id="footer">
+    <div id="footer">
       <Footer></Footer>
     </div>
   </div>
@@ -91,9 +97,9 @@
 <script>
 // @ is an alias to /src
 import RestaurantCard from "@/components/RestaurantCard.vue";
-import restaurantService from '../api/restaurants';
-import bookingService from '../api/booking';
-import usersService from '../api/users';
+import restaurantService from "../api/restaurants";
+import bookingService from "../api/booking";
+import usersService from "../api/users";
 import Footer from "@/components/Footer.vue";
 
 export default {
@@ -109,13 +115,14 @@ export default {
     recommendation: "undefined"
   }),
 
-
-  mounted: async function () {
+  mounted: async function() {
     this.restaurantsStored = await restaurantService.getRestaurantCards();
     this.restaurants = await restaurantService.getRestaurantCards();
-      if(this.$store.state.loggedUser.id != ""){
-        this.preferences = await usersService.getUserTags(this.$store.state.loggedUser.id);
-      }
+    if (this.$store.state.loggedUser.id != "") {
+      this.preferences = await usersService.getUserTags(
+        this.$store.state.loggedUser.id
+      );
+    }
     this.filters = await bookingService.getAllTags();
     await this.getRecommendation();
   },
@@ -126,42 +133,60 @@ export default {
     },
 
     search() {
-        // COMO REMOVER ACENTOS??
-        if (this.filter == "") {
-          return this.restaurantsStored.filter(restaurant =>
-            restaurant.nome.toLowerCase().includes(this.searchText.toLowerCase()) ||
-            restaurant.tag_name.toLowerCase().includes(this.searchText.toLowerCase()) ||
-            restaurant.localidade.toLowerCase().includes(this.searchText.toLowerCase()))           
-        } else {
-          return this.restaurantsStored.filter(restaurant =>
-            (restaurant.nome.toLowerCase().includes(this.searchText.toLowerCase()) ||
-              restaurant.tag_name.toLowerCase().includes(this.searchText.toLowerCase()) ||
-              restaurant.localidade.toLowerCase().includes(this.searchText.toLowerCase())) &&
-            restaurant.tag_name.toLowerCase().includes(this.filter.toLowerCase()))
-        }
-      },
+      // COMO REMOVER ACENTOS??
+      if (this.filter == "") {
+        return this.restaurantsStored.filter(
+          restaurant =>
+            restaurant.nome
+              .toLowerCase()
+              .includes(this.searchText.toLowerCase()) ||
+            restaurant.tag_name
+              .toLowerCase()
+              .includes(this.searchText.toLowerCase()) ||
+            restaurant.localidade
+              .toLowerCase()
+              .includes(this.searchText.toLowerCase())
+        );
+      } else {
+        return this.restaurantsStored.filter(
+          restaurant =>
+            (restaurant.nome
+              .toLowerCase()
+              .includes(this.searchText.toLowerCase()) ||
+              restaurant.tag_name
+                .toLowerCase()
+                .includes(this.searchText.toLowerCase()) ||
+              restaurant.localidade
+                .toLowerCase()
+                .includes(this.searchText.toLowerCase())) &&
+            restaurant.tag_name
+              .toLowerCase()
+              .includes(this.filter.toLowerCase())
+        );
+      }
+    },
 
     async getRecommendation() {
       if (this.$store.state.logged != false) {
         //for each pref filter the array restaurant with the ones that have a pref as main tag
         this.recommendation = [];
-         this.preferences.forEach(pref => {
-         this.restaurants.forEach(restaurant => {
-           if(pref.tag_name == restaurant.tag_name){
-              this.recommendation.push(restaurant)
-           }           
+        this.preferences.forEach(pref => {
+          this.restaurants.forEach(restaurant => {
+            if (pref.tag_name == restaurant.tag_name) {
+              this.recommendation.push(restaurant);
+            }
           });
         });
       } else {
         this.recommendation = "undefined";
       }
-    },
+    }
   },
 
   components: {
     RestaurantCard,
     Footer
-  },
+  }
 };
 </script>
 
@@ -170,7 +195,7 @@ export default {
   font-family: "Raleway";
   color: #966227;
   margin-bottom: 5px;
-  white-space:nowrap;
+  white-space: nowrap;
 }
 
 .img-wrapper {

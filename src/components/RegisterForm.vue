@@ -69,25 +69,22 @@
     </div>
   </div>
 </template>
-<script >
-import usersService from '../api/users.js';
+<script>
+import usersService from "../api/users.js";
 import swal from "sweetalert2";
 
 export default {
-
   name: "RegisterForm",
   data: () => ({
     id: 0,
     username: "",
     email: "",
     password: "",
-    confPassword: "",
+    confPassword: ""
   }),
 
   methods: {
     async addUser() {
-
-
       //check se a password foi confirmada
       if (this.password != this.confPassword) {
         swal.fire("Erro", "Passwords Diferentes", "error");
@@ -106,7 +103,10 @@ export default {
             password: this.password
           });
 
-          if (loginResponse == "Credenciais Inválidas" || loginResponse == "Password Diferentes") {
+          if (
+            loginResponse == "Credenciais Inválidas" ||
+            loginResponse == "Password Diferentes"
+          ) {
             swal.fire("Erro", loginResponse, "error");
           } else {
             this.$store.commit("LOGIN", {
@@ -117,14 +117,18 @@ export default {
               type: "client"
             });
             this.$router.replace("/");
-            swal.fire("Registo", `Bem-vindo ${loginResponse.username}`, "success");
+            swal.fire(
+              "Registo",
+              `Bem-vindo ${loginResponse.username}`,
+              "success"
+            );
           }
         } else {
           swal.fire("Erro", registerResponse, "error");
         }
       }
     }
-  },
+  }
 };
 </script>
 

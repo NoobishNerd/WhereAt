@@ -2,19 +2,16 @@
   <!--Footer-->
   <footer>
     <div class="container">
-      <div id="footerContent" class="row d-flex text-center justify-content-center mb-md-0 mb-4">
+      <div
+        id="footerContent"
+        class="row d-flex text-center justify-content-center mb-md-0 mb-4"
+      >
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 ">
           <h6 class="text-uppercase mb-4 font-weight-bold ">Contactos</h6>
-          
-          <p>
-            <i class="fas fa-home mr-3"></i> Av. VillaGarcia de Arosa 1075
-          </p>
-          <p>
-            <i class="fas fa-envelope mr-3"></i> 9180270@esmad.ipp.pt
-          </p>
-          <p>
-            <i class="fas fa-phone mr-3"></i> +351 968 907 643
-          </p>
+
+          <p><i class="fas fa-home mr-3"></i> Av. VillaGarcia de Arosa 1075</p>
+          <p><i class="fas fa-envelope mr-3"></i> 9180270@esmad.ipp.pt</p>
+          <p><i class="fas fa-phone mr-3"></i> +351 968 907 643</p>
         </div>
       </div>
 
@@ -33,18 +30,17 @@ export default {
   props: {
     msg: String
   }
-}
+};
 </script>
 
-
 <style scoped>
-span{
+span {
   font-family: Lobster;
   font-size: 24px;
 }
 @font-face {
-    font-family: Lobster;
-    src: url(/fonts/Lobster_1.3.otf);
+  font-family: Lobster;
+  src: url(/fonts/Lobster_1.3.otf);
 }
 html {
   position: relative;
@@ -128,12 +124,12 @@ hr {
   margin: 0% 40% 0% 40%;
 }
 
-#footerContent{
+#footerContent {
   margin: 0 auto;
   text-align: center;
 }
 
-i{
+i {
   margin-left: 10px;
 }
 </style>

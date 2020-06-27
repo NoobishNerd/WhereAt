@@ -1,7 +1,9 @@
 <template>
   <div class="loginRes">
-        <div class="header">
-      <router-link to="/"><font-awesome-icon icon="chevron-circle-left" /></router-link>
+    <div class="header">
+      <router-link to="/"
+        ><font-awesome-icon icon="chevron-circle-left"
+      /></router-link>
     </div>
     <div class="login d-flex align-items-center justify-content-center ">
       <div id="formContent" class="">
@@ -31,7 +33,6 @@
                   >Não está registado?</router-link
                 >
               </span>
-
             </form>
           </div>
         </div>
@@ -41,14 +42,14 @@
 </template>
 
 <script>
-import usersService from '../api/users.js';
+import usersService from "../api/users.js";
 import swal from "sweetalert2";
 
 export default {
   name: "LoginRestaurant",
   data: () => ({
     email: "",
-    password: "",
+    password: ""
   }),
 
   methods: {
@@ -59,7 +60,10 @@ export default {
         password: this.password
       });
 
-      if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
+      if (
+        loginResponse == "Credenciais Inválidos" ||
+        loginResponse == "Password Errada"
+      ) {
         swal.fire("Erro", loginResponse, "error");
       } else {
         this.$store.commit("LOGIN", {
@@ -67,15 +71,13 @@ export default {
           admin: 0,
           username: loginResponse.name,
           profilePic: loginResponse.profilePic,
-          type: "restaurant",
-
+          type: "restaurant"
         });
         swal.fire("Login", `Bem-vindo ${loginResponse.name}`, "success");
         this.$router.replace("/");
-
       }
     }
-  },
+  }
 };
 </script>
 
@@ -100,7 +102,6 @@ a {
 }
 
 /* STRUCTURE */
-
 
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;

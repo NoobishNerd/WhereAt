@@ -4,15 +4,18 @@ const bookingService = {
   async getNonAvailabeTablesIds(data, id) {
     let translated = {
       data_hora_reservada: data.date_booked
-    }
+    };
 
-    const response = await fetch(`${API_URL}reservas/nonAvailableTablesIds/${id}`, {
-      method: "POST",
-      body: JSON.stringify(translated),
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${API_URL}reservas/nonAvailableTablesIds/${id}`,
+      {
+        method: "POST",
+        body: JSON.stringify(translated),
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-    });
+    );
 
     if (response.ok) {
       const responseData = await response.json();
@@ -29,14 +32,13 @@ const bookingService = {
       id_restaurante: data.id_restaurant,
       id_mesa: data.id_table,
       data_hora: data.date
-    }
-
+    };
 
     const response = await fetch(`${API_URL}reservas`, {
       method: "POST",
       body: JSON.stringify(translated),
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       }
     });
 
@@ -49,13 +51,16 @@ const bookingService = {
   },
 
   async getUserReservations(id) {
-    const response = await fetch(`${API_URL}reservas/allUtilizadorReservas/${id}`, {
-      method: "GET",
-    });
+    const response = await fetch(
+      `${API_URL}reservas/allUtilizadorReservas/${id}`,
+      {
+        method: "GET"
+      }
+    );
 
     if (response.ok) {
       const responseData = await response.json();
-      let translated = []
+      let translated = [];
 
       responseData.forEach(reservation => {
         translated.push({
@@ -68,7 +73,7 @@ const bookingService = {
           presence: reservation.presenca,
           name: reservation.nome,
           capacity: reservation.n_cadeiras
-        })
+        });
       });
       return translated;
     } else {
@@ -76,13 +81,16 @@ const bookingService = {
     }
   },
   async getRestaurantReservations(id) {
-    const response = await fetch(`${API_URL}reservas/allRestauranteReservas/${id}`, {
-      method: "GET",
-    });
+    const response = await fetch(
+      `${API_URL}reservas/allRestauranteReservas/${id}`,
+      {
+        method: "GET"
+      }
+    );
 
     if (response.ok) {
       const responseData = await response.json();
-      let translated = []
+      let translated = [];
 
       responseData.forEach(reservation => {
         translated.push({
@@ -95,7 +103,7 @@ const bookingService = {
           presence: reservation.presenca,
           username: reservation.user_name,
           capacity: reservation.n_cadeiras
-        })
+        });
       });
       return translated;
     } else {
@@ -109,16 +117,18 @@ const bookingService = {
       data_hora: data.date,
       newConfirmacao: data.confirmation,
       newPresenca: data.presence
-    }
+    };
 
-
-    const response = await fetch(`${API_URL}reservas/restaurantes/${id_res}/utilizadores/${id_user}/mesas/${id_table}`, {
-      method: "PUT",
-      body: JSON.stringify(translated),
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${API_URL}reservas/restaurantes/${id_res}/utilizadores/${id_user}/mesas/${id_table}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(translated),
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-    });
+    );
 
     if (response.ok) {
       return response.json();
@@ -128,9 +138,12 @@ const bookingService = {
   },
 
   async deleteReservation(id_res, id_user, id_table) {
-    const response = await fetch(`${API_URL}reservas/restaurantes/${id_res}/utilizadores/${id_user}/mesas/${id_table}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `${API_URL}reservas/restaurantes/${id_res}/utilizadores/${id_user}/mesas/${id_table}`,
+      {
+        method: "DELETE"
+      }
+    );
 
     if (response.ok) {
       return response.json();
@@ -138,13 +151,6 @@ const bookingService = {
       throw Error(response);
     }
   },
-
-
-
-
-
-
-
 
   async getAllTags() {
     const response = await fetch(`http://localhost:3000/tags`, {
@@ -154,19 +160,18 @@ const bookingService = {
     if (response.ok) {
       const responseData = await response.json();
 
-      let translated = []
+      let translated = [];
       responseData.forEach(tag => {
         translated.push({
           id_tag: tag.id_tag,
           tag_name: tag.desc_tag
-        })
+        });
       });
       return translated;
     } else {
       throw Error(response);
     }
-  },
-}
-
+  }
+};
 
 export default bookingService;
