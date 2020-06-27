@@ -140,9 +140,12 @@ export default {
     async getRecommendation() {
       if (this.$store.state.logged != false) {
         //for each pref filter the array restaurant with the ones that have a pref as main tag
-        this.recommendation = this.preferences.forEach(pref => {
-          this.restaurants.filter(restaurant => {
-            pref == restaurant.tag_name
+        this.recommendation = [];
+         this.preferences.forEach(pref => {
+         this.restaurants.forEach(restaurant => {
+           if(pref.tag_name == restaurant.tag_name){
+              this.recommendation.push(restaurant)
+           }           
           });
         });
       } else {
