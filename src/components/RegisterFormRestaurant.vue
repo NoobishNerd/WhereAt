@@ -130,7 +130,7 @@ export default {
           email: this.email,
         });
 
-        if (registerResponse == "Conta criada com sucesso") {
+        if (registerResponse == "Conta criada com Sucesso | Código Postal criado com Sucesso") {
           swal.fire("Registo", registerResponse, "success");
           //login
           const loginResponse = await usersService.getRestaurant({
@@ -153,7 +153,7 @@ export default {
             this.$router.replace("/");
           }
         } else if (registerResponse == "Conta criada com Sucesso | Código Postal já Existente") {
-          //login
+          //login         
           const loginResponse = await usersService.getRestaurant({
             email: this.email,
             password: this.password,
