@@ -209,7 +209,8 @@ const usersService = {
         address: responseData.morada,
         approval: responseData.aprovacao,
         postalCode: responseData.cod_postal,
-        availability: responseData.disponibilidade
+        availability: responseData.disponibilidade,
+        local: responseData.localidade
       }
             // eslint-disable-next-line no-console
             console.log("getRestaurantById")
