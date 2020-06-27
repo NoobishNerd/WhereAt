@@ -49,7 +49,7 @@
         <br>
         <div class="row">
             <div class="col-sm-3" v-for="tag in preferences" v-bind:key="tag.id_tag + 1000">                        
-                <p style="color:white" class="text-center pref">{{tag.tag_name}}<span class="ml-2"><button @click="removePref(tag.id_tag)" id="addPrefBtn">X</button></span></p>
+                <p style="color:white" class="text-center pref">{{tag.tag_name}}<span class="ml-2"><button @click="removePref(tag.id_tag)" id="addPrefBtn1">X</button></span></p>
             </div>
         </div>
   </div>
@@ -133,13 +133,14 @@ export default {
   border-style: solid;
   border-width: 4px;
   border-color: #f17526;
-
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
   background-color: #f17526;
 }
 
 
 #smallerButton {
-  background-color: #F17526;
+  background-color: #302f30;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -148,6 +149,8 @@ export default {
   display: inline-block;
   font-size: 15px;
   margin: 0px 20px 20px 20px;
+    -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
@@ -156,6 +159,23 @@ export default {
 }
 
 #addPrefBtn {
+  background-color: #302f30;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+    -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
+}
+#addPrefBtn1 {
   background-color: #F17526;
   border: none;
   color: white;
@@ -163,6 +183,8 @@ export default {
   text-decoration: none;
   display: inline-block;
   font-size: 15px;
+    -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;

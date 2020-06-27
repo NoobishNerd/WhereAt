@@ -79,6 +79,7 @@ export default {
     }
     #sucess{
         background-color:#f17526;
+        
     }
     #danger{
         background-color:#444343;

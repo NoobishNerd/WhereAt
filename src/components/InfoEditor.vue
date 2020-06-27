@@ -62,14 +62,14 @@
 
 <style scoped>
     #saveChangesBtn {
-        background-color: #f17526;
+        background-color: #302f30;
         border: none;
         color: #ffffff;
         text-align: center;
         text-decoration: none;
         font-size: 15px;
-        -webkit-border-radius: 5px 5px 5px 5px;
-        border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
         -webkit-transition: all 0.3s ease-in-out;
         -moz-transition: all 0.3s ease-in-out;
         -ms-transition: all 0.3s ease-in-out;

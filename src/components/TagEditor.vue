@@ -83,14 +83,14 @@ export default {
   border-radius: 40px 40px 40px 40px;  
 }
 #changeMainBtn {
-    background-color: #f17526;
+    background-color: #302f30;
     border: none;
     color: #ffffff;
 
     text-decoration: none;
 
-    -webkit-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;
@@ -99,13 +99,12 @@ export default {
 }
 
 #addTagBtn {
-    background-color: #f17526;
+    background-color: #302f30;
     border: none;
     color: #ffffff;
-
+      -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
     text-decoration: none;
-    -webkit-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;
@@ -117,11 +116,9 @@ export default {
     background-color: #f17526;
     border: none;
     color: #ffffff;
-
     text-decoration: none;
-
-    -webkit-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;
@@ -132,11 +129,9 @@ export default {
 #removeTagBtnWhite {
     background-color: white;
     border: none;
-
     text-decoration: none;
-
-    -webkit-border-radius: 5px 5px 5px 5px;
-    border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;

@@ -213,14 +213,14 @@ export default {
   color: aliceblue
 }
     #commentBtn {
-        background-color: #f17526;
+        background-color: #302f30;
         border: none;
         color: #ffffff;
         text-align: center;
         text-decoration: none;
         font-size: 14px;
-        -webkit-border-radius: 3px 3px 3px 3px;
-        border-radius: 3px 3px 3px 3px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
         -webkit-transition: all 0.3s ease-in-out;
         -moz-transition: all 0.3s ease-in-out;
         -ms-transition: all 0.3s ease-in-out;
@@ -232,8 +232,8 @@ export default {
         text-align: center;
         text-decoration: none;
         font-size: 14px;
-        -webkit-border-radius: 3px 3px 3px 3px;
-        border-radius: 3px 3px 3px 3px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
         -webkit-transition: all 0.3s ease-in-out;
         -moz-transition: all 0.3s ease-in-out;
         -ms-transition: all 0.3s ease-in-out;

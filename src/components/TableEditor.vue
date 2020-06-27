@@ -74,17 +74,15 @@ export default {
 }
 
 #addButtontables {
-  background-color: #f17526;
+  background-color: #302f30;
   border: none;
   color: #ffffff;
   padding: 10px 60px;
   text-align: center;
   text-decoration: none;
-
   font-size: 15px;
-
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
   margin: 100px 0px 40px 0px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -93,17 +91,16 @@ export default {
   transition: all 0.3s ease-in-out;
 }
 #removeButtontables {
-  background-color: #f17526;
+  background-color: #302f30;
   border: none;
   color: #ffffff;
-  padding: 10px 65px;
+  padding: 10px 61px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 15px;
-
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
   margin: 70px 0px 40px 0px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;

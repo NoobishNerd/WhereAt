@@ -144,7 +144,7 @@ export default {
 
 <style scoped>
     #addItemBtn {
-        background-color: #f17526;
+        background-color: #302f30;
         border: none;
         color: #ffffff;
         padding: 10px 60px;

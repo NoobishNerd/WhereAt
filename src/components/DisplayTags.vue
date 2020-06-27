@@ -38,14 +38,16 @@ export default {
   border-style: solid;
   border-width: 2px;
   border-color: #f17526;
-
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
   background-color: #f17526;
 }
 .side {
   border-style: solid;
   border-width: 2px;
   border-color: #f17526;    
-
+    -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
 }
 
 </style>

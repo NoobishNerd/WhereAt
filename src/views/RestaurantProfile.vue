@@ -160,7 +160,7 @@ justify-content:center;
 }
 
 #smallerButton {
-  background-color: #f17526;
+  background-color: #302f30;
   border: none;
   color: white;
   padding: 10px 45px;
@@ -174,5 +174,7 @@ justify-content:center;
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+    -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
 }
 </style>

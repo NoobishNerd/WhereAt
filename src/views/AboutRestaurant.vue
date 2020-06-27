@@ -313,7 +313,7 @@ img {
 }
 
 #smallerButton {
-  background-color: #f17526;
+  background-color: #302f30;
   border: none;
   color: #ffffff;
   padding: 10px 45px;
@@ -322,6 +322,8 @@ img {
   display: inline-block;
   font-size: 15px;
   margin: 10px 20px 40px 20px;
+    -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;

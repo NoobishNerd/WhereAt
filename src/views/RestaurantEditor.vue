@@ -210,7 +210,7 @@ html * {
 }
 
 #smallerButton {
-  background-color: #f17526;
+  background-color: #302f30;
   border: none;
   color: #ffffff;
   padding: 10px 45px;
@@ -218,8 +218,8 @@ html * {
   text-decoration: none;
   display: inline-block;
   font-size: 15px;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
   margin: 10px 20px 40px 20px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -234,17 +234,17 @@ html * {
 }
 
 #windowPhoto {
-  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.25);
     height:auto;
     object-fit: cover;
 }
 
 #windowCarrousel {
-  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.25);
 }
 
 #windowReservation {
@@ -267,9 +267,9 @@ html * {
 }
 
 #finalCrate {
-  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.25);
   border: none;
 }
 
@@ -326,43 +326,39 @@ html * {
 }
 
 #manageBtn {
-  background-color: white;
-  border-color: #f17526;
-  border-radius: 5px;
-  color: #f17526;
+    background-color: #302f30;
+  border-radius: 2px;
+  color: white;
   text-decoration: none;
   transition: all 0.2s;
+    -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
 }
 
 
-#manageBtn:hover{
-  color: white;
-  background-color: #f17526;
-}
+
 
 
 #addPhotoBtn {
-  background-color: white;
-  border-color: #f17526;
-  border-radius: 5px;
-  color: #f17526;
+
+    background-color: #302f30;
+  border-radius: 2px;
+  color: white;
   text-decoration: none;
   transition: all 0.2s;
+    -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
 }
 
-#addPhotoBtn:hover{
-  color: white;
-  background-color: #f17526;
-}
 
 
 #removePhotoBtn {
-  background-color: #f17526;
+  background-color: #302f30;
   border: none;
   color: #ffffff;
   text-decoration: none;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;

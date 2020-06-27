@@ -66,7 +66,7 @@ export default {
 }
 
 #smallerButton {
-  background-color: #F17526;
+  background-color: #302f30;
   border: none;
   color: white;
   padding: 10px 20px;
@@ -75,6 +75,8 @@ export default {
   display: inline-block;
   font-size: 15px;
   margin: 0px 20px 20px 20px;
+    -webkit-border-radius: 2px 2px 2px 2px;
+  border-radius: 2px 2px 2px 2px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
