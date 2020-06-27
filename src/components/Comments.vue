@@ -186,7 +186,7 @@ export default {
         )
         if (commentResponse != "Não tem Permissão para Comentar neste Restaurante") {
           this.comments.push({
-            foto: this.loggedUser.profilePic,
+            profilePic: this.loggedUser.profilePic,
             username: this.loggedUser.username,
             id_user: this.loggedUser.id,
             comment: this.newComment,
