@@ -93,6 +93,7 @@ import InfoEditor from "@/components/InfoEditor.vue"
 
 import usersService from '../api/users.js';
 import restaurantService from '../api/restaurants.js';
+import swal from "sweetalert2";
 
 export default {
   data: () => ({
@@ -149,7 +150,7 @@ export default {
           });
           resultsMap.setMapTypeId("roadmap")
         } else {
-          alert("Geocode didn't work because of: " + status)
+          swal.fire("Geocode", "Geocode didn't work because of: " + status, "warning");
         }
       });
     },

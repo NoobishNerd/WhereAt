@@ -19,9 +19,6 @@ const restaurantService = {
                     capacity: table.n_cadeiras
                 })
             });
-
-            // eslint-disable-next-line no-console
-            console.log(translated);
             return translated;
         } else {
             throw Error(response);
@@ -43,8 +40,6 @@ const restaurantService = {
 
         if (response.ok) {
             const responseData = await response.json();
-            // eslint-disable-next-line no-console
-            console.log(responseData);
             return responseData;
         } else {
             throw Error(response);
@@ -87,8 +82,6 @@ const restaurantService = {
                     profilePic: comment.foto
                 })
             });
-            // eslint-disable-next-line no-console
-            console.log(translated);
             return translated;
         } else {
             throw Error(response);
@@ -154,8 +147,6 @@ const restaurantService = {
                     category: dish.desc_categoria
                 })
             });
-            // eslint-disable-next-line no-console
-            console.log(translated);
             return translated;
         } else {
             throw Error(response);
@@ -180,8 +171,6 @@ const restaurantService = {
 
         if (response.ok) {
             const responseData = await response.json();
-            // eslint-disable-next-line no-console
-            console.log(responseData);
             return responseData;
         } else {
             throw Error(response);
@@ -218,8 +207,6 @@ const restaurantService = {
                     srcLink: photo.link_foto,
                 })
             });
-            // eslint-disable-next-line no-console
-            console.log(translated);
             return translated;
         } else {
             throw Error(response);
@@ -241,8 +228,6 @@ const restaurantService = {
 
         if (response.ok) {
             const responseData = await response.json();
-            // eslint-disable-next-line no-console
-            console.log(responseData);
             return responseData;
         } else {
             throw Error(response);
@@ -281,8 +266,6 @@ const restaurantService = {
                     tag_main: tag.tag_principal
                 })
             });
-            // eslint-disable-next-line no-console
-            console.log(translated);
             return translated;
         } else {
             throw Error(response);
@@ -304,8 +287,6 @@ const restaurantService = {
 
         if (response.ok) {
             const responseData = await response.json();
-            // eslint-disable-next-line no-console
-            console.log(responseData);
             return responseData;
         } else {
             throw Error(response);
@@ -358,8 +339,6 @@ const restaurantService = {
                     local: card.localidade
                 })
             });
-            // eslint-disable-next-line no-console
-            console.log(translated);
             return translated;
         } else {
             throw Error(response);

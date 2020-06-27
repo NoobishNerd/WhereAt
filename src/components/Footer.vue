@@ -2,19 +2,10 @@
   <!--Footer-->
   <footer>
     <div class="container">
-      <div id="upperRow" class="row text-center d-flex justify-content-center pt-5 mb-3">
-        <div class="col-md-2 mb-3">
-          <h6 class="text-uppercase font-weight-bold">
-            <router-link to="/" class="footer-link">Home</router-link>
-          </h6>
-        </div>
-      </div>
-
-      <hr />
-
       <div id="footerContent" class="row d-flex text-center justify-content-center mb-md-0 mb-4">
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 ">
           <h6 class="text-uppercase mb-4 font-weight-bold ">Contactos</h6>
+          
           <p>
             <i class="fas fa-home mr-3"></i> Av. VillaGarcia de Arosa 1075
           </p>
@@ -113,7 +104,6 @@ h4 {
 h6 {
   font-size: 16px;
   padding-top: 5%;
-  padding-bottom: 5%;
 }
 
 a {
@@ -135,7 +125,7 @@ hr {
 }
 
 #hr2 {
-  margin: 0% 35% 0% 35%;
+  margin: 0% 40% 0% 40%;
 }
 
 #footerContent{

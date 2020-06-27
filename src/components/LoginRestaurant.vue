@@ -42,6 +42,7 @@
 
 <script>
 import usersService from '../api/users.js';
+import swal from "sweetalert2";
 
 export default {
   name: "LoginRestaurant",
@@ -53,19 +54,13 @@ export default {
   methods: {
     async login() {
       //login
-      usersService.getRestaurant({
-        email: this.email,
-        password: this.password
-      });
-
       const loginResponse = await usersService.getRestaurant({
         email: this.email,
         password: this.password
       });
 
       if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
-        // eslint-disable-next-line no-console
-        console.log(loginResponse)
+        swal.fire("Erro", loginResponse, "error");
       } else {
         this.$store.commit("LOGIN", {
           id: loginResponse.id_restaurant,
@@ -73,9 +68,9 @@ export default {
           username: loginResponse.name,
           profilePic: loginResponse.profilePic,
           type: "restaurant",
-          
+
         });
-        
+        swal.fire("Login", `Bem-vindo ${loginResponse.name}`, "success");
         this.$router.replace("/");
 
       }

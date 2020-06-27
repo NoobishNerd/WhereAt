@@ -82,6 +82,9 @@
         </div>
       </div>
     </div>
+          <div id="footer">
+      <Footer></Footer>
+    </div>
   </div>
 </template>
 
@@ -91,6 +94,7 @@ import RestaurantCard from "@/components/RestaurantCard.vue";
 import restaurantService from '../api/restaurants';
 import bookingService from '../api/booking';
 import usersService from '../api/users';
+import Footer from "@/components/Footer.vue";
 
 export default {
   name: "home",
@@ -156,6 +160,7 @@ export default {
 
   components: {
     RestaurantCard,
+    Footer
   },
 };
 </script>

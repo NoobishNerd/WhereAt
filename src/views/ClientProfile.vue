@@ -74,6 +74,7 @@
 import ClientInfo from "@/components/ClientInfo.vue";
 import ClientHistory from "@/components/ClientHistory.vue";
 import AdminAuth from "@/components/AdminAuth.vue";
+import swal from "sweetalert2";
 
 import usersService from '../api/users.js';
 
@@ -86,8 +87,6 @@ export default {
 
   created: async function () {
     this.user = await usersService.getUserById(this.$route.params.id);
-    // eslint-disable-next-line no-console
-    console.log(this.user)
   },
 
   methods: {
@@ -102,24 +101,29 @@ export default {
     },
 
     async changeUserImg() {
-      let newUserImg = prompt("Link da imagem:");
-      if (newUserImg != "") {
-       await usersService.updateUser({
-          username: this.user.username,
-          email: this.user.email,
-          password: this.user.password,
-          admin: this.user.admin,
-          profilePic: newUserImg,
-          phone: this.user.phone
-        },
-            this.$route.params.id,
+      const {
+        value: url
+      } = await swal.fire({
+        input: 'url',
+        inputPlaceholder: 'Enter the URL'
+      })
+      if (url) {
+        await usersService.updateUser({
+            username: this.user.username,
+            email: this.user.email,
+            password: this.user.password,
+            admin: this.user.admin,
+            profilePic: url,
+            phone: this.user.phone
+          },
+          this.$route.params.id,
         )
-            this.user.profilePic = newUserImg;
-            this.$store.commit("CHANGE_USER_IMG", {profilePic: newUserImg});
-      } else {
-        alert("Coloque o link da imagem!");
+        this.user.profilePic = url;
+        this.$store.commit("CHANGE_USER_IMG", {
+          profilePic: url
+        });
       }
-    },
+    }
   },
   components: {
     ClientInfo,

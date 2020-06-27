@@ -41,6 +41,7 @@
 
 <script>
 import usersService from '../api/users.js';
+import swal from "sweetalert2";
 
 export default {
   name: "Login",
@@ -52,11 +53,6 @@ export default {
   methods: {
     async login() {
       //login
-      usersService.getUser({
-        email: this.email,
-        password: this.password
-      });
-
       const loginResponse = await usersService.getUser({
         email: this.email,
         password: this.password
@@ -64,23 +60,20 @@ export default {
 
       if (loginResponse == "Credenciais Inválidas" || loginResponse == "Password Errada") {
         // eslint-disable-next-line no-console
-        console.log(loginResponse)
+        swal.fire("Erro", loginResponse, "error");
       } else {
         this.$store.commit("LOGIN", {
           id: loginResponse.id_user,
           admin: loginResponse.admin,
           username: loginResponse.username,
           profilePic: loginResponse.profilePic,
-          type: "client",
-          
+          type: "client"
         });
-        // eslint-disable-next-line no-console
-        console.log(loginResponse)
         this.$router.replace("/");
-
+        swal.fire("Login", `Bem-vindo ${loginResponse.username}`, "success");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -190,5 +183,8 @@ input[type="text"]:placeholder {
   font-size: 2rem;
   margin-left: 15px;
   text-decoration: none;
+}
+footer[data-v-40ab164b]{
+  display: none;
 }
 </style>

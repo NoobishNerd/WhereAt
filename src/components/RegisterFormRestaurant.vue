@@ -17,7 +17,7 @@
                   type="text"
                   class="form-control"
                   id="registerName"
-                  placeholder="name do Restaurante"
+                  placeholder="Nome do Restaurante"
                   required
                   v-model="username"
                 />
@@ -28,7 +28,7 @@
                   class="form-control"
                   id="registerEmail"
                   aria-describedby="emailHelp"
-                  placeholder="Endereço Email"
+                  placeholder="Endereço de Email"
                   required
                   v-model="email"
                 />
@@ -59,7 +59,7 @@
                   type="text"
                   class="form-control"
                   id="address"
-                  placeholder="address"
+                  placeholder="Morada"
                   required
                   v-model="address"
                 />
@@ -77,7 +77,7 @@
                   type="text"
                   class="form-control"
                   id="local"
-                  placeholder="local"
+                  placeholder="Localidade"
                   required
                   v-model="local"
                 />
@@ -100,6 +100,7 @@
 
 <script>
 import usersService from "../api/users.js";
+import swal from "sweetalert2";
 
 export default {
   name: "RegisterFormRestaurant",
@@ -118,7 +119,7 @@ export default {
     async addUser() {
       //check se a password foi confirmada
       if (this.password != this.confPassword) {
-        alert("PASSWORDS DIFERENTES");
+        swal.fire("Erro", "Passwords Diferentes", "error");
       } else {
         const registerResponse = await usersService.registerRestaurant({
           name: this.username,
@@ -130,31 +131,51 @@ export default {
         });
 
         if (registerResponse == "Conta criada com sucesso") {
+          swal.fire("Registo", registerResponse, "success");
           //login
-          usersService.getRestaurant({
-            email: this.email,
-            password: this.password,
-          });
-
           const loginResponse = await usersService.getRestaurant({
             email: this.email,
             password: this.password,
           });
 
           if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
-            // eslint-disable-next-line no-console
-            console.log(loginResponse)
+            swal.fire("Erro", loginResponse, "error");
           } else {
             this.$store.commit("LOGIN", {
               id: loginResponse.id_restaurant,
-              admin: loginResponse.admin,
+              admin: 0,
               username: loginResponse.name,
               profilePic: loginResponse.profilePic,
               type: "restaurant",
-            });
 
+            });
+            swal.fire("Login", `Bem-vindo ${loginResponse.name}`, "success");
             this.$router.replace("/");
           }
+        } else if (registerResponse == "Conta criada com Sucesso | Código Postal já Existente") {
+          //login
+          const loginResponse = await usersService.getRestaurant({
+            email: this.email,
+            password: this.password,
+          });
+
+          if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
+            swal.fire("Erro", loginResponse, "error");
+          } else {
+            this.$store.commit("LOGIN", {
+              id: loginResponse.id_restaurant,
+              admin: 0,
+              username: loginResponse.name,
+              profilePic: loginResponse.profilePic,
+              type: "restaurant",
+
+            });
+            swal.fire("Login", `Bem-vindo ${loginResponse.name}`, "success");
+            this.$router.replace("/");
+          }
+
+        } else {
+          swal.fire("Erro", registerResponse, "error");
         }
       }
     },

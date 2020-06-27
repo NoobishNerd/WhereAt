@@ -37,8 +37,6 @@ export default {
     }),
     created: async function () {
         this.restaurants = await restaurantService.getAllRestaurants();
-        // eslint-disable-next-line no-console
-        console.log(this.restaurants)
     },
 
     methods: {

@@ -133,6 +133,7 @@
 
 <script>
 import restaurantService from '../api/restaurants.js';
+import swal from "sweetalert2";
 
 export default {
   name: "Comments",
@@ -170,12 +171,10 @@ export default {
 
     async addComment() {
       if (this.newRating == "") {
-        alert("Por favor avalie o restaurante!")
+        swal.fire("Comentário", "Por favor avalie o restaurante!", "warning");
       } else if (this.loggedUser.type == "restaurant") {
-        alert("Contas restaurante não podem comentar")
+        swal.fire("Comentário", "Contas restaurante não podem comentar!", "warning");
       } else {
-        // eslint-disable-next-line no-console
-        console.log(this.loggedUser.id)
         let commentResponse = await restaurantService.addComment({
             id_user: this.loggedUser.id,
             comment: this.newComment,
@@ -194,7 +193,7 @@ export default {
             date: this.getSystemDate()
           })
         } else {
-          alert(commentResponse)
+          swal.fire("Comentários", commentResponse, "error");
         }
       }
       this.newComment = "";

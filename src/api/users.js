@@ -19,10 +19,6 @@ const usersService = {
         profilePic: responseData.foto,
         phone: responseData.numero_tel       
       }
-      // eslint-disable-next-line no-console
-      console.log("getUserById")
-      // eslint-disable-next-line no-console
-      console.log(translated);
       return translated;
     } else {
       throw Error(response);
@@ -41,6 +37,9 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
+      if(responseData == "Credenciais Inválidas" || responseData == "Password Errada"){
+        return responseData
+      }else{
       let translated = {
         id_user: responseData.id_utilizador,
         username: responseData.user_name,
@@ -50,11 +49,8 @@ const usersService = {
         profilePic: responseData.foto,
         phone: responseData.numero_tel
       }
-      // eslint-disable-next-line no-console
-      console.log("getUser")
-      // eslint-disable-next-line no-console
-      console.log(JSON.stringify(translated));
       return translated;
+    }
     } else {
       throw Error(response);
     }
@@ -77,10 +73,6 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
-            // eslint-disable-next-line no-console
-            console.log("registerUser")
-      // eslint-disable-next-line no-console
-      console.log(responseData);
       return responseData;
     } else {
       throw Error(response);
@@ -140,10 +132,6 @@ const usersService = {
           tag_name: tag.desc_tag,
         })
       });
-            // eslint-disable-next-line no-console
-            console.log("getUserTags")
-      // eslint-disable-next-line no-console
-      console.log(translated);
       return translated;
     } else {
       throw Error(response);
@@ -157,10 +145,6 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
-            // eslint-disable-next-line no-console
-            console.log("addUserTag")
-      // eslint-disable-next-line no-console
-      console.log(responseData);
       return responseData;
     } else {
       throw Error(response);
@@ -212,10 +196,6 @@ const usersService = {
         availability: responseData.disponibilidade,
         local: responseData.localidade
       }
-            // eslint-disable-next-line no-console
-            console.log("getRestaurantById")
-      // eslint-disable-next-line no-console
-      console.log(translated);
       return translated;
     } else {
       throw Error(response);
@@ -235,6 +215,9 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
+      if(responseData == "Credenciais Inválidos" || responseData == "Password Errada"){
+        return responseData
+      }else{
       let translated = {
         id_restaurant: responseData.id_restaurante,
         name: responseData.nome,
@@ -247,11 +230,8 @@ const usersService = {
         postalCode: responseData.cod_postal,
         availability: responseData.disponibilidade
       }
-       // eslint-disable-next-line no-console
-      console.log("getRestaurant")
-      // eslint-disable-next-line no-console
-      console.log(translated);
       return translated;
+    }
     } else {
       throw Error(response);
     }
@@ -277,10 +257,6 @@ const usersService = {
 
     if (response.ok) {
       const responseData = await response.json();
-            // eslint-disable-next-line no-console
-            console.log("registerRestaurant")
-      // eslint-disable-next-line no-console
-      console.log(responseData);
       return responseData;
     } else {
       throw Error(response);

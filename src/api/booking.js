@@ -16,8 +16,6 @@ const bookingService = {
 
     if (response.ok) {
       const responseData = await response.json();
-      // eslint-disable-next-line no-console
-      console.log(responseData);
       return responseData;
     } else {
       throw Error(response);
@@ -44,8 +42,6 @@ const bookingService = {
 
     if (response.ok) {
       const responseData = await response.json();
-      // eslint-disable-next-line no-console
-      console.log(responseData);
       return responseData;
     } else {
       throw Error(response);
@@ -74,8 +70,6 @@ const bookingService = {
           capacity: reservation.n_cadeiras
         })
       });
-      // eslint-disable-next-line no-console
-      console.log(translated);
       return translated;
     } else {
       throw Error(response);
@@ -103,8 +97,6 @@ const bookingService = {
           capacity: reservation.n_cadeiras
         })
       });
-      // eslint-disable-next-line no-console
-      console.log(translated);
       return translated;
     } else {
       throw Error(response);
@@ -169,8 +161,6 @@ const bookingService = {
           tag_name: tag.desc_tag
         })
       });
-      // eslint-disable-next-line no-console
-      console.log(translated);
       return translated;
     } else {
       throw Error(response);

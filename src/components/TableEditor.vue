@@ -22,6 +22,7 @@
 
 <script>
 import restaurantService from '../api/restaurants'
+import swal from "sweetalert2";
 export default {
   name: "TableEditor",
   data: () => ({
@@ -43,7 +44,7 @@ export default {
   methods: {
     async addTable() {
       if (this.newTableCapacity == "") {
-        alert("Escolha a capacidade da mesa")
+        swal.fire("Mesas", "Escolha a capacidade da mesa!", "warning");
       } else {
         await restaurantService.addTable({
             capacity: this.newTableCapacity,

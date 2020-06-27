@@ -71,6 +71,7 @@
 </template>
 <script >
 import usersService from '../api/users.js';
+import swal from "sweetalert2";
 
 export default {
 
@@ -89,7 +90,7 @@ export default {
 
       //check se a password foi confirmada
       if (this.password != this.confPassword) {
-        alert("PASSWORDS DIFERENTES");
+        swal.fire("Erro", "Passwords Diferentes", "error");
       } else {
         const registerResponse = await usersService.registerUser({
           username: this.username,
@@ -98,20 +99,15 @@ export default {
         });
 
         if (registerResponse == "Conta criada com sucesso") {
+          swal.fire("Registo", registerResponse, "success");
           //login
-          usersService.getUser({
-            email: this.email,
-            password: this.password
-          });
-
           const loginResponse = await usersService.getUser({
             email: this.email,
             password: this.password
           });
 
-          if (loginResponse == "Credenciais Inválidos" || loginResponse == "Password Errada") {
-            // eslint-disable-next-line no-console
-            console.log(loginResponse)
+          if (loginResponse == "Credenciais Inválidas" || loginResponse == "Password Diferentes") {
+            swal.fire("Erro", loginResponse, "error");
           } else {
             this.$store.commit("LOGIN", {
               id: loginResponse.id_user,
@@ -120,12 +116,11 @@ export default {
               profilePic: loginResponse.profilePic,
               type: "client"
             });
-
-
             this.$router.replace("/");
-
+            swal.fire("Registo", `Bem-vindo ${loginResponse.username}`, "success");
           }
-
+        } else {
+          swal.fire("Erro", registerResponse, "error");
         }
       }
     }

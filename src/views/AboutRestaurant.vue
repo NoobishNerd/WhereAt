@@ -102,11 +102,6 @@
               <input class=" mb-3" v-model="hour" required type="time" />
               <br>
               <input class="mb-3" required v-model="date" type="date" id="start" name="start" />
-              <br>
-              <input class="mt-2 mb-5 py-2 px-2 ml-0" @click="updateAvailableTables" type="button"
-                value="Ver mesas disponiveis" id="reservationBtn" />
-              <br />
-
               <button type="submit" class="py-2 px-5 pl-0 ml-0 mt-5" v-if="
                   this.$store.state.logged == true &&
                     this.$store.state.loggedUser.type == 'client'
@@ -137,6 +132,7 @@ import DisplayInfo from "@/components/DisplayInfo.vue";
 import usersService from '../api/users.js';
 import restaurantService from '../api/restaurants.js';
 import bookingService from '../api/booking.js';
+import swal from "sweetalert2";
 
 export default {
   data: () => ({
@@ -163,7 +159,7 @@ export default {
     this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
     this.availableTables = await restaurantService.getRestaurantTables(this.$route.params.id);
     this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
-  
+
   },
 
 
@@ -174,7 +170,6 @@ export default {
       switch (newComponent) {
         case "coments":
           this.comments = await restaurantService.getRestaurantComments(this.$route.params.id);
-          alert(this.comments)
           break;
         case "promos":
           break;
@@ -221,7 +216,7 @@ export default {
           });
           resultsMap.setMapTypeId("roadmap");
         } else {
-          alert("Geocode didn't work because of: " + status);
+          swal.fire("Geocode", "Geocode didn't work because of: " + status, "warning");
         }
       });
     },
@@ -229,18 +224,23 @@ export default {
     async reservation() {
       //fazer check se está logged in ou fazer v-if para n haver opção de reserva caso n esteja autenticado ou seja um restaurante
       if (this.checkAvailability() && this.selectedTable != "") {
-
-        await bookingService.createReservation({
+        this.updateAvailableTables();
+        let response = await bookingService.createReservation({
           date_booked: this.date + "-" + this.hour,
           id_user: this.$store.getters.getLoggedUser.id,
           id_restaurant: this.$route.params.id,
           id_table: this.selectedTableReady.id_table,
           date: this.getSystemDate()
         });
-
-        this.updateAvailableTables();
+        if (response.code == "ER_DUP_ENTRY") {
+          swal.fire("Reserva", "Já efetuou um pedido igual!", "error");
+        } else if (response != "Error! This table is unavailable you should not be able to book it.") {
+          swal.fire("Reserva", "Pedido de reserva enviado!", "success");
+        } else {
+          swal.fire("Reserva", "Mesa ocupada! Selecione outra mesa/hora", "error");
+        }
       } else if (this.selectedTable == "") {
-        alert("Por favor selecione uma mesa");
+        swal.fire("Reserva", "Por favor selecione uma mesa!", "info");
       }
     },
 
@@ -249,8 +249,8 @@ export default {
 
       this.updateObjectTable();
 
-      if (this.selectedTableReady.capacity == 0 || isNaN(this.selectedTableReady.capacity)) {
-        alert("A mesa selecionada não está disponivel");
+      if (this.selectedTableReady.capacity == 0) {
+        swal.fire("Reserva", "A mesa selecionada não está disponivel!", "info");
         return false;
       } else {
         return true;
@@ -377,21 +377,6 @@ img {
 }
 #inputBtn {
   width: 100px;
-}
-#reservationBtn {
-  background-color: #f17526;
-  border: none;
-  color: #ffffff;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 15px;
-  margin: 10px 20px 40px 20px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
 }
 .google-map {
   width: 100%;

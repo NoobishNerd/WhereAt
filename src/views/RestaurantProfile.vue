@@ -58,6 +58,7 @@
 <script>
 import RestaurantHistory from "@/components/RestaurantHistory.vue";
 import RestaurantVacations from "@/components/RestaurantVacations.vue";
+import swal from "sweetalert2";
 
 import usersService from '../api/users.js';
 export default {
@@ -89,13 +90,18 @@ export default {
     },
 
     async changeRestaurantImg() {
-      let newRestaurantImg = prompt("Link da imagem:");
-      if (newRestaurantImg != "") {
+       const {
+        value: url
+      } = await swal.fire({
+        input: 'url',
+        inputPlaceholder: 'Enter the URL'
+      })
+      if (url) {
         await usersService.updateRestaurant({
             id_restaurant: this.restaurant.id_restaurant,
             name: this.restaurant.name,
             password: this.restaurant.password,
-            profilePic: newRestaurantImg,
+            profilePic: url,
             info: this.restaurant.info,
             address: this.restaurant.address,
             approval: this.restaurant.approval,
@@ -105,12 +111,10 @@ export default {
           },
           this.$route.params.id,
         )
-        this.restaurant.profilePic = newRestaurantImg;
+        this.restaurant.profilePic = url;
         this.$store.commit("CHANGE_USER_IMG", {
-          profilePic: newRestaurantImg
+          profilePic: url
         });
-      } else {
-        alert("Coloque o link da imagem!");
       }
     }
   },

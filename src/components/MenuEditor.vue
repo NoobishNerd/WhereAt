@@ -97,6 +97,7 @@
 
 <script>
 import restaurantService from '../api/restaurants'
+import swal from "sweetalert2";
 export default {
     name: "MenuEditor",
     data: () => ({
@@ -118,7 +119,7 @@ export default {
     methods: {
         async addItem() {
             if (this.item == "" || this.itemType == "" || this.price == "") {
-                alert("Preencha todos os campos")
+                swal.fire("Ementa", "Preencha todos os campos!", "warning");
             } else {
                 await restaurantService.addDish({
                         price: this.price,
