@@ -67,7 +67,6 @@
         color: #ffffff;
         text-align: center;
         text-decoration: none;
-        text-transform: uppercase;
         font-size: 15px;
         -webkit-border-radius: 5px 5px 5px 5px;
         border-radius: 5px 5px 5px 5px;

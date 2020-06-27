@@ -149,7 +149,6 @@ export default {
         padding: 10px 60px;
         text-align: center;
         text-decoration: none;
-        text-transform: uppercase;
         font-size: 15px;
 
         -webkit-border-radius: 5px 5px 5px 5px;
@@ -164,9 +163,7 @@ export default {
         background-color: #f17526;
         border: none;
         color: #ffffff;
-
         text-decoration: none;
-        text-transform: uppercase;
         -webkit-border-radius: 5px 5px 5px 5px;
         border-radius: 5px 5px 5px 5px;
         -webkit-transition: all 0.3s ease-in-out;

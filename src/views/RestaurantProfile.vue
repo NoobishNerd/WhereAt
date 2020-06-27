@@ -163,7 +163,6 @@ justify-content:center;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  text-transform: uppercase;
   font-size: 15px;
   margin: 10px 20px 40px 20px;
   -webkit-transition: all 0.3s ease-in-out;

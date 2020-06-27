@@ -158,7 +158,6 @@ export default {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  text-transform: uppercase;
   font-size: 15px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -177,9 +176,7 @@ export default {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  text-transform: uppercase;
   font-size: 15px;
-
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   -webkit-transition: all 0.3s ease-in-out;

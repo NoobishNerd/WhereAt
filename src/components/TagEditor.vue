@@ -88,7 +88,7 @@ export default {
     color: #ffffff;
 
     text-decoration: none;
-    text-transform: uppercase;
+
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
     -webkit-transition: all 0.3s ease-in-out;
@@ -104,7 +104,6 @@ export default {
     color: #ffffff;
 
     text-decoration: none;
-    text-transform: uppercase;
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
     -webkit-transition: all 0.3s ease-in-out;
@@ -120,7 +119,7 @@ export default {
     color: #ffffff;
 
     text-decoration: none;
-    text-transform: uppercase;
+
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
     -webkit-transition: all 0.3s ease-in-out;
@@ -135,7 +134,7 @@ export default {
     border: none;
 
     text-decoration: none;
-    text-transform: uppercase;
+
     -webkit-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
     -webkit-transition: all 0.3s ease-in-out;

@@ -73,7 +73,6 @@ export default {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  text-transform: uppercase;
   font-size: 15px;
   margin: 0px 20px 20px 20px;
   -webkit-transition: all 0.3s ease-in-out;

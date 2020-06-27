@@ -79,7 +79,7 @@ export default {
   padding: 10px 60px;
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
+
   font-size: 15px;
 
   -webkit-border-radius: 5px 5px 5px 5px;
@@ -99,7 +99,6 @@ export default {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  text-transform: uppercase;
   font-size: 15px;
 
   -webkit-border-radius: 5px 5px 5px 5px;

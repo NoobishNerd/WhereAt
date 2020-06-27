@@ -213,7 +213,6 @@ html * {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  text-transform: uppercase;
   font-size: 15px;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
@@ -328,7 +327,6 @@ html * {
   border-radius: 5px;
   color: #f17526;
   text-decoration: none;
-  text-transform: uppercase;
   transition: all 0.2s;
 }
 
@@ -345,7 +343,6 @@ html * {
   border-radius: 5px;
   color: #f17526;
   text-decoration: none;
-  text-transform: uppercase;
   transition: all 0.2s;
 }
 
@@ -360,7 +357,6 @@ html * {
   border: none;
   color: #ffffff;
   text-decoration: none;
-  text-transform: uppercase;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   -webkit-transition: all 0.3s ease-in-out;
