@@ -386,7 +386,8 @@ const restaurantService = {
                     address: restaurant.morada,
                     approval: restaurant.aprovacao,
                     postalCode: restaurant.cod_postal,
-                    availability: restaurant.disponibilidade
+                    availability: restaurant.disponibilidade,
+                    local : restaurant.localidade
                 })
             });
 
