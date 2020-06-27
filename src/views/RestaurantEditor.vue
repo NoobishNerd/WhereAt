@@ -166,11 +166,14 @@ export default {
 
 
     async addPhoto() {
-      let newPhoto = prompt("Link da imagem:")
-      if (newPhoto != "") {
-        await restaurantService.addPhoto({srcLink: newPhoto} ,this.$route.params.id)
-      } else {
-        alert("Coloque o link da imagem!");
+       const {
+        value: url
+      } = await swal.fire({
+        input: 'url',
+        inputPlaceholder: 'Enter the URL'
+      })
+      if (url) {
+        await restaurantService.addPhoto({srcLink: url} ,this.$route.params.id)
       }
       this.album = await restaurantService.getRestaurantAlbum(this.$route.params.id);
     },
