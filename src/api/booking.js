@@ -153,7 +153,7 @@ const bookingService = {
   },
 
   async getAllTags() {
-    const response = await fetch(`http://localhost:3000/tags`, {
+    const response = await fetch(`${API_URL}tags`, {
       method: "GET"
     });
 
