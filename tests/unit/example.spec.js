@@ -1,6 +1,7 @@
 import { createLocalVue, shallowMount, mount } from "@vue/test-utils";
 import NavBar from "@/components/NavBar.vue";
 import Home from "@/views/Home.vue";
+import AboutRestaurant from "@/views/AboutRestaurant.vue";
 import ClientProfile from "@/views/ClientProfile.vue";
 import VueRouter from "vue-router"
 import Vue from 'vue'
@@ -49,26 +50,57 @@ describe("NAVBAR", () => {
     });
     expect(wrapper.find("#main_userImg").isVisible()).toBe(true);
   });
-  test("if logged in is true, main user image is visible", () => {
-    const wrapper = mount(NavBar, {
-      store: mock
-    });
-    // eslint-disable-next-line no-console
-    console.log(wrapper)
-    expect(wrapper.find("#loggedImg").src).toEqual("https://cdn.olhares.pt/client/files/foto/big/195/1956951.jpg");
-  });
+ 
 });
 
 describe("HOME PAGE", () => {
-  test("restaurant with id 1 exists in home page", () => {
+  test("if user is logged, recommendations are visible", () => {
     const wrapper = mount(Home, {
       store: mock
     });
-    expect(wrapper.find("#restauranteN1").isVisible()).toBe(true);
+
+    expect(wrapper.find("#recommendationText").isVisible()).toBe(true);
   });
 });
 
-describe("PROFILE", () => {
+describe("RESTAURANT PROFILE", () => {
+  test("In restaurant profile, is information below the name visible", () =>{
+    const wrapper = mount(AboutRestaurant,{
+      store: mock
+    });
+    expect(wrapper.find("#restaurantInfoP").isVisible()).toBe(true);
+  })
+
+  test("In restaurant profile, is restaurant name is visible on top of the page", () =>{
+    const wrapper = mount(AboutRestaurant,{
+      store: mock
+    });
+    expect(wrapper.find("#restaurantNameH5").isVisible()).toBe(true);
+  })
+
+  test("In restaurant profile, does the map render", () =>{
+    const wrapper = mount(AboutRestaurant,{
+      store: mock
+    });
+    expect(wrapper.find("#myMap").isVisible()).toBe(true);
+  })
+
+  test("In restaurant profile, does the carousel render", () =>{
+    const wrapper = mount(AboutRestaurant,{
+      store: mock
+    });
+    expect(wrapper.find("#carouselExampleIndicators").isVisible()).toBe(true);
+  })
+
+  test("In restaurant profile, render reservation button", () =>{
+    const wrapper = mount(AboutRestaurant,{
+      store: mock
+    });
+    expect(wrapper.find("#smallerButton").isVisible()).toBe(true);
+  })
+})
+
+describe("CLIENT PROFILE", () => {
   test("check if profile name is modelled after loggedUser", () => {
     jest.useFakeTimers()
     const wrapper = mount(ClientProfile, {

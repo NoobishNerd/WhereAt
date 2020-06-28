@@ -70,11 +70,11 @@
         </div>
       </div>
       <div class="col-5">
-        <h5 class="" style="color:#f17526">{{ restaurant.name }}</h5>
+        <h5 class="" style="color:#f17526" id="restaurantNameH5">{{ restaurant.name }}</h5>
         <h6 class="" v-if="restaurant.info == ''">
           Este restaurante ainda não adicionou informações adicionais
         </h6>
-        <p v-else class="">
+        <p v-else class="" id="restaurantInfoP">
           {{ restaurant.info }}
         </p>
         <div class="row">
