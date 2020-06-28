@@ -137,26 +137,26 @@ export default {
       if (this.filter == "") {
         return this.restaurantsStored.filter(
           restaurant =>
-            restaurant.nome
+            restaurant.name
               .toLowerCase()
               .includes(this.searchText.toLowerCase()) ||
             restaurant.tag_name
               .toLowerCase()
               .includes(this.searchText.toLowerCase()) ||
-            restaurant.localidade
+            restaurant.local
               .toLowerCase()
               .includes(this.searchText.toLowerCase())
         );
       } else {
         return this.restaurantsStored.filter(
           restaurant =>
-            (restaurant.nome
+            (restaurant.name
               .toLowerCase()
               .includes(this.searchText.toLowerCase()) ||
               restaurant.tag_name
                 .toLowerCase()
                 .includes(this.searchText.toLowerCase()) ||
-              restaurant.localidade
+              restaurant.local
                 .toLowerCase()
                 .includes(this.searchText.toLowerCase())) &&
             restaurant.tag_name
