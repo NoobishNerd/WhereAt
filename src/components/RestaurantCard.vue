@@ -1,7 +1,7 @@
 <template>
   <div class="card-group" style="cursor:pointer">
     <div class="container-fluid">
-      <div class="card">
+      <div class="card" v-bind:id="`restauranteN${restaurant.id_restaurant}`">
         <img
           class="card-img-top"
           :src="restaurant.profilePic"

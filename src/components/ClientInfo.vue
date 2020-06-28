@@ -4,8 +4,8 @@
     <br />
     <div class="row">
       <div class="col-sm-12">
-        <h5 id="boldText">Nome de Utilizador</h5>
-        <input v-model="user.username" class="form-control" type="text" />
+        <h5>Nome de Utilizador</h5>
+        <input id="nameTxt" v-model="user.username" class="form-control" type="text" />
       </div>
     </div>
     <br />

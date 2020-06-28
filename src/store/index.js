@@ -24,11 +24,7 @@ export default new Vuex.Store({
       username: "dorime",
       profilePic: "https://i.ytimg.com/vi/zQ4LiyFF8RU/hqdefault.jpg",
       admin: false
-    },
-
-    //variáveis para respostas do server
-    request: null,
-    status: null
+    }
   },
 
   getters: {

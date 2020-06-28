@@ -81,7 +81,7 @@
                 v-for="restaurant in recommendation"
                 v-bind:key="restaurant.id_restaurant + 'star'"
               >
-                <RestaurantCard v-bind:restaurant="restaurant"></RestaurantCard>
+                <RestaurantCard id="restaurantCard" v-bind:restaurant="restaurant"></RestaurantCard>
               </li>
             </ul>
           </div>

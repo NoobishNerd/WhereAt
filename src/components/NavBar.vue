@@ -10,6 +10,7 @@
       </router-link>
       <form class="form-inline">
         <img
+          id="loggedImg"
           @click="goToProfile"
           v-if="this.$store.state.logged == true"
           v-bind:src="loggedUser.profilePic"
@@ -20,6 +21,7 @@
         />
         <div v-else text-center>
           <img
+            id="main_userImg"
             @click="showOpts"
             src="../assets/main_user.png"
             height="40px"
